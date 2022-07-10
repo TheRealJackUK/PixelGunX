@@ -24,7 +24,7 @@ public class GoogleIABManager : AbstractManager
 
 	static GoogleIABManager()
 	{
-		AbstractManager.initialize(typeof(GoogleIABManager));
+//		AbstractManager.initialize(typeof(GoogleIABManager));
 	}
 
 	public void billingSupported(string empty)

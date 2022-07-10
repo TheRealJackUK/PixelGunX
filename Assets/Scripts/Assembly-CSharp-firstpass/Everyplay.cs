@@ -934,10 +934,10 @@ public class Everyplay : MonoBehaviour
 
 	public static void InitEveryplay(string clientId, string clientSecret, string redirectURI)
 	{
-		AndroidJavaClass androidJavaClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-		AndroidJavaObject @static = androidJavaClass.GetStatic<AndroidJavaObject>("currentActivity");
-		everyplayUnity = new AndroidJavaObject("com.everyplay.Everyplay.unity.EveryplayUnity3DWrapper");
-		everyplayUnity.Call("initEveryplay", @static, clientId, clientSecret, redirectURI);
+//		AndroidJavaClass androidJavaClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+	//	AndroidJavaObject @static = androidJavaClass.GetStatic<AndroidJavaObject>("currentActivity");
+	//	everyplayUnity = new AndroidJavaObject("com.everyplay.Everyplay.unity.EveryplayUnity3DWrapper");
+	//	everyplayUnity.Call("initEveryplay", @static, clientId, clientSecret, redirectURI);
 	}
 
 	public static void EveryplayShow()

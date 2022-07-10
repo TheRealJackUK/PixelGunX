@@ -29,15 +29,15 @@ public class AGSClient : MonoBehaviour
 	{
 		PROXY_CLASS_NAME = "com.amazon.ags.api.unity.AmazonGamesClientProxyImpl";
 		JavaObject = new AmazonJavaWrapper();
-		using (AndroidJavaClass androidJavaClass = new AndroidJavaClass(PROXY_CLASS_NAME))
+//		using (AndroidJavaClass androidJavaClass = new AndroidJavaClass(PROXY_CLASS_NAME))
 		{
-			if (androidJavaClass.GetRawClass() == IntPtr.Zero)
+			if (/*androidJavaClass.GetRawClass() == IntPtr.Zero*/false)
 			{
-				LogGameCircleWarning("No java class " + PROXY_CLASS_NAME + " present, can't use AGSClient");
+			//	LogGameCircleWarning("No java class " + PROXY_CLASS_NAME + " present, can't use AGSClient");
 			}
 			else
 			{
-				JavaObject.setAndroidJavaObject(androidJavaClass.CallStatic<AndroidJavaObject>("getInstance", new object[0]));
+			//	JavaObject.setAndroidJavaObject(androidJavaClass.CallStatic<AndroidJavaObject>("getInstance", new object[0]));
 			}
 		}
 	}

@@ -51,7 +51,7 @@ namespace SponsorPay
 
 		public SponsorPayPlugin(string gameObjectName)
 		{
-			plugin = new AndroidSponsorPayPlugin(gameObjectName);
+//			plugin = new AndroidSponsorPayPlugin(gameObjectName);
 		}
 
 		public string Start(string appId, string userId, string securityToken)

@@ -255,13 +255,13 @@ public sealed class FlurryPluginWrapper : MonoBehaviour
 	public static void LogTwitter()
 	{
 		LogEventWithParameterAndValue(SocialEventName, SocialParName, "Twitter");
-		DevToDevSDK.SocialNetworkPost(DevToDevSocialNetwork.Twitter, DevToDevSocialNetworkPostReason.Other);
+//		DevToDevSDK.SocialNetworkPost(DevToDevSocialNetwork.Twitter, DevToDevSocialNetworkPostReason.Other);
 	}
 
 	public static void LogFacebook()
 	{
 		LogEventWithParameterAndValue(SocialEventName, SocialParName, "Facebook");
-		DevToDevSDK.SocialNetworkPost(DevToDevSocialNetwork.Facebook, DevToDevSocialNetworkPostReason.Other);
+	//	DevToDevSDK.SocialNetworkPost(DevToDevSocialNetwork.Facebook, DevToDevSocialNetworkPostReason.Other);
 	}
 
 	public static void LogGamecenter()
@@ -273,14 +273,14 @@ public sealed class FlurryPluginWrapper : MonoBehaviour
 	{
 		LogEventWithParameterAndValue(FreeCoinsEv, FreeCoinsParName, "Facebook");
 		LogEvent("Facebook");
-		DevToDevSDK.SocialNetworkPost(DevToDevSocialNetwork.Facebook, DevToDevSocialNetworkPostReason.Other);
+	//	DevToDevSDK.SocialNetworkPost(DevToDevSocialNetwork.Facebook, DevToDevSocialNetworkPostReason.Other);
 	}
 
 	public static void LogFreeCoinsTwitter()
 	{
 		LogEventWithParameterAndValue(FreeCoinsEv, FreeCoinsParName, "Twitter");
 		LogEvent("Twitter");
-		DevToDevSDK.SocialNetworkPost(DevToDevSocialNetwork.Twitter, DevToDevSocialNetworkPostReason.Other);
+		//DevToDevSDK.SocialNetworkPost(DevToDevSocialNetwork.Twitter, DevToDevSocialNetworkPostReason.Other);
 	}
 
 	public static void LogFreeCoinsYoutube()
@@ -442,13 +442,13 @@ public sealed class FlurryPluginWrapper : MonoBehaviour
 		FlurryAnalytics.startSession("4G82F29HDF359K693N94");
 		FlurryAnalytics.setUserID(SystemInfo.deviceUniqueIdentifier);
 		InitializeFlurryWindowsPhone();
-		DevToDevSDK.Initialize("c705a8af-9893-050d-bf70-9b5ef9f37a3c", "9iR85EXmukcCradFjPBAnUy7Wh0SfpOK");
-		DevToDevSDK.StartSession();
+	//	DevToDevSDK.Initialize("c705a8af-9893-050d-bf70-9b5ef9f37a3c", "9iR85EXmukcCradFjPBAnUy7Wh0SfpOK");
+	//	DevToDevSDK.StartSession();
 	}
 
 	private void OnDestroy()
 	{
-		DevToDevSDK.EndSession();
+	//	DevToDevSDK.EndSession();
 	}
 
 	private void OnEnable()
@@ -501,8 +501,8 @@ public sealed class FlurryPluginWrapper : MonoBehaviour
 
 	private static void LogEventToDevToDev(string eventName, Dictionary<string, string> parameters = null)
 	{
-		DevToDevCustomEventParams devToDevCustomEventParams = new DevToDevCustomEventParams();
-		using (devToDevCustomEventParams)
+//		DevToDevCustomEventParams devToDevCustomEventParams = new DevToDevCustomEventParams();
+//		using (devToDevCustomEventParams)
 		{
 			try
 			{
@@ -512,17 +512,17 @@ public sealed class FlurryPluginWrapper : MonoBehaviour
 				}
 				foreach (KeyValuePair<string, string> parameter in parameters)
 				{
-					devToDevCustomEventParams.Put(parameter.Key, parameter.Value);
+//					devToDevCustomEventParams.Put(parameter.Key, parameter.Value);
 				}
 				if (!parameters.ContainsKey("App Version"))
 				{
-					devToDevCustomEventParams.Put("App Version", GlobalGameController.AppVersion);
+				//	devToDevCustomEventParams.Put("App Version", GlobalGameController.AppVersion);
 				}
 				if (!parameters.ContainsKey("Initial Version"))
 				{
-					devToDevCustomEventParams.Put("Initial Version", PlayerPrefs.GetString(Defs.InitialAppVersionKey));
+			//		devToDevCustomEventParams.Put("Initial Version", PlayerPrefs.GetString(Defs.InitialAppVersionKey));
 				}
-				DevToDevSDK.CustomEvent(eventName, devToDevCustomEventParams);
+//				DevToDevSDK.CustomEvent(eventName, devToDevCustomEventParams);
 			}
 			catch (Exception message)
 			{
