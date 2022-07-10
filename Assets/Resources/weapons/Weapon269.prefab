@@ -1,0 +1,152 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1326288282667958}
+  m_IsPrefabParent: 1
+--- !u!1 &1326288282667958
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4146037103641301}
+  - component: {fileID: 114649373091459687}
+  m_Layer: 0
+  m_Name: Weapon269
+  m_TagString: TacticalBow_3
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4146037103641301
+Transform:
+  m_GameObject: {fileID: 1326288282667958}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4602165784590075}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114649373091459687
+MonoBehaviour:
+  m_GameObject: {fileID: 1326288282667958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e49530b120524004b898a3f8cbbe7735, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  isSlowdown: 0
+  slowdownCoeff: 0
+  slowdownTime: 0
+  noFillObjects: []
+  typeDead: 0
+  gunFlash: {fileID: 0}
+  gunFlashDouble: []
+  lengthForShot: 0.7166668
+  damageByTier:
+  - 5.016667
+  - 6.450001
+  - 9.316668
+  - 10.75
+  - 12.9
+  - 12.9
+  dpses:
+  - 7
+  - 9
+  - 13
+  - 15
+  - 18
+  - 18
+  damageByTierInDeadly: []
+  tier: 4
+  categoryNabor: 4
+  isGrenadeWeapon: 0
+  damageShop: 18
+  fireRateShop: 91
+  CapacityShop: 1
+  mobilityShop: 110
+  zoomShop: 4
+  AreaDamageShop: 0
+  WallsBreakShop: 0
+  AOE: 0
+  AOEText:
+  filterMap:
+  alternativeName: Weapon1
+  isSerialShooting: 1
+  ammoInClip: 1
+  InitialAmmo: 20
+  maxAmmo: 40
+  ammoForBonusShotMelee: 10
+  isMelee: 1
+  isRoundMelee: 0
+  radiusRoundMelee: 5
+  isShotGun: 0
+  isDoubleShot: 0
+  countShots: 15
+  isShotMelee: 1
+  isZooming: 1
+  isMagic: 0
+  flamethrower: 0
+  bulletExplode: 1
+  bazooka: 0
+  countInSeriaBazooka: 1
+  stepTimeInSeriaBazooka: 0.2
+  railgun: 0
+  freezer: 0
+  grenadeLauncher: 0
+  bazookaExplosionRadius: 5
+  bazookaExplosionRadiusSelf: 2.5
+  bazookaImpulseRadius: 6
+  fieldOfViewZomm: 15
+  range: 70
+  damage: 200
+  speedModifier: 1.1
+  Probability: 0
+  damageRange: {x: -50, y: 50}
+  gunPosition: {x: 0, y: -1.7, z: 0}
+  inAppExtensionModifier: 10
+  meleeAngle: 8
+  multiplayerDamage: 5.016667
+  meleeAttackTimeModifier: 0.15
+  startZone: {x: 8, y: 8}
+  tekKoof: 1
+  upKoofFire: 0.5
+  maxKoof: 4
+  downKoofFirst: 0.2
+  downKoof: 0.2
+  campaignOnly: 0
+  rocketNum: 0
+  scopeNum: 7
+  scaleShop: 171
+  positionShop: {x: -1.403809, y: 15.63734, z: 0.5571455}
+  rotationShop: {x: -30, y: 120, z: -3.351899E-05}
+  localizeWeaponKey: Key_1357
+--- !u!1 &1740184295809732
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4602165784590075}
+  m_Layer: 0
+  m_Name: BulletSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4602165784590075
+Transform:
+  m_GameObject: {fileID: 1740184295809732}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: -0.5, w: -0.5}
+  m_LocalPosition: {x: 0.175, y: 1.371, z: 0.593}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4146037103641301}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -90, y: -90, z: 0}

@@ -1,0 +1,186 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1364312329352672}
+  m_IsPrefabParent: 1
+--- !u!1 &1364312329352672
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4901550124555810}
+  - component: {fileID: 114209194199911778}
+  - component: {fileID: 114580567232424583}
+  m_Layer: 0
+  m_Name: Weapon123
+  m_TagString: Razer_3
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4901550124555810
+Transform:
+  m_GameObject: {fileID: 1364312329352672}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4181318740248913}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114209194199911778
+MonoBehaviour:
+  m_GameObject: {fileID: 1364312329352672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e49530b120524004b898a3f8cbbe7735, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  isSlowdown: 0
+  slowdownCoeff: 0
+  slowdownTime: 0
+  noFillObjects: []
+  typeDead: 0
+  gunFlash: {fileID: 0}
+  gunFlashDouble: []
+  lengthForShot: 0.8833334
+  damageByTier:
+  - 3.533334
+  - 6.183334
+  - 8.833334
+  - 8.833334
+  - 8.833334
+  - 8.833334
+  dpses:
+  - 4
+  - 7
+  - 9.999999
+  - 9.999999
+  - 9.999999
+  - 9.999999
+  damageByTierInDeadly: []
+  tier: 2
+  categoryNabor: 4
+  isGrenadeWeapon: 0
+  damageShop: 10
+  fireRateShop: 82
+  CapacityShop: 9
+  mobilityShop: 110
+  zoomShop: 0
+  AreaDamageShop: 0
+  WallsBreakShop: 0
+  AOE: 0
+  AOEText:
+  filterMap:
+  alternativeName: Weapon77
+  isSerialShooting: 1
+  ammoInClip: 9
+  InitialAmmo: 14
+  maxAmmo: 45
+  ammoForBonusShotMelee: 10
+  isMelee: 0
+  isRoundMelee: 0
+  radiusRoundMelee: 5
+  isShotGun: 0
+  isDoubleShot: 0
+  countShots: 15
+  isShotMelee: 0
+  isZooming: 0
+  isMagic: 0
+  flamethrower: 0
+  bulletExplode: 0
+  bazooka: 1
+  countInSeriaBazooka: 1
+  stepTimeInSeriaBazooka: 0.2
+  railgun: 0
+  freezer: 0
+  grenadeLauncher: 0
+  bazookaExplosionRadius: 2.5
+  bazookaExplosionRadiusSelf: 0
+  bazookaImpulseRadius: 0
+  fieldOfViewZomm: 18.5
+  range: 3
+  damage: 550
+  speedModifier: 1.1
+  Probability: 0
+  damageRange: {x: -50, y: 50}
+  gunPosition: {x: 0, y: -1.7, z: 0}
+  inAppExtensionModifier: 10
+  meleeAngle: 45
+  multiplayerDamage: 3.533334
+  meleeAttackTimeModifier: 0.57
+  startZone: {x: 30, y: 30}
+  tekKoof: 1
+  upKoofFire: 2
+  maxKoof: 1.5
+  downKoofFirst: 2
+  downKoof: 2
+  campaignOnly: 0
+  rocketNum: 20
+  scopeNum: 0
+  scaleShop: 200.88
+  positionShop: {x: -0.5820313, y: 4.777306, z: 0.05476457}
+  rotationShop: {x: -8.537737E-07, y: 30, z: 30}
+  localizeWeaponKey: Key_0669
+--- !u!114 &114580567232424583
+MonoBehaviour:
+  m_GameObject: {fileID: 1364312329352672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e1cb13abf4189c48831be2a7e6ee65f, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  gunFlashObj: {fileID: 1705561972446925}
+  timeFireAction: 0.1
+--- !u!1 &1482528585544713
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4181318740248913}
+  m_Layer: 0
+  m_Name: BulletSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4181318740248913
+Transform:
+  m_GameObject: {fileID: 1482528585544713}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: -0.5, w: -0.5}
+  m_LocalPosition: {x: 0.1882505, y: 1.195733, z: 1.461027}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4075204998576707}
+  m_Father: {fileID: 4901550124555810}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -90, y: -90, z: 0}
+--- !u!1 &1705561972446925
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4075204998576707}
+  m_Layer: 0
+  m_Name: GunFlash
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &4075204998576707
+Transform:
+  m_GameObject: {fileID: 1705561972446925}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4181318740248913}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

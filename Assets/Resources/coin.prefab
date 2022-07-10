@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1887623720414918}
+  m_IsPrefabParent: 1
+--- !u!1 &1887623720414918
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4658891454074698}
+  - component: {fileID: 33689157675246667}
+  - component: {fileID: 23333868341614389}
+  - component: {fileID: 111087400844054490}
+  - component: {fileID: 114479962400659947}
+  m_Layer: 0
+  m_Name: coin
+  m_TagString: CoinBonus
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4658891454074698
+Transform:
+  m_GameObject: {fileID: 1887623720414918}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &33689157675246667
+MeshFilter:
+  m_GameObject: {fileID: 1887623720414918}
+  m_Mesh: {fileID: 4300000, guid: 64ff0bbfd04169343ad4eaa7a1990d66, type: 2}
+--- !u!23 &23333868341614389
+MeshRenderer:
+  m_GameObject: {fileID: 1887623720414918}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: d5ec2f73a7d0ecf45a220525ad53a434, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!111 &111087400844054490
+Animation:
+  m_GameObject: {fileID: 1887623720414918}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: c62c1b2ae292f27438aefc36c5ba6e36, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!114 &114479962400659947
+MonoBehaviour:
+  m_GameObject: {fileID: 1887623720414918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a76c070136d9a224aa3ab6c1058f998b, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  player: {fileID: 0}
+  CoinItemUpAudioClip: {fileID: 8300000, guid: e8cb41648bfa29646a51ba161c58fc0e, type: 3}

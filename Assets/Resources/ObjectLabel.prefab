@@ -1,0 +1,157 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1066631678982462}
+  m_IsPrefabParent: 1
+--- !u!1 &1066631678982462
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4610434836289645}
+  - component: {fileID: 132084319546284101}
+  - component: {fileID: 114326736185140233}
+  - component: {fileID: 131567754522755763}
+  m_Layer: 0
+  m_Name: ObjectLabel
+  m_TagString: ObjectLabel
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4610434836289645
+Transform:
+  m_GameObject: {fileID: 1066631678982462}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_Children:
+  - {fileID: 4235576901158543}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!132 &132084319546284101
+GUIText:
+  m_GameObject: {fileID: 1066631678982462}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Text: Mega Killer
+  m_Anchor: 6
+  m_Alignment: 1
+  m_PixelOffset: {x: -45, y: 0}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 12800000, guid: 3eae69b6b94cdaa4b97316c0a49d0200, type: 3}
+  m_Material: {fileID: 0}
+  m_FontSize: 18
+  m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_PixelCorrect: 1
+  m_RichText: 0
+--- !u!114 &114326736185140233
+MonoBehaviour:
+  m_GameObject: {fileID: 1066631678982462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93b2d349f4088f746bf0c3a56799a59f, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  target: {fileID: 0}
+  offset: {x: 0, y: 0.85, z: 0}
+  clampToScreen: 0
+  clampBorderSize: 0.05
+  useMainCamera: 1
+  cameraToUse: {fileID: 0}
+  cam: {fileID: 0}
+  timeShow: 0
+  posLabel: {x: 0, y: 0, z: 0}
+  isShow: 0
+  isMenu: 0
+  isShadow: 0
+  _weaponManager: {fileID: 0}
+  clanTexture: {fileID: 131182226491167124}
+  clanName: {fileID: 132984830673631713}
+--- !u!131 &131567754522755763
+GUITexture:
+  m_GameObject: {fileID: 1066631678982462}
+  m_Enabled: 1
+  m_Texture: {fileID: 0}
+  m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+  m_PixelInset:
+    serializedVersion: 2
+    x: -75
+    y: -3
+    width: 30
+    height: 30
+  m_LeftBorder: 0
+  m_RightBorder: 0
+  m_TopBorder: 0
+  m_BottomBorder: 0
+--- !u!1 &1699991917954166
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4235576901158543}
+  - component: {fileID: 131182226491167124}
+  - component: {fileID: 132984830673631713}
+  m_Layer: 0
+  m_Name: ClanObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4235576901158543
+Transform:
+  m_GameObject: {fileID: 1699991917954166}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4610434836289645}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!131 &131182226491167124
+GUITexture:
+  m_GameObject: {fileID: 1699991917954166}
+  m_Enabled: 1
+  m_Texture: {fileID: 0}
+  m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+  m_PixelInset:
+    serializedVersion: 2
+    x: -64
+    y: -18
+    width: 15
+    height: 15
+  m_LeftBorder: 0
+  m_RightBorder: 0
+  m_TopBorder: 0
+  m_BottomBorder: 0
+--- !u!132 &132984830673631713
+GUIText:
+  m_GameObject: {fileID: 1699991917954166}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Text:
+  m_Anchor: 0
+  m_Alignment: 0
+  m_PixelOffset: {x: -41, y: -4}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 12800000, guid: f6818e829bbe3d7438e2d6089f6ea4e6, type: 3}
+  m_Material: {fileID: 0}
+  m_FontSize: 13
+  m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_PixelCorrect: 1
+  m_RichText: 1

@@ -1,0 +1,127 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1142539377825776}
+  m_IsPrefabParent: 1
+--- !u!1 &1142539377825776
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4108830415403261}
+  - component: {fileID: 111179187346460949}
+  - component: {fileID: 114626407132291031}
+  m_Layer: 0
+  m_Name: StormTrooperCape_Up2
+  m_TagString: cape_EliteCrafter
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4108830415403261
+Transform:
+  m_GameObject: {fileID: 1142539377825776}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4821154466647919}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!111 &111179187346460949
+Animation:
+  m_GameObject: {fileID: 1142539377825776}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 752c01faad292c3489fc4aad62513492, type: 2}
+  - {fileID: 7400000, guid: da8672b8bf643144c8c2084577a32fd9, type: 2}
+  - {fileID: 7400000, guid: ebdcaa74cc2ad7047b12c56c7caf06c1, type: 2}
+  - {fileID: 7400000, guid: 0dee829ac2057ac488c325b6d4686950, type: 2}
+  - {fileID: 7400000, guid: fcd403eebc6238c4998cda47817266aa, type: 2}
+  - {fileID: 7400000, guid: 6a19340b6775ec7499eebd7f043a19e0, type: 2}
+  - {fileID: 7400000, guid: 37037b9fc656d264083dbe003a01d8cc, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!114 &114626407132291031
+MonoBehaviour:
+  m_GameObject: {fileID: 1142539377825776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f472c02c637f38940977a077a803e733, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  tier: 2
+  scaleShop: 150
+  positionShop: {x: -0.7250977, y: -0.05223846, z: 0.1859985}
+  rotationShop: {x: 0, y: 30, z: -15}
+  localizeKey: Key_1102
+--- !u!1 &1765718449260516
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4821154466647919}
+  - component: {fileID: 33123611219905484}
+  - component: {fileID: 23180595425298158}
+  m_Layer: 0
+  m_Name: cape_EliteCrafter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4821154466647919
+Transform:
+  m_GameObject: {fileID: 1765718449260516}
+  m_LocalRotation: {x: 0.05653127, y: 0.7048434, z: -0.05653127, w: 0.7048434}
+  m_LocalPosition: {x: -0.1462616, y: 1.497632, z: 0.009140319}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4108830415403261}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 9.171072, y: -90, z: 0}
+--- !u!33 &33123611219905484
+MeshFilter:
+  m_GameObject: {fileID: 1765718449260516}
+  m_Mesh: {fileID: 4300000, guid: 4f9a542ff5ad06a4388bf6d4052baee5, type: 2}
+--- !u!23 &23180595425298158
+MeshRenderer:
+  m_GameObject: {fileID: 1765718449260516}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 63afdc3ea5f14d447a440ae8c6ed5891, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0

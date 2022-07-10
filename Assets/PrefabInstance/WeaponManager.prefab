@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1980883300854712}
+  m_IsPrefabParent: 1
+--- !u!1 &1980883300854712
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4741628387917226}
+  - component: {fileID: 114827624354889262}
+  - component: {fileID: 114460896387259008}
+  - component: {fileID: 114164322498615591}
+  - component: {fileID: 114742017392768958}
+  - component: {fileID: 114124233104056668}
+  m_Layer: 0
+  m_Name: WeaponManager
+  m_TagString: WeaponManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4741628387917226
+Transform:
+  m_GameObject: {fileID: 1980883300854712}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 19.41597, y: 3.785927, z: 12.08187}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114827624354889262
+MonoBehaviour:
+  m_GameObject: {fileID: 1980883300854712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2040f5cfcbe322488d3d157a22dd444, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  _grenadeWeaponCache: {fileID: 0}
+  _turretWeaponCache: {fileID: 0}
+  _rocketCache: {fileID: 0}
+  _turretCache: {fileID: 0}
+  newWeaponsInCats:
+  shownWeapons: []
+  ServerIp:
+  myPlayer: {fileID: 0}
+  myPlayerMoveC: {fileID: 0}
+  myGun: {fileID: 0}
+  myTable: {fileID: 0}
+  myNetworkStartTable: {fileID: 0}
+  CurrentWeaponIndex: 0
+  useCam: {fileID: 0}
+  _currentFilterMap: 0
+--- !u!114 &114460896387259008
+MonoBehaviour:
+  m_GameObject: {fileID: 1980883300854712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7156ec326a7134e49b1427efcccec3f2, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+--- !u!114 &114164322498615591
+MonoBehaviour:
+  m_GameObject: {fileID: 1980883300854712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e041d26a443915c49870e97a5c616f6d, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+--- !u!114 &114742017392768958
+MonoBehaviour:
+  m_GameObject: {fileID: 1980883300854712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9beab8ce006cdf04c87fec7d98177a01, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  pauserTemp: 0
+--- !u!114 &114124233104056668
+MonoBehaviour:
+  m_GameObject: {fileID: 1980883300854712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286682858f808674abeddf4b876b6bc9, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  updateColor: 1
+  allowDrag: 1
+  frequency: 0.5
+  nbDecimal: 1

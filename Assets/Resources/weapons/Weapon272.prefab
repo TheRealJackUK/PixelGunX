@@ -1,0 +1,186 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1581617830351098}
+  m_IsPrefabParent: 1
+--- !u!1 &1581617830351098
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4040421770383772}
+  - component: {fileID: 114626190774098854}
+  - component: {fileID: 114119348627484739}
+  m_Layer: 0
+  m_Name: Weapon272
+  m_TagString: Tesla_Cannon_2
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4040421770383772
+Transform:
+  m_GameObject: {fileID: 1581617830351098}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4231212244464528}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114626190774098854
+MonoBehaviour:
+  m_GameObject: {fileID: 1581617830351098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e49530b120524004b898a3f8cbbe7735, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  isSlowdown: 0
+  slowdownCoeff: 0
+  slowdownTime: 0
+  noFillObjects: []
+  typeDead: 0
+  gunFlash: {fileID: 0}
+  gunFlashDouble: []
+  lengthForShot: 0.45
+  damageByTier:
+  - 2.7
+  - 3.15
+  - 4.05
+  - 6.750001
+  - 6.750001
+  - 6.750001
+  dpses:
+  - 6
+  - 7
+  - 9
+  - 15
+  - 15
+  - 15
+  damageByTierInDeadly: []
+  tier: 3
+  categoryNabor: 5
+  isGrenadeWeapon: 0
+  damageShop: 15
+  fireRateShop: 91
+  CapacityShop: 17
+  mobilityShop: 100
+  zoomShop: 0
+  AreaDamageShop: 0
+  WallsBreakShop: 0
+  AOE: 0
+  AOEText:
+  filterMap:
+  alternativeName: Weapon77
+  isSerialShooting: 1
+  ammoInClip: 17
+  InitialAmmo: 34
+  maxAmmo: 68
+  ammoForBonusShotMelee: 10
+  isMelee: 0
+  isRoundMelee: 0
+  radiusRoundMelee: 5
+  isShotGun: 0
+  isDoubleShot: 0
+  countShots: 15
+  isShotMelee: 0
+  isZooming: 0
+  isMagic: 0
+  flamethrower: 0
+  bulletExplode: 0
+  bazooka: 1
+  countInSeriaBazooka: 1
+  stepTimeInSeriaBazooka: 0.2
+  railgun: 0
+  freezer: 0
+  grenadeLauncher: 0
+  bazookaExplosionRadius: 4
+  bazookaExplosionRadiusSelf: 3
+  bazookaImpulseRadius: 6
+  fieldOfViewZomm: 18.5
+  range: 3
+  damage: 210
+  speedModifier: 1
+  Probability: 0
+  damageRange: {x: -20, y: 20}
+  gunPosition: {x: 0, y: -1.7, z: 0}
+  inAppExtensionModifier: 10
+  meleeAngle: 45
+  multiplayerDamage: 2.7
+  meleeAttackTimeModifier: 0.57
+  startZone: {x: 30, y: 30}
+  tekKoof: 1
+  upKoofFire: 2
+  maxKoof: 1.5
+  downKoofFirst: 2
+  downKoof: 2
+  campaignOnly: 0
+  rocketNum: 28
+  scopeNum: 0
+  scaleShop: 188.8272
+  positionShop: {x: -10.1, y: 4.9, z: 0.1}
+  rotationShop: {x: 1.707547E-06, y: 30.00001, z: 120}
+  localizeWeaponKey: Key_1360
+--- !u!114 &114119348627484739
+MonoBehaviour:
+  m_GameObject: {fileID: 1581617830351098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e1cb13abf4189c48831be2a7e6ee65f, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  gunFlashObj: {fileID: 1021843343015907}
+  timeFireAction: 0.1
+--- !u!1 &1958285188954391
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4231212244464528}
+  m_Layer: 0
+  m_Name: BulletSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4231212244464528
+Transform:
+  m_GameObject: {fileID: 1958285188954391}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: -0.5, w: -0.5}
+  m_LocalPosition: {x: 0.08, y: 1.107, z: 1.347}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4336160176095207}
+  m_Father: {fileID: 4040421770383772}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -90, y: -90, z: 0}
+--- !u!1 &1021843343015907
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4336160176095207}
+  m_Layer: 0
+  m_Name: GunFlash
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &4336160176095207
+Transform:
+  m_GameObject: {fileID: 1021843343015907}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4231212244464528}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
