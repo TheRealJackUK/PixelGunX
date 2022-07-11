@@ -681,7 +681,7 @@ internal sealed class MainMenuController : ControlsSettingsBase
 		yield return new WaitForSeconds(0.5f);
 		_drawLoadingProgress = false;
 		stubLoading.SetActive(false);
-//		ActivityIndicator.sharedActivityIndicator.SetActive(false);
+		ActivityIndicator.sharedActivityIndicator.SetActive(false);
 		Debug.Log("Start initializing ProfileGui.");
 		ProfileController profileController = UnityEngine.Object.FindObjectOfType<ProfileController>();
 		if (profileController == null)
@@ -2099,10 +2099,10 @@ internal sealed class MainMenuController : ControlsSettingsBase
 		starterPackPanel.gameObject.SetActive(enable);
 		if (enable)
 		{
-			//buttonBackground.mainTexture = StarterPackController.Get.GetCurrentPackImage();
+			buttonBackground.mainTexture = StarterPackController.Get.GetCurrentPackImage();
 		}
 		_starterPackEnabled = enable;
-//		starterPackTimer.text = StarterPackController.Get.GetTimeToEndEvent();
+		starterPackTimer.text = "fedesito\nis cool";
 	}
 
 	public void OnStarterPackButtonClick()

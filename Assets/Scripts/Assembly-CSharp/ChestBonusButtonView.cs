@@ -27,7 +27,7 @@ public class ChestBonusButtonView : MonoBehaviour
 
 	private void CheckBonusButtonUpdate()
 	{
-		bool flag = true;
+		bool flag = false;
 		base.gameObject.SetActive(flag);
 		if (flag)
 		{
