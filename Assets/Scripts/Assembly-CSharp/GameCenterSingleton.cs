@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
-using UnityEngine.SocialPlatforms.GameCenter;
 
 public class GameCenterSingleton
 {
@@ -139,7 +138,6 @@ public class GameCenterSingleton
 
 	public void ResetAchievements()
 	{
-		GameCenterPlatform.ResetAllAchievements(ResetAchievementsHandler);
 	}
 
 	private void LoadAchievements()

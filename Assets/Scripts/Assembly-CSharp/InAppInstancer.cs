@@ -2,7 +2,6 @@ using System.Collections;
 using System.Reflection;
 using Rilisoft;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.GameCenter;
 
 [Obfuscation(Exclude = true)]
 internal sealed class InAppInstancer : MonoBehaviour
@@ -54,7 +53,6 @@ internal sealed class InAppInstancer : MonoBehaviour
 		}
 		else if (BuildSettings.BuildTarget == BuildTarget.iPhone)
 		{
-			GameCenterPlatform.ShowDefaultAchievementCompletionBanner(true);
 		}
 	}
 

@@ -6,7 +6,6 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using Rilisoft;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.GameCenter;
 using UnityEngine.UI;
 
 internal sealed class Launcher : MonoBehaviour
@@ -633,7 +632,6 @@ internal sealed class Launcher : MonoBehaviour
 		}
 		else if (BuildSettings.BuildTarget == BuildTarget.iPhone)
 		{
-			GameCenterPlatform.ShowDefaultAchievementCompletionBanner(true);
 		}
 		yield return 1f;
 	}
