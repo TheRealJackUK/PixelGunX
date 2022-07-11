@@ -267,11 +267,11 @@ namespace SponsorPay
 
 		public void AddParameters(Dictionary<string, string> parameters)
 		{
-			string text = JsonMapper.ToJson(parameters);
+			/*string text = JsonMapper.ToJson(parameters);
 			if (!string.IsNullOrEmpty(text))
 			{
 				plugin.AddParameters(text);
-			}
+			}*/
 		}
 
 		public void RemoveAllParameters()
