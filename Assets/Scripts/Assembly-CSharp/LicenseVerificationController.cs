@@ -113,56 +113,7 @@ public class LicenseVerificationController : MonoBehaviour
 	internal static PackageInfo GetPackageInfo()
 	{
 		PackageInfo packageInfo = default(PackageInfo);
-		packageInfo.PackageName = string.Empty;
-		packageInfo.SignatureHash = string.Empty;
-		PackageInfo result = packageInfo;
-		try
-		{
-			AndroidJavaObject currentActivity = AndroidSystem.Instance.CurrentActivity;
-			if (currentActivity == null)
-			{
-				Debug.LogWarning("activity == null");
-				return result;
-			}
-			result.PackageName = currentActivity.Call<string>("getPackageName", new object[0]) ?? string.Empty;
-			AndroidJavaObject androidJavaObject = currentActivity.Call<AndroidJavaObject>("getPackageManager", new object[0]);
-			if (androidJavaObject == null)
-			{
-				Debug.LogWarning("manager == null");
-				return result;
-			}
-			AndroidJavaObject androidJavaObject2 = androidJavaObject.Call<AndroidJavaObject>("getPackageInfo", new object[2] { result.PackageName, 64 });
-			if (androidJavaObject2 == null)
-			{
-				Debug.LogWarning("packageInfo == null");
-				return result;
-			}
-			AndroidJavaObject[] array = androidJavaObject2.Get<AndroidJavaObject[]>("signatures");
-			if (array == null)
-			{
-				Debug.LogWarning("signatures == null");
-				return result;
-			}
-			if (array.Length != 1)
-			{
-				Debug.LogWarning("signatures.Length == " + array.Length);
-				return result;
-			}
-			AndroidJavaObject androidJavaObject3 = array[0];
-			byte[] buffer = androidJavaObject3.Call<byte[]>("toByteArray", new object[0]);
-			using (SHA1Managed sHA1Managed = new SHA1Managed())
-			{
-				byte[] inArray = sHA1Managed.ComputeHash(buffer);
-				result.SignatureHash = Convert.ToBase64String(inArray);
-				return result;
-			}
-		}
-		catch (Exception arg)
-		{
-			string message = string.Format("Error while retrieving Android package info:    {0}", arg);
-			Debug.LogError(message);
-			return result;
-		}
+		return packageInfo;
 	}
 
 	private static string GetErrorMessage(VerificationErrorCode errorCode)

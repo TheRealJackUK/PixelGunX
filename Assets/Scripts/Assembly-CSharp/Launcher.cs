@@ -129,21 +129,6 @@ internal sealed class Launcher : MonoBehaviour
 					goto case 1u;
 				}
 				_003CactualPackageInfo_003E__0 = default(LicenseVerificationController.PackageInfo);
-				try
-				{
-					_003CactualPackageInfo_003E__0 = LicenseVerificationController.GetPackageInfo();
-					PackageInfo = _003CactualPackageInfo_003E__0;
-				}
-				catch (Exception ex)
-				{
-					Exception ex2 = (_003Cex_003E__1 = ex);
-					UnityEngine.Debug.Log("LicenseVerificationController.GetPackageInfo() failed:    " + _003Cex_003E__1);
-					Application.LoadLevel(GetTerminalSceneName_3afcc97c(989645180u));
-				}
-				finally
-				{
-					_003C_003E__Finally0();
-				}
 				_003CactualPackageName_003E__2 = _003CactualPackageInfo_003E__0.PackageName;
 				if (string.Compare(_003CactualPackageName_003E__2, Defs.GetIntendedAndroidPackageName(), StringComparison.Ordinal) != 0)
 				{
@@ -519,21 +504,6 @@ internal sealed class Launcher : MonoBehaviour
 		if (Application.platform == RuntimePlatform.Android && (Defs.AndroidEdition == Defs.RuntimeAndroidEdition.GoogleLite || Defs.AndroidEdition == Defs.RuntimeAndroidEdition.GooglePro))
 		{
 			LicenseVerificationController.PackageInfo actualPackageInfo = default(LicenseVerificationController.PackageInfo);
-			try
-			{
-				actualPackageInfo = LicenseVerificationController.GetPackageInfo();
-				PackageInfo = actualPackageInfo;
-			}
-			catch (Exception ex2)
-			{
-				Exception ex = ex2;
-				UnityEngine.Debug.Log("LicenseVerificationController.GetPackageInfo() failed:    " + ex);
-				Application.LoadLevel(GetTerminalSceneName_3afcc97c(989645180u));
-			}
-			finally
-			{
-				//((_003CAppsMenuStartCoroutine_003Ec__IteratorC9)(object)this)._003C_003E__Finally0();
-			}
 			string actualPackageName = actualPackageInfo.PackageName;
 			if (string.Compare(actualPackageName, Defs.GetIntendedAndroidPackageName(), StringComparison.Ordinal) != 0)
 			{

@@ -105,21 +105,6 @@ internal sealed class AppsMenu : MonoBehaviour
 						}
 					};
 					_003CactualPackageInfo_003E__1 = default(LicenseVerificationController.PackageInfo);
-					try
-					{
-						_003CactualPackageInfo_003E__1 = LicenseVerificationController.GetPackageInfo();
-						Launcher.PackageInfo = _003CactualPackageInfo_003E__1;
-					}
-					catch (Exception ex)
-					{
-						Exception ex2 = (_003Cex_003E__2 = ex);
-						UnityEngine.Debug.Log("LicenseVerificationController.GetPackageInfo() failed:    " + _003Cex_003E__2);
-						_003Chandle_003E__0(GetTerminalSceneName_4de1(19937u));
-					}
-					finally
-					{
-						_003C_003E__Finally0();
-					}
 					_003CactualPackageName_003E__3 = _003CactualPackageInfo_003E__1.PackageName;
 					if (string.Compare(_003CactualPackageName_003E__3, Defs.GetIntendedAndroidPackageName(), StringComparison.Ordinal) != 0)
 					{
@@ -344,7 +329,7 @@ internal sealed class AppsMenu : MonoBehaviour
 		Defs.isTrainingFlag = Storager.getInt(Defs.TrainingCompleted_4_4_Sett, false) == 0;
 		if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.WP8Player)
 		{
-			Application.targetFrameRate = 30;
+			Application.targetFrameRate = 240;
 		}
 		_startFrameIndex = Time.frameCount;
 		yield return 0.2f;
@@ -540,21 +525,6 @@ internal sealed class AppsMenu : MonoBehaviour
 				}
 			};
 			LicenseVerificationController.PackageInfo actualPackageInfo = default(LicenseVerificationController.PackageInfo);
-			try
-			{
-				actualPackageInfo = LicenseVerificationController.GetPackageInfo();
-				Launcher.PackageInfo = actualPackageInfo;
-			}
-			catch (Exception ex2)
-			{
-				Exception ex = ex2;
-				UnityEngine.Debug.Log("LicenseVerificationController.GetPackageInfo() failed:    " + ex);
-				handle(GetTerminalSceneName_4de1(19937u));
-			}
-			finally
-			{
-				//((_003CStart_003Ec__Iterator3)(object)this)._003C_003E__Finally0();
-			}
 			string actualPackageName = actualPackageInfo.PackageName;
 			if (string.Compare(actualPackageName, Defs.GetIntendedAndroidPackageName(), StringComparison.Ordinal) != 0)
 			{

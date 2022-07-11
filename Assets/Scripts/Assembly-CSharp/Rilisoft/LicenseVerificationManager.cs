@@ -182,24 +182,7 @@ namespace Rilisoft
 
 		private void LoadServiceBinder()
 		{
-			if (BuildSettings.BuildTarget == BuildTarget.Android)
-			{
-				byte[] bytes = serviceBinder.bytes;
-				_activity = AndroidSystem.Instance.CurrentActivity;
-				_packageName = _activity.Call<string>("getPackageName", new object[0]);
-				string text = Path.Combine(_activity.Call<AndroidJavaObject>("getCacheDir", new object[0]).Call<string>("getPath", new object[0]), _packageName);
-				Directory.CreateDirectory(text);
-				File.WriteAllBytes(text + "/classes.jar", bytes);
-				Directory.CreateDirectory(text + "/odex");
-				AndroidJavaObject androidJavaObject = new AndroidJavaObject("dalvik.system.DexClassLoader", text + "/classes.jar", text + "/odex", null, _activity.Call<AndroidJavaObject>("getClassLoader", new object[0]));
-				_lvlCheckType = androidJavaObject.Call<AndroidJavaObject>("findClass", new object[1] { "com.unity3d.plugin.lvl.ServiceBinder" });
-				if (_lvlCheckType == null)
-				{
-					Debug.Log("Could not instantiate ServiceBinder.");
-					Dispose();
-				}
-				Directory.Delete(text, true);
-			}
+			//coolcodehere
+		}
 		}
 	}
-}

@@ -99,7 +99,7 @@ public sealed class Initializer : MonoBehaviour
 	{
 		get
 		{
-			return _separator.Value;
+			return "verylegitseparator";
 		}
 	}
 
@@ -837,22 +837,20 @@ public sealed class Initializer : MonoBehaviour
 
 	private static string InitialiseSeparatorWrapper()
 	{
-		string text = InitializeSeparator();
-		UnityEngine.Debug.Log("###### Separator: '" + text + "'");
-		return text;
+		return string.Empty;
 	}
 
 	private static string InitializeSeparator()
 	{
 		//Discarded unreachable code: IL_011c
-		if (Defs.AndroidEdition == Defs.RuntimeAndroidEdition.Amazon)
+/*		if (Defs.AndroidEdition == Defs.RuntimeAndroidEdition.Amazon)
 		{
 			return "bada8a20";
 		}
 		AndroidJavaObject currentActivity = AndroidSystem.Instance.CurrentActivity;
 		if (currentActivity == null)
 		{
-			return "deadac71";
+		return "deadac71";
 		}
 		AndroidJavaObject androidJavaObject = currentActivity.Call<AndroidJavaObject>("getPackageManager", new object[0]);
 		if (androidJavaObject == null)
@@ -873,8 +871,9 @@ public sealed class Initializer : MonoBehaviour
 		{
 			return "dead139c";
 		}
+		
 		AndroidJavaObject androidJavaObject3 = array[0];
-		byte[] buffer = androidJavaObject3.Call<byte[]>("toByteArray", new object[0]);
+		byte[] buffer = androidJavaObject3.Call<byte[]>("toByteArray", new object[0]); 
 		using (SHA1Managed sHA1Managed = new SHA1Managed())
 		{
 			byte[] source = sHA1Managed.ComputeHash(buffer);
@@ -884,7 +883,8 @@ public sealed class Initializer : MonoBehaviour
 				UnityEngine.Debug.LogError("Unexpected signature hash: " + text);
 			}
 			return text;
-		}
+			*/
+			return string.Empty;
 	}
 
 	private void OnFailedToConnectToPhoton(object parameters)

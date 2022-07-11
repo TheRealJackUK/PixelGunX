@@ -17,7 +17,7 @@ namespace Rilisoft
 			}
 		}
 
-		public AndroidJavaObject CurrentActivity
+		/*public AndroidJavaObject CurrentActivity
 		{
 			get
 			{
@@ -28,7 +28,7 @@ namespace Rilisoft
 					{
 						return _currentActivity.Target as AndroidJavaObject;
 					}
-					AndroidJavaClass androidJavaClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+/				AndroidJavaClass androidJavaClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
 					AndroidJavaObject @static = androidJavaClass.GetStatic<AndroidJavaObject>("currentActivity");
 					if (@static == null)
 					{
@@ -45,7 +45,7 @@ namespace Rilisoft
 					return null;
 				}
 			}
-		}
+		}*/
 
 		private AndroidSystem()
 		{
@@ -53,35 +53,7 @@ namespace Rilisoft
 
 		public string GetAdvertisingId()
 		{
-			//Discarded unreachable code: IL_00ae, IL_00d2
-			if (Application.platform != RuntimePlatform.Android)
-			{
-				return string.Empty;
-			}
-			try
-			{
-				AndroidJavaClass androidJavaClass = new AndroidJavaClass("com.google.android.gms.ads.identifier.AdvertisingIdClient");
-				AndroidJavaObject currentActivity = CurrentActivity;
-				if (currentActivity == null)
-				{
-					Debug.LogWarning(string.Format("Failed to get Android advertising id: {0} == null", "currentActivity"));
-					return string.Empty;
-				}
-				AndroidJavaObject androidJavaObject = androidJavaClass.CallStatic<AndroidJavaObject>("getAdvertisingIdInfo", new object[1] { currentActivity });
-				if (androidJavaObject == null)
-				{
-					Debug.LogWarning(string.Format("Failed to get Android advertising id: {0} == null", "adInfo"));
-					return string.Empty;
-				}
-				string text = androidJavaObject.Call<string>("getId", new object[0]);
-				return text ?? string.Empty;
-			}
-			catch (Exception exception)
-			{
-				Debug.LogWarning("Exception occured while getting Android advertising id. See next log entry for details.");
-				Debug.LogException(exception);
-				return string.Empty;
-			}
+			return string.Empty;
 		}
 	}
 }

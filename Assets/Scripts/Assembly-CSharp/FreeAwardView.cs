@@ -48,7 +48,7 @@ internal sealed class FreeAwardView : MonoBehaviour
 			}
 			if (backgroundPanel != null)
 			{
-				backgroundPanel.SetActive(!(value is FreeAwardController.IdleState));
+				backgroundPanel.SetActive(false);
 			}
 			if (watchPanel != null)
 			{
@@ -60,7 +60,7 @@ internal sealed class FreeAwardView : MonoBehaviour
 			}
 			if (connectionPanel != null)
 			{
-				connectionPanel.SetActive(value is FreeAwardController.ConnectionState);
+				connectionPanel.SetActive(false);
 			}
 			if (awardPanel != null)
 			{

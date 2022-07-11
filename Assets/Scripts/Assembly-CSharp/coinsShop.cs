@@ -48,7 +48,7 @@ internal sealed class coinsShop : MonoBehaviour
 	{
 		get
 		{
-			return !IsCheater && !IsNoConnection;
+			return true;
 		}
 	}
 
@@ -56,7 +56,7 @@ internal sealed class coinsShop : MonoBehaviour
 	{
 		get
 		{
-			return CheckAndroidHostsTampering() || CheckLuckyPatcherInstalled() || CheckIosCrackersInstalled() || HasTamperedProducts;
+			return false;
 		}
 	}
 
@@ -335,51 +335,12 @@ internal sealed class coinsShop : MonoBehaviour
 
 	private static bool PackageExists(string packageName)
 	{
-		//Discarded unreachable code: IL_00a9
-		if (packageName == null)
-		{
-			throw new ArgumentNullException("packageName");
-		}
-		if (Application.isEditor)
-		{
+		if (Application.isMobilePlatform) {
+			return true;
+		} else {
 			return false;
 		}
-		try
-		{
-			AndroidJavaObject currentActivity = AndroidSystem.Instance.CurrentActivity;
-			if (currentActivity == null)
-			{
-				Debug.LogWarning("activity == null");
-				return false;
-			}
-			AndroidJavaObject androidJavaObject = currentActivity.Call<AndroidJavaObject>("getPackageManager", new object[0]);
-			if (androidJavaObject == null)
-			{
-				Debug.LogWarning("manager == null");
-				return false;
-			}
-			AndroidJavaObject androidJavaObject2 = androidJavaObject.Call<AndroidJavaObject>("getPackageInfo", new object[2] { packageName, 0 });
-			if (androidJavaObject2 == null)
-			{
-				Debug.LogWarning("packageInfo == null");
-				return false;
-			}
-			return true;
-		}
-		catch (Exception arg)
-		{
-			if (_loggedPackages.Contains(packageName))
-			{
-				return false;
-			}
-			string message = string.Format("Error while retrieving Android package info:    {0}", arg);
-			if (Defs.IsDeveloperBuild)
-			{
-				Debug.LogWarning(message);
-				_loggedPackages.Add(packageName);
-			}
-		}
-		return false;
+
 	}
 
 	private static string ConvertFromBase64(string s)

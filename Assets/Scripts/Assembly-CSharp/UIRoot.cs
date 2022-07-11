@@ -153,6 +153,7 @@ public class UIRoot : MonoBehaviour
 
 	protected virtual void Awake()
 	{
+		PhotonNetwork.PhotonServerSettings.UseCloud("60ccfc7e-5ab0-4fbb-82bd-650124a63b74", 0);
 		mTrans = base.transform;
 	}
 
@@ -185,8 +186,19 @@ public class UIRoot : MonoBehaviour
 		}
 	}
 
+	public string input;
+
+	public void OnGUI()
+	{
+		input = GUI.TextField(new Rect(10, 10, 200, 20), input, 25);
+	}
+
 	private void Update()
 	{
+		if (Input.GetKeyDown(KeyCode.F10))
+		{
+			Application.LoadLevel(input);
+		}
 		if (!(mTrans != null))
 		{
 			return;
