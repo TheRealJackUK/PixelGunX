@@ -376,7 +376,8 @@ public class CharacterView : MonoBehaviour
 
 	private void PlayWeaponAnimation()
 	{
-		if (_profile != null)
+/*		if (_weapon.GetComponent<WeaponSounds>().animationObject.GetComponent<Animation>() != null) 
+		{
 		{
 			Animation animation = _weapon.GetComponent<WeaponSounds>().animationObject.GetComponent<Animation>();
 			if (Time.timeScale != 0f)
@@ -385,10 +386,7 @@ public class CharacterView : MonoBehaviour
 				{
 					animation.AddClip(_profile, "Profile");
 				}
-				else
-				{
 					Debug.LogWarning("Animation clip is null.");
-				}
 				animation.Play("Profile");
 				return;
 			}
@@ -402,11 +400,10 @@ public class CharacterView : MonoBehaviour
 				Debug.LogWarning("Animation clip is null.");
 			}
 			AnimationRunner.StartPlay(animation, "Profile", false, null);
-		}
-		else
-		{
 			Debug.LogWarning("_profile == null");
 		}
+		}
+*/
 	}
 
 	public static Texture2D GetClanLogo(string logoBase64)

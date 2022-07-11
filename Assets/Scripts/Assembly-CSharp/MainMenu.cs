@@ -217,12 +217,14 @@ public sealed class MainMenu : MonoBehaviour
 			{
 				EveryplayWrapper.Instance.Stop();
 			}
-			if (!FriendsController.sharedController.dataSent)
+			
+			/*if (!FriendsController.sharedController.dataSent)
 			{
 				FriendsController.sharedController.InitOurInfo();
 				FriendsController.sharedController.SendOurData(true);
 				FriendsController.sharedController.dataSent = true;
-			}
+			}*/
+			
 			if (NotificationController.isGetEveryDayMoney)
 			{
 				isShowAvard = true;

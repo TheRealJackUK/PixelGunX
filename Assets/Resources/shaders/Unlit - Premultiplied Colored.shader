@@ -1,122 +1,104 @@
-Shader "Unlit/Premultiplied Colored" {
-Properties {
- _MainTex ("Base (RGB), Alpha (A)", 2D) = "black" {}
-}
-SubShader { 
- LOD 200
- Tags { "QUEUE"="Transparent" "IGNOREPROJECTOR"="true" "RenderType"="Transparent" }
- Pass {
-  Tags { "QUEUE"="Transparent" "IGNOREPROJECTOR"="true" "RenderType"="Transparent" }
-  ZWrite Off
-  Cull Off
-  Fog { Mode Off }
-  Blend One OneMinusSrcAlpha
-  ColorMask RGB
-  Offset -1, -1
-Program "vp" {
-SubProgram "gles " {
-"!!GLES
-
-
-#ifdef VERTEX
-
-attribute vec4 _glesVertex;
-attribute vec4 _glesColor;
-attribute vec4 _glesMultiTexCoord0;
-uniform highp mat4 glstate_matrix_mvp;
-varying highp vec2 xlv_TEXCOORD0;
-varying mediump vec4 xlv_COLOR;
-void main ()
+Shader "Unlit/Premultiplied Colored"
 {
-  gl_Position = (glstate_matrix_mvp * _glesVertex);
-  xlv_TEXCOORD0 = _glesMultiTexCoord0.xy;
-  xlv_COLOR = _glesColor;
-}
+	Properties
+	{
+		_MainTex ("Base (RGB), Alpha (A)", 2D) = "black" {}
+	}
 
+	SubShader
+	{
+		LOD 200
 
+		Tags
+		{
+			"Queue" = "Transparent"
+			"IgnoreProjector" = "True"
+			"RenderType" = "Transparent"
+			"DisableBatching" = "True"
+		}
 
-#endif
-#ifdef FRAGMENT
+		Pass
+		{
+			Cull Off
+			Lighting Off
+			ZWrite Off
+			AlphaTest Off
+			Fog { Mode Off }
+			Offset -1, -1
+			Blend One OneMinusSrcAlpha
+		
+			CGPROGRAM
+			#pragma vertex vert
+			#pragma fragment frag
+			#include "UnityCG.cginc"
 
-uniform sampler2D _MainTex;
-varying highp vec2 xlv_TEXCOORD0;
-varying mediump vec4 xlv_COLOR;
-void main ()
-{
-  lowp vec4 tmpvar_1;
-  tmpvar_1 = texture2D (_MainTex, xlv_TEXCOORD0);
-  gl_FragData[0] = (tmpvar_1 * xlv_COLOR);
-}
+			sampler2D _MainTex;
+			float4 _MainTex_ST;
 
+			struct appdata_t
+			{
+				float4 vertex : POSITION;
+				float2 texcoord : TEXCOORD0;
+				half4 color : COLOR;
+				UNITY_VERTEX_INPUT_INSTANCE_ID
+			};
 
+			struct v2f
+			{
+				float4 vertex : SV_POSITION;
+				float2 texcoord : TEXCOORD0;
+				half4 color : COLOR;
+				UNITY_VERTEX_OUTPUT_STEREO
+			};
 
-#endif"
-}
-SubProgram "gles3 " {
-"!!GLES3#version 300 es
+			v2f vert (appdata_t v)
+			{
+				v2f o;
+				UNITY_SETUP_INSTANCE_ID(v);
+				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
+				o.vertex = UnityObjectToClipPos(v.vertex);
+				o.texcoord = v.texcoord;
+				o.color = v.color;
+				return o;
+			}
 
+			half4 frag (v2f IN) : SV_Target
+			{
+				half4 col = tex2D(_MainTex, IN.texcoord) * IN.color;
+				return col;
+			}
+			ENDCG
+		}
+	}
+	
+	SubShader
+	{
+		LOD 100
 
-#ifdef VERTEX
-
-
-in vec4 _glesVertex;
-in vec4 _glesColor;
-in vec4 _glesMultiTexCoord0;
-uniform highp mat4 glstate_matrix_mvp;
-out highp vec2 xlv_TEXCOORD0;
-out mediump vec4 xlv_COLOR;
-void main ()
-{
-  gl_Position = (glstate_matrix_mvp * _glesVertex);
-  xlv_TEXCOORD0 = _glesMultiTexCoord0.xy;
-  xlv_COLOR = _glesColor;
-}
-
-
-
-#endif
-#ifdef FRAGMENT
-
-
-layout(location=0) out mediump vec4 _glesFragData[4];
-uniform sampler2D _MainTex;
-in highp vec2 xlv_TEXCOORD0;
-in mediump vec4 xlv_COLOR;
-void main ()
-{
-  lowp vec4 tmpvar_1;
-  tmpvar_1 = texture (_MainTex, xlv_TEXCOORD0);
-  _glesFragData[0] = (tmpvar_1 * xlv_COLOR);
-}
-
-
-
-#endif"
-}
-}
-Program "fp" {
-SubProgram "gles " {
-"!!GLES"
-}
-SubProgram "gles3 " {
-"!!GLES3"
-}
-}
- }
-}
-SubShader { 
- LOD 100
- Tags { "QUEUE"="Transparent" "IGNOREPROJECTOR"="true" "RenderType"="Transparent" }
- Pass {
-  Tags { "QUEUE"="Transparent" "IGNOREPROJECTOR"="true" "RenderType"="Transparent" }
-  ZWrite Off
-  Cull Off
-  Fog { Mode Off }
-  Blend One OneMinusSrcAlpha
-  ColorMask RGB
-  ColorMaterial AmbientAndDiffuse
-  Offset -1, -1
-  SetTexture [_MainTex] { combine texture * primary }
- }
-}
+		Tags
+		{
+			"Queue" = "Transparent"
+			"IgnoreProjector" = "True"
+			"RenderType" = "Transparent"
+			"DisableBatching" = "True"
+		}
+		
+		Pass
+		{
+			Cull Off
+			Lighting Off
+			ZWrite Off
+			AlphaTest Off
+			Fog { Mode Off }
+			Offset -1, -1
+			//ColorMask RGB
+			Blend One OneMinusSrcAlpha 
+			ColorMaterial AmbientAndDiffuse
+			
+			SetTexture [_MainTex]
+			{
+				Combine Texture * Primary
+			}
+		}
+	}
 }

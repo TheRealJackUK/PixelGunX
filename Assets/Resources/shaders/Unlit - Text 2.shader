@@ -1,163 +1,99 @@
-Shader "Hidden/Unlit/Text 2" {
-Properties {
- _MainTex ("Alpha (A)", 2D) = "white" {}
-}
-SubShader { 
- LOD 200
- Tags { "QUEUE"="Transparent" "IGNOREPROJECTOR"="true" "RenderType"="Transparent" }
- Pass {
-  Tags { "QUEUE"="Transparent" "IGNOREPROJECTOR"="true" "RenderType"="Transparent" }
-  ZWrite Off
-  Cull Off
-  Fog { Mode Off }
-  Blend SrcAlpha OneMinusSrcAlpha
-  Offset -1, -1
-Program "vp" {
-SubProgram "gles " {
-"!!GLES
-
-
-#ifdef VERTEX
-
-attribute vec4 _glesVertex;
-attribute vec4 _glesColor;
-attribute vec4 _glesMultiTexCoord0;
-uniform highp mat4 glstate_matrix_mvp;
-uniform highp vec4 _ClipRange0;
-uniform highp vec4 _ClipRange1;
-uniform highp vec4 _ClipArgs1;
-varying mediump vec4 xlv_COLOR;
-varying highp vec2 xlv_TEXCOORD0;
-varying highp vec4 xlv_TEXCOORD1;
-void main ()
+Shader "Hidden/Unlit/Text 2" 
 {
-  highp vec4 tmpvar_1;
-  tmpvar_1.xy = ((_glesVertex.xy * _ClipRange0.zw) + _ClipRange0.xy);
-  highp vec2 ret_2;
-  ret_2.x = ((_glesVertex.x * _ClipArgs1.w) - (_glesVertex.y * _ClipArgs1.z));
-  ret_2.y = ((_glesVertex.x * _ClipArgs1.z) + (_glesVertex.y * _ClipArgs1.w));
-  tmpvar_1.zw = ((ret_2 * _ClipRange1.zw) + _ClipRange1.xy);
-  gl_Position = (glstate_matrix_mvp * _glesVertex);
-  xlv_COLOR = _glesColor;
-  xlv_TEXCOORD0 = _glesMultiTexCoord0.xy;
-  xlv_TEXCOORD1 = tmpvar_1;
-}
+	Properties
+	{
+		_MainTex ("Alpha (A)", 2D) = "white" {}
+	}
 
+	SubShader
+	{
+		LOD 200
 
+		Tags
+		{
+			"Queue" = "Transparent"
+			"IgnoreProjector" = "True"
+			"RenderType" = "Transparent"
+			"DisableBatching" = "True"
+		}
+		
+		Pass
+		{
+			Cull Off
+			Lighting Off
+			ZWrite Off
+			Offset -1, -1
+			Fog { Mode Off }
+			Blend SrcAlpha OneMinusSrcAlpha
 
-#endif
-#ifdef FRAGMENT
+			CGPROGRAM
+			#pragma vertex vert
+			#pragma fragment frag
+			#include "UnityCG.cginc"
 
-uniform sampler2D _MainTex;
-uniform highp vec4 _ClipArgs0;
-uniform highp vec4 _ClipArgs1;
-varying mediump vec4 xlv_COLOR;
-varying highp vec2 xlv_TEXCOORD0;
-varying highp vec4 xlv_TEXCOORD1;
-void main ()
-{
-  mediump vec4 col_1;
-  highp vec2 tmpvar_2;
-  tmpvar_2 = ((vec2(1.0, 1.0) - abs(xlv_TEXCOORD1.xy)) * _ClipArgs0.xy);
-  highp vec2 tmpvar_3;
-  tmpvar_3 = ((vec2(1.0, 1.0) - abs(xlv_TEXCOORD1.zw)) * _ClipArgs1.xy);
-  col_1.xyz = xlv_COLOR.xyz;
-  lowp vec4 tmpvar_4;
-  tmpvar_4 = texture2D (_MainTex, xlv_TEXCOORD0);
-  col_1.w = (xlv_COLOR.w * tmpvar_4.w);
-  highp float tmpvar_5;
-  tmpvar_5 = (col_1.w * clamp (min (
-    min (tmpvar_2.x, tmpvar_2.y)
-  , 
-    min (tmpvar_3.x, tmpvar_3.y)
-  ), 0.0, 1.0));
-  col_1.w = tmpvar_5;
-  gl_FragData[0] = col_1;
-}
+			sampler2D _MainTex;
+			float4 _ClipRange0 = float4(0.0, 0.0, 1.0, 1.0);
+			float4 _ClipArgs0 = float4(1000.0, 1000.0, 0.0, 1.0);
+			float4 _ClipRange1 = float4(0.0, 0.0, 1.0, 1.0);
+			float4 _ClipArgs1 = float4(1000.0, 1000.0, 0.0, 1.0);
 
+			struct appdata_t
+			{
+				float4 vertex : POSITION;
+				half4 color : COLOR;
+				float2 texcoord : TEXCOORD0;
+				UNITY_VERTEX_INPUT_INSTANCE_ID
+			};
 
+			struct v2f
+			{
+				float4 vertex : SV_POSITION;
+				half4 color : COLOR;
+				float2 texcoord : TEXCOORD0;
+				float4 worldPos : TEXCOORD1;
+				UNITY_VERTEX_OUTPUT_STEREO
+			};
 
-#endif"
-}
-SubProgram "gles3 " {
-"!!GLES3#version 300 es
+			float2 Rotate (float2 v, float2 rot)
+			{
+				float2 ret;
+				ret.x = v.x * rot.y - v.y * rot.x;
+				ret.y = v.x * rot.x + v.y * rot.y;
+				return ret;
+			}
 
+			v2f vert (appdata_t v)
+			{
+				v2f o;
+				UNITY_SETUP_INSTANCE_ID(v);
+				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
+				o.vertex = UnityObjectToClipPos(v.vertex);
+				o.color = v.color;
+				o.texcoord = v.texcoord;
+				o.worldPos.xy = v.vertex.xy * _ClipRange0.zw + _ClipRange0.xy;
+				o.worldPos.zw = Rotate(v.vertex.xy, _ClipArgs1.zw) * _ClipRange1.zw + _ClipRange1.xy;
+				return o;
+			}
 
-#ifdef VERTEX
+			half4 frag (v2f IN) : SV_Target
+			{
+				// First clip region
+				float2 factor = (float2(1.0, 1.0) - abs(IN.worldPos.xy)) * _ClipArgs0.xy;
+				float f = min(factor.x, factor.y);
 
+				// Second clip region
+				factor = (float2(1.0, 1.0) - abs(IN.worldPos.zw)) * _ClipArgs1.xy;
+				f = min(f, min(factor.x, factor.y));
+			
+				// Sample the texture
+				half4 col = IN.color;
+				col.a *= tex2D(_MainTex, IN.texcoord).a;
+				col.a *= clamp(f, 0.0, 1.0);
 
-in vec4 _glesVertex;
-in vec4 _glesColor;
-in vec4 _glesMultiTexCoord0;
-uniform highp mat4 glstate_matrix_mvp;
-uniform highp vec4 _ClipRange0;
-uniform highp vec4 _ClipRange1;
-uniform highp vec4 _ClipArgs1;
-out mediump vec4 xlv_COLOR;
-out highp vec2 xlv_TEXCOORD0;
-out highp vec4 xlv_TEXCOORD1;
-void main ()
-{
-  highp vec4 tmpvar_1;
-  tmpvar_1.xy = ((_glesVertex.xy * _ClipRange0.zw) + _ClipRange0.xy);
-  highp vec2 ret_2;
-  ret_2.x = ((_glesVertex.x * _ClipArgs1.w) - (_glesVertex.y * _ClipArgs1.z));
-  ret_2.y = ((_glesVertex.x * _ClipArgs1.z) + (_glesVertex.y * _ClipArgs1.w));
-  tmpvar_1.zw = ((ret_2 * _ClipRange1.zw) + _ClipRange1.xy);
-  gl_Position = (glstate_matrix_mvp * _glesVertex);
-  xlv_COLOR = _glesColor;
-  xlv_TEXCOORD0 = _glesMultiTexCoord0.xy;
-  xlv_TEXCOORD1 = tmpvar_1;
-}
-
-
-
-#endif
-#ifdef FRAGMENT
-
-
-layout(location=0) out mediump vec4 _glesFragData[4];
-uniform sampler2D _MainTex;
-uniform highp vec4 _ClipArgs0;
-uniform highp vec4 _ClipArgs1;
-in mediump vec4 xlv_COLOR;
-in highp vec2 xlv_TEXCOORD0;
-in highp vec4 xlv_TEXCOORD1;
-void main ()
-{
-  mediump vec4 col_1;
-  highp vec2 tmpvar_2;
-  tmpvar_2 = ((vec2(1.0, 1.0) - abs(xlv_TEXCOORD1.xy)) * _ClipArgs0.xy);
-  highp vec2 tmpvar_3;
-  tmpvar_3 = ((vec2(1.0, 1.0) - abs(xlv_TEXCOORD1.zw)) * _ClipArgs1.xy);
-  col_1.xyz = xlv_COLOR.xyz;
-  lowp vec4 tmpvar_4;
-  tmpvar_4 = texture (_MainTex, xlv_TEXCOORD0);
-  col_1.w = (xlv_COLOR.w * tmpvar_4.w);
-  highp float tmpvar_5;
-  tmpvar_5 = (col_1.w * clamp (min (
-    min (tmpvar_2.x, tmpvar_2.y)
-  , 
-    min (tmpvar_3.x, tmpvar_3.y)
-  ), 0.0, 1.0));
-  col_1.w = tmpvar_5;
-  _glesFragData[0] = col_1;
-}
-
-
-
-#endif"
-}
-}
-Program "fp" {
-SubProgram "gles " {
-"!!GLES"
-}
-SubProgram "gles3 " {
-"!!GLES3"
-}
-}
- }
-}
-Fallback "Unlit/Text"
+				return col;
+			}
+			ENDCG
+		}
+	}
+	Fallback "Unlit/Text"
 }

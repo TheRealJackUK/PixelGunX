@@ -55,11 +55,11 @@ public class BannerWindowController : MonoBehaviour
 		_bannerQueue = new Queue<BannerWindow>();
 		_someBannerShown = false;
 		_whenStart = Time.realtimeSinceStartup + 3f;
-		FriendsController.sharedController.DownloadInfoByEverydayDelta();
-		StarterPackController.Get.CheckShowStarterPack();
-		StarterPackController.Get.UpdateCountShownWindowByTimeCondition();
-		PromoActionsManager.UpdateDaysOfValorShownCondition();
-		_isBlockShowForNewPlayer = !IsBannersCanShowAfterNewInstall();
+		//FriendsController.sharedController.DownloadInfoByEverydayDelta();
+		//StarterPackController.Get.CheckShowStarterPack();
+		//StarterPackController.Get.UpdateCountShownWindowByTimeCondition();
+		//PromoActionsManager.UpdateDaysOfValorShownCondition();
+		//_isBlockShowForNewPlayer = !IsBannersCanShowAfterNewInstall();
 	}
 
 	private void OnDestroy()
@@ -74,7 +74,7 @@ public class BannerWindowController : MonoBehaviour
 		if (!pause)
 		{
 			StarterPackController.Get.UpdateCountShownWindowByTimeCondition();
-			FriendsController.sharedController.DownloadInfoByEverydayDelta();
+//			FriendsController.sharedController.DownloadInfoByEverydayDelta();
 			PromoActionsManager.UpdateDaysOfValorShownCondition();
 			_isBlockShowForNewPlayer = !IsBannersCanShowAfterNewInstall();
 		}
@@ -379,12 +379,12 @@ public class BannerWindowController : MonoBehaviour
 			_bannerShowed[3] = true;
 			_needShowBanner[3] = true;
 		}
-		if (PromoActionsManager.sharedManager.IsDayOfValorEventActive && !Defs.IsTraining && PlayerPrefs.GetInt("DaysOfValorShownCount", 1) > 0 && !_bannerShowed[4])
+		if (true)
 		{
 			_bannerShowed[4] = true;
 			_needShowBanner[4] = true;
 		}
-		if (PromoActionsManager.sharedManager.IsEventX3Active && !Defs.IsTraining && PlayerPrefs.GetInt(Defs.EventX3WindowShownCount, 1) > 0 && !_bannerShowed[5])
+		if (true)
 		{
 			_bannerShowed[5] = true;
 			_needShowBanner[5] = true;
@@ -407,7 +407,7 @@ public class BannerWindowController : MonoBehaviour
 			_bannerShowed[7] = true;
 			_needShowBanner[7] = true;
 		}
-		if (StarterPackController.Get.IsNeedShowEventWindow() && !_bannerShowed[9])
+		if (!_bannerShowed[9])
 		{
 			_bannerShowed[9] = true;
 			_needShowBanner[9] = true;

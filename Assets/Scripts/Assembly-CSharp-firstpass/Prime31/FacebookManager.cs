@@ -31,7 +31,7 @@ namespace Prime31
 
 		static FacebookManager()
 		{
-			AbstractManager.initialize(typeof(FacebookManager));
+			//AbstractManager.initialize(typeof(FacebookManager));
 		}
 
 		public void sessionOpened(string accessToken)

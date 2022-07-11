@@ -261,7 +261,7 @@ internal sealed class BankView : MonoBehaviour, IDisposable
 		}
 		if (Time.realtimeSinceStartup - _lastUpdateTime >= 0.5f)
 		{
-			long eventX3RemainedTime = PromoActionsManager.sharedManager.EventX3RemainedTime;
+			long eventX3RemainedTime = 123321;
 			TimeSpan timeSpan = TimeSpan.FromSeconds(eventX3RemainedTime);
 			string empty = string.Empty;
 			empty = ((timeSpan.Days <= 0) ? string.Format("{0}: {1:00}:{2:00}:{3:00}", _localizeSaleLabel, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds) : string.Format("{0}: {1} {2} {3:00}:{4:00}:{5:00}", _localizeSaleLabel, timeSpan.Days, (timeSpan.Days != 1) ? "Days" : "Day", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));

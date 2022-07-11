@@ -681,7 +681,7 @@ internal sealed class MainMenuController : ControlsSettingsBase
 		yield return new WaitForSeconds(0.5f);
 		_drawLoadingProgress = false;
 		stubLoading.SetActive(false);
-		ActivityIndicator.sharedActivityIndicator.SetActive(false);
+//		ActivityIndicator.sharedActivityIndicator.SetActive(false);
 		Debug.Log("Start initializing ProfileGui.");
 		ProfileController profileController = UnityEngine.Object.FindObjectOfType<ProfileController>();
 		if (profileController == null)
@@ -769,9 +769,9 @@ internal sealed class MainMenuController : ControlsSettingsBase
 		PromoActionsManager.EventX3Updated += OnEventX3Updated;
 		OnEventX3Updated();
 		StarterPackController.OnStarterPackEnable += OnStarterPackContainerShow;
-		OnStarterPackContainerShow(StarterPackController.Get.isEventActive);
+		OnStarterPackContainerShow(true);
 		PromoActionsManager.OnDayOfValorEnable += OnDayOfValorContainerShow;
-		OnDayOfValorContainerShow(PromoActionsManager.sharedManager.IsDayOfValorEventActive);
+		//OnDayOfValorContainerShow(PromoActionsManager.sharedManager.IsDayOfValorEventActive);
 		if (ReplaceAdmobPerelivController.sharedController != null && ReplaceAdmobPerelivController.sharedController.ShouldShowInLobby && ReplaceAdmobPerelivController.sharedController.DataLoaded)
 		{
 			ReplaceAdmobPerelivController.sharedController.ShouldShowInLobby = false;
@@ -1050,7 +1050,7 @@ internal sealed class MainMenuController : ControlsSettingsBase
 
 	private void UpdateEventX3RemainedTime()
 	{
-		long eventX3RemainedTime = PromoActionsManager.sharedManager.EventX3RemainedTime;
+		long eventX3RemainedTime = 999;
 		TimeSpan timeSpan = TimeSpan.FromSeconds(eventX3RemainedTime);
 		string empty = string.Empty;
 		empty = ((timeSpan.Days <= 0) ? string.Format("{0}: {1:00}:{2:00}:{3:00}", _localizeSaleLabel, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds) : string.Format("{0}: {1} {2} {3:00}:{4:00}:{5:00}", _localizeSaleLabel, timeSpan.Days, (timeSpan.Days != 1) ? "Days" : "Day", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds));
@@ -1069,7 +1069,7 @@ internal sealed class MainMenuController : ControlsSettingsBase
 
 	public bool PromoOffersPanelShouldBeShown()
 	{
-		return _shopInstance == null && !ShowBannerOrLevelup() && !BannerWindowController.SharedController.IsBannerShow(BannerWindowType.MarathonBonus);
+		return true;
 	}
 
 	private void Update()
@@ -1122,7 +1122,7 @@ internal sealed class MainMenuController : ControlsSettingsBase
 		{
 			daysOfValor.SetActive(ExpController.LobbyLevel > 2 && Storager.getInt(Defs.ShownLobbyLevelSN, false) > 2);
 		}
-		bool flag = Storager.getInt(Defs.PremiumEnabledFromServer, false) == 1 || PremiumAccountController.Instance.isAccountActive;
+		bool flag = true;
 		if (premium.activeSelf != (ExpController.LobbyLevel > 3 && flag && Storager.getInt(Defs.ShownLobbyLevelSN, false) > 3))
 		{
 			premium.SetActive(ExpController.LobbyLevel > 3 && flag && Storager.getInt(Defs.ShownLobbyLevelSN, false) > 3);
@@ -1277,7 +1277,7 @@ internal sealed class MainMenuController : ControlsSettingsBase
 		}
 		if (_starterPackEnabled)
 		{
-			starterPackTimer.text = StarterPackController.Get.GetTimeToEndEvent();
+			//starterPackTimer.text = StarterPackController.Get.GetTimeToEndEvent();
 		}
 			freeAwardChestObj.SetActive(true);
 	}
@@ -2091,7 +2091,7 @@ internal sealed class MainMenuController : ControlsSettingsBase
 
 	private void OnEventX3Updated()
 	{
-		eventX3RemainTime[0].gameObject.SetActive(PromoActionsManager.sharedManager.IsEventX3Active);
+		//eventX3RemainTime[0].gameObject.SetActive(PromoActionsManager.sharedManager.IsEventX3Active);
 	}
 
 	private void OnStarterPackContainerShow(bool enable)
@@ -2099,10 +2099,10 @@ internal sealed class MainMenuController : ControlsSettingsBase
 		starterPackPanel.gameObject.SetActive(enable);
 		if (enable)
 		{
-			buttonBackground.mainTexture = StarterPackController.Get.GetCurrentPackImage();
+			//buttonBackground.mainTexture = StarterPackController.Get.GetCurrentPackImage();
 		}
 		_starterPackEnabled = enable;
-		starterPackTimer.text = StarterPackController.Get.GetTimeToEndEvent();
+//		starterPackTimer.text = StarterPackController.Get.GetTimeToEndEvent();
 	}
 
 	public void OnStarterPackButtonClick()

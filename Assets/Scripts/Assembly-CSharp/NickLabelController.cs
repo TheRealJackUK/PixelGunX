@@ -229,8 +229,8 @@ public sealed class NickLabelController : MonoBehaviour
 			nickLabel.text = text;
 		}
 		UpdateRankSprite();
-		clanName.text = FriendsController.sharedController.clanName;
-		if (!string.IsNullOrEmpty(FriendsController.sharedController.clanLogo))
+//		clanName.text = FriendsController.sharedController.clanName;
+/*		if (!string.IsNullOrEmpty(FriendsController.sharedController.clanLogo))
 		{
 			byte[] data = Convert.FromBase64String(FriendsController.sharedController.clanLogo);
 			Texture2D texture2D = new Texture2D(Defs.LogoWidth, Defs.LogoWidth);
@@ -241,10 +241,12 @@ public sealed class NickLabelController : MonoBehaviour
 			Transform transform = clanTexture.transform;
 			transform.localPosition = new Vector3((float)(-clanName.width) * 0.5f - 16f, transform.localPosition.y, transform.localPosition.z);
 		}
+
 		else
 		{
-			clanTexture.mainTexture = null;
+			//clanTexture.mainTexture = null;
 		}
+*/
 	}
 
 	public void OnEnable()

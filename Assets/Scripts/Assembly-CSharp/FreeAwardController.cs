@@ -754,10 +754,10 @@ internal sealed class FreeAwardController : MonoBehaviour
 				}
 					CurrentState = new ConnectionState();
 			}
-			else if (Time.realtimeSinceStartup - waitingState.StartTime > (float)PromoActionsManager.MobileAdvert.TimeoutWaitVideo)
+			/*else if (Time.realtimeSinceStartup - waitingState.StartTime > (float)PromoActionsManager.MobileAdvert.TimeoutWaitVideo)
 			{
 				CurrentState = new ConnectionState();
-			}
+			}*/
 			return;
 		WatchingState watchingState = TryGetState<WatchingState>();
 		if (watchingState != null)

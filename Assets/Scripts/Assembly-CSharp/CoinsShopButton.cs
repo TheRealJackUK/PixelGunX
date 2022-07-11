@@ -22,7 +22,7 @@ public class CoinsShopButton : MonoBehaviour
 
 	private void OnEventX3Updated()
 	{
-		bool isEventX3Active = PromoActionsManager.sharedManager.IsEventX3Active;
+		bool isEventX3Active = true;
 		if (eventX3 != null && eventX3.activeSelf != isEventX3Active)
 		{
 			eventX3.SetActive(isEventX3Active);

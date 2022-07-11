@@ -1,164 +1,80 @@
-Shader "Unlit/Transparent Colored (Packed) (TextureClip)" {
-Properties {
- _MainTex ("Base (RGB), Alpha (A)", 2D) = "black" {}
-}
-SubShader { 
- LOD 200
- Tags { "QUEUE"="Transparent" "IGNOREPROJECTOR"="true" "RenderType"="Transparent" }
- Pass {
-  Tags { "QUEUE"="Transparent" "IGNOREPROJECTOR"="true" "RenderType"="Transparent" }
-  ZWrite Off
-  Cull Off
-  Fog { Mode Off }
-  Blend SrcAlpha OneMinusSrcAlpha
-  ColorMask RGB
-  Offset -1, -1
-Program "vp" {
-SubProgram "gles " {
-"!!GLES
-
-
-#ifdef VERTEX
-
-attribute vec4 _glesVertex;
-attribute vec4 _glesColor;
-attribute vec4 _glesMultiTexCoord0;
-uniform highp mat4 glstate_matrix_mvp;
-uniform mediump vec4 _MainTex_ST;
-varying mediump vec4 xlv_COLOR;
-varying highp vec2 xlv_TEXCOORD0;
-varying highp vec2 xlv_TEXCOORD1;
-void main ()
+Shader "Unlit/Transparent Colored (Packed) (TextureClip)"
 {
-  gl_Position = (glstate_matrix_mvp * _glesVertex);
-  xlv_COLOR = _glesColor;
-  xlv_TEXCOORD0 = _glesMultiTexCoord0.xy;
-  xlv_TEXCOORD1 = ((_glesVertex.xy * _MainTex_ST.xy) + _MainTex_ST.zw);
-}
+	Properties
+	{
+		_MainTex ("Base (RGB), Alpha (A)", 2D) = "black" {}
+	}
 
+	SubShader
+	{
+		LOD 200
 
+		Tags
+		{
+			"Queue" = "Transparent"
+			"IgnoreProjector" = "True"
+			"RenderType" = "Transparent"
+		}
+		
+		Pass
+		{
+			Cull Off
+			Lighting Off
+			ZWrite Off
+			Offset -1, -1
+			Fog { Mode Off }
+			//ColorMask RGB
+			Blend SrcAlpha OneMinusSrcAlpha
 
-#endif
-#ifdef FRAGMENT
+			CGPROGRAM
+			#pragma vertex vert
+			#pragma fragment frag
 
-uniform sampler2D _MainTex;
-uniform sampler2D _ClipTex;
-varying mediump vec4 xlv_COLOR;
-varying highp vec2 xlv_TEXCOORD0;
-varying highp vec2 xlv_TEXCOORD1;
-void main ()
-{
-  mediump vec4 col_1;
-  mediump vec4 mask_2;
-  mediump float alpha_3;
-  highp vec2 P_4;
-  P_4 = ((xlv_TEXCOORD1 * 0.5) + vec2(0.5, 0.5));
-  lowp float tmpvar_5;
-  tmpvar_5 = texture2D (_ClipTex, P_4).w;
-  alpha_3 = tmpvar_5;
-  lowp vec4 tmpvar_6;
-  tmpvar_6 = texture2D (_MainTex, xlv_TEXCOORD0);
-  mask_2 = tmpvar_6;
-  mediump vec4 tmpvar_7;
-  tmpvar_7 = clamp (ceil((xlv_COLOR - 0.5)), 0.0, 1.0);
-  mediump vec4 tmpvar_8;
-  tmpvar_8 = clamp (((
-    (tmpvar_7 * 0.51)
-   - xlv_COLOR) / -0.49), 0.0, 1.0);
-  col_1.xyz = tmpvar_8.xyz;
-  col_1.w = (tmpvar_8.w * alpha_3);
-  mediump vec4 tmpvar_9;
-  tmpvar_9 = (mask_2 * tmpvar_7);
-  mask_2 = tmpvar_9;
-  col_1.w = (col_1.w * ((
-    (tmpvar_9.x + tmpvar_9.y)
-   + tmpvar_9.z) + tmpvar_9.w));
-  gl_FragData[0] = col_1;
-}
+			#include "UnityCG.cginc"
 
+			sampler2D _MainTex;
+			half4 _MainTex_ST;
+			sampler2D _ClipTex;
 
+			struct appdata_t
+			{
+				float4 vertex : POSITION;
+				half4 color : COLOR;
+				float2 texcoord : TEXCOORD0;
+			};
 
-#endif"
-}
-SubProgram "gles3 " {
-"!!GLES3#version 300 es
+			struct v2f
+			{
+				float4 vertex : SV_POSITION;
+				half4 color : COLOR;
+				float2 texcoord : TEXCOORD0;
+				float2 worldPos : TEXCOORD1;
+			};
 
+			v2f vert (appdata_t v)
+			{
+				v2f o;
+				o.vertex = UnityObjectToClipPos(v.vertex);
+				o.color = v.color;
+				o.texcoord = v.texcoord;
+				o.worldPos = TRANSFORM_TEX(v.vertex.xy, _MainTex);
+				return o;
+			}
 
-#ifdef VERTEX
-
-
-in vec4 _glesVertex;
-in vec4 _glesColor;
-in vec4 _glesMultiTexCoord0;
-uniform highp mat4 glstate_matrix_mvp;
-uniform mediump vec4 _MainTex_ST;
-out mediump vec4 xlv_COLOR;
-out highp vec2 xlv_TEXCOORD0;
-out highp vec2 xlv_TEXCOORD1;
-void main ()
-{
-  gl_Position = (glstate_matrix_mvp * _glesVertex);
-  xlv_COLOR = _glesColor;
-  xlv_TEXCOORD0 = _glesMultiTexCoord0.xy;
-  xlv_TEXCOORD1 = ((_glesVertex.xy * _MainTex_ST.xy) + _MainTex_ST.zw);
-}
-
-
-
-#endif
-#ifdef FRAGMENT
-
-
-layout(location=0) out mediump vec4 _glesFragData[4];
-uniform sampler2D _MainTex;
-uniform sampler2D _ClipTex;
-in mediump vec4 xlv_COLOR;
-in highp vec2 xlv_TEXCOORD0;
-in highp vec2 xlv_TEXCOORD1;
-void main ()
-{
-  mediump vec4 col_1;
-  mediump vec4 mask_2;
-  mediump float alpha_3;
-  highp vec2 P_4;
-  P_4 = ((xlv_TEXCOORD1 * 0.5) + vec2(0.5, 0.5));
-  lowp float tmpvar_5;
-  tmpvar_5 = texture (_ClipTex, P_4).w;
-  alpha_3 = tmpvar_5;
-  lowp vec4 tmpvar_6;
-  tmpvar_6 = texture (_MainTex, xlv_TEXCOORD0);
-  mask_2 = tmpvar_6;
-  mediump vec4 tmpvar_7;
-  tmpvar_7 = clamp (ceil((xlv_COLOR - 0.5)), 0.0, 1.0);
-  mediump vec4 tmpvar_8;
-  tmpvar_8 = clamp (((
-    (tmpvar_7 * 0.51)
-   - xlv_COLOR) / -0.49), 0.0, 1.0);
-  col_1.xyz = tmpvar_8.xyz;
-  col_1.w = (tmpvar_8.w * alpha_3);
-  mediump vec4 tmpvar_9;
-  tmpvar_9 = (mask_2 * tmpvar_7);
-  mask_2 = tmpvar_9;
-  col_1.w = (col_1.w * ((
-    (tmpvar_9.x + tmpvar_9.y)
-   + tmpvar_9.z) + tmpvar_9.w));
-  _glesFragData[0] = col_1;
-}
-
-
-
-#endif"
-}
-}
-Program "fp" {
-SubProgram "gles " {
-"!!GLES"
-}
-SubProgram "gles3 " {
-"!!GLES3"
-}
-}
- }
-}
-Fallback Off
+			half4 frag (v2f IN) : SV_Target
+			{
+				half alpha = tex2D(_ClipTex, IN.worldPos * 0.5 + float2(0.5, 0.5)).a;
+				half4 mask = tex2D(_MainTex, IN.texcoord);
+				half4 mixed = saturate(ceil(IN.color - 0.5));
+				half4 col = saturate((mixed * 0.51 - IN.color) / -0.49);
+				
+				col.a *= alpha;
+				mask *= mixed;
+				col.a *= mask.r + mask.g + mask.b + mask.a;
+				return col;
+			}
+			ENDCG
+		}
+	}
+	Fallback Off
 }

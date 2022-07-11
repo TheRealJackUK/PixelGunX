@@ -74,8 +74,8 @@ public sealed class PersConfigurator : MonoBehaviour
 			weapon.transform.localRotation = Quaternion.identity;
 			if (profile != null)
 			{
-				weapon.GetComponent<WeaponSounds>().animationObject.GetComponent<Animation>().AddClip(profile, "Profile");
-				weapon.GetComponent<WeaponSounds>().animationObject.GetComponent<Animation>().Play("Profile");
+				//weapon.GetComponent<WeaponSounds>().animationObject.GetComponent<Animation>().AddClip(profile, "Profile");
+				//weapon.GetComponent<WeaponSounds>().animationObject.GetComponent<Animation>().Play("Profile");
 			}
 			gun = w.GetComponent<WeaponSounds>().bonusPrefab;
 		}
@@ -89,13 +89,14 @@ public sealed class PersConfigurator : MonoBehaviour
 			}
 		}
 		SetCurrentSkin();
-		ShopNGUIController.sharedShop.onEquipSkinAction = delegate
+		/*ShopNGUIController.sharedShop.onEquipSkinAction = delegate
 		{
 			SetCurrentSkin();
-		};
+		}; */
 		yield return new WaitForEndOfFrame();
 		_AddCapeAndHat();
-		ShopNGUIController.sharedShop.wearEquipAction = delegate
+		
+/*		ShopNGUIController.sharedShop.wearEquipAction = delegate
 		{
 			_AddCapeAndHat();
 		};
@@ -103,6 +104,7 @@ public sealed class PersConfigurator : MonoBehaviour
 		{
 			_AddCapeAndHat();
 		};
+*/
 		ShopNGUIController.ShowArmorChanged += HandleShowArmorChanged;
 		while (NickLabelStack.sharedStack == null)
 		{

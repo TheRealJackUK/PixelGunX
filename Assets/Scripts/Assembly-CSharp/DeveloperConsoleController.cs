@@ -115,7 +115,7 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 		{
 			if (toggle.value)
 			{
-				Application.targetFrameRate = 60;
+				Application.targetFrameRate = 240;
 			}
 			else
 			{
@@ -409,7 +409,7 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 		view.EnemiesInCampaignInput = GlobalGameController.EnemiesToKill;
 		int @int = Storager.getInt(Defs.TrainingCompleted_4_4_Sett, false);
 		view.TrainingCompleted = Convert.ToBoolean(@int);
-		view.TempGunActive = TempItemsController.sharedController.ContainsItem(WeaponTags.Impulse_Sniper_Rifle_Tag);
+		//view.TempGunActive = TempItemsController.sharedController.ContainsItem(WeaponTags.Impulse_Sniper_Rifle_Tag);
 		view.Set60FPSActive = Application.targetFrameRate == 60;
 		view.IsPayingUser = FlurryPluginWrapper.IsPayingUser();
 		view.isDebugGuiVisibleCheckbox.value = isDebugGuiVisible;
@@ -429,10 +429,10 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 		view.starterPackLive.text = StarterPackModel.MaxLiveTimeEvent.TotalMinutes.ToString();
 		view.starterPackCooldown.text = StarterPackModel.CooldownTimeEvent.TotalMinutes.ToString();
 		PremiumAccountController instance = PremiumAccountController.Instance;
-		view.oneDayPreminAccount.value = instance.oneDayAccountLive.ToString();
-		view.threeDayPreminAccount.value = instance.threeDayAccountLive.ToString();
-		view.sevenDayPreminAccount.value = instance.sevenDayAccountLive.ToString();
-		view.monthDayPreminAccount.value = instance.monthDayAccountLive.ToString();
+//		view.oneDayPreminAccount.value = instance.oneDayAccountLive.ToString();
+//		view.threeDayPreminAccount.value = instance.threeDayAccountLive.ToString();
+//		view.sevenDayPreminAccount.value = instance.sevenDayAccountLive.ToString();
+//		view.monthDayPreminAccount.value = instance.monthDayAccountLive.ToString();
 	}
 
 	private void Awake()
@@ -441,11 +441,11 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 		{
 			if (view.set60FpsCheckbox != null)
 			{
-				view.set60FpsCheckbox.startsActive = Application.targetFrameRate == 60;
+				view.set60FpsCheckbox.startsActive = Application.targetFrameRate == 240;
 			}
 			if (view.tempGunCheckbox != null)
 			{
-				view.tempGunCheckbox.startsActive = TempItemsController.sharedController.ContainsItem(WeaponTags.Impulse_Sniper_Rifle_Tag);
+			//	view.tempGunCheckbox.startsActive = TempItemsController.sharedController.ContainsItem(WeaponTags.Impulse_Sniper_Rifle_Tag);
 			}
 			int @int = Storager.getInt(Defs.TrainingCompleted_4_4_Sett, false);
 			if (view.trainingCheckbox != null)

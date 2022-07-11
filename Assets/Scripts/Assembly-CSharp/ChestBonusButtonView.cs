@@ -27,7 +27,7 @@ public class ChestBonusButtonView : MonoBehaviour
 
 	private void CheckBonusButtonUpdate()
 	{
-		bool flag = _purchaseInfo != null && ChestBonusController.Get.IsBonusActiveForItem(_purchaseInfo);
+		bool flag = true;
 		base.gameObject.SetActive(flag);
 		if (flag)
 		{
@@ -37,9 +37,9 @@ public class ChestBonusButtonView : MonoBehaviour
 
 	private void SetViewData(PurchaseEventArgs purchaseInfo)
 	{
-		ChestBonusData bonusData = ChestBonusController.Get.GetBonusData(purchaseInfo);
-		timeOrCountLabel.text = bonusData.GetItemCountOrTime();
-		itemTexture.mainTexture = bonusData.GetImage();
+		//ChestBonusData bonusData = ChestBonusController.Get.GetBonusData(purchaseInfo);
+		//timeOrCountLabel.text = bonusData.GetItemCountOrTime();
+		//itemTexture.mainTexture = bonusData.GetImage();
 	}
 
 	public void OnButtonClick()

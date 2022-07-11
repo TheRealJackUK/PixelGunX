@@ -1,129 +1,102 @@
-Shader "Unlit/Transparent Colored" {
-Properties {
- _MainTex ("Base (RGB), Alpha (A)", 2D) = "black" {}
-}
-SubShader { 
- LOD 200
- Tags { "QUEUE"="Transparent" "IGNOREPROJECTOR"="true" "RenderType"="Transparent" }
- Pass {
-  Tags { "QUEUE"="Transparent" "IGNOREPROJECTOR"="true" "RenderType"="Transparent" }
-  ZWrite Off
-  Cull Off
-  Fog { Mode Off }
-  Blend SrcAlpha OneMinusSrcAlpha
-  Offset -1, -1
-Program "vp" {
-SubProgram "gles " {
-"!!GLES
-
-
-#ifdef VERTEX
-
-attribute vec4 _glesVertex;
-attribute vec4 _glesColor;
-attribute vec4 _glesMultiTexCoord0;
-uniform highp mat4 glstate_matrix_mvp;
-mediump vec2 tmpvar_1;
-varying mediump vec2 xlv_TEXCOORD0;
-varying lowp vec4 xlv_COLOR;
-void main ()
+Shader "Unlit/Transparent Colored"
 {
-  highp vec2 tmpvar_2;
-  tmpvar_2 = _glesMultiTexCoord0.xy;
-  tmpvar_1 = tmpvar_2;
-  gl_Position = (glstate_matrix_mvp * _glesVertex);
-  xlv_TEXCOORD0 = tmpvar_1;
-  xlv_COLOR = _glesColor;
-}
+	Properties
+	{
+		_MainTex ("Base (RGB), Alpha (A)", 2D) = "black" {}
+	}
+	
+	SubShader
+	{
+		LOD 200
 
+		Tags
+		{
+			"Queue" = "Transparent"
+			"IgnoreProjector" = "True"
+			"RenderType" = "Transparent"
+			"DisableBatching" = "True"
+		}
+		
+		Pass
+		{
+			Cull Off
+			Lighting Off
+			ZWrite Off
+			Fog { Mode Off }
+			Offset -1, -1
+			Blend SrcAlpha OneMinusSrcAlpha
 
+			CGPROGRAM
+			#pragma vertex vert
+			#pragma fragment frag			
+			#include "UnityCG.cginc"
 
-#endif
-#ifdef FRAGMENT
+			sampler2D _MainTex;
+			float4 _MainTex_ST;
+	
+			struct appdata_t
+			{
+				float4 vertex : POSITION;
+				float2 texcoord : TEXCOORD0;
+				fixed4 color : COLOR;
+				UNITY_VERTEX_INPUT_INSTANCE_ID
+			};
+	
+			struct v2f
+			{
+				float4 vertex : SV_POSITION;
+				half2 texcoord : TEXCOORD0;
+				fixed4 color : COLOR;
+				UNITY_VERTEX_OUTPUT_STEREO
+			};
+	
+			v2f o;
 
-uniform sampler2D _MainTex;
-varying mediump vec2 xlv_TEXCOORD0;
-varying lowp vec4 xlv_COLOR;
-void main ()
-{
-  lowp vec4 tmpvar_1;
-  tmpvar_1 = (texture2D (_MainTex, xlv_TEXCOORD0) * xlv_COLOR);
-  gl_FragData[0] = tmpvar_1;
-}
+			v2f vert (appdata_t v)
+			{
+				UNITY_SETUP_INSTANCE_ID(v);
+				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
+				o.vertex = UnityObjectToClipPos(v.vertex);
+				o.texcoord = v.texcoord;
+				o.color = v.color;
+				return o;
+			}
+				
+			fixed4 frag (v2f IN) : SV_Target
+			{
+				return tex2D(_MainTex, IN.texcoord) * IN.color;
+			}
+			ENDCG
+		}
+	}
 
+	SubShader
+	{
+		LOD 100
 
-
-#endif"
-}
-SubProgram "gles3 " {
-"!!GLES3#version 300 es
-
-
-#ifdef VERTEX
-
-
-in vec4 _glesVertex;
-in vec4 _glesColor;
-in vec4 _glesMultiTexCoord0;
-uniform highp mat4 glstate_matrix_mvp;
-mediump vec2 tmpvar_1;
-out mediump vec2 xlv_TEXCOORD0;
-out lowp vec4 xlv_COLOR;
-void main ()
-{
-  highp vec2 tmpvar_2;
-  tmpvar_2 = _glesMultiTexCoord0.xy;
-  tmpvar_1 = tmpvar_2;
-  gl_Position = (glstate_matrix_mvp * _glesVertex);
-  xlv_TEXCOORD0 = tmpvar_1;
-  xlv_COLOR = _glesColor;
-}
-
-
-
-#endif
-#ifdef FRAGMENT
-
-
-layout(location=0) out mediump vec4 _glesFragData[4];
-uniform sampler2D _MainTex;
-in mediump vec2 xlv_TEXCOORD0;
-in lowp vec4 xlv_COLOR;
-void main ()
-{
-  lowp vec4 tmpvar_1;
-  tmpvar_1 = (texture (_MainTex, xlv_TEXCOORD0) * xlv_COLOR);
-  _glesFragData[0] = tmpvar_1;
-}
-
-
-
-#endif"
-}
-}
-Program "fp" {
-SubProgram "gles " {
-"!!GLES"
-}
-SubProgram "gles3 " {
-"!!GLES3"
-}
-}
- }
-}
-SubShader { 
- LOD 100
- Tags { "QUEUE"="Transparent" "IGNOREPROJECTOR"="true" "RenderType"="Transparent" }
- Pass {
-  Tags { "QUEUE"="Transparent" "IGNOREPROJECTOR"="true" "RenderType"="Transparent" }
-  ZWrite Off
-  Cull Off
-  Fog { Mode Off }
-  Blend SrcAlpha OneMinusSrcAlpha
-  ColorMask RGB
-  ColorMaterial AmbientAndDiffuse
-  Offset -1, -1
-  SetTexture [_MainTex] { combine texture * primary }
- }
-}
+		Tags
+		{
+			"Queue" = "Transparent"
+			"IgnoreProjector" = "True"
+			"RenderType" = "Transparent"
+			"DisableBatching" = "True"
+		}
+		
+		Pass
+		{
+			Cull Off
+			Lighting Off
+			ZWrite Off
+			Fog { Mode Off }
+			Offset -1, -1
+			//ColorMask RGB
+			Blend SrcAlpha OneMinusSrcAlpha
+			ColorMaterial AmbientAndDiffuse
+			
+			SetTexture [_MainTex]
+			{
+				Combine Texture * Primary
+			}
+		}
+	}
 }

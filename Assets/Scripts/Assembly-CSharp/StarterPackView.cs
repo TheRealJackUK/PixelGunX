@@ -81,11 +81,12 @@ public class StarterPackView : BannerWindow
 
 	private void Update()
 	{
-		string timeToEndEvent = StarterPackController.Get.GetTimeToEndEvent();
+		/*string timeToEndEvent = StarterPackController.Get.GetTimeToEndEvent();
 		for (int i = 0; i < timerEvent.Length; i++)
 		{
 			timerEvent[i].text = timeToEndEvent;
 		}
+		*/
 	}
 
 	public void OnButtonBuyClick()
