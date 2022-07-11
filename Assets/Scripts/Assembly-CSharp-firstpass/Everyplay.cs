@@ -997,7 +997,8 @@ public class Everyplay : MonoBehaviour
 
 	public static bool EveryplayIsRecordingSupported()
 	{
-		return everyplayUnity.Call<bool>("isRecordingSupported", new object[0]);
+		return false;
+//		return everyplayUnity.Call<bool>("isRecordingSupported", new object[0]);
 	}
 
 	public static bool EveryplayIsPaused()
@@ -1047,7 +1048,8 @@ public class Everyplay : MonoBehaviour
 
 	public static bool EveryplayIsSupported()
 	{
-		return everyplayUnity.Call<bool>("isSupported", new object[0]);
+		return false;
+	//	return everyplayUnity.Call<bool>("isSupported", new object[0]);
 	}
 
 	public static bool EveryplayIsSingleCoreDevice()

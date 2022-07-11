@@ -36,6 +36,10 @@ public sealed class WeaponManager : MonoBehaviour
 
 	private List<GameObject> cachedInnerPrefabs = new List<GameObject>();
 
+	public string myCAnim(string a){
+        return Defs.CAnim(currentWeaponSounds.animationObject, a);
+    }
+
 	public static Dictionary<string, string> campaignBonusWeapons;
 
 	public static Dictionary<string, string> tagToStoreIDMapping;
@@ -2886,13 +2890,13 @@ public sealed class WeaponManager : MonoBehaviour
 	{
 		if (!currentWeaponSounds.isShotMelee)
 		{
-			currentWeaponSounds.animationObject.GetComponent<Animation>().Stop("Empty");
+			currentWeaponSounds.animationObject.GetComponent<Animation>().Stop(myCAnim("Empty"));
 			if (!currentWeaponSounds.isDoubleShot)
 			{
-				currentWeaponSounds.animationObject.GetComponent<Animation>().CrossFade("Shoot");
+				currentWeaponSounds.animationObject.GetComponent<Animation>().CrossFade(myCAnim("Shoot"));
 			}
-			currentWeaponSounds.animationObject.GetComponent<Animation>().Play("Reload");
-			currentWeaponSounds.animationObject.GetComponent<Animation>()["Reload"].speed = EffectsController.ReloadAnimationSpeed[currentWeaponSounds.categoryNabor - 1];
+			currentWeaponSounds.animationObject.GetComponent<Animation>().Play(myCAnim("Reload"));
+			currentWeaponSounds.animationObject.GetComponent<Animation>()[myCAnim("Reload")].speed = EffectsController.ReloadAnimationSpeed[currentWeaponSounds.categoryNabor - 1];
 		}
 	}
 

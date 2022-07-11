@@ -255,6 +255,10 @@ public sealed class Player_move_c : MonoBehaviour
 
 	public GameObject myTable;
 
+	public string myCAnim(string a){
+        return Defs.CAnim(_weaponManager.currentWeaponSounds.animationObject, a);
+    }
+
 	private float[] _byCatDamageModifs = new float[5];
 
 	public int AimTextureWidth = 50;
@@ -1182,7 +1186,7 @@ public sealed class Player_move_c : MonoBehaviour
 			}
 			if ((bool)_weaponManager && (bool)_weaponManager.currentWeaponSounds && _weaponManager.currentWeaponSounds.animationObject != null)
 			{
-				_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>().CrossFade("Walk");
+				_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>().CrossFade(myCAnim("Walk"));
 			}
 		}
 	}
@@ -1197,7 +1201,7 @@ public sealed class Player_move_c : MonoBehaviour
 			}
 			if ((bool)___weaponManager && (bool)___weaponManager.currentWeaponSounds && ___weaponManager.currentWeaponSounds.animationObject != null)
 			{
-				___weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>().CrossFade("Idle");
+				___weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>().CrossFade(myCAnim("Idle"));
 			}
 		}
 	}
@@ -1692,21 +1696,21 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 		if (_weaponManager.currentWeaponSounds.animationObject != null)
 		{
-			if (_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>().GetClip("Reload") != null)
+			if (_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>().GetClip(myCAnim("Reload")) != null)
 			{
-				_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()["Reload"].layer = 1;
+				_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()[myCAnim("Reload")].layer = 1;
 			}
 			if (!_weaponManager.currentWeaponSounds.isDoubleShot)
 			{
-				if (_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>().GetClip("Shoot") != null)
+				if (_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>().GetClip(myCAnim("Shoot")) != null)
 				{
-					_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()["Shoot"].layer = 1;
+					_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()[myCAnim("Shoot")].layer = 1;
 				}
 			}
 			else
 			{
-				_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()["Shoot1"].layer = 1;
-				_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()["Shoot2"].layer = 1;
+				_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()[myCAnim("Shoot1")].layer = 1;
+				_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()[myCAnim("Shoot2")].layer = 1;
 			}
 		}
 		if (!_weaponManager.currentWeaponSounds.isMelee)
@@ -2248,7 +2252,7 @@ public sealed class Player_move_c : MonoBehaviour
 			_weaponManager.myGun = base.gameObject;
 			if (_weaponManager.currentWeaponSounds != null)
 			{
-				_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()["Reload"].layer = 1;
+				_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()[myCAnim("Reload")].layer = 1;
 				_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>().Stop();
 			}
 		}
@@ -2795,8 +2799,8 @@ public sealed class Player_move_c : MonoBehaviour
 		if (myTransform.childCount != 0)
 		{
 			WeaponSounds component = myTransform.GetChild(0).GetComponent<WeaponSounds>();
-			component.animationObject.GetComponent<Animation>().Play("Reload");
-			component.animationObject.GetComponent<Animation>()["Reload"].speed = _reloadAnimationSpeed[component.categoryNabor - 1];
+			component.animationObject.GetComponent<Animation>().Play(myCAnim("Reload"));
+			component.animationObject.GetComponent<Animation>()[myCAnim("Reload")].speed = _reloadAnimationSpeed[component.categoryNabor - 1];
 			if (Defs.isSoundFX)
 			{
 				base.GetComponent<AudioSource>().PlayOneShot(component.reload);
@@ -2810,7 +2814,7 @@ public sealed class Player_move_c : MonoBehaviour
 		{
 			if (WeaponManager.sharedManager.currentWeaponSounds.ammoInClip > 1)
 			{
-				inGameGUI.ShowCircularIndicatorOnReload(WeaponManager.sharedManager.currentWeaponSounds.animationObject.GetComponent<Animation>()["Reload"].length / EffectsController.ReloadAnimationSpeed[WeaponManager.sharedManager.currentWeaponSounds.categoryNabor - 1]);
+				inGameGUI.ShowCircularIndicatorOnReload(WeaponManager.sharedManager.currentWeaponSounds.animationObject.GetComponent<Animation>()[myCAnim("Reload")].length / EffectsController.ReloadAnimationSpeed[WeaponManager.sharedManager.currentWeaponSounds.categoryNabor - 1]);
 			}
 			else
 			{
@@ -4336,7 +4340,7 @@ public sealed class Player_move_c : MonoBehaviour
 			float tm = TimeOfMeleeAttack(weaponSounds);
 			StartCoroutine(RunOnGroundEffectCoroutine(weaponSounds.gameObject.name.Replace("(Clone)", string.Empty), tm));
 		}
-		string text = (weaponSounds.isDoubleShot ? ("Shoot" + numFlash) : "Shoot");
+		string text = (weaponSounds.isDoubleShot ? (myCAnim("Shoot") + numFlash) : myCAnim("Shoot"));
 		if (isMechActive)
 		{
 			mechGunAnimation.Play(text);
@@ -4882,7 +4886,7 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 		if (!isMulti || isMine)
 		{
-			if (((Weapon)_weaponManager.playerWeapons[_weaponManager.CurrentWeaponIndex]).currentAmmoInClip == 0 && ((Weapon)_weaponManager.playerWeapons[_weaponManager.CurrentWeaponIndex]).currentAmmoInBackpack > 0 && !_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>().IsPlaying("Shoot") && !isReloading)
+			if (((Weapon)_weaponManager.playerWeapons[_weaponManager.CurrentWeaponIndex]).currentAmmoInClip == 0 && ((Weapon)_weaponManager.playerWeapons[_weaponManager.CurrentWeaponIndex]).currentAmmoInBackpack > 0 && !_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>().IsPlaying(myCAnim("Shoot")) && !isReloading)
 			{
 				ReloadPressed();
 			}
@@ -6001,7 +6005,7 @@ public sealed class Player_move_c : MonoBehaviour
 			return;
 		}
 		Animation animation = ((!isMechActive) ? _weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>() : mechGunAnimation);
-		if (animation.IsPlaying("Shoot1") || animation.IsPlaying("Shoot2") || animation.IsPlaying("Shoot") || animation.IsPlaying("Shoot1") || animation.IsPlaying("Shoot2") || animation.IsPlaying("Reload") || animation.IsPlaying("Empty"))
+		if (animation.IsPlaying(myCAnim("Shoot1")) || animation.IsPlaying(myCAnim("Shoot2")) || animation.IsPlaying(myCAnim("Shoot")) || animation.IsPlaying(myCAnim("Shoot1")) || animation.IsPlaying(myCAnim("Shoot2")) || animation.IsPlaying(myCAnim("Reload")) || animation.IsPlaying(myCAnim("Empty")))
 		{
 			return;
 		}
@@ -6063,7 +6067,7 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 		if (!_weaponManager.currentWeaponSounds.isMelee)
 		{
-			_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>().Play("Empty");
+			_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>().Play(myCAnim("Empty"));
 			if (Defs.isSoundFX)
 			{
 				base.GetComponent<AudioSource>().PlayOneShot(_weaponManager.currentWeaponSounds.empty);
@@ -6092,14 +6096,14 @@ public sealed class Player_move_c : MonoBehaviour
 		{
 			if (!_weaponManager.currentWeaponSounds.isDoubleShot)
 			{
-				_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>().Play("Shoot");
-				num = _weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()["Shoot"].length;
+				_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>().Play(myCAnim("Shoot"));
+				num = _weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()[myCAnim("Shoot")].length;
 			}
 			else
 			{
 				int numShootInDouble2 = GetNumShootInDouble();
-				_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>().Play("Shoot" + numShootInDouble2);
-				num = _weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()["Shoot" + numShootInDouble2].length;
+				_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>().Play(myCAnim("Shoot") + numShootInDouble2);
+				num = _weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()[myCAnim("Shoot") + numShootInDouble2].length;
 			}
 			if (Defs.isSoundFX)
 			{
@@ -6606,7 +6610,7 @@ public sealed class Player_move_c : MonoBehaviour
 
 	private IEnumerator HitByMelee(GameObject enemyToHit, GameObject hittedPart = null)
 	{
-		yield return new WaitForSeconds(_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()["Shoot"].length * _weaponManager.currentWeaponSounds.meleeAttackTimeModifier);
+		yield return new WaitForSeconds(_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()[myCAnim("Shoot")].length * _weaponManager.currentWeaponSounds.meleeAttackTimeModifier);
 		if (!(enemyToHit != null))
 		{
 			yield break;

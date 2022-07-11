@@ -9,7 +9,15 @@ public sealed class Defs
 		On,
 		Off
 	}
-
+public static string CAnim(GameObject animator, string con){
+        foreach (AnimationState ac in animator.GetComponent<Animation>()){
+            string nm = ac.name.ToString();
+            if (nm.Contains(con) || nm.StartsWith(con) || nm == con){            
+                return nm;
+            }
+        }
+        return null;
+    }
 	public enum WeaponIndex
 	{
 		Grenade = 1000,
