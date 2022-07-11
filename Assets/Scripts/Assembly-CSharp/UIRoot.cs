@@ -186,19 +186,18 @@ public class UIRoot : MonoBehaviour
 		}
 	}
 
-	public string input;
+	public string input11 = string.Empty;
 
 	public void OnGUI()
 	{
-		input = GUI.TextField(new Rect(10, 10, 200, 20), input, 25);
+		input11 = GUI.TextField(new Rect(10, 10, 200, 20), input11, 25);
+		if (GUI.Button(new Rect(10, 30, 80, 20), "load scene")) {
+			Application.LoadLevel(input11);
+		}
 	}
 
 	private void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.F10))
-		{
-			Application.LoadLevel(input);
-		}
 		if (!(mTrans != null))
 		{
 			return;
