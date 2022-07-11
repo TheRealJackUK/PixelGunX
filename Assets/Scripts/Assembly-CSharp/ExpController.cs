@@ -50,28 +50,7 @@ public sealed class ExpController : MonoBehaviour
 	{
 		get
 		{
-			if (Storager.getInt(Defs.LobbyLevelApplied, false) == 0)
-			{
-				return 4;
-			}
-			int result = 1;
-			if (!Defs.isTrainingFlag)
-			{
-				result = 2;
-				if (ExperienceController.sharedController != null)
-				{
-					int currentLevel = ExperienceController.sharedController.currentLevel;
-					if (currentLevel >= 3)
-					{
-						result = 4;
-					}
-					else if (currentLevel >= 2)
-					{
-						result = 3;
-					}
-				}
-			}
-			return result;
+			return 4;
 		}
 	}
 
