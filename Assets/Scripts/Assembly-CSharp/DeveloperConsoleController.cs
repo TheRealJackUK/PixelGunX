@@ -36,11 +36,11 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 		if (ExperienceController.sharedController != null)
 		{
 			int currentLevel = ExperienceController.sharedController.currentLevel;
-			if (currentLevel != 1)
+			if (currentLevel != ExperienceController.maxLevel)
 			{
 				int num = currentLevel - 1;
-				Storager.setInt("currentLevel" + currentLevel, 0, true);
 				Storager.setInt("currentLevel" + num, 1, true);
+				PlayerPrefs.SetInt("currentLevel", num);
 				ExperienceController.sharedController.Refresh();
 				view.LevelLabel = "Level: " + num;
 				RefreshExperience();
@@ -57,6 +57,7 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 			{
 				int num = currentLevel + 1;
 				Storager.setInt("currentLevel" + num, 1, true);
+				PlayerPrefs.SetInt("currentLevel", num);
 				ExperienceController.sharedController.Refresh();
 				view.LevelLabel = "Level: " + num;
 				RefreshExperience();
@@ -320,7 +321,7 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 
 	private void RefreshExperience()
 	{
-		int currentLevel = ExperienceController.sharedController.currentLevel;
+		int currentLevel = PlayerPrefs.GetInt("currentLevel");;
 		int num = ExperienceController.MaxExpLevels[currentLevel];
 		int num2 = Mathf.Clamp(Convert.ToInt32(view.ExperiencePercentage * (float)num), 0, num - 1);
 		float experiencePercentage = (float)num2 / (float)num;

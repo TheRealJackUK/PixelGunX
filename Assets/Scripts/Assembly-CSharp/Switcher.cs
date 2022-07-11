@@ -796,13 +796,6 @@ internal sealed class Switcher : MonoBehaviour
 			yield return _progress;
 			if (BuildSettings.BuildTarget == BuildTarget.iPhone)
 			{
-				Storager.SynchronizeIosWithCloud();
-				Storager.SyncWithCloud(Defs.SkinsMakerInProfileBought);
-				Storager.SyncWithCloud(Defs.hungerGamesPurchasedKey);
-				Storager.SyncWithCloud(Defs.CaptureFlagPurchasedKey);
-				Storager.SyncWithCloud(Defs.code010110_Key);
-				Storager.SyncWithCloud(Defs.smallAsAntKey);
-				Storager.SyncWithCloud(Defs.UnderwaterKey);
 				string[] canBuyWeaponStorageIds = ItemDb.GetCanBuyWeaponStorageIds(true);
 				for (int j = 0; j < canBuyWeaponStorageIds.Length; j++)
 				{
@@ -1110,13 +1103,6 @@ internal sealed class Switcher : MonoBehaviour
 
 	private static void CheckHugeUpgrade()
 	{
-		bool flag = Storager.hasKey("Coins");
-		bool flag2 = Storager.hasKey(Defs.ArmorNewEquppedSN);
-		if (flag && !flag2)
-		{
-			AppendAbuseMethod(AbuseMetod.UpgradeFromVulnerableVersion);
-			UnityEngine.Debug.LogError("Upgrade tampering detected: " + AbuseMethod);
-		}
 	}
 
 	private static void PerformEssentialInitialization(string currencyKey, AbuseMetod abuseMethod)
@@ -1126,36 +1112,14 @@ internal sealed class Switcher : MonoBehaviour
 			return;
 		}
 		int @int = Storager.getInt(currencyKey, false);
-		if (DigestStorager.Instance.ContainsKey(currencyKey))
-		{
-			if (!DigestStorager.Instance.Verify(currencyKey, @int))
-			{
-				AppendAbuseMethod(abuseMethod);
-				UnityEngine.Debug.LogError("Currency tampering detected: " + AbuseMethod);
-			}
-		}
-		else
-		{
-			DigestStorager.Instance.Set(currencyKey, @int);
-		}
+		DigestStorager.Instance.Set(currencyKey, @int);
 	}
 
 	private static void PerformWeaponInitialization()
 	{
 		IEnumerable<string> source = WeaponManager.storeIDtoDefsSNMapping.Values.Where((string w) => Storager.getInt(w, false) == 1);
 		int value = source.Count();
-		if (DigestStorager.Instance.ContainsKey("WeaponsCount"))
-		{
-			if (!DigestStorager.Instance.Verify("WeaponsCount", value))
-			{
-				AppendAbuseMethod(AbuseMetod.Weapons);
-				UnityEngine.Debug.LogError("Weapon tampering detected: " + AbuseMethod);
-			}
-		}
-		else
-		{
-			DigestStorager.Instance.Set("WeaponsCount", value);
-		}
+		DigestStorager.Instance.Set("WeaponsCount", value);
 	}
 
 	private static void PerformExpendablesInitialization()
@@ -1443,8 +1407,5 @@ internal sealed class Switcher : MonoBehaviour
 
 	internal static void AppendAbuseMethod(AbuseMetod f)
 	{
-		_abuseMethod = AbuseMethod | f;
-		AbuseMetod? abuseMethod = _abuseMethod;
-		Storager.setInt("AbuseMethod", (int)abuseMethod.Value, false);
 	}
 }

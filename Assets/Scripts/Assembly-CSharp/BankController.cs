@@ -121,25 +121,14 @@ internal sealed class BankController : MonoBehaviour
 	{
 		if (!Storager.hasKey("Coins"))
 		{
-			int val = 10;
-			if (Defs.AndroidEdition == Defs.RuntimeAndroidEdition.GooglePro)
-			{
-				val = 100;
-			}
-			Storager.setInt("Coins", val, false);
+			Debug.LogError("trolled");
+			Storager.setInt("Coins", 10, false);
 			PlayerPrefs.Save();
 		}
 		if (!Storager.hasKey("GemsCurrency"))
 		{
-			switch (BuildSettings.BuildTarget)
-			{
-			case BuildTarget.iPhone:
-				Storager.setInt("GemsCurrency", 0, false);
-				break;
-			case BuildTarget.Android:
-				Storager.setInt("GemsCurrency", 5, false);
-				break;
-			}
+			Debug.LogError("trolled");
+			Storager.setInt("GemsCurrency", 5, false);
 			PlayerPrefs.Save();
 		}
 	}
