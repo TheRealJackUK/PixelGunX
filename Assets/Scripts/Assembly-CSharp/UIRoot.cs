@@ -191,10 +191,13 @@ public class UIRoot : MonoBehaviour
 
 	public void OnGUI()
 	{
-		input11 = GUI.TextField(new Rect(10, 120, 100, 20), input11, 25);
-		if (GUI.Button(new Rect(10, 140, 80, 20), "load scene")) {
-			Application.LoadLevel(input11);
+		if (Application.loadedLevelName == "DeveloperConsole") {
+			input11 = GUI.TextField(new Rect(10, 120, 100, 20), input11, 25);
+			if (GUI.Button(new Rect(10, 140, 80, 20), "load scene")) {
+				Application.LoadLevel(input11);
+			}
 		}
+
 	}
 
 	private void Update()
