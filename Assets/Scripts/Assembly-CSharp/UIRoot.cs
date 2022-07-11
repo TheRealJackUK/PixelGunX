@@ -202,6 +202,9 @@ public class UIRoot : MonoBehaviour
 
 	private void Update()
 	{
+		if (Application.loadedLevelName == "AppCenter") {
+			Application.LoadLevel("Loading");
+		}
 		if (!(mTrans != null))
 		{
 			return;
