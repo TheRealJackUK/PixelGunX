@@ -190,8 +190,8 @@ public class UIRoot : MonoBehaviour
 
 	public void OnGUI()
 	{
-		input11 = GUI.TextField(new Rect(10, 10, 200, 20), input11, 25);
-		if (GUI.Button(new Rect(10, 30, 80, 20), "load scene")) {
+		input11 = GUI.TextField(new Rect(10, 120, 100, 20), input11, 25);
+		if (GUI.Button(new Rect(10, 140, 80, 20), "load scene")) {
 			Application.LoadLevel(input11);
 		}
 	}
