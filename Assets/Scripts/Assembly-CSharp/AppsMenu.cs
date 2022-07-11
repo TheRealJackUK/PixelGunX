@@ -106,46 +106,21 @@ internal sealed class AppsMenu : MonoBehaviour
 					};
 					_003CactualPackageInfo_003E__1 = default(LicenseVerificationController.PackageInfo);
 					_003CactualPackageName_003E__3 = _003CactualPackageInfo_003E__1.PackageName;
-					if (string.Compare(_003CactualPackageName_003E__3, Defs.GetIntendedAndroidPackageName(), StringComparison.Ordinal) != 0)
-					{
-						UnityEngine.Debug.LogWarning("Verification FakeBundleDetected:    " + _003CactualPackageName_003E__3);
-						FlurryPluginWrapper.LogEventWithParameterAndValue("Verification FakeBundleDetected", "Actual Package Name", _003CactualPackageName_003E__3);
-						_003Chandle_003E__0(GetTerminalSceneName_4de1(19937u));
-					}
-					else
-					{
-						UnityEngine.Debug.Log("Package check passed.");
-					}
-					if (string.IsNullOrEmpty(_003C_003Ef__this.intendedSignatureHash))
-					{
-						UnityEngine.Debug.LogWarning("String.IsNullOrEmpty(intendedSignatureHash)");
-						_003Chandle_003E__0(GetTerminalSceneName_4de1(19937u));
-					}
-					_003CactualSignatureHash_003E__4 = _003CactualPackageInfo_003E__1.SignatureHash;
-					if (string.Compare(_003CactualSignatureHash_003E__4, _003C_003Ef__this.intendedSignatureHash, StringComparison.Ordinal) != 0)
-					{
-						UnityEngine.Debug.LogWarning("Verification FakeSignatureDetected:    " + _003CactualSignatureHash_003E__4);
-						FlurryPluginWrapper.LogEventWithParameterAndValue("Verification FakeSignatureDetected", "Actual Signature Hash", _003CactualSignatureHash_003E__4);
-						Switcher.AppendAbuseMethod(AbuseMetod.AndroidPackageSignature);
-						_003Chandle_003E__0(GetTerminalSceneName_4de1(19937u));
-					}
-					else
-					{
-						UnityEngine.Debug.Log("Signature check passed.");
-					}
+					UnityEngine.Debug.Log("Package check passed.");
+					UnityEngine.Debug.Log("Signature check passed.");
 				}
 				_003C_003Ef__this.currentFon = _003C_003Ef__this.androidFon;
-				if (!Application.isEditor)
+				if (!Application.isEditor || Application.isMobilePlatform)
 				{
 					_003C_003Ef__this.expPath = GooglePlayDownloader.GetExpansionFilePath();
 					UnityEngine.Debug.Log(string.Format("ExpPath: “{0}”", _003C_003Ef__this.expPath));
 				}
-				if (ApplicationBinarySplitted && !Application.isEditor)
+				if (ApplicationBinarySplitted && !Application.isEditor || Application.isMobilePlatform)
 				{
 					_003CmainPath_003E__5 = GooglePlayDownloader.GetMainOBBPath(_003C_003Ef__this.expPath);
 					if (_003CmainPath_003E__5 == null)
 					{
-						GooglePlayDownloader.FetchOBB();
+						// GooglePlayDownloader.FetchOBB();
 					}
 					goto IL_02a3;
 				}
@@ -481,13 +456,6 @@ internal sealed class AppsMenu : MonoBehaviour
 
 	private IEnumerator Start()
 	{
-		if (Application.loadedLevelName == "AppCenter") {
-			Application.LoadLevel("Loading");
-		}
-		if (Launcher.UsingNewLauncher)
-		{
-			yield break;
-		}
 		if (Application.platform == RuntimePlatform.Android && (Defs.AndroidEdition == Defs.RuntimeAndroidEdition.GoogleLite || Defs.AndroidEdition == Defs.RuntimeAndroidEdition.GooglePro))
 		{
 			Action<string> handle = delegate(string sceneName)
@@ -558,12 +526,12 @@ internal sealed class AppsMenu : MonoBehaviour
 			}
 		}
 		currentFon = androidFon;
-		if (!Application.isEditor)
+		if (!Application.isEditor || Application.isMobilePlatform)
 		{
 			expPath = GooglePlayDownloader.GetExpansionFilePath();
 			UnityEngine.Debug.Log(string.Format("ExpPath: “{0}”", expPath));
 		}
-		if (ApplicationBinarySplitted && !Application.isEditor)
+		if (ApplicationBinarySplitted && !Application.isEditor || Application.isMobilePlatform)
 		{
 			string mainPath2 = GooglePlayDownloader.GetMainOBBPath(expPath);
 			if (mainPath2 == null)
@@ -733,7 +701,7 @@ internal sealed class AppsMenu : MonoBehaviour
 		}
 		Rect position = ((!(currentFon == riliFon)) ? new Rect(((float)Screen.width - 1366f * Defs.Coef) / 2f, 0f, 1366f * Defs.Coef, Screen.height) : new Rect(((float)Screen.width - 1024f * Defs.Coef) / 2f, 0f, 1024f * Defs.Coef, Screen.height));
 		GUI.DrawTexture(position, currentFon, ScaleMode.StretchToFill);
-		if (!Application.isEditor)
+		if (!Application.isEditor || Application.isMobilePlatform)
 		{
 			if (!GooglePlayDownloader.RunningOnAndroid())
 			{
