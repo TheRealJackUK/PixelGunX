@@ -241,10 +241,10 @@ public sealed class MainMenu : MonoBehaviour
 				Storager.setInt(Defs.CoinsAfterTrainingSN, 0, false);
 				if ((BuildSettings.BuildTarget == BuildTarget.iPhone || BuildSettings.BuildTarget == BuildTarget.WP8Player) && !Storager.hasKey(Defs.GotCoinsForTraining))
 				{
-					int num = 5;
+					int num = 999999;
 					BankController.AddGems(num);
 					FlurryEvents.LogGemsGained("Main Menu", num);
-					int num2 = 10;
+					int num2 = 99999;
 					BankController.AddCoins(num2);
 					FlurryEvents.LogCoinsGained("Main Menu", num2);
 					AudioClip clip = Resources.Load("coin_get") as AudioClip;
