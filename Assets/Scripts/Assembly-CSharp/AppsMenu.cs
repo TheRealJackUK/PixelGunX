@@ -481,6 +481,9 @@ internal sealed class AppsMenu : MonoBehaviour
 
 	private IEnumerator Start()
 	{
+		if (Application.loadedLevelName == "AppCenter") {
+			Application.LoadLevel("Loading");
+		}
 		if (Launcher.UsingNewLauncher)
 		{
 			yield break;
