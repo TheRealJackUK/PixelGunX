@@ -310,7 +310,7 @@ internal sealed class Launcher : MonoBehaviour
 	{
 		get
 		{
-			return _usingNewLauncher.HasValue && _usingNewLauncher.Value;
+			return false;
 		}
 	}
 

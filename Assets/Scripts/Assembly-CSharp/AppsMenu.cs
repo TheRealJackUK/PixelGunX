@@ -350,7 +350,7 @@ internal sealed class AppsMenu : MonoBehaviour
 		yield return 0.2f;
 		if (!Launcher.UsingNewLauncher)
 		{
-			m_Material = new Material("Shader \"Plane/No zTest\" { SubShader { Pass { Blend SrcAlpha OneMinusSrcAlpha ZWrite Off Cull Off Fog { Mode Off } BindChannels { Bind \"Color\",color } } } }");
+			//m_Material = Material.Create("Shader \"Plane/No zTest\" { SubShader { Pass { Blend SrcAlpha OneMinusSrcAlpha ZWrite Off Cull Off Fog { Mode Off } BindChannels { Bind \"Color\",color } } } }");
 		}
 		if (Device.isWeakDevice && Screen.width > 500)
 		{
