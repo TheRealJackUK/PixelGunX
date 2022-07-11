@@ -1189,34 +1189,6 @@ public sealed class WeaponManager : MonoBehaviour
 		}
 	}
 
-	private static List<string> Removed150615_Guns
-	{
-		get
-		{
-			if (_Removed150615_Guns == null)
-			{
-				string[] array = new string[32]
-				{
-					"Weapon101", "Weapon110", "Weapon143", "Weapon147", "Weapon165", "Weapon170", "Weapon171", "Weapon188", "Weapon189", "Weapon190",
-					"Weapon191", "Weapon192", "Weapon197", "Weapon20", "Weapon201", "Weapon202", "Weapon47", "Weapon57", "Weapon95", "Weapon96",
-					"Weapon97", "Weapon98", "Weapon120", "Weapon123", "Weapon129", "Weapon240", "Weapon241", "Weapon50", "Weapon132", "Weapon137",
-					"Weapon139", "Weapon247"
-				};
-				_Removed150615_Guns = new List<string>(array.Length);
-				string[] array2 = array;
-				foreach (string prefabName in array2)
-				{
-					ItemRecord byPrefabName = ItemDb.GetByPrefabName(prefabName);
-					if (byPrefabName != null && byPrefabName.Tag != null)
-					{
-						_Removed150615_Guns.Add(byPrefabName.Tag);
-					}
-				}
-			}
-			return _Removed150615_Guns;
-		}
-	}
-
 	public bool Initialized
 	{
 		get
@@ -2062,7 +2034,7 @@ public sealed class WeaponManager : MonoBehaviour
 			else
 			{
 				string text2 = FirstTagForOurTier(text);
-				if (((num > 0 && ((text2 != null && text2.Equals(text)) || Storager.getInt(storeIDtoDefsSNMapping[tagToStoreIDMapping[list[num - 1]]], true) == 1) && component.tier < 100) || (num == 0 && text2 != null && text2.Equals(text) && ExpController.Instance != null && ExpController.Instance.OurTier >= component.tier)) && (!Removed150615_Guns.Contains(WeaponUpgrades.TagOfFirstUpgrade(text)) || LastBoughtTag(text) != null))
+				if (((num > 0 && ((text2 != null && text2.Equals(text)) || Storager.getInt(storeIDtoDefsSNMapping[tagToStoreIDMapping[list[num - 1]]], true) == 1) && component.tier < 100) || (num == 0 && text2 != null && text2.Equals(text) && ExpController.Instance != null && ExpController.Instance.OurTier >= component.tier)) || LastBoughtTag(text) != null)
 				{
 					flag = true;
 				}
@@ -2070,7 +2042,7 @@ public sealed class WeaponManager : MonoBehaviour
 		}
 		else
 		{
-			flag = ((ExpController.Instance != null && ExpController.Instance.OurTier >= component.tier) || Storager.getInt(storeIDtoDefsSNMapping[tagToStoreIDMapping[text]], true) == 1) && (!Removed150615_Guns.Contains(WeaponUpgrades.TagOfFirstUpgrade(text)) || LastBoughtTag(text) != null);
+			flag = ((ExpController.Instance != null && ExpController.Instance.OurTier >= component.tier) || Storager.getInt(storeIDtoDefsSNMapping[tagToStoreIDMapping[text]], true) == 1 || LastBoughtTag(text) != null);
 		}
 		if (!flag)
 		{
