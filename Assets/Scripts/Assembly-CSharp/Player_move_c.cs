@@ -1426,7 +1426,7 @@ public sealed class Player_move_c : MonoBehaviour
 	private IEnumerator ChangeWeaponCorutine()
 	{
 		photonView.synchronization = ViewSynchronization.Off;
-		base.GetComponent<NetworkView>().stateSynchronization = NetworkStateSynchronization.Off;
+//		base.GetComponent<NetworkView>().stateSynchronization = NetworkStateSynchronization.Off;
 		if (!Defs.isTurretWeapon)
 		{
 			while (deltaAngle < 40f && !Defs.isTurretWeapon && !isMechActive)
