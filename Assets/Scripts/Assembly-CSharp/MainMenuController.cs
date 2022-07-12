@@ -2102,7 +2102,7 @@ internal sealed class MainMenuController : ControlsSettingsBase
 			buttonBackground.mainTexture = StarterPackController.Get.GetCurrentPackImage();
 		}
 		_starterPackEnabled = enable;
-		starterPackTimer.text = "fedesito\nis cool";
+		starterPackTimer.text = "vroom\nvroom";
 	}
 
 	public void OnStarterPackButtonClick()

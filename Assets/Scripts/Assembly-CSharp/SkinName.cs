@@ -378,7 +378,7 @@ public sealed class SkinName : MonoBehaviour
 		}
 		else
 		{
-			isMine = photonView.isMine;
+		isMine = photonView.isMine;
 		}
 		if (((!Defs.isInet && !base.GetComponent<NetworkView>().isMine) || (Defs.isInet && !photonView.isMine)) && Defs.isMulti)
 		{
