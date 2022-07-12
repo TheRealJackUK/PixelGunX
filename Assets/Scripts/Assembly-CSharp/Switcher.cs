@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using Prime31;
 using Rilisoft;
+using UnityEngine;
 using Rilisoft.MiniJson;
 using UnityEngine;
 
@@ -122,22 +123,16 @@ internal sealed class Switcher : MonoBehaviour
 	internal static IEnumerable<float> InitializeStorager()
 	{
 		float progress3 = 0f;
-		if (Application.isEditor && !PlayerPrefs.HasKey(Defs.initValsInKeychain15))
-		{
-			Storager.setString(Defs.CapeEquppedSN, Defs.CapeNoneEqupped, false);
-			Storager.setString(Defs.HatEquppedSN, Defs.HatNoneEqupped, false);
-			yield return progress3;
-		}
-		if (!Storager.hasKey(Defs.initValsInKeychain15))
+		/*if (!Storager.hasKey(Defs.initValsInKeychain15))
 		{
 			Storager.setInt(Defs.initValsInKeychain15, 0, false);
 			Storager.setInt(Defs.LobbyLevelApplied, 1, false);
-			Storager.setString(Defs.CapeEquppedSN, Defs.CapeNoneEqupped, false);
-			Storager.setString(Defs.HatEquppedSN, Defs.HatNoneEqupped, false);
+			//Storager.setString(Defs.CapeEquppedSN, Defs.CapeNoneEqupped, false);
+			//Storager.setString(Defs.HatEquppedSN, Defs.HatNoneEqupped, false);
 			Storager.setInt(Defs.IsFirstLaunchFreshInstall, 1, false);
-			yield return progress3;
-		}
-		else if (Storager.getInt(Defs.LobbyLevelApplied, false) == 0)
+			//yield return progress3;
+		}*/
+		if (Storager.getInt(Defs.LobbyLevelApplied, false) == 0)
 		{
 			Storager.setInt(Defs.ShownLobbyLevelSN, 4, false);
 		}
@@ -151,7 +146,7 @@ internal sealed class Switcher : MonoBehaviour
 			Storager.setInt(Defs.initValsInKeychain17, 0, false);
 			PlayerPrefs.SetFloat(value: SecondsFrom1970(), key: Defs.TimeFromWhichShowEnder_SN);
 		}
-		if (Application.isEditor && !PlayerPrefs.HasKey(Defs.initValsInKeychain27))
+		/*if (Application.isEditor && !PlayerPrefs.HasKey(Defs.initValsInKeychain27))
 		{
 			Storager.setString(Defs.BootsEquppedSN, Defs.BootsNoneEqupped, false);
 		}
@@ -160,22 +155,17 @@ internal sealed class Switcher : MonoBehaviour
 			Storager.setInt(Defs.initValsInKeychain27, 0, false);
 			Storager.setString(Defs.BootsEquppedSN, Defs.BootsNoneEqupped, false);
 			yield return progress3;
-		}
+		}*/
 		progress3 = 0.5f;
 		yield return progress3;
-		if (!Storager.hasKey(Defs.initValsInKeychain40))
+		/*if (!Storager.hasKey(Defs.initValsInKeychain40))
 		{
 			Storager.setInt(Defs.initValsInKeychain40, 0, false);
 			Storager.setString(Defs.ArmorNewEquppedSN, Defs.ArmorNewNoneEqupped, false);
 			Storager.setInt("GrenadeID", 5, false);
+			UnityEngine.Debug.LogError("trolled");
 			yield return progress3;
-			if (BuildSettings.BuildTarget == BuildTarget.iPhone)
-			{
-				Storager.setInt(Defs.TrainingCompleted_4_4_Sett, 0, false);
-				Defs.isTrainingFlag = true;
-			}
-			yield return progress3;
-		}
+		}*/
 		if (!Storager.IsInitialized(Defs.initValsInKeychain41))
 		{
 			Storager.setInt(Defs.initValsInKeychain41, 0, false);
@@ -262,6 +252,7 @@ internal sealed class Switcher : MonoBehaviour
 				Storager.setString(Defs.VisualArmor, visualArmor, false);
 			}
 			yield return progress3;
+			
 			if (armorBought != null)
 			{
 				string armorEquipped = Storager.getString(Defs.ArmorNewEquppedSN, false);
