@@ -236,7 +236,7 @@ public sealed class MainMenu : MonoBehaviour
 			{
 				Debug.LogError("MainMenu.Start():    expController == null");
 			}
-			if (Storager.getInt(Defs.CoinsAfterTrainingSN, false) == 1)
+			if (Storager.getInt(Defs.CoinsAfterTrainingSN, false) == 0)
 			{
 				Storager.setInt(Defs.CoinsAfterTrainingSN, 0, false);
 				if ((BuildSettings.BuildTarget == BuildTarget.iPhone || BuildSettings.BuildTarget == BuildTarget.WP8Player) && !Storager.hasKey(Defs.GotCoinsForTraining))
