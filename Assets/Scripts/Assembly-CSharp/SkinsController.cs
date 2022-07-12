@@ -116,6 +116,7 @@ public sealed class SkinsController : MonoBehaviour
 		}
 		skinsLocalizeKey.Add("Key_1204");
 		skinsLocalizeKey.Add("Key_1205");
+		skinsLocalizeKey.Add("Bamber");
 	}
 
 	public static Texture2D TextureFromString(string textureString, int w = 64, int h = 32)

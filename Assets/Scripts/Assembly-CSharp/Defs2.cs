@@ -199,6 +199,7 @@ public sealed class Defs2
 		_mapsInfo.Add(new MapInfo("Barge", "Key_1199", "Key_1198", "Key_0539"));
 		_mapsInfo.Add(new MapInfo("Slender_Multy", "Key_0453", "Key_0499", "Key_0540"));
 		_mapsInfo.Add(new MapInfo("Mine", "Key_1280", "Key_1279", "Key_0540"));
+		_mapsInfo.Add(new MapInfo("map_test", "Key_1280", "Key_1279", "Key_0540"));
 	}
 
 	public static void SetLocalizeForMaps()
