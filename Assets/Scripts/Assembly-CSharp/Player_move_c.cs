@@ -1453,7 +1453,7 @@ public sealed class Player_move_c : MonoBehaviour
 			}
 		}
 		photonView.synchronization = ViewSynchronization.Unreliable;
-		base.GetComponent<NetworkView>().stateSynchronization = NetworkStateSynchronization.Unreliable;
+		//base.GetComponent<NetworkView>().stateSynchronization = NetworkStateSynchronization.Unreliable;
 	}
 
 	public void ChangeWeaponReal(int index, bool shouldSetMaxAmmo = true)
