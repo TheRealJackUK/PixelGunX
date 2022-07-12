@@ -326,6 +326,7 @@ public class BannerWindowController : MonoBehaviour
 
 	private void CheckDownloadAdvertisement()
 	{
+		/*
 		if (BuildSettings.BuildTarget == BuildTarget.iPhone)
 		{
 			int currentLevel = ExperienceController.sharedController.currentLevel;
@@ -338,6 +339,7 @@ public class BannerWindowController : MonoBehaviour
 				advertiseController.Run();
 			}
 		}
+		*/
 	}
 
 	private bool IsAdvertisementDownloading()

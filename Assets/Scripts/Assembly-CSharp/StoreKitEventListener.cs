@@ -658,39 +658,7 @@ public sealed class StoreKitEventListener : MonoBehaviour
 
 	private bool TryAddVirtualCrrency(string productId)
 	{
-		int? num = null;
-		int num2 = Array.IndexOf(coinIds, productId);
-		int num3 = Array.IndexOf(gemsIds, productId);
-		if (num2 >= coinIds.GetLowerBound(0))
-		{
-			num = Mathf.RoundToInt((float)VirtualCurrencyHelper.GetCoinInappsQuantity(num2) * PremiumAccountController.VirtualCurrencyMultiplier);
-			int val = Storager.getInt("Coins", false) + num.Value;
-			Storager.setInt("Coins", val, false);
-			ChestBonusController.TryTakeChestBonus(false, num2);
-		}
-		else if (num3 >= gemsIds.GetLowerBound(0))
-		{
-			num = Mathf.RoundToInt((float)VirtualCurrencyHelper.GetGemsInappsQuantity(num3) * PremiumAccountController.VirtualCurrencyMultiplier);
-			int val2 = Storager.getInt("GemsCurrency", false) + num.Value;
-			Storager.setInt("GemsCurrency", val2, false);
-			ChestBonusController.TryTakeChestBonus(true, num3);
-		}
-		if (num.HasValue)
-		{
-			FlurryEvents.PaymentTime = Time.realtimeSinceStartup;
-			try
-			{
-				LogVirtualCurrencyPurchased(productId, num.Value, num3 >= gemsIds.GetLowerBound(0));
-			}
-			catch (Exception arg)
-			{
-				Debug.LogWarning(string.Format("LogVirtualCurrencyPurchased({0}, {1}) threw exception: {2}", productId, num.Value, arg));
-			}
-			SetLastPaymentTime();
-			CheckIfFirstTimePayment();
-		}
-		FriendsController.sharedController.SendOurData(false);
-		return num.HasValue;
+		return true;
 	}
 
 	private bool TryAddStarterPackItem(string productId)

@@ -143,13 +143,13 @@ public sealed class CampaignProgress
 	private static void SetProgressDictionary(string key, Dictionary<string, Dictionary<string, int>> dictionary, bool useCloud)
 	{
 		string val = SerializeProgress(dictionary);
-		Storager.setString(key, val, useCloud);
+		Storager.setString(key, val, false);
 		PlayerPrefs.Save();
 	}
 
 	private static Dictionary<string, Dictionary<string, int>> GetProgressDictionary(string key, bool useCloud)
 	{
-		string @string = Storager.getString(key, useCloud);
+		string @string = Storager.getString(key, false);
 		return DeserializeProgress(@string);
 	}
 

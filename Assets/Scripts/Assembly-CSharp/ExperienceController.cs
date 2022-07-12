@@ -154,7 +154,7 @@ public sealed class ExperienceController : MonoBehaviour
 		{
 			if (!Storager.hasKey("currentLevel" + i))
 			{
-				Storager.setInt("currentLevel" + i, (i == 1) ? 1 : 0, i == 1);
+				Storager.setInt("currentLevel" + PlayerPrefs.GetInt("currentLevel"), 1, false);
 			}
 		}
 		_storagerKeysInitialized = true;
@@ -173,17 +173,7 @@ public sealed class ExperienceController : MonoBehaviour
 
 	public static int GetCurrentLevel()
 	{
-		int result = 1;
-		for (int i = 1; i <= maxLevel; i++)
-		{
-			string key = "currentLevel" + i;
-			if (Storager.getInt(key, true) == 1)
-			{
-				result = i;
-				Storager.setInt(key, 1, true);
-			}
-		}
-		return result;
+		return PlayerPrefs.GetInt("currentLevel");
 	}
 
 	public void Refresh()
@@ -248,8 +238,7 @@ public sealed class ExperienceController : MonoBehaviour
 			{
 				if (Storager.getInt("currentLevel" + k, true) == 1)
 				{
-					currentLevel = k;
-					Storager.setInt("currentLevel" + currentLevel, 1, true);
+					currentLevel = PlayerPrefs.GetInt("currentLevel");
 				}
 			}
 			if (PlayerPrefs.GetInt("MonitorNewTier", 0) == 0)
@@ -259,6 +248,8 @@ public sealed class ExperienceController : MonoBehaviour
 				{
 					currentLevel = 27;
 					Storager.setInt("currentLevel" + currentLevel, 1, true);
+					PlayerPrefs.SetInt("currentLevel", currentLevel);
+					PlayerPrefs.SetInt("currentLevel", currentLevel);
 					Storager.setInt("currentExperience", 0, false);
 				}
 			}
@@ -270,6 +261,7 @@ public sealed class ExperienceController : MonoBehaviour
 				currentExperience.Value = 0;
 				currentLevel++;
 				Storager.setInt("currentLevel" + currentLevel, 1, true);
+				PlayerPrefs.SetInt("currentLevel", currentLevel);
 				Storager.setInt("currentExperience", currentExperience.Value, false);
 				BankController.GiveInitialNumOfCoins();
 				AddCurrenciesForLevelUP();
@@ -369,6 +361,7 @@ public sealed class ExperienceController : MonoBehaviour
 			currentExperience.Value -= MaxExpLevels[currentLevel];
 			currentLevel++;
 			Storager.setInt("currentLevel" + currentLevel, 1, true);
+			PlayerPrefs.SetInt("currentLevel", currentLevel);
 			Storager.setInt("currentExperience", currentExperience.Value, false);
 			ShopNGUIController.SynchronizeAndroidPurchases("Current level: " + currentLevel);
 			BankController.GiveInitialNumOfCoins();

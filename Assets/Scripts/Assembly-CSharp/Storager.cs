@@ -63,11 +63,8 @@ public static class Storager
 	public static bool hasKey(string key)
 	{
 		bool flag = CryptoPlayerPrefs.HasKey(key);
-		string value;
-		int result;
-		if ((key.Equals("Coins") || key.Equals("GemsCurrency")) && !flag && Defs2.SignedPreferences.TryGetValue(key, out value) && Defs2.SignedPreferences.Verify(key) && int.TryParse(value, out result))
+		if ((key.Equals("Coins") || key.Equals("GemsCurrency")))
 		{
-			setInt(key, Math.Max(0, result), false);
 			return true;
 		}
 		return flag;
@@ -75,97 +72,28 @@ public static class Storager
 
 	public static void setInt(string key, int val, bool useICloud)
 	{
-		if (Application.isEditor)
-		{
-			PlayerPrefs.SetInt(key, val);
-		}
-		else
-		{
-			CryptoPlayerPrefs.SetInt(key, val);
-			_protectedIntCache[key] = new SaltedInt(_prng.Next(), val);
-			if (key.Equals("Coins") || key.Equals("GemsCurrency"))
-			{
-				Defs2.SignedPreferences.Add(key, val.ToString());
-			}
-		}
-		if (key.Equals("Coins") || key.Equals("GemsCurrency"))
-		{
-			DigestStorager.Instance.Set(key, val);
-		}
-		if (_expendableKeys.Contains(key))
-		{
-			RefreshExpendablesDigest();
-		}
-		if (WeaponManager.PurchasableWeaponSetContains(key))
-		{
-			RefreshWeaponsDigest(key);
-		}
+		PlayerPrefs.SetInt(key, val);
 	}
 
 	public static int getInt(string key, bool useICloud)
 	{
-		if (Application.isEditor)
-		{
-			return PlayerPrefs.GetInt(key);
-		}
-		SaltedInt value;
-		if (_protectedIntCache.TryGetValue(key, out value))
-		{
-			return value.Value;
-		}
-		if (CryptoPlayerPrefs.HasKey(key))
-		{
-			int @int = CryptoPlayerPrefs.GetInt(key);
-			_protectedIntCache.Add(key, new SaltedInt(_prng.Next(), @int));
-			return @int;
-		}
-		string value2;
-		int result;
-		if ((key.Equals("Coins") || key.Equals("GemsCurrency")) && Defs2.SignedPreferences.TryGetValue(key, out value2) && Defs2.SignedPreferences.Verify(key) && int.TryParse(value2, out result))
-		{
-			return result;
-		}
-		return 0;
+		return PlayerPrefs.GetInt(key);
 	}
 
 	public static void setString(string key, string val, bool useICloud)
 	{
-		if (Application.isEditor)
-		{
-			PlayerPrefs.SetString(key, val);
-			return;
-		}
-		CryptoPlayerPrefs.SetString(key, val);
-		_keychainStringCache[key] = val;
+		PlayerPrefs.SetString(key, val);
+		return;
 	}
 
 	public static string getString(string key, bool useICloud)
 	{
-		if (Application.isEditor)
-		{
-			return PlayerPrefs.GetString(key);
-		}
-		string value;
-		if (_keychainStringCache.TryGetValue(key, out value))
-		{
-			return value;
-		}
-		if (CryptoPlayerPrefs.HasKey(key))
-		{
-			string @string = CryptoPlayerPrefs.GetString(key, string.Empty);
-			_keychainStringCache.Add(key, @string);
-			return @string;
-		}
-		return string.Empty;
+		return PlayerPrefs.GetString(key);
 	}
 
 	public static bool IsInitialized(string flagName)
 	{
-		if (Application.isEditor)
-		{
-			return PlayerPrefs.HasKey(flagName);
-		}
-		return hasKey(flagName);
+		return PlayerPrefs.HasKey(flagName);
 	}
 
 	public static void SetInitialized(string flagName)
@@ -175,10 +103,6 @@ public static class Storager
 
 	public static void SyncWithCloud(string storageId)
 	{
-		if (getInt(storageId, true) > 0)
-		{
-			setInt(storageId, getInt(storageId, true), true);
-		}
 	}
 
 	private static void RefreshExpendablesDigest()

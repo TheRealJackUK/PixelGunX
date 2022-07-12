@@ -620,7 +620,7 @@ internal sealed class AppsMenu : MonoBehaviour
 
 	private void LoadLoading()
 	{
-		GlobalGameController.currentLevel = -1;
+		//GlobalGameController.currentLevel = -1;
 		Application.LoadLevel("Loading");
 	}
 
@@ -672,27 +672,6 @@ internal sealed class AppsMenu : MonoBehaviour
 		LoadLoading();
 	}
 
-	private void DrawResetKeyChainUI()
-	{
-		int num = 250;
-		int num2 = 80;
-		Rect position = new Rect(Screen.width - num, 0f, num, num2);
-		if (!GUI.Button(position, "Reset Keychain"))
-		{
-			return;
-		}
-		resetKeychainAllowCounter++;
-		if (resetKeychainAllowCounter >= 1)
-		{
-			PlayerPrefs.SetInt("WantToResetKeychain", 1);
-			PlayerPrefs.Save();
-			if (!Application.isEditor)
-			{
-				Application.Quit();
-			}
-		}
-	}
-
 	private void OnGUI()
 	{
 		if (Launcher.UsingNewLauncher)
@@ -721,7 +700,6 @@ internal sealed class AppsMenu : MonoBehaviour
 		{
 			GUI.DrawTexture(new Rect((float)Screen.width * 0.5f - (float)loadingNote.width * 0.5f * Defs.Coef, (float)Screen.height * 0.2f, (float)loadingNote.width * Defs.Coef, (float)loadingNote.height * Defs.Coef), loadingNote);
 		}
-		DrawResetKeyChainUI();
 	}
 
 	private IEnumerator LoadLoadingScene()

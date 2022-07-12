@@ -37,7 +37,7 @@ public class HitManager : MonoBehaviour
 	{
 		CryptoPlayerPrefs.SetInt(getPrefKey(), hits);
 		PlayerPrefs.SetInt(getPrefKey(), hits);
-		CryptoPlayerPrefs.Save();
+		PlayerPrefs.Save();
 	}
 
 	private string getPrefKey()
