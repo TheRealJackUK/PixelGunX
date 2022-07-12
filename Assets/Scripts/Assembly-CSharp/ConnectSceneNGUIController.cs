@@ -77,7 +77,7 @@ public class ConnectSceneNGUIController : MonoBehaviour
 	public static string[] masMapName = new string[25]
 	{
 		"Paradise", "Pizza", "Christmas_Town", "NuclearCity", "Supermarket", "Sky_islands", "Sniper", "Knife", "Heaven", "Hill",
-		"Ants", "Underwater", "Matrix", "Ships", "Portal", "Space", "Estate", "Parkour", "Pool", "School",
+		"Ants", "Underwater", "Matrix", "Ships", "Portal", "map_test", "Space", "Estate", "Parkour", "Pool", "School",
 		"Coliseum_MP", "Bridge", "Jail", "Slender_Multy", "Train"
 	};
 
