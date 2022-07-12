@@ -6102,8 +6102,8 @@ public sealed class Player_move_c : MonoBehaviour
 			else
 			{
 				int numShootInDouble2 = GetNumShootInDouble();
-				_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>().Play(myCAnim("Shoot") + numShootInDouble2);
-				num = _weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()[myCAnim("Shoot") + numShootInDouble2].length;
+				_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>().Play("Shoot" + numShootInDouble2);
+				num = _weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()["Shoot" + numShootInDouble2].length;
 			}
 			if (Defs.isSoundFX)
 			{
