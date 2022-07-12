@@ -236,15 +236,15 @@ public sealed class MainMenu : MonoBehaviour
 			{
 				Debug.LogError("MainMenu.Start():    expController == null");
 			}
-			if (Storager.getInt(Defs.CoinsAfterTrainingSN, false) == 0)
+			if (Storager.getInt(Defs.CoinsAfterTrainingSN, false) == 1)
 			{
 				Storager.setInt(Defs.CoinsAfterTrainingSN, 0, false);
 				if ((BuildSettings.BuildTarget == BuildTarget.iPhone || BuildSettings.BuildTarget == BuildTarget.WP8Player) && !Storager.hasKey(Defs.GotCoinsForTraining))
 				{
-					int num = 999999;
+					int num = 5;
 					BankController.AddGems(num);
 					FlurryEvents.LogGemsGained("Main Menu", num);
-					int num2 = 99999;
+					int num2 = 10;
 					BankController.AddCoins(num2);
 					FlurryEvents.LogCoinsGained("Main Menu", num2);
 					AudioClip clip = Resources.Load("coin_get") as AudioClip;

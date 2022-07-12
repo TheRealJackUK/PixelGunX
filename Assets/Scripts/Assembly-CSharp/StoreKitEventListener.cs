@@ -159,6 +159,8 @@ public sealed class StoreKitEventListener : MonoBehaviour
 
 	public static string skin931_2;
 
+	public static string skin931_3;
+
 	public static string fullVersion;
 
 	public static string armor;
@@ -268,6 +270,7 @@ public sealed class StoreKitEventListener : MonoBehaviour
 		skin810_6 = "skin810_6";
 		skin931_1 = "skin931_1";
 		skin931_2 = "skin931_2";
+		skin931_3 = "skin931_3";
 		fullVersion = "extendedversion";
 		armor = "armor";
 		armor2 = "armor2";
@@ -306,6 +309,7 @@ public sealed class StoreKitEventListener : MonoBehaviour
 		list.Add(skin810_6);
 		list.Add(skin931_1);
 		list.Add(skin931_2);
+		list.Add(skin931_3);
 		skinIDs = list.ToArray();
 		idsForSingle = new string[11]
 		{
