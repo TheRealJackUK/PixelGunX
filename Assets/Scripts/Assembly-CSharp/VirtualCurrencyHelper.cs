@@ -64,6 +64,7 @@ public sealed class VirtualCurrencyHelper
 		AddPrice(StoreKitEventListener.skin931_1, 25);
 		AddPrice(StoreKitEventListener.skin931_2, 25);
 		AddPrice(StoreKitEventListener.skin931_3, 2147483647);
+		AddPrice(StoreKitEventListener.skin931_4, 50);
 		AddPrice("CustomSkinID", Defs.skinsMakerPrice);
 		AddPrice(Wear.HitmanCape, 60);
 		AddPrice(Wear.BerserkCape, 60);

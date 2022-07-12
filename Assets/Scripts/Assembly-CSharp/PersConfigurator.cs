@@ -173,7 +173,7 @@ public sealed class PersConfigurator : MonoBehaviour
 				gameObject2.transform.parent = cape;
 				gameObject2.transform.localPosition = new Vector3(0f, -0.8f, 0f);
 				gameObject2.transform.localRotation = Quaternion.identity;
-				gameObject2.GetComponent<Animation>().Play("Profile");
+				gameObject2.GetComponent<Animation>().Play(Defs.CAnim(gameObject2,("Profile")));
 			}
 			else
 			{

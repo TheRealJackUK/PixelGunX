@@ -42,6 +42,7 @@ public static class InAppData
 		inAppData.Add(53, new KeyValuePair<string, string>(StoreKitEventListener.skin931_1, Defs.skin931_1));
 		inAppData.Add(54, new KeyValuePair<string, string>(StoreKitEventListener.skin931_2, Defs.skin931_2));
 		inAppData.Add(55, new KeyValuePair<string, string>(StoreKitEventListener.skin931_3, Defs.skin931_3));
+		inAppData.Add(56, new KeyValuePair<string, string>(StoreKitEventListener.skin931_4, Defs.skin931_4));
 		inappReadableNames.Add("bigammopack", "Big Pack of Ammo");
 		inappReadableNames.Add("Fullhealth", "Full Health");
 		inappReadableNames.Add(StoreKitEventListener.elixirID, "Elixir of Resurrection");
@@ -72,6 +73,7 @@ public static class InAppData
 		inappReadableNames.Add(StoreKitEventListener.skin931_1, "skin931_1");
 		inappReadableNames.Add(StoreKitEventListener.skin931_2, "skin931_2");
 		inappReadableNames.Add(StoreKitEventListener.skin931_3, "skin931_3");
+		inappReadableNames.Add(StoreKitEventListener.skin931_4, "skin931_4");
 		inappReadableNames.Add(Wear.HitmanCape, "Archimage Cape");
 		inappReadableNames.Add(Wear.BerserkCape, "Bloody Demon Cape");
 		inappReadableNames.Add(Wear.DemolitionCape, "Royal Knight Cape");
