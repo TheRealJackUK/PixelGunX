@@ -125,12 +125,13 @@ internal sealed class Switcher : MonoBehaviour
 		float progress3 = 0f;
 		/*if (!Storager.hasKey(Defs.initValsInKeychain15))
 		{
+			UnityEngine.Debug.LogError("resetting or some shit");
 			Storager.setInt(Defs.initValsInKeychain15, 0, false);
 			Storager.setInt(Defs.LobbyLevelApplied, 1, false);
-			//Storager.setString(Defs.CapeEquppedSN, Defs.CapeNoneEqupped, false);
-			//Storager.setString(Defs.HatEquppedSN, Defs.HatNoneEqupped, false);
+			Storager.setString(Defs.CapeEquppedSN, Defs.CapeNoneEqupped, false);
+			Storager.setString(Defs.HatEquppedSN, Defs.HatNoneEqupped, false);
 			Storager.setInt(Defs.IsFirstLaunchFreshInstall, 1, false);
-			//yield return progress3;
+			yield return progress3;
 		}*/
 		if (Storager.getInt(Defs.LobbyLevelApplied, false) == 0)
 		{
@@ -141,17 +142,14 @@ internal sealed class Switcher : MonoBehaviour
 			Storager.setInt(Defs.IsFirstLaunchFreshInstall, 0, false);
 		}
 		progress3 = 0.25f;
-		if (Application.isEditor || (Application.platform == RuntimePlatform.IPhonePlayer && UnityEngine.Debug.isDebugBuild) || (Application.platform == RuntimePlatform.IPhonePlayer && !Storager.hasKey(Defs.initValsInKeychain17)))
+		if ((Application.platform == RuntimePlatform.IPhonePlayer && UnityEngine.Debug.isDebugBuild) || (Application.platform == RuntimePlatform.IPhonePlayer && !Storager.hasKey(Defs.initValsInKeychain17)))
 		{
 			Storager.setInt(Defs.initValsInKeychain17, 0, false);
 			PlayerPrefs.SetFloat(value: SecondsFrom1970(), key: Defs.TimeFromWhichShowEnder_SN);
 		}
-		/*if (Application.isEditor && !PlayerPrefs.HasKey(Defs.initValsInKeychain27))
+		/*if (!Storager.hasKey(Defs.initValsInKeychain27))
 		{
-			Storager.setString(Defs.BootsEquppedSN, Defs.BootsNoneEqupped, false);
-		}
-		if (!Storager.hasKey(Defs.initValsInKeychain27))
-		{
+			UnityEngine.Debug.LogError("resetting boots or some shit");
 			Storager.setInt(Defs.initValsInKeychain27, 0, false);
 			Storager.setString(Defs.BootsEquppedSN, Defs.BootsNoneEqupped, false);
 			yield return progress3;
@@ -160,14 +158,16 @@ internal sealed class Switcher : MonoBehaviour
 		yield return progress3;
 		/*if (!Storager.hasKey(Defs.initValsInKeychain40))
 		{
+			UnityEngine.Debug.LogError("resetting armor or some shit");
 			Storager.setInt(Defs.initValsInKeychain40, 0, false);
 			Storager.setString(Defs.ArmorNewEquppedSN, Defs.ArmorNewNoneEqupped, false);
 			Storager.setInt("GrenadeID", 5, false);
 			UnityEngine.Debug.LogError("trolled");
 			yield return progress3;
 		}*/
-		if (!Storager.IsInitialized(Defs.initValsInKeychain41))
+		if (Storager.hasKey(Defs.initValsInKeychain41))
 		{
+			UnityEngine.Debug.LogError("keychain41 will always be found");
 			Storager.setInt(Defs.initValsInKeychain41, 0, false);
 			string hatBought = null;
 			string visualHatArmor = null;
@@ -178,6 +178,8 @@ internal sealed class Switcher : MonoBehaviour
 				Storager.setInt(Wear.hat_Royal_1, 0, false);
 				Storager.setInt(Wear.hat_Steel_1, 0, false);
 				visualHatArmor = Wear.hat_Almaz_1;
+				UnityEngine.Debug.LogError("hatBought is " + hatBought);
+				UnityEngine.Debug.LogError("visualHatArmor is " + visualHatArmor);
 				yield return progress3;
 			}
 			else if (Storager.getInt(Wear.hat_Royal_1, false) > 0)
@@ -186,6 +188,8 @@ internal sealed class Switcher : MonoBehaviour
 				Storager.setInt(Wear.hat_Royal_1, 0, false);
 				Storager.setInt(Wear.hat_Steel_1, 0, false);
 				visualHatArmor = Wear.hat_Royal_1;
+				UnityEngine.Debug.LogError("hatBought is " + hatBought);
+				UnityEngine.Debug.LogError("visualHatArmor is " + visualHatArmor);
 				yield return progress3;
 			}
 			else if (Storager.getInt(Wear.hat_Steel_1, false) > 0)
@@ -193,8 +197,12 @@ internal sealed class Switcher : MonoBehaviour
 				hatBought = Wear.hat_Army_1;
 				Storager.setInt(Wear.hat_Steel_1, 0, false);
 				visualHatArmor = Wear.hat_Steel_1;
+				UnityEngine.Debug.LogError("hatBought is " + hatBought);
+				UnityEngine.Debug.LogError("visualHatArmor is " + visualHatArmor);
 				yield return progress3;
 			}
+
+
 			if (hatBought != null)
 			{
 				string hatEquipped = Storager.getString(Defs.HatEquppedSN, false);
@@ -216,6 +224,7 @@ internal sealed class Switcher : MonoBehaviour
 			{
 				Storager.setString(Defs.VisualHatArmor, visualHatArmor, false);
 			}
+			// string[] foundHats = new string[]{};
 			yield return progress3;
 			string armorBought = null;
 			string visualArmor = null;
@@ -249,6 +258,7 @@ internal sealed class Switcher : MonoBehaviour
 			}
 			if (visualArmor != null)
 			{
+				UnityEngine.Debug.LogError("visual armor is " + visualArmor);
 				Storager.setString(Defs.VisualArmor, visualArmor, false);
 			}
 			yield return progress3;
