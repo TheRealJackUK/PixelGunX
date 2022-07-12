@@ -374,13 +374,13 @@ public sealed class SkinName : MonoBehaviour
 		isInet = Defs.isInet;
 		if (!isInet)
 		{
-			isMine = base.GetComponent<NetworkView>().isMine;
+			isMine = photonView.isMine;
 		}
 		else
 		{
 		isMine = photonView.isMine;
 		}
-		if (((!Defs.isInet && !base.GetComponent<NetworkView>().isMine) || (Defs.isInet && !photonView.isMine)) && Defs.isMulti)
+		if (((!Defs.isInet && !photonView.isMine) || (Defs.isInet && !photonView.isMine)) && Defs.isMulti)
 		{
 			camPlayer.active = false;
 			character.enabled = false;
@@ -631,7 +631,7 @@ public sealed class SkinName : MonoBehaviour
 			StartCoroutine(_SetAndResetImpactedByTrampoline());
 			return;
 		}
-		bool flag2 = (isLocal && base.GetComponent<NetworkView>().isMine) || (isInet && (bool)photonView && photonView.isMine);
+		bool flag2 = (isLocal && photonView.isMine) || (isInet && (bool)photonView && photonView.isMine);
 		if (isMulti && flag2 && col.gameObject.name.Equals("DeadCollider"))
 		{
 			isPlayDownSound = false;
