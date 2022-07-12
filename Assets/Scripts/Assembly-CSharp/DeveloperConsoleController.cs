@@ -18,6 +18,7 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 	private bool _initialized;
 
 	private bool _needsRestart;
+	bool can = false;
 
 	public void HandleBackButton()
 	{
@@ -329,15 +330,30 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 		}
 	}
 
-		private void RefreshFOV()
+	private void RefreshFOV()
 	{
 		int currentFOV = Storager.getInt("camerafov", false);
 		int num = 180;
-		int num2 = Mathf.Clamp(Convert.ToInt32(view.FOVPercentage * (float)num), 0, num - 1);
-		float fovPercentage = (float)num2 / (float)num;
-		view.FovLabel = "FOV: " + num2 + '/' + num;
+		int num2 = Mathf.Clamp(Convert.ToInt32(currentFOV * (float)num), 0, num - 1);
+		float fovPercentage = (float)currentFOV / (float)num;
+		view.FovLabel = "FOV: " + currentFOV + '/' + num;
 		view.FOVPercentage = fovPercentage;
-		Storager.setInt("camerafov", num2, false);
+		Debug.Log(currentFOV);
+		// Storager.setInt("camerafov", num2, false);
+	}
+
+	private void RAUFOV()
+	{
+		if (can){
+			int currentFOV = Storager.getInt("camerafov", false);
+			int num = 180;
+			int num2 = Mathf.Clamp(Convert.ToInt32(view.FOVPercentage * (float)num), 0, num - 1);
+			float fovPercentage = (float)num2 / (float)num;
+			view.FovLabel = "FOV: " + num2 + '/' + num;
+			view.FOVPercentage = fovPercentage;
+			Storager.setInt("camerafov", num2, false);
+			Debug.Log(num2);
+		}
 	}
 
 	public void HandleExperienceSliderChanged()
@@ -350,7 +366,7 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 		public void HandleFOVSliderChanged()
 	{
 		{
-			RefreshFOV();
+			RAUFOV();
 		}
 	}
 
@@ -494,6 +510,7 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 	private IEnumerator Start()
 	{
 		RefreshFOV();
+		can = true;
 		if (view != null)
 		{
 			Refresh();
