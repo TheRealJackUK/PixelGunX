@@ -105,7 +105,7 @@ internal sealed class FirstPersonControlSharp : MonoBehaviour
 		mySkinName = GetComponent<SkinName>();
 		if (!isInet)
 		{
-			isMine = base.GetComponent<NetworkView>().isMine;
+			isMine = PhotonView.Get(this).isMine;
 		}
 		else
 		{

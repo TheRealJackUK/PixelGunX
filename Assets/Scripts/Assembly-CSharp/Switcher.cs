@@ -1132,18 +1132,7 @@ internal sealed class Switcher : MonoBehaviour
 			GearManager.Mech
 		};
 		byte[] value = source.SelectMany((string key) => BitConverter.GetBytes(Storager.getInt(key, false))).ToArray();
-		if (DigestStorager.Instance.ContainsKey("ExpendablesCount"))
-		{
-			if (!DigestStorager.Instance.Verify("ExpendablesCount", value))
-			{
-				AppendAbuseMethod(AbuseMetod.Expendables);
-				UnityEngine.Debug.LogError("Expendables tampering detected: " + AbuseMethod);
-			}
-		}
-		else
-		{
-			DigestStorager.Instance.Set("ExpendablesCount", value);
-		}
+		DigestStorager.Instance.Set("ExpendablesCount", value);
 	}
 
 	private static void ClearProgress()
