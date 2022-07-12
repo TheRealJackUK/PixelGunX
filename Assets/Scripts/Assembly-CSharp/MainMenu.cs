@@ -3,6 +3,7 @@ using System.Reflection;
 using Prime31;
 using Rilisoft;
 using UnityEngine;
+using System;
 
 public sealed class MainMenu : MonoBehaviour
 {
@@ -190,7 +191,7 @@ public sealed class MainMenu : MonoBehaviour
 			}
 			else if (!WeaponManager.sharedManager && (bool)weaponManagerPrefab)
 			{
-				GameObject gameObject = Object.Instantiate(weaponManagerPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+				GameObject gameObject = UnityEngine.Object.Instantiate(weaponManagerPrefab, Vector3.zero, Quaternion.identity) as GameObject;
 				gameObject.GetComponent<WeaponManager>().Reset(0);
 			}
 		}
@@ -207,6 +208,7 @@ public sealed class MainMenu : MonoBehaviour
 
 	private void Start()
 	{
+		Defs.isMouseControl = Convert.ToBoolean(PlayerPrefs.GetInt("isMouseControl"));
 		using (new StopwatchLogger("MainMenu.Start()"))
 		{
 			sharedMenu = this;
@@ -297,11 +299,11 @@ public sealed class MainMenu : MonoBehaviour
 			PlayerPrefs.SetInt("typeConnect__", -1);
 			if (!GameObject.FindGameObjectWithTag("SkinsManager") && (bool)skinsManagerPrefab)
 			{
-				Object.Instantiate(skinsManagerPrefab, Vector3.zero, Quaternion.identity);
+				UnityEngine.Object.Instantiate(skinsManagerPrefab, Vector3.zero, Quaternion.identity);
 			}
 			if (!WeaponManager.sharedManager && (bool)weaponManagerPrefab)
 			{
-				Object.Instantiate(weaponManagerPrefab, Vector3.zero, Quaternion.identity);
+				UnityEngine.Object.Instantiate(weaponManagerPrefab, Vector3.zero, Quaternion.identity);
 			}
 			GlobalGameController.ResetParameters();
 			GlobalGameController.Score = 0;
@@ -320,7 +322,7 @@ public sealed class MainMenu : MonoBehaviour
 				if (num3 >= ((!Application.isEditor && !Debug.isDebugBuild) ? 86400f : 0f))
 				{
 					PlayerPrefs.SetInt(Defs.ShowEnder_SN, 0);
-					Object.Instantiate(Resources.Load("Ender") as GameObject);
+					UnityEngine.Object.Instantiate(Resources.Load("Ender") as GameObject);
 				}
 			}
 		}

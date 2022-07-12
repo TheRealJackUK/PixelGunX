@@ -116,11 +116,7 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 		{
 			if (toggle.value)
 			{
-				Application.targetFrameRate = 240;
-			}
-			else
-			{
-				Application.targetFrameRate = 30;
+				Application.targetFrameRate = 60;
 			}
 		}
 	}
@@ -128,8 +124,9 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 	public void HandleMouseControlChanged(UIToggle toggle)
 	{
 		if (!(toggle == null))
-		{
-			Defs.isMouseControl = toggle.value;
+		{;
+			PlayerPrefs.SetInt("isMouseControl", Convert.ToInt32(toggle.value));
+			Defs.isMouseControl = Convert.ToBoolean(PlayerPrefs.GetInt("isMouseControl"));
 		}
 	}
 
@@ -431,7 +428,7 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 		view.Set60FPSActive = Application.targetFrameRate == 60;
 		view.IsPayingUser = FlurryPluginWrapper.IsPayingUser();
 		view.isDebugGuiVisibleCheckbox.value = isDebugGuiVisible;
-		view.SetMouseControll = Defs.isMouseControl;
+		view.SetMouseControll = Convert.ToBoolean(PlayerPrefs.GetInt("isMouseControl"));
 		view.SetSpectatorMode = Defs.isRegimVidosDebug;
 		string @string = PlayerPrefs.GetString("RemotePushNotificationToken", string.Empty);
 		if (string.IsNullOrEmpty(@string))
