@@ -93,7 +93,7 @@ public sealed class ExperienceController : MonoBehaviour
 		{
 			return currentLevelForEditor;
 		}
-		private set
+		set
 		{
 			currentLevelForEditor = value;
 		}

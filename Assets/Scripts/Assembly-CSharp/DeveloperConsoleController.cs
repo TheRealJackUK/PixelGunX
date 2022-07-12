@@ -36,15 +36,12 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 		if (ExperienceController.sharedController != null)
 		{
 			int currentLevel = ExperienceController.sharedController.currentLevel;
-			if (currentLevel != ExperienceController.maxLevel)
-			{
-				int num = currentLevel - 1;
-				Storager.setInt("currentLevel" + num, 1, true);
-				PlayerPrefs.SetInt("currentLevel", num);
-				ExperienceController.sharedController.Refresh();
-				view.LevelLabel = "Level: " + num;
-				RefreshExperience();
-			}
+			int num = currentLevel - 1;
+			Storager.setInt("currentLevel" + num, 1, true);
+			PlayerPrefs.SetInt("currentLevel", num);
+			ExperienceController.sharedController.Refresh();
+			view.LevelLabel = "Level: " + num;
+			RefreshExperience();
 		}
 	}
 
@@ -334,7 +331,7 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 
 		private void RefreshFOV()
 	{
-		int currentFOV = (int)Storager.getInt("camerafov", false);
+		int currentFOV = Storager.getInt("camerafov", false);
 		int num = 180;
 		int num2 = Mathf.Clamp(Convert.ToInt32(view.FOVPercentage * (float)num), 0, num - 1);
 		float fovPercentage = (float)num2 / (float)num;
