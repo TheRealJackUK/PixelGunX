@@ -18,6 +18,10 @@ internal sealed class DeveloperConsoleView : MonoBehaviour
 
 	public UISlider experienceSlider;
 
+	public UILabel fovLabel;
+
+	public UISlider fovSlider;
+
 	public UIInput coinsInput;
 
 	public UIInput enemyCountInSurvivalWave;
@@ -84,6 +88,17 @@ internal sealed class DeveloperConsoleView : MonoBehaviour
 		}
 	}
 
+		public string FovLabel
+	{
+		set
+		{
+			if (!(fovLabel == null))
+			{
+				fovLabel.text = value;
+			}
+		}
+	}
+
 	public float ExperiencePercentage
 	{
 		get
@@ -95,6 +110,21 @@ internal sealed class DeveloperConsoleView : MonoBehaviour
 			if (!(experienceSlider == null))
 			{
 				experienceSlider.value = Mathf.Clamp01(value);
+			}
+		}
+	}
+
+		public float FOVPercentage
+	{
+		get
+		{
+			return (!(fovSlider != null)) ? 0f : fovSlider.value;
+		}
+		set
+		{
+			if (!(fovSlider == null))
+			{
+				fovSlider.value = Mathf.Clamp01(value);
 			}
 		}
 	}

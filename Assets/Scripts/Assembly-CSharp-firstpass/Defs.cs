@@ -9,6 +9,9 @@ public sealed class Defs
 		On,
 		Off
 	}
+
+public static float CAMFOV = 44f;
+
 public static string CAnim(GameObject animator, string con){
         foreach (AnimationState ac in animator.GetComponent<Animation>()){
             string nm = ac.name.ToString();

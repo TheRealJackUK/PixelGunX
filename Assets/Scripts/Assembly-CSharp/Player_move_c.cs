@@ -973,6 +973,7 @@ public sealed class Player_move_c : MonoBehaviour
 
 	private void Awake()
 	{
+		myCamera.fieldOfView = Storager.getInt("camerafov", false);
 		isTraining = Defs.IsTraining;
 		isSurvival = Defs.IsSurvival;
 		isMulti = Defs.isMulti;
@@ -1222,7 +1223,7 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 		else
 		{
-			myCamera.fieldOfView = 44f;
+			myCamera.fieldOfView = Storager.getInt("camerafov", false);
 			gunCamera.fieldOfView = 75f;
 			gunCamera.gameObject.SetActive(true);
 			if (inGameGUI != null)

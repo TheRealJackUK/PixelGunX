@@ -323,7 +323,7 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 	{
 		int currentLevel = PlayerPrefs.GetInt("currentLevel");;
 		int num = ExperienceController.MaxExpLevels[currentLevel];
-		int num2 = Mathf.Clamp(Convert.ToInt32(view.ExperiencePercentage * (float)num), 0, num - 1);
+		int num2 = Mathf.Clamp(Convert.ToInt32(view.FOVPercentage * (float)num), 0, num - 1);
 		float experiencePercentage = (float)num2 / (float)num;
 		view.ExperienceLabel = "Exp: " + num2 + '/' + num;
 		view.ExperiencePercentage = experiencePercentage;
@@ -335,11 +335,28 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 		}
 	}
 
+		private void RefreshFOV()
+	{
+		int currentFOV = (int)Storager.getInt("camerafov", false);
+		int num = 180;
+		int num2 = Mathf.Clamp(Convert.ToInt32(view.FOVPercentage * (float)num), 0, num - 1);
+		float fovPercentage = (float)num2 / (float)num;
+		view.FovLabel = "FOV: " + num2 + '/' + num;
+		view.FOVPercentage = fovPercentage;
+		Storager.setInt("camerafov", num2, false);
+	}
+
 	public void HandleExperienceSliderChanged()
 	{
 		if (ExperienceController.sharedController != null)
 		{
 			RefreshExperience();
+		}
+	}
+		public void HandleFOVSliderChanged()
+	{
+		{
+			RefreshFOV();
 		}
 	}
 
