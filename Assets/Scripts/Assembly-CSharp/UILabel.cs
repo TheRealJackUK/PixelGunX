@@ -314,6 +314,7 @@ public class UILabel : UIWidget
 		}
 	}
 
+	[SerializeField]
 	public string text
 	{
 		get

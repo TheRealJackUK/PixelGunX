@@ -44,6 +44,10 @@ public class UIDrawCall : MonoBehaviour
 
 	[NonSerialized]
 	[HideInInspector]
+	public static UIPanel spanel;
+
+	[NonSerialized]
+	[HideInInspector]
 	public Texture2D clipTexture;
 
 	[NonSerialized]
@@ -265,74 +269,146 @@ public class UIDrawCall : MonoBehaviour
 
 	private void CreateMaterial()
 	{
-		mTextureClip = false;
-		mLegacyShader = false;
-		mClipCount = panel.clipCount;
-		string text = ((mShader != null) ? mShader.name : ((!(mMaterial != null)) ? "Unlit/Transparent Colored" : mMaterial.shader.name));
-		text = text.Replace("GUI/Text Shader", "Unlit/Text");
-		if (text.Length > 2 && text[text.Length - 2] == ' ')
-		{
-			int num = text[text.Length - 1];
-			if (num > 48 && num <= 57)
+		try {
+			mTextureClip = false;
+			mLegacyShader = false;
+			mClipCount = panel.clipCount;
+			string text = ((mShader != null) ? mShader.name : ((!(mMaterial != null)) ? "Unlit/Transparent Colored" : mMaterial.shader.name));
+			text = text.Replace("GUI/Text Shader", "Unlit/Text");
+			if (text.Length > 2 && text[text.Length - 2] == ' ')
 			{
-				text = text.Substring(0, text.Length - 2);
+				int num = text[text.Length - 1];
+				if (num > 48 && num <= 57)
+				{
+					text = text.Substring(0, text.Length - 2);
+				}
 			}
-		}
-		if (text.StartsWith("Hidden/"))
-		{
-			text = text.Substring(7);
-		}
-		text = text.Replace(" (SoftClip)", string.Empty);
-		text = text.Replace(" (TextureClip)", string.Empty);
-		if (panel.clipping == Clipping.TextureMask)
-		{
-			mTextureClip = true;
-			shader = Shader.Find("Hidden/" + text + " (TextureClip)");
-		}
-		else if (mClipCount != 0)
-		{
-			shader = Shader.Find("Hidden/" + text + " " + mClipCount);
-			if (shader == null)
+			if (text.StartsWith("Hidden/"))
 			{
-				shader = Shader.Find(text + " " + mClipCount);
+				text = text.Substring(7);
 			}
-			if (shader == null && mClipCount == 1)
+			text = text.Replace(" (SoftClip)", string.Empty);
+			text = text.Replace(" (TextureClip)", string.Empty);
+			if (panel.clipping == Clipping.TextureMask)
 			{
-				mLegacyShader = true;
-				shader = Shader.Find(text + " (SoftClip)");
-			}
-		}
-		else
-		{
-			shader = Shader.Find(text);
-		}
-		if (shader == null)
-		{
-			shader = Shader.Find("Unlit/Transparent Colored");
-		}
-		if (mMaterial != null)
-		{
-			mDynamicMat = new Material(mMaterial);
-			mDynamicMat.name = "[NGUI] " + mMaterial.name;
-			mDynamicMat.hideFlags = HideFlags.DontSave | HideFlags.NotEditable;
-			mDynamicMat.CopyPropertiesFromMaterial(mMaterial);
-			string[] shaderKeywords = mMaterial.shaderKeywords;
-			for (int i = 0; i < shaderKeywords.Length; i++)
-			{
-				mDynamicMat.EnableKeyword(shaderKeywords[i]);
-			}
-			if (shader != null)
-			{
-				mDynamicMat.shader = shader;
+				mTextureClip = true;
+				shader = Shader.Find("Hidden/" + text + " (TextureClip)");
 			}
 			else if (mClipCount != 0)
 			{
-				Debug.LogError(text + " shader doesn't have a clipped shader version for " + mClipCount + " clip regions");
+				shader = Shader.Find("Hidden/" + text + " " + mClipCount);
+				if (shader == null)
+				{
+					shader = Shader.Find(text + " " + mClipCount);
+				}
+				if (shader == null && mClipCount == 1)
+				{
+					mLegacyShader = true;
+					shader = Shader.Find(text + " (SoftClip)");
+				}
 			}
-		}
-		else
-		{
-			mDynamicMat = new Material(Shader.Find("UI/Default"));
+			else
+			{
+				shader = Shader.Find(text);
+			}
+			if (shader == null)
+			{
+				shader = Shader.Find("Unlit/Transparent Colored");
+			}
+			if (mMaterial != null)
+			{
+				mDynamicMat = new Material(mMaterial);
+				mDynamicMat.name = "[NGUI] " + mMaterial.name;
+				mDynamicMat.hideFlags = HideFlags.DontSave | HideFlags.NotEditable;
+				mDynamicMat.CopyPropertiesFromMaterial(mMaterial);
+				string[] shaderKeywords = mMaterial.shaderKeywords;
+				for (int i = 0; i < shaderKeywords.Length; i++)
+				{
+					mDynamicMat.EnableKeyword(shaderKeywords[i]);
+				}
+				if (shader != null)
+				{
+					mDynamicMat.shader = shader;
+				}
+				else if (mClipCount != 0)
+				{
+					Debug.LogError(text + " shader doesn't have a clipped shader version for " + mClipCount + " clip regions");
+				}
+			}
+			else
+			{
+				mDynamicMat = new Material(Shader.Find("UI/Default"));
+			}
+		} catch (Exception e){
+			mTextureClip = false;
+			mLegacyShader = false;
+			// mClipCount = panel.clipCount;
+			string text = ((mShader != null) ? mShader.name : ((!(mMaterial != null)) ? "Unlit/Transparent Colored" : mMaterial.shader.name));
+			text = text.Replace("GUI/Text Shader", "Unlit/Text");
+			if (text.Length > 2 && text[text.Length - 2] == ' ')
+			{
+				int num = text[text.Length - 1];
+				if (num > 48 && num <= 57)
+				{
+					text = text.Substring(0, text.Length - 2);
+				}
+			}
+			if (text.StartsWith("Hidden/"))
+			{
+				text = text.Substring(7);
+			}
+			text = text.Replace(" (SoftClip)", string.Empty);
+			text = text.Replace(" (TextureClip)", string.Empty);
+			if (panel.clipping == Clipping.TextureMask)
+			{
+				mTextureClip = true;
+				shader = Shader.Find("Hidden/" + text + " (TextureClip)");
+			}
+			else if (mClipCount != 0)
+			{
+				shader = Shader.Find("Hidden/" + text + " " + mClipCount);
+				if (shader == null)
+				{
+					shader = Shader.Find(text + " " + mClipCount);
+				}
+				if (shader == null && mClipCount == 1)
+				{
+					mLegacyShader = true;
+					shader = Shader.Find(text + " (SoftClip)");
+				}
+			}
+			else
+			{
+				shader = Shader.Find(text);
+			}
+			if (shader == null)
+			{
+				shader = Shader.Find("Unlit/Transparent Colored");
+			}
+			if (mMaterial != null)
+			{
+				mDynamicMat = new Material(mMaterial);
+				mDynamicMat.name = "[NGUI] " + mMaterial.name;
+				mDynamicMat.hideFlags = HideFlags.DontSave | HideFlags.NotEditable;
+				mDynamicMat.CopyPropertiesFromMaterial(mMaterial);
+				string[] shaderKeywords = mMaterial.shaderKeywords;
+				for (int i = 0; i < shaderKeywords.Length; i++)
+				{
+					mDynamicMat.EnableKeyword(shaderKeywords[i]);
+				}
+				if (shader != null)
+				{
+					mDynamicMat.shader = shader;
+				}
+				else if (mClipCount != 0)
+				{
+					Debug.LogError(text + " shader doesn't have a clipped shader version for " + mClipCount + " clip regions");
+				}
+			}
+			else
+			{
+				mDynamicMat = new Material(Shader.Find("UI/Default"));
+			}
 		}
 	}
 
@@ -340,6 +416,7 @@ public class UIDrawCall : MonoBehaviour
 	{
 		NGUITools.DestroyImmediate(mDynamicMat);
 		CreateMaterial();
+		// Debug.Log(mDynamicMat == null);
 		mDynamicMat.renderQueue = mRenderQueue;
 		if (mTexture != null)
 		{
@@ -354,14 +431,18 @@ public class UIDrawCall : MonoBehaviour
 
 	private void UpdateMaterials()
 	{
-		if (mRebuildMat || mDynamicMat == null || mClipCount != panel.clipCount || mTextureClip != (panel.clipping == Clipping.TextureMask))
-		{
-			RebuildMaterial();
-			mRebuildMat = false;
-		}
-		else if (mRenderer.sharedMaterial != mDynamicMat)
-		{
-			mRenderer.sharedMaterials = new Material[1] { mDynamicMat };
+		try {
+			if (mRebuildMat || mDynamicMat == null || mClipCount != panel.clipCount || mTextureClip != (panel.clipping == Clipping.TextureMask))
+			{
+				RebuildMaterial();
+				mRebuildMat = false;
+			}
+			else if (mRenderer.sharedMaterial != mDynamicMat)
+			{
+				mRenderer.sharedMaterials = new Material[1] { mDynamicMat };
+			}
+		}catch (Exception e){
+
 		}
 	}
 
@@ -635,6 +716,7 @@ public class UIDrawCall : MonoBehaviour
 
 	private void OnEnable()
 	{
+		spanel = panel;
 		mRebuildMat = true;
 	}
 
@@ -693,8 +775,14 @@ public class UIDrawCall : MonoBehaviour
 			return uIDrawCall;
 		}
 		GameObject gameObject = new GameObject(name);
-		UnityEngine.Object.DontDestroyOnLoad(gameObject);
+		try {
+			UnityEngine.Object.DontDestroyOnLoad(gameObject);
+		}catch(Exception e){
+
+		}
+		gameObject.transform.localScale = new Vector3(0.002604167f, 0.002604167f, 0.002604167f);
 		UIDrawCall uIDrawCall2 = gameObject.AddComponent<UIDrawCall>();
+		uIDrawCall2.panel = spanel;
 		mActiveList.Add(uIDrawCall2);
 		return uIDrawCall2;
 	}
