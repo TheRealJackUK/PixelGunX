@@ -16,4 +16,11 @@ internal sealed class BackgroundMusicController : MonoBehaviour
 	{
 		MenuBackgroundMusic.sharedMusic.StopMusic(base.GetComponent<AudioSource>());
 	}
+
+	public void Update()
+	{
+		AudioSource aus = base.GetComponent<AudioSource>();
+		AudioListener target = AudioListener.FindObjectOfType<AudioListener>();
+		aus.transform.position = target.transform.position;
+	}
 }

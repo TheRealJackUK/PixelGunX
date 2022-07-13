@@ -100,6 +100,13 @@ internal sealed class MenuBackgroundMusic : MonoBehaviour
 		UnityEngine.Object.DontDestroyOnLoad(base.gameObject);
 	}
 
+	private void Update()
+	{
+		GameObject gameObject = GameObject.FindGameObjectWithTag("MenuBackgroundMusic");
+		AudioListener target = AudioListener.FindObjectOfType<AudioListener>();
+		gameObject.transform.position = target.transform.position;
+	}
+
 	public void Play()
 	{
 		if (Defs.isSoundMusic)
