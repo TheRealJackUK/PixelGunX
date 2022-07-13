@@ -74,6 +74,7 @@ public sealed class PersConfigurator : MonoBehaviour
 			weapon.transform.localRotation = Quaternion.identity;
 			if (profile != null)
 			{
+				profile.wrapMode = WrapMode.Loop;
 				weapon.GetComponent<WeaponSounds>().animationObject.GetComponent<Animation>().AddClip(profile, "Profile");
 				weapon.GetComponent<WeaponSounds>().animationObject.GetComponent<Animation>().Play("Profile");
 			}
