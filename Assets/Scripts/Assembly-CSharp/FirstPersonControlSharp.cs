@@ -302,6 +302,10 @@ internal sealed class FirstPersonControlSharp : MonoBehaviour
 				_cameraMouseDelta = vector * Defs.Sensitivity / 2f;
 			}
 		}
+		if (Input.GetKeyDown(KeyCode.F1))
+		{
+					Screen.lockCursor = false;
+		}
 		mousePosOld = Input.mousePosition;
 		_movement = thisTransform.TransformDirection(new Vector3(JoystickController.leftJoystick.value.x, 0f, JoystickController.leftJoystick.value.y));
 		if ((!isHunger || !hungerGameController.isGo) && isHunger)
