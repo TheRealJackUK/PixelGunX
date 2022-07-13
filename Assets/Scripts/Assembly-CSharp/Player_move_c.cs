@@ -70,6 +70,8 @@ public sealed class Player_move_c : MonoBehaviour
 
 	public bool isRocketJump;
 
+	public float currArmor = 31f;
+
 	public float timeBuyHealth = -10000f;
 
 	public float armorSynch;
@@ -712,28 +714,21 @@ public sealed class Player_move_c : MonoBehaviour
 	{
 		get
 		{
-			return CurrentBaseArmor + CurrentBodyArmor + CurrentHatArmor;
+			return currArmor;
 		}
 		set
 		{
+			Debug.LogError("Set Called!, with the value of " + value);
 			float num = curArmor - value;
 			if (num >= 0f)
 			{
-				if (CurrentHatArmor >= num)
+				if (currArmor >= num)
 				{
-					CurrentHatArmor -= num;
+					currArmor -= num;
 					return;
 				}
-				num -= CurrentHatArmor;
-				CurrentHatArmor = 0f;
-				if (CurrentBodyArmor >= num)
-				{
-					CurrentBodyArmor -= num;
-					return;
-				}
-				num -= CurrentBodyArmor;
-				CurrentBodyArmor = 0f;
-				CurrentBaseArmor -= num;
+				num -= currArmor;
+				currArmor -= num;
 			}
 			else if (num < 0f)
 			{
@@ -756,9 +751,7 @@ public sealed class Player_move_c : MonoBehaviour
 	{
 		get
 		{
-			float num = Wear.MaxArmorForItem(FriendsController.sharedController.armorName, TierOrRoomTier((!(ExpController.Instance != null)) ? (ExpController.LevelsForTiers.Length - 1) : ExpController.Instance.OurTier));
-			float num2 = Wear.MaxArmorForItem(FriendsController.sharedController.hatName, TierOrRoomTier((!(ExpController.Instance != null)) ? (ExpController.LevelsForTiers.Length - 1) : ExpController.Instance.OurTier));
-			return num + num2;
+			return 31f;
 		}
 	}
 
@@ -825,7 +818,7 @@ public sealed class Player_move_c : MonoBehaviour
 	{
 		get
 		{
-			return CurrentBodyArmor + CurrentHatArmor;
+			return CurrentBodyArmor;
 		}
 	}
 
@@ -833,16 +826,10 @@ public sealed class Player_move_c : MonoBehaviour
 	{
 		get
 		{
-			float value = 0f;
-			Wear.curArmor.TryGetValue(FriendsController.sharedController.armorName ?? string.Empty, out value);
-			return value;
+			return 19f;
 		}
 		set
 		{
-			if (Wear.curArmor.ContainsKey(FriendsController.sharedController.armorName ?? string.Empty))
-			{
-				Wear.curArmor[FriendsController.sharedController.armorName ?? string.Empty] = value;
-			}
 		}
 	}
 
@@ -932,20 +919,9 @@ public sealed class Player_move_c : MonoBehaviour
 	{
 		if (WearedMaxArmor > 0f)
 		{
-			float num = Wear.MaxArmorForItem(FriendsController.sharedController.armorName, TierOrRoomTier((!(ExpController.Instance != null)) ? (ExpController.LevelsForTiers.Length - 1) : ExpController.Instance.OurTier));
-			float num2 = num - CurrentBodyArmor;
-			if (num2 < 0f)
-			{
-				num2 = 0f;
-			}
-			if (dt <= num2)
-			{
-				CurrentBodyArmor += dt;
-				return;
-			}
-			CurrentBodyArmor += num2;
+			float num2 = 0f;
 			dt -= num2;
-			float num3 = Wear.MaxArmorForItem(FriendsController.sharedController.hatName, TierOrRoomTier((!(ExpController.Instance != null)) ? (ExpController.LevelsForTiers.Length - 1) : ExpController.Instance.OurTier));
+			float num3 = 0f;
 			float num4 = num3 - CurrentHatArmor;
 			if (num4 < 0f)
 			{
@@ -2381,9 +2357,8 @@ public sealed class Player_move_c : MonoBehaviour
 				if (!BonusEffectForArmorWorksInThisMatch)
 				{
 					float num = Wear.MaxArmorForItem(FriendsController.sharedController.armorName ?? string.Empty, TierOrRoomTier((!(ExpController.Instance != null)) ? (ExpController.LevelsForTiers.Length - 1) : ExpController.Instance.OurTier)) * (EffectsController.IcnreaseEquippedArmorPercentage - 1f);
-					float num2 = Wear.MaxArmorForItem(FriendsController.sharedController.hatName ?? string.Empty, TierOrRoomTier((!(ExpController.Instance != null)) ? (ExpController.LevelsForTiers.Length - 1) : ExpController.Instance.OurTier)) * (EffectsController.IcnreaseEquippedArmorPercentage - 1f);
+					float num2 = 0f;
 					BonusEffectForArmorWorksInThisMatch = (double)(num + num2) > 0.001;
-					AddArmor(num + num2);
 				}
 				if (!ArmorBonusGiven)
 				{
@@ -5072,6 +5047,7 @@ public sealed class Player_move_c : MonoBehaviour
 			}
 			if (Defs.inRespawnWindow)
 			{
+				currArmor = 31f;
 				Defs.inRespawnWindow = false;
 				RespawnPlayer();
 				return;
@@ -5165,6 +5141,7 @@ public sealed class Player_move_c : MonoBehaviour
 
 	public void RespawnPlayer()
 	{
+		currArmor = 31f;
 		SetMapCameraActive(false);
 		_killerInfo.Reset();
 		Func<bool> func = () => _pauser != null && _pauser.paused;

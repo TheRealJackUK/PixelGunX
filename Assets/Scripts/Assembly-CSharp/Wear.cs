@@ -560,7 +560,7 @@ public static class Wear
 			}
 			armorNum.TryGetValue(armorName ?? string.Empty, out value);
 		}
-		return value * EffectsController.IcnreaseEquippedArmorPercentage;
+		return 17f * EffectsController.IcnreaseEquippedArmorPercentage;
 	}
 
 	public static int GetArmorCountFor(string armorTag, string hatTag)
