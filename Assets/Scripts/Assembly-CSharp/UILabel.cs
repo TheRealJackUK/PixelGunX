@@ -101,7 +101,7 @@ public class UILabel : UIWidget
 
 	[HideInInspector]
 	[SerializeField]
-	private NGUIText.Alignment mAlignment;
+	public NGUIText.Alignment mAlignment;
 
 	[HideInInspector]
 	[SerializeField]
