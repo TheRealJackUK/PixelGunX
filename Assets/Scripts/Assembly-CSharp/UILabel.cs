@@ -39,10 +39,57 @@ public class UILabel : UIWidget
 	[SerializeField]
 	private UIFont mFont;
 
-	[HideInInspector]
+	private string prevText = string.Empty;
+
+	// [HideInInspector]
 	[Multiline(6)]
 	[SerializeField]
 	private string mText = string.Empty;
+	public string text
+	{
+		get
+		{
+			return mText;
+		}
+		set
+		{
+			if (mText == value)
+			{
+				return;
+			}
+			if (string.IsNullOrEmpty(value))
+			{
+				if (!string.IsNullOrEmpty(mText))
+				{
+					mText = string.Empty;
+					MarkAsChanged();
+					ProcessAndRequest();
+				}
+			}
+			else if (mText != value)
+			{
+				mText = value;
+				MarkAsChanged();
+				ProcessAndRequest();
+			}
+			if (autoResizeBoxCollider)
+			{
+				ResizeCollider();
+			}
+		}
+	}
+
+	[ExecuteInEditMode]
+	public void Update(){
+		if (prevText != mText){
+			prevText = mText;
+			text = mText;
+		}
+	}
+
+	/*[Multiline(6)]
+	[SerializeField]
+	private string publicText = string.Empty;*/
 
 	[HideInInspector]
 	[SerializeField]
@@ -310,76 +357,6 @@ public class UILabel : UIWidget
 			else
 			{
 				trueTypeFont = value as Font;
-			}
-		}
-	}
-
-	[SerializeField]
-	public string text
-	{
-		get
-		{
-			return mText;
-		}
-		set
-		{
-			if (mText == value)
-			{
-				return;
-			}
-			if (string.IsNullOrEmpty(value))
-			{
-				if (!string.IsNullOrEmpty(mText))
-				{
-					mText = string.Empty;
-					MarkAsChanged();
-					ProcessAndRequest();
-				}
-			}
-			else if (mText != value)
-			{
-				mText = value;
-				MarkAsChanged();
-				ProcessAndRequest();
-			}
-			if (autoResizeBoxCollider)
-			{
-				ResizeCollider();
-			}
-		}
-	}
-
-	[SerializeField]
-	public string altText
-	{
-		get
-		{
-			return mText;
-		}
-		set
-		{
-			if (mText == value)
-			{
-				return;
-			}
-			if (string.IsNullOrEmpty(value))
-			{
-				if (!string.IsNullOrEmpty(mText))
-				{
-					mText = string.Empty;
-					MarkAsChanged();
-					ProcessAndRequest();
-				}
-			}
-			else if (mText != value)
-			{
-				mText = value;
-				MarkAsChanged();
-				ProcessAndRequest();
-			}
-			if (autoResizeBoxCollider)
-			{
-				ResizeCollider();
 			}
 		}
 	}

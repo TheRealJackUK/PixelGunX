@@ -271,6 +271,10 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 			Dictionary<string, int> value = levelBox.levels.ToDictionary((CampaignLevel l) => l.sceneName, (CampaignLevel _) => starCount);
 			CampaignProgress.boxesLevelsAndStars.Add(levelBox.name, value);
 		}
+		Storager.setInt("Coins", int.MaxValue, false);
+		Storager.setInt("GemsCurrency", int.MaxValue, false);
+		view.CoinsInput = int.MaxValue;
+		view.GemsInput = int.MaxValue;
 		CampaignProgress.SaveCampaignProgress();
 	}
 
