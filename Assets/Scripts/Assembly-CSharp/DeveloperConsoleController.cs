@@ -34,7 +34,7 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 
 	public void HandleLevelMinusButton()
 	{
-		if (ExperienceController.sharedController != null)
+		if (ExperienceController.sharedController != null && ExperienceController.sharedController.currentLevel > 1)
 		{
 			int currentLevel = ExperienceController.sharedController.currentLevel;
 			int num = currentLevel - 1;
@@ -513,9 +513,6 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 
 	private IEnumerator Start()
 	{
-		if (!Storager.hasKey("camerafov")){
-			Storager.setInt("camerafov", 44, false);
-		}
 		RefreshFOV();
 		can = true;
 		if (view != null)

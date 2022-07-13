@@ -182,6 +182,9 @@ public sealed class MainMenu : MonoBehaviour
 
 	private void Awake()
 	{
+		if (PlayerPrefs.GetInt("currentlevel") == 0 || PlayerPrefs.GetInt("currentlevel") == 1) {
+			PlayerPrefs.SetInt("currentlevel", 2);
+		}
 		using (new StopwatchLogger("MainMenu.Awake()"))
 		{
 			GlobalGameController.SetMultiMode();

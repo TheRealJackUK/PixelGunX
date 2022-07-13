@@ -271,6 +271,15 @@ internal sealed class AppsMenu : MonoBehaviour
 
 	private void Awake()
 	{
+		if (Storager.getInt("currentExperience", false) < 0 || Storager.getInt("currentExperience", false) == null) 
+		{
+			Storager.setInt("currentExperience", 1, false);
+		}
+		if (PlayerPrefs.GetInt("currentlevel") < 1 || PlayerPrefs.GetInt("currentlevel") == null) 
+		{
+			PlayerPrefs.SetInt("currentlevel", 1);
+			PlayerPrefs.SetInt("currentlevel1", 1);
+		}
 		if (!Storager.hasKey(Defs.PremiumEnabledFromServer))
 		{
 			Storager.setInt(Defs.PremiumEnabledFromServer, 1, false);
