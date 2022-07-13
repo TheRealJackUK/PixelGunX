@@ -18,6 +18,7 @@ public class MainMenuHeroCamera : MonoBehaviour
 	public void Start()
 	{
 		Vector3 eulerAngles = base.transform.rotation.eulerAngles;
+		// moveMenuAnimator.gameObject.GetComponent<Animation>().Play("");
 		base.transform.rotation = Quaternion.Euler(new Vector3(eulerAngles.x, YawForMainMenu, eulerAngles.z));
 	}
 

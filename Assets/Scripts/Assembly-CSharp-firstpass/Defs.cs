@@ -2512,7 +2512,7 @@ public static string CAnim(GameObject animator, string con){
 		ProfileFromFriends = 0;
 		PixelGunAppID = "640111933";
 		AppStoreURL = "https://itunes.apple.com/app/pixel-gun-3d-block-world-pocket/id" + PixelGunAppID + "?mt=8";
-		SupportMail = "pixelgun3D.supp0rt@gmail.com";
+		SupportMail = "pgx.support@proton.me";
 		levelNamesFromNums = new Dictionary<string, string>();
 		EnderManAvailable = true;
 		isSoundMusic = false;
@@ -2640,6 +2640,7 @@ public static string CAnim(GameObject animator, string con){
 		levelNumsForMusicInMult.Add("Barge", 1046);
 		levelNumsForMusicInMult.Add("Slender_Multy", 1047);
 		levelNumsForMusicInMult.Add("Mine", 1048);
+		levelNumsForMusicInMult.Add("DevScene", 1049);
 		_premiumMaps.Add("Ants", 15);
 		_premiumMaps.Add("Matrix", 15);
 		_premiumMaps.Add("Underwater", 15);

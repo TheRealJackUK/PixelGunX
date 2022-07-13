@@ -147,7 +147,7 @@ public class FeedbackMenuController : MonoBehaviour
 		Action handler = delegate
 		{
 			string text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-			string text2 = string.Concat("mailto:pixelgun3D.supp0rt@gmail.com?subject=Feedback&body=%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A------------%20DO NOT DELETE%20------------%0D%0AUTC%20Time:%20", DateTime.Now.ToString(), "%0D%0AGame:%20PixelGun3D%0D%0AVersion:%20", text, "%0D%0APlayerID:%20", FriendsController.sharedController.id, "%0D%0ACategory:%20Feedback%0D%0ADevice%20Type:%20", SystemInfo.deviceType, "%20", SystemInfo.deviceModel, "%0D%0AOS%20Version:%20", SystemInfo.operatingSystem, "%0D%0A------------------------");
+			string text2 = string.Concat("mailto:pgx.support@proton.me?subject=Feedback&body=%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A------------%20DO NOT DELETE%20------------%0D%0AUTC%20Time:%20", DateTime.Now.ToString(), "%0D%0AGame:%20PixelGun3D%0D%0AVersion:%20", text, "%0D%0APlayerID:%20", FriendsController.sharedController.id, "%0D%0ACategory:%20Feedback%0D%0ADevice%20Type:%20", SystemInfo.deviceType, "%20", SystemInfo.deviceModel, "%0D%0AOS%20Version:%20", SystemInfo.operatingSystem, "%0D%0A------------------------");
 			text2 = text2.Replace(" ", "%20");
 			Debug.Log(text2);
 			FlurryPluginWrapper.LogEventWithParameterAndValue("Social", "Buttons Pressed", "Feedback Sended");
