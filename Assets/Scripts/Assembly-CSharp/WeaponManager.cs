@@ -1882,11 +1882,11 @@ public sealed class WeaponManager : MonoBehaviour
 		bool isHunger = Defs.isHunger;
 		bool insideTraining = GlobalGameController.InsideTraining;
 		bool flag = !Defs.IsSurvival && !insideTraining && !isMulti;
-		if (prefab.name.Equals("Weapon9"))
+		if (prefab.CompareTag("Knife"))
 		{
 			return true;
 		}
-		if (prefab.name.Equals("Weapon1") && !isHunger)
+		if (prefab.CompareTag(_initialWeaponName) && !isHunger)
 		{
 			return true;
 		}
@@ -2238,7 +2238,7 @@ public sealed class WeaponManager : MonoBehaviour
 			bool flag = false;
 			for (int i = 0; i < upgrades.Count; i++)
 			{
-				WeaponSounds weaponSounds = list.Find((WeaponSounds ws) => ws.Comparetag(upgrades[i]));
+				WeaponSounds weaponSounds = list.Find((WeaponSounds ws) => ws.tag.Equals(upgrades[i]));
 				if (weaponSounds != null && weaponSounds.tier > ExpController.GetOurTier())
 				{
 					if (i == 0)
@@ -2665,7 +2665,7 @@ public sealed class WeaponManager : MonoBehaviour
 		int num2 = _RemovePrevVersionsOfUpgrade(tg);
 		allAvailablePlayerWeapons.Sort(new WeaponComparer());
 		bool flag2 = true;
-		if ((weapon2.weaponPrefab.GetComponent<WeaponSounds>().campaignOnly || weapon2.weaponPrefab.CompareTag("UziWeapon")) && CurrentWeaponIndex >= 0 && tagToStoreIDMapping.ContainsKey((playerWeapons[CurrentWeaponIndex] as Weapon).weaponPrefab.tag))
+		if ((weapon2.weaponPrefab.GetComponent<WeaponSounds>().campaignOnly || weapon2.weaponPrefab.tag.Equals("UziWeapon")) && CurrentWeaponIndex >= 0 && tagToStoreIDMapping.ContainsKey((playerWeapons[CurrentWeaponIndex] as Weapon).weaponPrefab.tag))
 		{
 			flag2 = false;
 		}
@@ -2693,7 +2693,7 @@ public sealed class WeaponManager : MonoBehaviour
 				for (int j = 0; j < allAvailablePlayerWeapons.Count; j++)
 				{
 					Weapon weapon = allAvailablePlayerWeapons[j] as Weapon;
-					if (weapon.weaponPrefab.CompareTag(upgrade[i]))
+					if (weapon.weaponPrefab.tag.Equals(upgrade[i]))
 					{
 						list.Add(weapon);
 					}
@@ -2711,7 +2711,7 @@ public sealed class WeaponManager : MonoBehaviour
 
 	public GameObject GetPrefabByTag(string weaponTag)
 	{
-		return weaponsInGame.OfType<GameObject>().FirstOrDefault((GameObject w) => w.CompareTag(weaponTag));
+		return weaponsInGame.OfType<GameObject>().FirstOrDefault((GameObject w) => w.tag.Equals(weaponTag));
 	}
 
 	public GameObject GetPrefabByName(string name)
@@ -2932,7 +2932,7 @@ public sealed class WeaponManager : MonoBehaviour
 		int num = -1;
 		foreach (Weapon allAvailablePlayerWeapon in allAvailablePlayerWeapons)
 		{
-			if (allAvailablePlayerWeapon.weaponPrefab.CompareTag(tg))
+			if (allAvailablePlayerWeapon.weaponPrefab.tag.Equals(tg))
 			{
 				num = allAvailablePlayerWeapons.IndexOf(allAvailablePlayerWeapon);
 				break;

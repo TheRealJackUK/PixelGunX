@@ -402,7 +402,7 @@ public class ThirdPersonController : MonoBehaviour
 
 	public virtual void Reset()
 	{
-		gameObject.CompareTag("Player");
+		gameObject.tag = "Player";
 	}
 
 	public virtual void Main()
