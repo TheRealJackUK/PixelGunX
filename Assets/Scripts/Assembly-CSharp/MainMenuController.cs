@@ -2102,7 +2102,9 @@ internal sealed class MainMenuController : ControlsSettingsBase
 			buttonBackground.mainTexture = StarterPackController.Get.GetCurrentPackImage();
 		}
 		_starterPackEnabled = enable;
-		starterPackTimer.text = "vroom\nvroom";
+		// funny trick 1! !!! Fuck you
+		starterPackTimer.mAlignment = NGUIText.Alignment.Left;
+		starterPackTimer.text = "Port by:\nfedesito\nEnderPurrson\nGAMERSUNITE";
 	}
 
 	public void OnStarterPackButtonClick()
