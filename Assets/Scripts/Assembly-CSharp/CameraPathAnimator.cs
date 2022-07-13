@@ -85,8 +85,6 @@ public class CameraPathAnimator : MonoBehaviour
 
 	private float delayTime;
 
-	public float sensitivity = 5f;
-
 	public float minX = -90f;
 
 	public float maxX = 90f;
@@ -662,8 +660,8 @@ public class CameraPathAnimator : MonoBehaviour
 		{
 			return Quaternion.identity;
 		}
-		rotationX += Input.GetAxis("Mouse X") * sensitivity;
-		rotationY += (0f - Input.GetAxis("Mouse Y")) * sensitivity;
+		rotationX += Input.GetAxis("Mouse X") * Defs.sensitivity;
+		rotationY += (0f - Input.GetAxis("Mouse Y")) * Defs.sensitivity;
 		rotationY = Mathf.Clamp(rotationY, minX, maxX);
 		return Quaternion.Euler(new Vector3(rotationY, rotationX, 0f));
 	}

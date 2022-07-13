@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public sealed class Defs
@@ -11,6 +12,12 @@ public sealed class Defs
 	}
 
 public static float CAMFOV = 44f;
+
+public static string camerafov = Convert.ToString(Defs.CAMFOV);
+
+public static float sensitivity = 5f;
+
+public static string sensitivityvalue = Convert.ToString(Defs.sensitivity);
 
 public static string CAnim(GameObject animator, string con){
         foreach (AnimationState ac in animator.GetComponent<Animation>()){
