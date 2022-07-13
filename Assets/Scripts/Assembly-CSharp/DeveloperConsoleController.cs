@@ -509,6 +509,9 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 
 	private IEnumerator Start()
 	{
+		if (!Storager.hasKey("camerafov")){
+			Storager.setInt("camerafov", 44, false);
+		}
 		RefreshFOV();
 		can = true;
 		if (view != null)

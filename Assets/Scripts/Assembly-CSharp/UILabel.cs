@@ -349,6 +349,41 @@ public class UILabel : UIWidget
 		}
 	}
 
+	[SerializeField]
+	public string altText
+	{
+		get
+		{
+			return mText;
+		}
+		set
+		{
+			if (mText == value)
+			{
+				return;
+			}
+			if (string.IsNullOrEmpty(value))
+			{
+				if (!string.IsNullOrEmpty(mText))
+				{
+					mText = string.Empty;
+					MarkAsChanged();
+					ProcessAndRequest();
+				}
+			}
+			else if (mText != value)
+			{
+				mText = value;
+				MarkAsChanged();
+				ProcessAndRequest();
+			}
+			if (autoResizeBoxCollider)
+			{
+				ResizeCollider();
+			}
+		}
+	}
+
 	public int defaultFontSize
 	{
 		get
