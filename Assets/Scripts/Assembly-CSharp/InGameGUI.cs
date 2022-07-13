@@ -1079,25 +1079,46 @@ public sealed class InGameGUI : MonoBehaviour
 		}
 	}
 
+	public int currentScrollIndex = 1;
+	public int prevSI = 1;
+
 	private void Update()
 	{
+		if (currentScrollIndex > 5){
+			currentScrollIndex = 1;
+		}
+		if (currentScrollIndex < 1){
+			currentScrollIndex = 5;
+		}
+		if (Input.mouseScrollDelta.y > 0f)
+		{
+			currentScrollIndex++;
+		}
+		if (Input.mouseScrollDelta.y < 0f)
+		{
+			currentScrollIndex--;
+		}
+		if (prevSI != currentScrollIndex){
+			prevSI = currentScrollIndex;
+			SelectWeaponFromCategory(currentScrollIndex);
+		}
 		if (Input.GetKeyDown(KeyCode.Alpha1))
 		{
 			SelectWeaponFromCategory(1);
 		}
-				if (Input.GetKeyDown(KeyCode.Alpha2))
+		if (Input.GetKeyDown(KeyCode.Alpha2))
 		{
 			SelectWeaponFromCategory(2);
 		}
-				if (Input.GetKeyDown(KeyCode.Alpha3))
+		if (Input.GetKeyDown(KeyCode.Alpha3))
 		{
 			SelectWeaponFromCategory(3);
 		}
-				if (Input.GetKeyDown(KeyCode.Alpha4))
+		if (Input.GetKeyDown(KeyCode.Alpha4))
 		{
 			SelectWeaponFromCategory(4);
 		}
-				if (Input.GetKeyDown(KeyCode.Alpha5))
+		if (Input.GetKeyDown(KeyCode.Alpha5))
 		{
 			SelectWeaponFromCategory(5);
 		}
