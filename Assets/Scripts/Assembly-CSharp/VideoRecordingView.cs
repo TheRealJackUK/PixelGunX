@@ -110,7 +110,7 @@ internal sealed class VideoRecordingView : MonoBehaviour, IDisposable
 		resumeButton.gameObject.SetActive(false);
 		shareButton.gameObject.SetActive(false);
 		stopButton.gameObject.SetActive(false);
-		interfaceContainer.gameObject.SetActive(_interfaceEnabled && (Everyplay.IsSupported() || Application.isEditor));
+		interfaceContainer.gameObject.SetActive(_interfaceEnabled && (Everyplay.IsSupported() || true));
 	}
 
 	private void OnDestroy()
@@ -124,7 +124,7 @@ internal sealed class VideoRecordingView : MonoBehaviour, IDisposable
 		{
 			return;
 		}
-		bool isEditor = Application.isEditor;
+		bool isEditor = true;
 		bool isWeakDevice = IsWeakDevice;
 		bool flag = Everyplay.IsRecordingSupported();
 		interfaceContainer.gameObject.SetActive(_interfaceEnabled && !isWeakDevice && (isEditor || flag));

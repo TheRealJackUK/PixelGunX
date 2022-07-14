@@ -230,7 +230,7 @@ internal sealed class FirstPersonControlSharp : MonoBehaviour
 				return;
 			}
 			JoystickController.leftJoystick.value = updateKeyboardControls();
-			Vector2 vector = ((!Application.isEditor) ? new Vector2(Input.mousePosition.x - mousePosOld.x, Input.mousePosition.y - mousePosOld.y) : new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")));
+			Vector2 vector = ((false/*this is !Application.isEditor*/) ? new Vector2(Input.mousePosition.x - mousePosOld.x, Input.mousePosition.y - mousePosOld.y) : new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")));
 			if (Input.GetKeyDown(KeyCode.Space))
 			{
 				JoystickController.rightJoystick.jumpPressed = true;
@@ -298,7 +298,7 @@ internal sealed class FirstPersonControlSharp : MonoBehaviour
 					_moveC.ZoomPress();
 				}
 			}
-			if ((Screen.lockCursor && Application.isEditor) || !Application.isEditor)
+			if (Screen.lockCursor)
 			{
 				_cameraMouseDelta = vector * Defs.Sensitivity / 2f;
 			}

@@ -26,7 +26,7 @@ internal sealed class SpinObject : MonoBehaviour
 
 	private void Update()
 	{
-		if (Application.isEditor)
+		if (true)
 		{
 			base.transform.Rotate(Vector3.up, Input.GetAxis("Horizontal") * -120f * (Time.realtimeSinceStartup - lastTime));
 		}
@@ -38,7 +38,7 @@ internal sealed class SpinObject : MonoBehaviour
 				base.transform.Rotate(Vector3.up, touch.deltaPosition.x * -120f * coef * (Time.realtimeSinceStartup - lastTime));
 			}
 		}
-		if (Application.isEditor)
+		if (true)
 		{
 			base.transform.Rotate(Vector3.up, Input.GetAxis("Mouse ScrollWheel") * 3f * -120f * (Time.realtimeSinceStartup - lastTime));
 		}

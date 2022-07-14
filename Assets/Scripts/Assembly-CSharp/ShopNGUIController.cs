@@ -4739,7 +4739,7 @@ public class ShopNGUIController : MonoBehaviour
 					MainMenu_Pers.Rotate(Vector3.up, touch.deltaPosition.x * num * 0.5f * (Time.realtimeSinceStartup - lastTime));
 				}
 			}
-			if (Application.isEditor)
+			if (true)
 			{
 				float num2 = Input.GetAxis("Mouse ScrollWheel") * 3f * num * (Time.realtimeSinceStartup - lastTime);
 				MainMenu_Pers.Rotate(Vector3.up, num2);

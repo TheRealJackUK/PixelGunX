@@ -387,7 +387,7 @@ public sealed class TrainingController : MonoBehaviour
 			{
 				vector = new Vector2((float)Screen.width - ((float)animTextures[0].width + 200f) * Defs.Coef, 100f * Defs.Coef);
 			}
-			if (Application.isEditor)
+			if (true)
 			{
 				Screen.lockCursor = false;
 			}
@@ -422,7 +422,7 @@ public sealed class TrainingController : MonoBehaviour
 			{
 				vector = new Vector2((float)Screen.width * 0.5f - (float)animTextures[0].width * 0.5f * Defs.Coef, (float)Screen.height * 0.3f - (float)animTextures[0].height * 0.5f * Defs.Coef);
 			}
-			if (Application.isEditor)
+			if (true)
 			{
 				Screen.lockCursor = true;
 			}
@@ -455,7 +455,7 @@ public sealed class TrainingController : MonoBehaviour
 			{
 				vector = new Vector2((float)Screen.width * 0.5f - (float)animTextures[0].width * 0.5f * Defs.Coef, (float)Screen.height * 0.25f - (float)animTextures[0].height * 0.5f * Defs.Coef);
 			}
-			if (Application.isEditor)
+			if (true)
 			{
 				Screen.lockCursor = true;
 			}
@@ -488,7 +488,7 @@ public sealed class TrainingController : MonoBehaviour
 			{
 				vector = new Vector2((float)Screen.width - 100f * Defs.Coef - (float)animTextures[0].width * Defs.Coef, (312f - (float)animTextures[0].height * 0.5f) * Defs.Coef);
 			}
-			if (Application.isEditor)
+			if (true)
 			{
 				Screen.lockCursor = false;
 			}
