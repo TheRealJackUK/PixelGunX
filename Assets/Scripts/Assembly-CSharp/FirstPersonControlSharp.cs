@@ -449,6 +449,16 @@ internal sealed class FirstPersonControlSharp : MonoBehaviour
 			{
 				CameraSceneController.sharedController.killCamController.UpdateMouseX();
 			}
+			if (Input.GetKeyDown("l"))
+			{
+				Input.ResetInputAxes();
+				Cursor.lockState = CursorLockMode.None;
+				Cursor.visible = true;
+				StartCoroutine(MyWaitForSeconds(0.1f));
+				Input.ResetInputAxes();
+				Cursor.lockState = CursorLockMode.Locked;
+
+			}
 		}
 	}
 
@@ -495,6 +505,10 @@ internal sealed class FirstPersonControlSharp : MonoBehaviour
 	{
 		yield return new WaitForSeconds(0.25f);
 		secondJumpEnabled = true;
+	}
+		public IEnumerator MyWaitForSeconds(float tm)
+	{
+			yield return new WaitForSeconds(tm);
 	}
 
 	private void OnDestroy()

@@ -4683,7 +4683,7 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 		if (Input.GetKeyUp(KeyCode.Escape))
 		{
-			if (Screen.lockCursor)
+			if (!Cursor.visible)
 			{
 				_escapePressed = true;
 				Input.ResetInputAxes();
