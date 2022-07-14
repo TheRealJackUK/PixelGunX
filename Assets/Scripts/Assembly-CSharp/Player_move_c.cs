@@ -4361,6 +4361,7 @@ public sealed class Player_move_c : MonoBehaviour
 
 	private void FixedUpdate()
 	{
+		GameObject.Find("Main Camera").AddComponent<Aura2API.AuraCamera>();
 		if (inGameGUI.pausePanel.GetActive() && CurHealth > 0) 
 		{
 			Cursor.lockState = CursorLockMode.None;
