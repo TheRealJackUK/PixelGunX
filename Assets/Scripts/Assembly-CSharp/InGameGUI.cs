@@ -1090,11 +1090,11 @@ public sealed class InGameGUI : MonoBehaviour
 		if (currentScrollIndex < 1){
 			currentScrollIndex = 5;
 		}
-		if (Input.mouseScrollDelta.y > 0f)
+		if (Input.mouseScrollDelta.y < 0f)
 		{
 			currentScrollIndex++;
 		}
-		if (Input.mouseScrollDelta.y < 0f)
+		if (Input.mouseScrollDelta.y > 0f)
 		{
 			currentScrollIndex--;
 		}

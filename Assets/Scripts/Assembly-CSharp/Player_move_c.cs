@@ -4361,10 +4361,6 @@ public sealed class Player_move_c : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		if (Input.GetKeyDown("g")) 
-		{
-			GrenadePress();
-		}
 		if (inGameGUI.pausePanel.GetActive() && CurHealth > 0) 
 		{
 			Cursor.lockState = CursorLockMode.None;
