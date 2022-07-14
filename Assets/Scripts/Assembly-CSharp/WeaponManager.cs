@@ -1691,8 +1691,9 @@ public sealed class WeaponManager : MonoBehaviour
 	{
 		if (w == null)
 		{
-			UnityEngine.Debug.LogWarning("Exiting from EquipWeapon(), because weapon is null.");
-			return;
+			//UnityEngine.Debug.LogWarning("Exiting from EquipWeapon(), because weapon is null.");
+			//return;
+			UnityEngine.Debug.LogError("you idiot, this is null, you stupid, stupid, horribly ignorant fool!");
 		}
 		bool isMulti = Defs.isMulti;
 		bool isHunger = Defs.isHunger;

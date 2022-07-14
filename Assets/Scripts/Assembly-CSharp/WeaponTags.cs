@@ -500,6 +500,8 @@ public static class WeaponTags
 
 	public static readonly string FutureRifle_Tag = "FutureRifle";
 
+	public static readonly string OGUzi_Tag = "OGUzi";
+
 	public static readonly string RapidFireRifle_Tag = "RapidFireRifle";
 
 	public static readonly string DualUzi_Tag = "DualUzi";
