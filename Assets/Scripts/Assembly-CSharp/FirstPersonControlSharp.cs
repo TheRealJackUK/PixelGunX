@@ -282,7 +282,7 @@ internal sealed class FirstPersonControlSharp : MonoBehaviour
 					sharedController2.SetTargetKillCam(null);
 				}
 			}
-			if (Input.GetMouseButton(0) && ((Screen.lockCursor && Application.isEditor) || !Application.isEditor) && !_moveC.isKilled)
+			if (Input.GetMouseButton(0) && ((Screen.lockCursor)) && !_moveC.isKilled)
 			{
 				_moveC.ShotPressed();
 			}
@@ -290,7 +290,8 @@ internal sealed class FirstPersonControlSharp : MonoBehaviour
 			{
 				if (!Screen.lockCursor)
 				{
-					Screen.lockCursor = true;
+					Cursor.lockState = CursorLockMode.Locked;
+					Cursor.visible = false;
 				}
 				else if ((!isMulti || isMine) && (bool)_moveC && WeaponManager.sharedManager != null && WeaponManager.sharedManager.currentWeaponSounds != null && WeaponManager.sharedManager.currentWeaponSounds.isZooming)
 				{
@@ -301,10 +302,6 @@ internal sealed class FirstPersonControlSharp : MonoBehaviour
 			{
 				_cameraMouseDelta = vector * Defs.Sensitivity / 2f;
 			}
-		}
-		if (Input.GetKeyDown(KeyCode.F1))
-		{
-					Screen.lockCursor = false;
 		}
 		mousePosOld = Input.mousePosition;
 		_movement = thisTransform.TransformDirection(new Vector3(JoystickController.leftJoystick.value.x, 0f, JoystickController.leftJoystick.value.y));

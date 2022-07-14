@@ -718,7 +718,6 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 		set
 		{
-			Debug.LogError("Set Called!, with the value of " + value);
 			float num = curArmor - value;
 			if (num >= 0f)
 			{
@@ -4362,6 +4361,14 @@ public sealed class Player_move_c : MonoBehaviour
 
 	private void FixedUpdate()
 	{
+		if (inGameGUI.pausePanel.GetActive() && CurHealth > 0) 
+		{
+			Cursor.lockState = CursorLockMode.None;
+			Cursor.visible = true;
+		} else if (Cursor.visible == true && Cursor.lockState == CursorLockMode.None) {
+			Cursor.visible = false;
+			Cursor.lockState = CursorLockMode.Locked;
+		}
 		if (isMulti && !isMine && myNickLabelController != null)
 		{
 			bool isVisible = (isImVisible = false);
@@ -4670,17 +4677,14 @@ public sealed class Player_move_c : MonoBehaviour
 				UpdateImmortalityAlpColor(1f);
 			}
 		}
-		if (Input.GetKeyUp(KeyCode.Escape) && ((isMulti && isMine) || !isMulti))
+		if (Input.GetKeyUp(KeyCode.Escape))
 		{
 			if (Screen.lockCursor)
 			{
-				if (Defs.IsDeveloperBuild)
-				{
-					Debug.Log("Escape handling. Cursor locked.");
-				}
 				_escapePressed = true;
 				Input.ResetInputAxes();
-				Screen.lockCursor = false;
+				Cursor.lockState = CursorLockMode.None;
+				Cursor.visible = true;
 			}
 			else if (!showRanks)
 			{

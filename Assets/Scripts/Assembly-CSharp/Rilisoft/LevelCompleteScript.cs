@@ -103,10 +103,7 @@ namespace Rilisoft
 
 		private void Start()
 		{
-			if (Application.isEditor)
-			{
-				Screen.lockCursor = false;
-			}
+			Screen.lockCursor = false;
 			if (BuildSettings.BuildTarget == BuildTarget.WP8Player)
 			{
 				twitterButton.transform.localPosition = new Vector3(-10000f, 0f, 0f);
