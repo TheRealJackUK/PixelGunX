@@ -9,7 +9,7 @@ public class FullScreenOption : MonoBehaviour
 		{
 			if (Screen.fullScreen)
 			{
-				Screen.SetResolution(1280, 720, false);
+				Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, true);
 			}
 			else
 			{

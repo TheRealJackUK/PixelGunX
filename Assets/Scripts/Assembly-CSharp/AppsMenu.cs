@@ -266,6 +266,7 @@ internal sealed class AppsMenu : MonoBehaviour
 
 	private void Awake()
 	{
+		Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, true);
 		if (Storager.getInt("currentExperience", false) < 0 || Storager.getInt("currentExperience", false) == null) 
 		{
 			Storager.setInt("currentExperience", 1, false);
@@ -320,7 +321,7 @@ internal sealed class AppsMenu : MonoBehaviour
 		{
 			if (Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.WP8Player)
 			{
-				Screen.SetResolution(Mathf.RoundToInt((float)Screen.width * 0.75f), Mathf.RoundToInt((float)Screen.height * 0.75f), true);
+				Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, true);
 			}
 			yield return 0.3f;
 		}
@@ -366,7 +367,7 @@ internal sealed class AppsMenu : MonoBehaviour
 		{
 			if (Application.platform == RuntimePlatform.IPhonePlayer && Screen.width == 2048)
 			{
-				Screen.SetResolution(Screen.width / 2, Screen.height / 2, true);
+				Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, true);
 			}
 			yield return 0.5f;
 		}
