@@ -55,7 +55,117 @@ internal sealed class AppsMenu : MonoBehaviour
 
 		public bool MoveNext()
 		{
-return true;
+			//Discarded unreachable code: IL_03ac
+			uint num = (uint)_0024PC;
+			_0024PC = -1;
+			switch (num)
+			{
+			case 0u:
+				if (Launcher.UsingNewLauncher)
+				{
+					goto default;
+				}
+				if (Application.platform == RuntimePlatform.Android && (Defs.AndroidEdition == Defs.RuntimeAndroidEdition.GoogleLite || Defs.AndroidEdition == Defs.RuntimeAndroidEdition.GooglePro))
+				{
+					_003Chandle_003E__0 = delegate(string sceneName)
+					{
+						UnityEngine.Debug.LogError("AppsMenu.Start(): Cheating detected.");
+						if (Application.platform == RuntimePlatform.Android && (Defs.AndroidEdition == Defs.RuntimeAndroidEdition.GoogleLite || Defs.AndroidEdition == Defs.RuntimeAndroidEdition.GooglePro))
+						{
+							string abuseKey_21493d = GetAbuseKey_21493d18(558447896u);
+							DateTime utcNow = DateTime.UtcNow;
+							long num2 = utcNow.Ticks >> 1;
+							long result = num2;
+							UnityEngine.Debug.Log("AppsMenu.Start(): Trying handle cheating.");
+							if (!Storager.hasKey(abuseKey_21493d))
+							{
+								UnityEngine.Debug.LogError(string.Format("AppsMenu.Start(): Setting “{0}”: {1} ({2:s})", abuseKey_21493d, num2, utcNow));
+								Storager.setString(abuseKey_21493d, num2.ToString(), false);
+							}
+							else if (long.TryParse(Storager.getString(abuseKey_21493d, false), out result))
+							{
+								UnityEngine.Debug.Log("Cheating Timestamp: " + new DateTime(result << 1).ToString("s"));
+								long num3 = Math.Min(num2, result);
+								UnityEngine.Debug.Log("Min Timestamp: " + new DateTime(num3 << 1).ToString("s"));
+								Storager.setString(abuseKey_21493d, num3.ToString(), false);
+							}
+							else
+							{
+								Storager.setString(abuseKey_21493d, num2.ToString(), false);
+							}
+							if (_internetChecker.Value != null)
+							{
+								UnityEngine.Debug.Log("Trying to start coroutine.");
+								_internetChecker.Value.StartCoroutine(MeetTheCoroutine(sceneName, result << 1, num2 << 1));
+							}
+							else
+							{
+								UnityEngine.Debug.LogError("InternetChecker is null.");
+							}
+						}
+					};
+					_003CactualPackageInfo_003E__1 = default(LicenseVerificationController.PackageInfo);
+					_003CactualPackageName_003E__3 = _003CactualPackageInfo_003E__1.PackageName;
+					UnityEngine.Debug.Log("Package check passed.");
+					UnityEngine.Debug.Log("Signature check passed.");
+				}
+				_003C_003Ef__this.currentFon = _003C_003Ef__this.androidFon;
+				if (ApplicationBinarySplitted && !Application.isEditor || Application.isMobilePlatform)
+				{
+					_003CmainPath_003E__5 = GooglePlayDownloader.GetMainOBBPath(_003C_003Ef__this.expPath);
+					if (_003CmainPath_003E__5 == null)
+					{
+						// GooglePlayDownloader.FetchOBB();
+					}
+					goto IL_02a3;
+				}
+				goto IL_030f;
+			case 1u:
+				if (_003CmainPath_003E__5 == null)
+				{
+					goto IL_02a3;
+				}
+				goto IL_030f;
+			case 2u:
+				_003CactivityIndicatorPrefab_003E__6 = Resources.Load("ActivityIndicator");
+				UnityEngine.Object.DontDestroyOnLoad(_003CactivityIndicatorPrefab_003E__6);
+				if (_003CactivityIndicatorPrefab_003E__6 == null)
+				{
+					UnityEngine.Debug.LogWarning("activityIndicatorPrefab == null");
+				}
+				else
+				{
+					StoreKitEventListener.purchaseActivityInd = UnityEngine.Object.Instantiate(_003CactivityIndicatorPrefab_003E__6) as GameObject;
+				}
+				SetCurrentLanguage();
+				_0024current = null;
+				_0024PC = 3;
+				break;
+			case 3u:
+				_0024PC = -1;
+				goto default;
+			default:
+				{
+					return false;
+				}
+				IL_030f:
+				_003C_003Ef__this.StartCoroutine(_003C_003Ef__this.LoadLoadingScene());
+				_0024current = null;
+				_0024PC = 2;
+				break;
+				IL_02a3:
+				_003CmainPath_003E__5 = GooglePlayDownloader.GetMainOBBPath(_003C_003Ef__this.expPath);
+				if (_003CmainPath_003E__5 != null)
+				{
+					UnityEngine.Debug.Log(string.Format("MainPath: “{0}”", _003CmainPath_003E__5));
+					goto IL_030f;
+				}
+				UnityEngine.Debug.LogWarning("Waiting mainPath...");
+				_0024current = new WaitForSeconds(0.5f);
+				_0024PC = 1;
+				break;
+			}
+			return true;
 		}
 
 		[DebuggerHidden]
@@ -350,7 +460,96 @@ return true;
 
 	private IEnumerator Start()
 	{
-yield return true;
+		if (Application.platform == RuntimePlatform.Android && (Defs.AndroidEdition == Defs.RuntimeAndroidEdition.GoogleLite || Defs.AndroidEdition == Defs.RuntimeAndroidEdition.GooglePro))
+		{
+			Action<string> handle = delegate(string sceneName)
+			{
+				UnityEngine.Debug.LogError("AppsMenu.Start(): Cheating detected.");
+				if (Application.platform == RuntimePlatform.Android && (Defs.AndroidEdition == Defs.RuntimeAndroidEdition.GoogleLite || Defs.AndroidEdition == Defs.RuntimeAndroidEdition.GooglePro))
+				{
+					string abuseKey_21493d = GetAbuseKey_21493d18(558447896u);
+					DateTime utcNow = DateTime.UtcNow;
+					long num = utcNow.Ticks >> 1;
+					long result = num;
+					UnityEngine.Debug.Log("AppsMenu.Start(): Trying handle cheating.");
+					if (!Storager.hasKey(abuseKey_21493d))
+					{
+						UnityEngine.Debug.LogError(string.Format("AppsMenu.Start(): Setting “{0}”: {1} ({2:s})", abuseKey_21493d, num, utcNow));
+						Storager.setString(abuseKey_21493d, num.ToString(), false);
+					}
+					else if (long.TryParse(Storager.getString(abuseKey_21493d, false), out result))
+					{
+						UnityEngine.Debug.Log("Cheating Timestamp: " + new DateTime(result << 1).ToString("s"));
+						long num2 = Math.Min(num, result);
+						UnityEngine.Debug.Log("Min Timestamp: " + new DateTime(num2 << 1).ToString("s"));
+						Storager.setString(abuseKey_21493d, num2.ToString(), false);
+					}
+					else
+					{
+						Storager.setString(abuseKey_21493d, num.ToString(), false);
+					}
+					if (_internetChecker.Value != null)
+					{
+						UnityEngine.Debug.Log("Trying to start coroutine.");
+						_internetChecker.Value.StartCoroutine(MeetTheCoroutine(sceneName, result << 1, num << 1));
+					}
+					else
+					{
+						UnityEngine.Debug.LogError("InternetChecker is null.");
+					}
+				}
+			};
+			LicenseVerificationController.PackageInfo actualPackageInfo = default(LicenseVerificationController.PackageInfo);
+			string actualPackageName = actualPackageInfo.PackageName;
+			if (string.Compare(actualPackageName, Defs.GetIntendedAndroidPackageName(), StringComparison.Ordinal) != 0)
+			{
+				UnityEngine.Debug.LogWarning("Verification FakeBundleDetected:    " + actualPackageName);
+				FlurryPluginWrapper.LogEventWithParameterAndValue("Verification FakeBundleDetected", "Actual Package Name", actualPackageName);
+				handle(GetTerminalSceneName_4de1(19937u));
+			}
+			else
+			{
+				UnityEngine.Debug.Log("Package check passed.");
+			}
+			if (string.IsNullOrEmpty(intendedSignatureHash))
+			{
+				UnityEngine.Debug.LogWarning("String.IsNullOrEmpty(intendedSignatureHash)");
+				handle(GetTerminalSceneName_4de1(19937u));
+			}
+			string actualSignatureHash = actualPackageInfo.SignatureHash;
+			if (string.Compare(actualSignatureHash, intendedSignatureHash, StringComparison.Ordinal) != 0)
+			{
+				UnityEngine.Debug.LogWarning("Verification FakeSignatureDetected:    " + actualSignatureHash);
+				FlurryPluginWrapper.LogEventWithParameterAndValue("Verification FakeSignatureDetected", "Actual Signature Hash", actualSignatureHash);
+				Switcher.AppendAbuseMethod(AbuseMetod.AndroidPackageSignature);
+				handle(GetTerminalSceneName_4de1(19937u));
+			}
+			else
+			{
+				UnityEngine.Debug.Log("Signature check passed.");
+			}
+		}
+		currentFon = androidFon;
+		if (ApplicationBinarySplitted && !Application.isEditor || Application.isMobilePlatform)
+		{
+			string mainPath2 = GooglePlayDownloader.GetMainOBBPath(expPath);
+			if (mainPath2 == null)
+			{
+				GooglePlayDownloader.FetchOBB();
+			}
+			do
+			{
+				mainPath2 = GooglePlayDownloader.GetMainOBBPath(expPath);
+				if (mainPath2 != null)
+				{
+					UnityEngine.Debug.Log(string.Format("MainPath: “{0}”", mainPath2));
+					break;
+				}
+				UnityEngine.Debug.LogWarning("Waiting mainPath...");
+				yield return new WaitForSeconds(0.5f);
+			}
+			while (mainPath2 == null);
+		}
 		StartCoroutine(LoadLoadingScene());
 		yield return null;
 		UnityEngine.Object activityIndicatorPrefab = Resources.Load("ActivityIndicator");
