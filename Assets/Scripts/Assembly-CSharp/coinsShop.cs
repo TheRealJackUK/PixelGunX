@@ -66,10 +66,6 @@ internal sealed class coinsShop : MonoBehaviour
 	{
 		get
 		{
-			if (!Application.isEditor)
-			{
-				return StoreKitEventListener.billingSupported;
-			}
 			return true;
 		}
 	}

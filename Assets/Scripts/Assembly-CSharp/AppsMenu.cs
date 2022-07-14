@@ -110,11 +110,6 @@ internal sealed class AppsMenu : MonoBehaviour
 					UnityEngine.Debug.Log("Signature check passed.");
 				}
 				_003C_003Ef__this.currentFon = _003C_003Ef__this.androidFon;
-				if (!Application.isEditor || Application.isMobilePlatform)
-				{
-					_003C_003Ef__this.expPath = GooglePlayDownloader.GetExpansionFilePath();
-					UnityEngine.Debug.Log(string.Format("ExpPath: “{0}”", _003C_003Ef__this.expPath));
-				}
 				if (ApplicationBinarySplitted && !Application.isEditor || Application.isMobilePlatform)
 				{
 					_003CmainPath_003E__5 = GooglePlayDownloader.GetMainOBBPath(_003C_003Ef__this.expPath);
@@ -535,11 +530,6 @@ internal sealed class AppsMenu : MonoBehaviour
 			}
 		}
 		currentFon = androidFon;
-		if (!Application.isEditor || Application.isMobilePlatform)
-		{
-			expPath = GooglePlayDownloader.GetExpansionFilePath();
-			UnityEngine.Debug.Log(string.Format("ExpPath: “{0}”", expPath));
-		}
 		if (ApplicationBinarySplitted && !Application.isEditor || Application.isMobilePlatform)
 		{
 			string mainPath2 = GooglePlayDownloader.GetMainOBBPath(expPath);

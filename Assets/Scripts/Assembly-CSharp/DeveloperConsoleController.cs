@@ -258,6 +258,7 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 		CampaignProgress.SaveCampaignProgress();
 		Storager.setString(Defs.WeaponsGotInCampaign, string.Empty, false);
 		Storager.setString(Defs.LevelsWhereGetCoinS, string.Empty, false);
+		PlayerPrefs.DeleteAll();
 	}
 
 	public void HandleFillProgressButton()

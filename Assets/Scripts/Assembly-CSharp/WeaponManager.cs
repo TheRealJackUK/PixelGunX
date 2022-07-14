@@ -1455,17 +1455,7 @@ public sealed class WeaponManager : MonoBehaviour
 		string[] array = text.Split('#');
 		array[pos] = wn;
 		string text2 = string.Join("#", array);
-		if (!Application.isEditor)
-		{
-			if (!Storager.hasKey(sn))
-			{
-			}
-			Storager.setString(sn, text2, false);
-		}
-		else
-		{
-			PlayerPrefs.SetString(sn, text2);
-		}
+		PlayerPrefs.SetString(sn, text2);
 	}
 
 	private string _KnifeSet()
@@ -1491,14 +1481,6 @@ public sealed class WeaponManager : MonoBehaviour
 	public string LoadWeaponSet(string sn)
 	{
 		string text = ((!sn.Equals(Defs.MultiplayerWSSN)) ? _KnifeAndPistolAndShotgunSet() : _KnifeAndPistolAndMP5AndSniperAndRocketnitzaSet());
-		if (!Application.isEditor)
-		{
-			if (!Storager.hasKey(sn))
-			{
-				Storager.setString(sn, text, false);
-			}
-			return Storager.getString(sn, false);
-		}
 		return PlayerPrefs.GetString(sn, text);
 	}
 
