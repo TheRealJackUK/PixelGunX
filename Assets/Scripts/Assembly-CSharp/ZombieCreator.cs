@@ -501,7 +501,14 @@ public sealed class ZombieCreator : MonoBehaviour
 				weaponBonus = BonusCreator._CreateBonusPrefab(weaponName);
 			}
 			StartCoroutine(_PrerenderBoss());
+			if (!Application.loadedLevelName.Equals("Code_campaign3"))
+			{
+bossMus = Resources.Load("Snd/final_boss_music") as AudioClip;
+			}
+			else
+			{
 			bossMus = Resources.Load("Snd/boss_campaign") as AudioClip;
+			}
 		}
 		GlobalGameController.curThr = GlobalGameController.thrStep;
 		_enemies.Add(new string[6] { "1", "2", "1", "11", "12", "13" });
