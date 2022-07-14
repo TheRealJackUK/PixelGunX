@@ -2104,7 +2104,7 @@ internal sealed class MainMenuController : ControlsSettingsBase
 		_starterPackEnabled = enable;
 		// funny trick 1! !!! Fuck you
 		starterPackTimer.mAlignment = NGUIText.Alignment.Left;
-		starterPackTimer.text = "Port by:\nfedesito\nEnderPurrson  \nGAMERSUNITE";
+		starterPackTimer.text = "Port by:\nfedesito\nEnderPurrson  \ndomedav";
 	}
 
 	public void OnStarterPackButtonClick()
