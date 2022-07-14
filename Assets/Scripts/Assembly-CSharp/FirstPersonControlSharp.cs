@@ -261,7 +261,7 @@ internal sealed class FirstPersonControlSharp : MonoBehaviour
 			{
 				NetworkStartTableNGUIController.sharedController.BackPressFromRanksTable(true);
 			}
-			if (Input.GetKey("f") && RespawnWindow.Instance != null && RespawnWindow.Instance.isShown)
+			if (Input.GetKey("enter") && RespawnWindow.Instance != null && RespawnWindow.Instance.isShown || Input.GetKeyDown(KeyCode.Space) && RespawnWindow.Instance != null && RespawnWindow.Instance.isShown)
 			{
 				RespawnWindow.Instance.OnBtnGoBattleClick();
 			}
