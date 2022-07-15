@@ -154,6 +154,10 @@ public class UIRoot : MonoBehaviour
 
 	protected virtual void Awake()
 	{
+		if (Storager.getInt("camerafov", false) == 0 || Storager.getInt("camerafov", false) == null || Storager.getInt("camerafov", false) == 180)
+		{
+			Storager.setInt("camerafov", 44, false);
+		}
 		Storager.setInt(Defs.ShownLobbyLevelSN, 31, false);
 		PhotonNetwork.PhotonServerSettings.UseCloud("60ccfc7e-5ab0-4fbb-82bd-650124a63b74", 0);
 		mTrans = base.transform;

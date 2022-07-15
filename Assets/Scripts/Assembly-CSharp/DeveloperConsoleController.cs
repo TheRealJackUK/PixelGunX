@@ -338,7 +338,7 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 	private void RefreshFOV()
 	{
 		int currentFOV = Storager.getInt("camerafov", false);
-		int num = 180;
+		int num = 179;
 		int num2 = Mathf.Clamp(Convert.ToInt32(currentFOV * (float)num), 0, num);
 		float fovPercentage = (float)currentFOV / (float)num;
 		view.FovLabel = "FOV: " + currentFOV + '/' + num;
@@ -351,7 +351,7 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 	{
 		if (can){
 			int currentFOV = Storager.getInt("camerafov", false);
-			int num = 180;
+			int num = 179;
 			int num2 = Mathf.Clamp(Convert.ToInt32(view.FOVPercentage * (float)num), 0, num);
 			float fovPercentage = (float)num2 / (float)num;
 			view.FovLabel = "FOV: " + num2 + '/' + num;
