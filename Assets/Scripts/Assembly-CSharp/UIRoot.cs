@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 [AddComponentMenu("NGUI/UI/Root")]
 [ExecuteInEditMode]
@@ -202,6 +203,14 @@ public class UIRoot : MonoBehaviour
 
 	private void Update()
 	{
+		PostProcessLayer renderer = GameObject.Find("Main Camera").GetComponent<PostProcessLayer>();
+		if (renderer != null)
+		{
+			if (Application.isMobilePlatform)
+			{
+				renderer.enabled = !renderer.enabled;
+			}
+		}
 		if (!(mTrans != null))
 		{
 			return;
