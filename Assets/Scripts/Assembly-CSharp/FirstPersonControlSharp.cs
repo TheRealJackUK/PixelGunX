@@ -245,13 +245,13 @@ internal sealed class FirstPersonControlSharp : MonoBehaviour
 			}
 			if (Input.GetKey("q"))
 			{
-				Weapon weapon = (Weapon)WeaponManager.sharedManager.playerWeapons[WeaponManager.sharedManager.CurrentWeaponIndex];
+				/*Weapon weapon = (Weapon)WeaponManager.sharedManager.playerWeapons[WeaponManager.sharedManager.CurrentWeaponIndex];
 				WeaponSounds component = weapon.weaponPrefab.GetComponent<WeaponSounds>();
-				weapon.currentAmmoInBackpack = component.MaxAmmoWithEffectApplied;
+				weapon.currentAmmoInBackpack = component.MaxAmmoWithEffectApplied;*/
 			}
 			if (Input.GetKey("e"))
 			{
-				InGameGUI.sharedInGameGUI.playerMoveC.CurHealth = Player_move_c.MaxPlayerHealth;
+				//InGameGUI.sharedInGameGUI.playerMoveC.CurHealth = Player_move_c.MaxPlayerHealth;
 			}
 			if (Defs.isMulti && Input.GetKeyDown("t") && !_moveC.showRanks)
 			{

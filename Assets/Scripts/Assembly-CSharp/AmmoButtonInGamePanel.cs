@@ -23,6 +23,7 @@ public sealed class AmmoButtonInGamePanel : MonoBehaviour
 
 	private void UpdateState(bool isDelta = true)
 	{
+		/*
 		Weapon weapon = (Weapon)WeaponManager.sharedManager.playerWeapons[WeaponManager.sharedManager.CurrentWeaponIndex];
 		int currentAmmoInBackpack = weapon.currentAmmoInBackpack;
 		WeaponSounds component = weapon.weaponPrefab.GetComponent<WeaponSounds>();
@@ -34,6 +35,7 @@ public sealed class AmmoButtonInGamePanel : MonoBehaviour
 			myButton.isEnabled = !flag;
 			priceLabel.gameObject.SetActive(!flag);
 		}
+		*/
 	}
 
 	private void OnEnable()

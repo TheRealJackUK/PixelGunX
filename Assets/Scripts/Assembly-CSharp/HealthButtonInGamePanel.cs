@@ -23,6 +23,7 @@ public sealed class HealthButtonInGamePanel : MonoBehaviour
 
 	private void UpdateState(bool isDelta = true)
 	{
+		/*
 		if (!(inGameGui.playerMoveC == null))
 		{
 			bool flag = inGameGui.playerMoveC.CurHealth == (float)Player_move_c.MaxPlayerHealth;
@@ -36,6 +37,7 @@ public sealed class HealthButtonInGamePanel : MonoBehaviour
 				priceLabel.gameObject.SetActive(!flag);
 			}
 		}
+		*/
 	}
 
 	private void OnEnable()
@@ -45,6 +47,7 @@ public sealed class HealthButtonInGamePanel : MonoBehaviour
 
 	private void OnClick()
 	{
+		/*
 		if (ButtonClickSound.Instance != null)
 		{
 			ButtonClickSound.Instance.PlayClick();
@@ -80,5 +83,6 @@ public sealed class HealthButtonInGamePanel : MonoBehaviour
 				FlurryPluginWrapper.LogEventAndDublicateToConsole("Fast Purchase", parameters);
 			});
 		}
+		*/
 	}
 }
