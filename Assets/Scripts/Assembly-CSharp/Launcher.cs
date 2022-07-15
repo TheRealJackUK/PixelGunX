@@ -123,7 +123,7 @@ internal sealed class Launcher : MonoBehaviour
 			switch (num)
 			{
 			case 0u:
-				if (Application.platform != RuntimePlatform.Android || (Defs.AndroidEdition != Defs.RuntimeAndroidEdition.GoogleLite && Defs.AndroidEdition != Defs.RuntimeAndroidEdition.GooglePro))
+				if (true)
 				{
 					goto case 1u;
 				}

@@ -680,7 +680,7 @@ internal sealed class AppsMenu : MonoBehaviour
 		}
 		Rect position = ((!(currentFon == riliFon)) ? new Rect(((float)Screen.width - 1366f * Defs.Coef) / 2f, 0f, 1366f * Defs.Coef, Screen.height) : new Rect(((float)Screen.width - 1024f * Defs.Coef) / 2f, 0f, 1024f * Defs.Coef, Screen.height));
 		GUI.DrawTexture(position, currentFon, ScaleMode.StretchToFill);
-		if (!Application.isEditor || Application.isMobilePlatform)
+		if (false)
 		{
 			if (!GooglePlayDownloader.RunningOnAndroid())
 			{
