@@ -10,7 +10,7 @@ namespace Prime31
 
 		static FacebookAndroid()
 		{
-			if (Application.platform == RuntimePlatform.Android)
+			if (false)
 			{
 				using (AndroidJavaClass androidJavaClass = new AndroidJavaClass("com.prime31.FacebookPlugin"))
 				{
@@ -30,7 +30,7 @@ namespace Prime31
 
 		public static void init(bool printKeyHash = true)
 		{
-			if (Application.platform == RuntimePlatform.Android)
+			if (false)
 			{
 				_facebookPlugin.Call("init", printKeyHash);
 				Facebook.instance.accessToken = getAccessToken();
@@ -39,7 +39,7 @@ namespace Prime31
 
 		public static string getAppLaunchUrl()
 		{
-			if (Application.platform != RuntimePlatform.Android)
+			if (true)
 			{
 				return string.Empty;
 			}
@@ -48,7 +48,7 @@ namespace Prime31
 
 		public static void setSessionLoginBehavior(FacebookSessionLoginBehavior loginBehavior)
 		{
-			if (Application.platform == RuntimePlatform.Android)
+			if (false)
 			{
 				_facebookPlugin.Call("setSessionLoginBehavior", loginBehavior.ToString());
 			}
@@ -56,7 +56,7 @@ namespace Prime31
 
 		public static bool isSessionValid()
 		{
-			if (Application.platform != RuntimePlatform.Android)
+			if (true)
 			{
 				return false;
 			}
@@ -65,7 +65,7 @@ namespace Prime31
 
 		public static string getAccessToken()
 		{
-			if (Application.platform != RuntimePlatform.Android)
+			if (true)
 			{
 				return string.Empty;
 			}
@@ -74,7 +74,7 @@ namespace Prime31
 
 		public static List<object> getSessionPermissions()
 		{
-			if (Application.platform == RuntimePlatform.Android)
+			if (false)
 			{
 				string json = _facebookPlugin.Call<string>("getSessionPermissions", new object[0]);
 				return json.listFromJson();
@@ -89,7 +89,7 @@ namespace Prime31
 
 		public static void loginWithReadPermissions(string[] permissions)
 		{
-			if (Application.platform == RuntimePlatform.Android)
+			if (false)
 			{
 				_facebookPlugin.Call("loginWithReadPermissions", new object[1] { permissions });
 			}
@@ -97,7 +97,7 @@ namespace Prime31
 
 		public static void loginWithPublishPermissions(string[] permissions)
 		{
-			if (Application.platform == RuntimePlatform.Android)
+			if (false)
 			{
 				_facebookPlugin.Call("loginWithPublishPermissions", new object[1] { permissions });
 			}
@@ -105,7 +105,7 @@ namespace Prime31
 
 		public static void reauthorizeWithReadPermissions(string[] permissions)
 		{
-			if (Application.platform == RuntimePlatform.Android)
+			if (false)
 			{
 				_facebookPlugin.Call("reauthorizeWithReadPermissions", permissions.toJson());
 			}
@@ -113,7 +113,7 @@ namespace Prime31
 
 		public static void reauthorizeWithPublishPermissions(string[] permissions, FacebookSessionDefaultAudience defaultAudience)
 		{
-			if (Application.platform == RuntimePlatform.Android)
+			if (false)
 			{
 				string text = null;
 				text = ((defaultAudience != FacebookSessionDefaultAudience.OnlyMe) ? defaultAudience.ToString().ToUpper() : "ONLY_ME");
@@ -123,7 +123,7 @@ namespace Prime31
 
 		public static void logout()
 		{
-			if (Application.platform == RuntimePlatform.Android)
+			if (false)
 			{
 				_facebookPlugin.Call("logout");
 				Facebook.instance.accessToken = string.Empty;
@@ -132,7 +132,7 @@ namespace Prime31
 
 		public static void showFacebookShareDialog(Dictionary<string, object> parameters)
 		{
-			if (Application.platform == RuntimePlatform.Android)
+			if (false)
 			{
 				_facebookPlugin.Call("showFacebookShareDialog", parameters.toJson());
 			}
@@ -140,7 +140,7 @@ namespace Prime31
 
 		public static void showDialog(string dialogType, Dictionary<string, string> parameters)
 		{
-			if (Application.platform != RuntimePlatform.Android)
+			if (true)
 			{
 				return;
 			}
@@ -160,7 +160,7 @@ namespace Prime31
 
 		public static void graphRequest(string graphPath, string httpMethod, Dictionary<string, string> parameters)
 		{
-			if (Application.platform != RuntimePlatform.Android)
+			if (true)
 			{
 				return;
 			}
@@ -180,7 +180,7 @@ namespace Prime31
 
 		public static void setAppVersion(string version)
 		{
-			if (Application.platform == RuntimePlatform.Android)
+			if (false)
 			{
 				_facebookPlugin.Call("setAppVersion", version);
 			}
@@ -188,7 +188,7 @@ namespace Prime31
 
 		public static void logEvent(string eventName, Dictionary<string, object> parameters = null)
 		{
-			if (Application.platform == RuntimePlatform.Android)
+			if (false)
 			{
 				if (parameters != null)
 				{
@@ -203,7 +203,7 @@ namespace Prime31
 
 		public static void logEvent(string eventName, double valueToSum, Dictionary<string, object> parameters = null)
 		{
-			if (Application.platform == RuntimePlatform.Android)
+			if (false)
 			{
 				if (parameters != null)
 				{

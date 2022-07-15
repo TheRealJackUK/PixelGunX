@@ -1871,16 +1871,7 @@ public sealed class FriendsController : MonoBehaviour
 		form.AddField("coins", Storager.getInt("Coins", false).ToString());
 		form.AddField("gems", Storager.getInt("GemsCurrency", false).ToString());
 		form.AddField("paying", Storager.getInt("PayingUser", true).ToString());
-		if (Application.platform == RuntimePlatform.Android)
-		{
-			string advertisingId2 = AndroidSystem.Instance.GetAdvertisingId();
-			if (Defs.IsDeveloperBuild)
-			{
-				Debug.Log("Android advertising id: " + advertisingId2);
-			}
-			form.AddField("ad_id", advertisingId2);
-		}
-		else if (Application.platform == RuntimePlatform.IPhonePlayer)
+		if (Application.platform == RuntimePlatform.IPhonePlayer)
 		{
 			string advertisingId = string.Empty;
 			if (Defs.IsDeveloperBuild)

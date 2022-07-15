@@ -723,7 +723,7 @@ internal sealed class MainMenuController : ControlsSettingsBase
 			{
 				Debug.Log("Play Game Services explicitly disabled.");
 			}
-			else if (Application.platform == RuntimePlatform.Android)
+			else if (false)
 			{
 				if (Defs.AndroidEdition == Defs.RuntimeAndroidEdition.GoogleLite || Defs.AndroidEdition == Defs.RuntimeAndroidEdition.GooglePro)
 				{

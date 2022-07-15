@@ -41,27 +41,6 @@ public class AGSSyncableStringSet : AGSSyncable
 
 	public HashSet<AGSSyncableStringElement> GetValues()
 	{
-		AndroidJNI.PushLocalFrame(10);
-		HashSet<AGSSyncableStringElement> hashSet = new HashSet<AGSSyncableStringElement>();
-		AndroidJavaObject androidJavaObject = javaObject.Call<AndroidJavaObject>("getValues", new object[0]);
-		if (androidJavaObject == null)
-		{
-			return hashSet;
-		}
-		AndroidJavaObject androidJavaObject2 = androidJavaObject.Call<AndroidJavaObject>("iterator", new object[0]);
-		if (androidJavaObject2 == null)
-		{
-			return hashSet;
-		}
-		while (androidJavaObject2.Call<bool>("hasNext", new object[0]))
-		{
-			AndroidJavaObject androidJavaObject3 = androidJavaObject2.Call<AndroidJavaObject>("next", new object[0]);
-			if (androidJavaObject3 != null)
-			{
-				hashSet.Add(new AGSSyncableStringElement(androidJavaObject3));
-			}
-		}
-		AndroidJNI.PopLocalFrame(IntPtr.Zero);
-		return hashSet;
+		return new HashSet<AGSSyncableStringElement>();
 	}
 }

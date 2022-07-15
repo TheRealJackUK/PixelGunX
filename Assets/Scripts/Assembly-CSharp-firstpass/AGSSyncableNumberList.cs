@@ -46,18 +46,6 @@ public class AGSSyncableNumberList : AGSSyncableList
 
 	public AGSSyncableNumberElement[] GetValues()
 	{
-		AndroidJNI.PushLocalFrame(10);
-		AndroidJavaObject[] array = javaObject.Call<AndroidJavaObject[]>("getValues", new object[0]);
-		if (array == null || array.Length == 0)
-		{
-			return null;
-		}
-		AGSSyncableNumberElement[] array2 = new AGSSyncableNumberElement[array.Length];
-		for (int i = 0; i < array.Length; i++)
-		{
-			array2[i] = new AGSSyncableNumber(array[i]);
-		}
-		AndroidJNI.PopLocalFrame(IntPtr.Zero);
-		return array2;
+		return new AGSSyncableNumberElement[]{};
 	}
 }

@@ -439,8 +439,6 @@ public sealed class FlurryPluginWrapper : MonoBehaviour
 	{
 		CheckForEdnermanApp();
 		UnityEngine.Object.DontDestroyOnLoad(base.gameObject);
-		FlurryAnalytics.startSession("4G82F29HDF359K693N94");
-		FlurryAnalytics.setUserID(SystemInfo.deviceUniqueIdentifier);
 		InitializeFlurryWindowsPhone();
 	//	DevToDevSDK.Initialize("c705a8af-9893-050d-bf70-9b5ef9f37a3c", "9iR85EXmukcCradFjPBAnUy7Wh0SfpOK");
 	//	DevToDevSDK.StartSession();

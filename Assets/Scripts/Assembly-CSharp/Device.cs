@@ -83,9 +83,9 @@ public sealed class Device
 	{
 		get
 		{
-			if (Application.platform == RuntimePlatform.Android)
+			if (Application.platform != RuntimePlatform.Android)
 			{
-				return !IsQuiteGoodAndroidDevice();
+				return false;
 			}
 			if (Application.platform == RuntimePlatform.WP8Player)
 			{
@@ -93,6 +93,10 @@ public sealed class Device
 				return false;
 			}
 			if (Application.platform == RuntimePlatform.WindowsEditor)
+			{
+				return false;
+			}
+			if (Screen.height > 1079) 
 			{
 				return false;
 			}

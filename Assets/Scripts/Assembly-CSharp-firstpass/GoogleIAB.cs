@@ -6,19 +6,12 @@ public class GoogleIAB
 
 	static GoogleIAB()
 	{
-		if (Application.platform != RuntimePlatform.Android)
-		{
-			return;
-		}
-		using (AndroidJavaClass androidJavaClass = new AndroidJavaClass("com.prime31.GoogleIABPlugin"))
-		{
-			_plugin = androidJavaClass.CallStatic<AndroidJavaObject>("instance", new object[0]);
-		}
+		return;
 	}
 
 	public static void enableLogging(bool shouldEnable)
 	{
-		if (Application.platform == RuntimePlatform.Android)
+		if (false)
 		{
 			if (shouldEnable)
 			{
@@ -30,7 +23,7 @@ public class GoogleIAB
 
 	public static void setAutoVerifySignatures(bool shouldVerify)
 	{
-		if (Application.platform == RuntimePlatform.Android)
+		if (false)
 		{
 			_plugin.Call("setAutoVerifySignatures", shouldVerify);
 		}
@@ -38,7 +31,7 @@ public class GoogleIAB
 
 	public static void init(string publicKey)
 	{
-		if (Application.platform == RuntimePlatform.Android)
+		if (false)
 		{
 			_plugin.Call("init", publicKey);
 		}
@@ -46,7 +39,7 @@ public class GoogleIAB
 
 	public static void unbindService()
 	{
-		if (Application.platform == RuntimePlatform.Android)
+		if (false)
 		{
 			_plugin.Call("unbindService");
 		}
@@ -63,7 +56,7 @@ public class GoogleIAB
 
 	public static void queryInventory(string[] skus)
 	{
-		if (Application.platform == RuntimePlatform.Android)
+		if (false)
 		{
 			_plugin.Call("queryInventory", new object[1] { skus });
 		}
@@ -76,7 +69,7 @@ public class GoogleIAB
 
 	public static void purchaseProduct(string sku, string developerPayload)
 	{
-		if (Application.platform == RuntimePlatform.Android)
+		if (false)
 		{
 			_plugin.Call("purchaseProduct", sku, developerPayload);
 		}
@@ -84,7 +77,7 @@ public class GoogleIAB
 
 	public static void consumeProduct(string sku)
 	{
-		if (Application.platform == RuntimePlatform.Android)
+		if (false)
 		{
 			_plugin.Call("consumeProduct", sku);
 		}
@@ -92,7 +85,7 @@ public class GoogleIAB
 
 	public static void consumeProducts(string[] skus)
 	{
-		if (Application.platform == RuntimePlatform.Android)
+		if (false)
 		{
 			_plugin.Call("consumeProducts", new object[1] { skus });
 		}

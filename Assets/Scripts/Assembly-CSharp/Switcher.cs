@@ -654,7 +654,7 @@ internal sealed class Switcher : MonoBehaviour
 		if (!GameObject.Find("FriendsController"))
 		{
 			ResourceRequest friendsControllerTask = Resources.LoadAsync("FriendsController");
-			if (Application.platform == RuntimePlatform.Android)
+			if (false)
 			{
 				while (!friendsControllerTask.isDone)
 				{
@@ -724,7 +724,7 @@ internal sealed class Switcher : MonoBehaviour
 		yield return _progress;
 		UnityEngine.Debug.Log("Start initializing ShopNGUI: " + _progress.ToString("P0"));
 		ResourceRequest shopTask = Resources.LoadAsync("ShopNGUI");
-		if (Application.platform == RuntimePlatform.Android)
+		if (false)
 		{
 			while (!shopTask.isDone)
 			{

@@ -39,21 +39,6 @@ internal sealed class InAppInstancer : MonoBehaviour
 			_amazonIapManagerInitialized = true;
 			yield return null;
 		}
-		if (Application.platform == RuntimePlatform.Android && Defs.AndroidEdition == Defs.RuntimeAndroidEdition.Amazon)
-		{
-			if (amazonGameCircleManager == null)
-			{
-				Debug.LogWarning("amazonGamecircleManager == null");
-			}
-			else if (!_amazonGamecircleManagerInitialized)
-			{
-				StartCoroutine(InitializeAmazonGamecircleManager());
-				_amazonGamecircleManagerInitialized = true;
-			}
-		}
-		else if (BuildSettings.BuildTarget == BuildTarget.iPhone)
-		{
-		}
 	}
 
 	private IEnumerator InitializeAmazonGamecircleManager()

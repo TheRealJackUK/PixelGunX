@@ -61,65 +61,6 @@ internal sealed class AppsMenu : MonoBehaviour
 			switch (num)
 			{
 			case 0u:
-				if (Launcher.UsingNewLauncher)
-				{
-					goto default;
-				}
-				if (Application.platform == RuntimePlatform.Android && (Defs.AndroidEdition == Defs.RuntimeAndroidEdition.GoogleLite || Defs.AndroidEdition == Defs.RuntimeAndroidEdition.GooglePro))
-				{
-					_003Chandle_003E__0 = delegate(string sceneName)
-					{
-						UnityEngine.Debug.LogError("AppsMenu.Start(): Cheating detected.");
-						if (Application.platform == RuntimePlatform.Android && (Defs.AndroidEdition == Defs.RuntimeAndroidEdition.GoogleLite || Defs.AndroidEdition == Defs.RuntimeAndroidEdition.GooglePro))
-						{
-							string abuseKey_21493d = GetAbuseKey_21493d18(558447896u);
-							DateTime utcNow = DateTime.UtcNow;
-							long num2 = utcNow.Ticks >> 1;
-							long result = num2;
-							UnityEngine.Debug.Log("AppsMenu.Start(): Trying handle cheating.");
-							if (!Storager.hasKey(abuseKey_21493d))
-							{
-								UnityEngine.Debug.LogError(string.Format("AppsMenu.Start(): Setting “{0}”: {1} ({2:s})", abuseKey_21493d, num2, utcNow));
-								Storager.setString(abuseKey_21493d, num2.ToString(), false);
-							}
-							else if (long.TryParse(Storager.getString(abuseKey_21493d, false), out result))
-							{
-								UnityEngine.Debug.Log("Cheating Timestamp: " + new DateTime(result << 1).ToString("s"));
-								long num3 = Math.Min(num2, result);
-								UnityEngine.Debug.Log("Min Timestamp: " + new DateTime(num3 << 1).ToString("s"));
-								Storager.setString(abuseKey_21493d, num3.ToString(), false);
-							}
-							else
-							{
-								Storager.setString(abuseKey_21493d, num2.ToString(), false);
-							}
-							if (_internetChecker.Value != null)
-							{
-								UnityEngine.Debug.Log("Trying to start coroutine.");
-								_internetChecker.Value.StartCoroutine(MeetTheCoroutine(sceneName, result << 1, num2 << 1));
-							}
-							else
-							{
-								UnityEngine.Debug.LogError("InternetChecker is null.");
-							}
-						}
-					};
-					_003CactualPackageInfo_003E__1 = default(LicenseVerificationController.PackageInfo);
-					_003CactualPackageName_003E__3 = _003CactualPackageInfo_003E__1.PackageName;
-					UnityEngine.Debug.Log("Package check passed.");
-					UnityEngine.Debug.Log("Signature check passed.");
-				}
-				_003C_003Ef__this.currentFon = _003C_003Ef__this.androidFon;
-				if (ApplicationBinarySplitted && !Application.isEditor || Application.isMobilePlatform)
-				{
-					_003CmainPath_003E__5 = GooglePlayDownloader.GetMainOBBPath(_003C_003Ef__this.expPath);
-					if (_003CmainPath_003E__5 == null)
-					{
-						// GooglePlayDownloader.FetchOBB();
-					}
-					goto IL_02a3;
-				}
-				goto IL_030f;
 			case 1u:
 				if (_003CmainPath_003E__5 == null)
 				{
@@ -154,7 +95,6 @@ internal sealed class AppsMenu : MonoBehaviour
 				_0024PC = 2;
 				break;
 				IL_02a3:
-				_003CmainPath_003E__5 = GooglePlayDownloader.GetMainOBBPath(_003C_003Ef__this.expPath);
 				if (_003CmainPath_003E__5 != null)
 				{
 					UnityEngine.Debug.Log(string.Format("MainPath: “{0}”", _003CmainPath_003E__5));
@@ -183,7 +123,7 @@ internal sealed class AppsMenu : MonoBehaviour
 		private static void _003C_003Em__2(string sceneName)
 		{
 			UnityEngine.Debug.LogError("AppsMenu.Start(): Cheating detected.");
-			if (Application.platform == RuntimePlatform.Android && (Defs.AndroidEdition == Defs.RuntimeAndroidEdition.GoogleLite || Defs.AndroidEdition == Defs.RuntimeAndroidEdition.GooglePro))
+			if (false)
 			{
 				string abuseKey_21493d = GetAbuseKey_21493d18(558447896u);
 				DateTime utcNow = DateTime.UtcNow;
@@ -461,12 +401,12 @@ internal sealed class AppsMenu : MonoBehaviour
 
 	private IEnumerator Start()
 	{
-		if (Application.platform == RuntimePlatform.Android && (Defs.AndroidEdition == Defs.RuntimeAndroidEdition.GoogleLite || Defs.AndroidEdition == Defs.RuntimeAndroidEdition.GooglePro))
+		if (false)
 		{
 			Action<string> handle = delegate(string sceneName)
 			{
 				UnityEngine.Debug.LogError("AppsMenu.Start(): Cheating detected.");
-				if (Application.platform == RuntimePlatform.Android && (Defs.AndroidEdition == Defs.RuntimeAndroidEdition.GoogleLite || Defs.AndroidEdition == Defs.RuntimeAndroidEdition.GooglePro))
+				if (false)
 				{
 					string abuseKey_21493d = GetAbuseKey_21493d18(558447896u);
 					DateTime utcNow = DateTime.UtcNow;
@@ -531,26 +471,6 @@ internal sealed class AppsMenu : MonoBehaviour
 			}
 		}
 		currentFon = androidFon;
-		if (ApplicationBinarySplitted && !Application.isEditor || Application.isMobilePlatform)
-		{
-			string mainPath2 = GooglePlayDownloader.GetMainOBBPath(expPath);
-			if (mainPath2 == null)
-			{
-				GooglePlayDownloader.FetchOBB();
-			}
-			do
-			{
-				mainPath2 = GooglePlayDownloader.GetMainOBBPath(expPath);
-				if (mainPath2 != null)
-				{
-					UnityEngine.Debug.Log(string.Format("MainPath: “{0}”", mainPath2));
-					break;
-				}
-				UnityEngine.Debug.LogWarning("Waiting mainPath...");
-				yield return new WaitForSeconds(0.5f);
-			}
-			while (mainPath2 == null);
-		}
 		StartCoroutine(LoadLoadingScene());
 		yield return null;
 		UnityEngine.Object activityIndicatorPrefab = Resources.Load("ActivityIndicator");
@@ -680,18 +600,6 @@ internal sealed class AppsMenu : MonoBehaviour
 		}
 		Rect position = ((!(currentFon == riliFon)) ? new Rect(((float)Screen.width - 1366f * Defs.Coef) / 2f, 0f, 1366f * Defs.Coef, Screen.height) : new Rect(((float)Screen.width - 1024f * Defs.Coef) / 2f, 0f, 1024f * Defs.Coef, Screen.height));
 		GUI.DrawTexture(position, currentFon, ScaleMode.StretchToFill);
-		if (false)
-		{
-			if (!GooglePlayDownloader.RunningOnAndroid())
-			{
-				GUI.Label(new Rect(10f, 10f, Screen.width - 10, 20f), "Use GooglePlayDownloader only on Android device!");
-				return;
-			}
-			if (string.IsNullOrEmpty(expPath))
-			{
-				GUI.Label(new Rect(10f, 10f, Screen.width - 10, 20f), "External storage is not available!");
-			}
-		}
 		if (BuildSettings.BuildTarget == BuildTarget.Android && Time.frameCount > _startFrameIndex + 1)
 		{
 			LoadingProgress.Instance.Draw(0f);

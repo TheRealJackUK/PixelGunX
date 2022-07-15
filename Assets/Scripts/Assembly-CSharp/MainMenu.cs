@@ -212,6 +212,10 @@ public sealed class MainMenu : MonoBehaviour
 	private void Start()
 	{
 		Defs.isMouseControl = !Application.isMobilePlatform;
+		if (!Application.isMobilePlatform)
+		{
+			PlayerPrefs.SetInt("isMouseControl", 1);
+		}
 		using (new StopwatchLogger("MainMenu.Start()"))
 		{
 			sharedMenu = this;
@@ -521,7 +525,7 @@ public sealed class MainMenu : MonoBehaviour
 
 	private bool FacebookSupported()
 	{
-		return (Application.platform == RuntimePlatform.IPhonePlayer) ? (iOSVersion > 5f) : (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.WP8Player);
+		return false;
 	}
 
 	private void CompletionHandlerPostFacebook(string error, object result)

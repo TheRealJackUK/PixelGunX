@@ -7,10 +7,6 @@ internal sealed class AddCamFX : MonoBehaviour
 {
 	private void Start()
 	{
-		if (Device.isWeakDevice || Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.WP8Player || (BuildSettings.BuildTarget == BuildTarget.Android && !Device.GpuRatingIsAtLeast(4)))
-		{
-			return;
-		}
 		GameObject gameObject = GameObject.FindGameObjectWithTag("CamFX");
 		if (!(gameObject != null) || !(gameObject.GetComponent<CamFXSetting>().CamFX != null))
 		{

@@ -159,40 +159,8 @@ internal sealed class Launcher : MonoBehaviour
 				_0024PC = 1;
 				break;
 			case 1u:
-				if (Application.platform == RuntimePlatform.Android)
-				{
-					if (AppsMenu.ApplicationBinarySplitted && !Application.isEditor)
-					{
-						_003CexpPath_003E__4 = GooglePlayDownloader.GetExpansionFilePath();
-						if (string.IsNullOrEmpty(_003CexpPath_003E__4))
-						{
-							UnityEngine.Debug.LogError(string.Format("ExpPath: “{0}”", _003CexpPath_003E__4));
-						}
-						else if (Defs.IsDeveloperBuild)
-						{
-							UnityEngine.Debug.Log(string.Format("ExpPath: “{0}”", _003CexpPath_003E__4));
-						}
-						_003CmainPath_003E__5 = GooglePlayDownloader.GetMainOBBPath(_003CexpPath_003E__4);
-						if (_003CmainPath_003E__5 == null)
-						{
-							UnityEngine.Debug.Log("Trying to fetch OBB...");
-							GooglePlayDownloader.FetchOBB();
-						}
-						_003CmainPath_003E__5 = GooglePlayDownloader.GetMainOBBPath(_003CexpPath_003E__4);
-						if (_003CmainPath_003E__5 == null)
-						{
-							UnityEngine.Debug.Log("Waiting OBB fetch...");
-						}
-						goto IL_02ec;
-					}
-					goto IL_02f7;
-				}
 				goto case 3u;
 			case 2u:
-				if (Time.frameCount % 120 == 0)
-				{
-					_003CmainPath_003E__5 = GooglePlayDownloader.GetMainOBBPath(_003CexpPath_003E__4);
-				}
 				goto IL_02ec;
 			case 3u:
 				_003CactivityIndicatorPrefab_003E__6 = Resources.Load("ActivityIndicator");
@@ -300,10 +268,6 @@ internal sealed class Launcher : MonoBehaviour
 
 	private void Awake()
 	{
-		if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.WP8Player)
-		{
-			Application.targetFrameRate = 30;
-		}
 		_targetFramerate = ((Application.targetFrameRate != -1) ? Mathf.Clamp(Application.targetFrameRate, 30, 60) : 300);
 		if (!_usingNewLauncher.HasValue)
 		{
@@ -500,7 +464,7 @@ internal sealed class Launcher : MonoBehaviour
 
 	private IEnumerable<float> AppsMenuStartCoroutine()
 	{
-		if (Application.platform == RuntimePlatform.Android && (Defs.AndroidEdition == Defs.RuntimeAndroidEdition.GoogleLite || Defs.AndroidEdition == Defs.RuntimeAndroidEdition.GooglePro))
+		if (false)
 		{
 			LicenseVerificationController.PackageInfo actualPackageInfo = default(LicenseVerificationController.PackageInfo);
 			string actualPackageName = actualPackageInfo.PackageName;
@@ -531,41 +495,6 @@ internal sealed class Launcher : MonoBehaviour
 				UnityEngine.Debug.Log("Signature check passed.");
 			}
 			yield return 0.2f;
-		}
-		if (Application.platform == RuntimePlatform.Android)
-		{
-			if (AppsMenu.ApplicationBinarySplitted && !Application.isEditor)
-			{
-				string expPath = GooglePlayDownloader.GetExpansionFilePath();
-				if (string.IsNullOrEmpty(expPath))
-				{
-					UnityEngine.Debug.LogError(string.Format("ExpPath: “{0}”", expPath));
-				}
-				else if (Defs.IsDeveloperBuild)
-				{
-					UnityEngine.Debug.Log(string.Format("ExpPath: “{0}”", expPath));
-				}
-				string mainPath2 = GooglePlayDownloader.GetMainOBBPath(expPath);
-				if (mainPath2 == null)
-				{
-					UnityEngine.Debug.Log("Trying to fetch OBB...");
-					GooglePlayDownloader.FetchOBB();
-				}
-				mainPath2 = GooglePlayDownloader.GetMainOBBPath(expPath);
-				if (mainPath2 == null)
-				{
-					UnityEngine.Debug.Log("Waiting OBB fetch...");
-				}
-				while (mainPath2 == null)
-				{
-					yield return 0.6f;
-					if (Time.frameCount % 120 == 0)
-					{
-						mainPath2 = GooglePlayDownloader.GetMainOBBPath(expPath);
-					}
-				}
-			}
-			yield return 0.6f;
 		}
 		UnityEngine.Object activityIndicatorPrefab = Resources.Load("ActivityIndicator");
 		UnityEngine.Object.DontDestroyOnLoad(activityIndicatorPrefab);
@@ -599,7 +528,7 @@ internal sealed class Launcher : MonoBehaviour
 			_amazonIapManagerInitialized = true;
 			yield return 0.2f;
 		}
-		if (Application.platform == RuntimePlatform.Android && Defs.AndroidEdition == Defs.RuntimeAndroidEdition.Amazon)
+		if (false)
 		{
 			if (amazonGameCircleManager == null)
 			{

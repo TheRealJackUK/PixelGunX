@@ -4,7 +4,7 @@ public class ShadowOnOff : MonoBehaviour
 {
 	private void Start()
 	{
-		if (Device.isWeakDevice || Application.platform == RuntimePlatform.Android)
+		if (Device.isWeakDevice)
 		{
 			base.gameObject.SetActive(false);
 		}

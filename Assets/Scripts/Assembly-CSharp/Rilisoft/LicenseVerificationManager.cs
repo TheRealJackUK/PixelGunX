@@ -45,10 +45,6 @@ namespace Rilisoft
 			bool flag = false;
 			try
 			{
-				if (Application.platform == RuntimePlatform.Android)
-				{
-					flag = new AndroidJavaClass("android.os.Build").GetRawClass() != IntPtr.Zero;
-				}
 			}
 			catch (Exception message)
 			{

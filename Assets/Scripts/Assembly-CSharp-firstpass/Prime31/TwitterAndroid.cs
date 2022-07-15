@@ -9,7 +9,7 @@ namespace Prime31
 
 		static TwitterAndroid()
 		{
-			if (Application.platform != RuntimePlatform.Android)
+			if (true)
 			{
 				return;
 			}
@@ -21,7 +21,7 @@ namespace Prime31
 
 		public static void init(string consumerKey, string consumerSecret, string callbackUrlScheme = "twitterplugin")
 		{
-			if (Application.platform == RuntimePlatform.Android)
+			if (false)
 			{
 				_plugin.Call("init", consumerKey, consumerSecret, callbackUrlScheme);
 			}
@@ -29,7 +29,7 @@ namespace Prime31
 
 		public static bool isLoggedIn()
 		{
-			if (Application.platform != RuntimePlatform.Android)
+			if (true)
 			{
 				return false;
 			}
@@ -38,7 +38,7 @@ namespace Prime31
 
 		public static string getAccessToken()
 		{
-			if (Application.platform != RuntimePlatform.Android)
+			if (true)
 			{
 				return string.Empty;
 			}
@@ -47,7 +47,7 @@ namespace Prime31
 
 		public static string getTokenSecret()
 		{
-			if (Application.platform != RuntimePlatform.Android)
+			if (true)
 			{
 				return string.Empty;
 			}
@@ -56,7 +56,7 @@ namespace Prime31
 
 		public static void showLoginDialog(bool useExternalBrowserForAuthentication = false)
 		{
-			if (Application.platform == RuntimePlatform.Android)
+			if (false)
 			{
 				_plugin.Call("showLoginDialog", useExternalBrowserForAuthentication);
 			}
@@ -64,7 +64,7 @@ namespace Prime31
 
 		public static void logout()
 		{
-			if (Application.platform == RuntimePlatform.Android)
+			if (false)
 			{
 				_plugin.Call("logout");
 			}
@@ -80,7 +80,7 @@ namespace Prime31
 
 		public static void postStatusUpdate(string update, byte[] image)
 		{
-			if (Application.platform == RuntimePlatform.Android)
+			if (false)
 			{
 				_plugin.Call("postUpdateWithImage", update, image);
 			}
@@ -98,7 +98,7 @@ namespace Prime31
 
 		public static void performRequest(string methodType, string path, Dictionary<string, string> parameters)
 		{
-			if (Application.platform == RuntimePlatform.Android)
+			if (false)
 			{
 				string text = ((parameters == null) ? string.Empty : parameters.toJson());
 				_plugin.Call("performRequest", methodType, path, text);
