@@ -209,6 +209,14 @@ public sealed class ZombieCreator : MonoBehaviour
 			GameObject gameObject3 = GameObject.FindGameObjectWithTag("BackgroundMusic");
 			if (gameObject3 != null && (bool)gameObject3.GetComponent<AudioSource>())
 			{
+							if (Application.loadedLevelName.Equals("Code_campaign3"))
+			{
+bossMus = Resources.Load("Snd/final_boss_music") as AudioClip;
+			}
+			else
+			{
+			bossMus = Resources.Load("Snd/boss_campaign") as AudioClip;
+			}
 				gameObject3.GetComponent<AudioSource>().Stop();
 				gameObject3.GetComponent<AudioSource>().clip = bossMus;
 				if (Defs.isSoundMusic)
@@ -501,7 +509,7 @@ public sealed class ZombieCreator : MonoBehaviour
 				weaponBonus = BonusCreator._CreateBonusPrefab(weaponName);
 			}
 			StartCoroutine(_PrerenderBoss());
-			if (!Application.loadedLevelName.Equals("Code_campaign3"))
+			if (Application.loadedLevelName.Equals("Code_campaign3"))
 			{
 bossMus = Resources.Load("Snd/final_boss_music") as AudioClip;
 			}
