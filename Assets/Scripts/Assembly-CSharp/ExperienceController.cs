@@ -91,6 +91,10 @@ public sealed class ExperienceController : MonoBehaviour
 	{
 		get
 		{
+			if (currentLevelForEditor == 0)
+			{
+				currentLevelForEditor = 1;
+			}
 			return currentLevelForEditor;
 		}
 		set

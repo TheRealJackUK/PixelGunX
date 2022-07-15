@@ -207,10 +207,14 @@ public class UIRoot : MonoBehaviour
 
 	private void Update()
 	{
-		if (Application.loadedLevelName.StartsWith("Menu_"))
+		if (GameObject.Find("Main Camera").GetComponent<PostProcessLayer>() != null)
 		{
-			if (GameObject.Find("Pers_Main_Point").GetComponent<PostProcessLayer>() == true && Application.isMobilePlatform)
-			GameObject.Find("Pers_Main_Point").GetComponent<PostProcessVolume>().enabled = false;
+			PostProcessLayer renderer = GameObject.Find("Main Camera").GetComponent<PostProcessLayer>();
+			if (renderer != null && renderer.enabled != false && Application.isMobilePlatform && GameObject.Find("Pers_Main_Point").GetComponent<PostProcessVolume>() != null && GameObject.Find("Pers_Main_Point").GetComponent<PostProcessVolume>().enabled)
+			{
+       			Destroy(renderer);
+				Destroy(GameObject.Find("Pers_Main_Point").GetComponent<PostProcessVolume>());
+			}
 		}
 		
 		if (!(mTrans != null))
