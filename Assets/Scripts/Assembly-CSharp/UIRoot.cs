@@ -208,7 +208,7 @@ public class UIRoot : MonoBehaviour
 
 	private void Update()
 	{
-		if (GameObject.Find("Main Camera").GetComponent<PostProcessLayer>() != null && Application.isMobilePlatform)
+		if (Application.isMobilePlatform && GameObject.Find("Main Camera").GetComponent<PostProcessLayer>() != null)
 		{
 			PostProcessLayer renderer = GameObject.Find("Main Camera").GetComponent<PostProcessLayer>();
 			if (renderer != null && renderer.enabled != false && Application.isMobilePlatform && GameObject.Find("Pers_Main_Point").GetComponent<PostProcessVolume>() != null && GameObject.Find("Pers_Main_Point").GetComponent<PostProcessVolume>().enabled)

@@ -97,6 +97,7 @@ internal sealed class MenuBackgroundMusic : MonoBehaviour
 		sharedMusic = this;
 		Defs.isSoundMusic = PlayerPrefsX.GetBool(PlayerPrefsX.SoundMusicSetting, true);
 		Defs.isSoundFX = PlayerPrefsX.GetBool(PlayerPrefsX.SoundFXSetting, true);
+		base.GetComponent<AudioSource>().spatialBlend = 0;
 		UnityEngine.Object.DontDestroyOnLoad(base.gameObject);
 	}
 
