@@ -10,7 +10,6 @@ namespace UnityEditor.Rendering.PostProcessing
     public sealed class EffectListEditor
     {
         Editor m_BaseEditor;
-
         PostProcessProfile m_Asset;
         SerializedObject m_SerializedObject;
         SerializedProperty m_SettingsProperty;
