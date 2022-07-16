@@ -1,233 +1,148 @@
+// Upgrade NOTE: commented out 'float4 unity_LightmapST', a built-in variable
+// Upgrade NOTE: commented out 'sampler2D unity_Lightmap', a built-in variable
+// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+// Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+// Upgrade NOTE: replaced tex2D unity_Lightmap with UNITY_SAMPLE_TEX2D
+
+// - Unlit
+// - Per-vertex (virtual) camera space specular light
+// - SUPPORTS lightmap
+
 Shader "MADFINGER/Environment/Lightmap + Wind" {
 Properties {
- _MainTex ("Base (RGB) Gloss (A)", 2D) = "white" {}
- _Wind ("Wind params", Vector) = (1,1,1,1)
- _WindEdgeFlutter ("Wind edge fultter factor", Float) = 0.5
- _WindEdgeFlutterFreqScale ("Wind edge fultter freq scale", Float) = 0.5
+	_MainTex ("Base (RGB) Gloss (A)", 2D) = "white" {}
+	_Wind("Wind params",Vector) = (1,1,1,1)
+	_WindEdgeFlutter("Wind edge fultter factor", float) = 0.5
+	_WindEdgeFlutterFreqScale("Wind edge fultter freq scale",float) = 0.5
 }
-SubShader { 
- LOD 100
- Tags { "LIGHTMODE"="ForwardBase" "QUEUE"="Transparent" "RenderType"="Transparent" }
- Pass {
-  Tags { "LIGHTMODE"="ForwardBase" "QUEUE"="Transparent" "RenderType"="Transparent" }
-  ZWrite Off
-  Cull Off
-  Blend SrcAlpha OneMinusSrcAlpha
-Program "vp" {
-SubProgram "gles " {
-"!!GLES
 
+SubShader {
+	Tags {"Queue"="Transparent" "RenderType"="Transparent" "LightMode"="ForwardBase"}
+	LOD 100
+	
+	Blend SrcAlpha OneMinusSrcAlpha
+	Cull Off ZWrite Off
+	
+	
+	CGINCLUDE
+	#include "UnityCG.cginc"
+	#include "TerrainEngine.cginc"
+	sampler2D _MainTex;
+	float4 _MainTex_ST;
+	samplerCUBE _ReflTex;
+	
+	#ifndef LIGHTMAP_OFF
+	// float4 unity_LightmapST;
+	// sampler2D unity_Lightmap;
+	#endif
+	
+	float _WindEdgeFlutter;
+	float _WindEdgeFlutterFreqScale;
 
-#ifdef VERTEX
+	struct v2f {
+		float4 pos : SV_POSITION;
+		float2 uv : TEXCOORD0;
+		#ifndef LIGHTMAP_OFF
+		float2 lmap : TEXCOORD1;
+		#endif
+		fixed3 spec : TEXCOORD2;
+	};
 
-attribute vec4 _glesVertex;
-attribute vec4 _glesColor;
-attribute vec3 _glesNormal;
-attribute vec4 _glesMultiTexCoord0;
-attribute vec4 _glesMultiTexCoord1;
-uniform highp vec4 _Time;
-uniform highp mat4 glstate_matrix_mvp;
-uniform highp mat4 _Object2World;
-uniform highp mat4 _World2Object;
-uniform highp vec4 _Wind;
-uniform highp vec4 _MainTex_ST;
-uniform highp vec4 unity_LightmapST;
-uniform highp float _WindEdgeFlutter;
-uniform highp float _WindEdgeFlutterFreqScale;
-varying highp vec2 xlv_TEXCOORD0;
-varying highp vec2 xlv_TEXCOORD1;
-varying lowp vec3 xlv_TEXCOORD2;
-void main ()
-{
-  lowp vec4 tmpvar_1;
-  tmpvar_1 = _glesColor;
-  highp float bendingFact_2;
-  highp vec4 wind_3;
-  lowp float tmpvar_4;
-  tmpvar_4 = tmpvar_1.w;
-  bendingFact_2 = tmpvar_4;
-  highp mat3 tmpvar_5;
-  tmpvar_5[0] = _World2Object[0].xyz;
-  tmpvar_5[1] = _World2Object[1].xyz;
-  tmpvar_5[2] = _World2Object[2].xyz;
-  wind_3.xyz = (tmpvar_5 * _Wind.xyz);
-  wind_3.w = (_Wind.w * bendingFact_2);
-  highp vec2 tmpvar_6;
-  tmpvar_6.y = 1.0;
-  tmpvar_6.x = _WindEdgeFlutterFreqScale;
-  highp vec4 pos_7;
-  pos_7.w = _glesVertex.w;
-  highp vec3 bend_8;
-  highp vec4 v_9;
-  v_9.x = _Object2World[0].w;
-  v_9.y = _Object2World[1].w;
-  v_9.z = _Object2World[2].w;
-  v_9.w = _Object2World[3].w;
-  highp float tmpvar_10;
-  tmpvar_10 = dot (v_9.xyz, vec3(1.0, 1.0, 1.0));
-  highp vec2 tmpvar_11;
-  tmpvar_11.x = dot (_glesVertex.xyz, vec3((_WindEdgeFlutter + tmpvar_10)));
-  tmpvar_11.y = tmpvar_10;
-  highp vec4 tmpvar_12;
-  tmpvar_12 = abs(((
-    fract((((
-      fract((((_Time.y * tmpvar_6).xx + tmpvar_11).xxyy * vec4(1.975, 0.793, 0.375, 0.193)))
-     * 2.0) - 1.0) + 0.5))
-   * 2.0) - 1.0));
-  highp vec4 tmpvar_13;
-  tmpvar_13 = ((tmpvar_12 * tmpvar_12) * (3.0 - (2.0 * tmpvar_12)));
-  highp vec2 tmpvar_14;
-  tmpvar_14 = (tmpvar_13.xz + tmpvar_13.yw);
-  bend_8.xz = ((_WindEdgeFlutter * 0.1) * normalize(_glesNormal)).xz;
-  bend_8.y = (bendingFact_2 * 0.3);
-  pos_7.xyz = (_glesVertex.xyz + ((
-    (tmpvar_14.xyx * bend_8)
-   + 
-    ((wind_3.xyz * tmpvar_14.y) * bendingFact_2)
-  ) * wind_3.w));
-  pos_7.xyz = (pos_7.xyz + (bendingFact_2 * wind_3.xyz));
-  gl_Position = (glstate_matrix_mvp * pos_7);
-  xlv_TEXCOORD0 = ((_glesMultiTexCoord0.xy * _MainTex_ST.xy) + _MainTex_ST.zw);
-  xlv_TEXCOORD1 = ((_glesMultiTexCoord1.xy * unity_LightmapST.xy) + unity_LightmapST.zw);
-  xlv_TEXCOORD2 = tmpvar_1.xyz;
+inline float4 AnimateVertex2(float4 pos, float3 normal, float4 animParams,float4 wind,float2 time)
+{	
+	// animParams stored in color
+	// animParams.x = branch phase
+	// animParams.y = edge flutter factor
+	// animParams.z = primary factor
+	// animParams.w = secondary factor
+
+	float fDetailAmp = 0.1f;
+	float fBranchAmp = 0.3f;
+	
+	// Phases (object, vertex, branch)
+	float fObjPhase = dot(unity_ObjectToWorld[3].xyz, 1);
+	float fBranchPhase = fObjPhase + animParams.x;
+	
+	float fVtxPhase = dot(pos.xyz, animParams.y + fBranchPhase);
+	
+	// x is used for edges; y is used for branches
+	float2 vWavesIn = time  + float2(fVtxPhase, fBranchPhase );
+	
+	// 1.975, 0.793, 0.375, 0.193 are good frequencies
+	float4 vWaves = (frac( vWavesIn.xxyy * float4(1.975, 0.793, 0.375, 0.193) ) * 2.0 - 1.0);
+	
+	vWaves = SmoothTriangleWave( vWaves );
+	float2 vWavesSum = vWaves.xz + vWaves.yw;
+
+	// Edge (xz) and branch bending (y)
+	float3 bend = animParams.y * fDetailAmp * normal.xyz;
+	bend.y = animParams.w * fBranchAmp;
+	pos.xyz += ((vWavesSum.xyx * bend) + (wind.xyz * vWavesSum.y * animParams.w)) * wind.w; 
+
+	// Primary bending
+	// Displace position
+	pos.xyz += animParams.z * wind.xyz;
+	
+	return pos;
 }
 
 
-
-#endif
-#ifdef FRAGMENT
-
-uniform sampler2D _MainTex;
-uniform sampler2D unity_Lightmap;
-varying highp vec2 xlv_TEXCOORD0;
-varying highp vec2 xlv_TEXCOORD1;
-void main ()
-{
-  lowp vec4 c_1;
-  lowp vec4 tmpvar_2;
-  tmpvar_2 = texture2D (_MainTex, xlv_TEXCOORD0);
-  c_1.w = tmpvar_2.w;
-  c_1.xyz = (tmpvar_2.xyz * (2.0 * texture2D (unity_Lightmap, xlv_TEXCOORD1).xyz));
-  gl_FragData[0] = c_1;
-}
-
-
-
-#endif"
-}
-SubProgram "gles3 " {
-"!!GLES3#version 300 es
-
-
-#ifdef VERTEX
-
-
-in vec4 _glesVertex;
-in vec4 _glesColor;
-in vec3 _glesNormal;
-in vec4 _glesMultiTexCoord0;
-in vec4 _glesMultiTexCoord1;
-uniform highp vec4 _Time;
-uniform highp mat4 glstate_matrix_mvp;
-uniform highp mat4 _Object2World;
-uniform highp mat4 _World2Object;
-uniform highp vec4 _Wind;
-uniform highp vec4 _MainTex_ST;
-uniform highp vec4 unity_LightmapST;
-uniform highp float _WindEdgeFlutter;
-uniform highp float _WindEdgeFlutterFreqScale;
-out highp vec2 xlv_TEXCOORD0;
-out highp vec2 xlv_TEXCOORD1;
-out lowp vec3 xlv_TEXCOORD2;
-void main ()
-{
-  lowp vec4 tmpvar_1;
-  tmpvar_1 = _glesColor;
-  highp float bendingFact_2;
-  highp vec4 wind_3;
-  lowp float tmpvar_4;
-  tmpvar_4 = tmpvar_1.w;
-  bendingFact_2 = tmpvar_4;
-  highp mat3 tmpvar_5;
-  tmpvar_5[0] = _World2Object[0].xyz;
-  tmpvar_5[1] = _World2Object[1].xyz;
-  tmpvar_5[2] = _World2Object[2].xyz;
-  wind_3.xyz = (tmpvar_5 * _Wind.xyz);
-  wind_3.w = (_Wind.w * bendingFact_2);
-  highp vec2 tmpvar_6;
-  tmpvar_6.y = 1.0;
-  tmpvar_6.x = _WindEdgeFlutterFreqScale;
-  highp vec4 pos_7;
-  pos_7.w = _glesVertex.w;
-  highp vec3 bend_8;
-  highp vec4 v_9;
-  v_9.x = _Object2World[0].w;
-  v_9.y = _Object2World[1].w;
-  v_9.z = _Object2World[2].w;
-  v_9.w = _Object2World[3].w;
-  highp float tmpvar_10;
-  tmpvar_10 = dot (v_9.xyz, vec3(1.0, 1.0, 1.0));
-  highp vec2 tmpvar_11;
-  tmpvar_11.x = dot (_glesVertex.xyz, vec3((_WindEdgeFlutter + tmpvar_10)));
-  tmpvar_11.y = tmpvar_10;
-  highp vec4 tmpvar_12;
-  tmpvar_12 = abs(((
-    fract((((
-      fract((((_Time.y * tmpvar_6).xx + tmpvar_11).xxyy * vec4(1.975, 0.793, 0.375, 0.193)))
-     * 2.0) - 1.0) + 0.5))
-   * 2.0) - 1.0));
-  highp vec4 tmpvar_13;
-  tmpvar_13 = ((tmpvar_12 * tmpvar_12) * (3.0 - (2.0 * tmpvar_12)));
-  highp vec2 tmpvar_14;
-  tmpvar_14 = (tmpvar_13.xz + tmpvar_13.yw);
-  bend_8.xz = ((_WindEdgeFlutter * 0.1) * normalize(_glesNormal)).xz;
-  bend_8.y = (bendingFact_2 * 0.3);
-  pos_7.xyz = (_glesVertex.xyz + ((
-    (tmpvar_14.xyx * bend_8)
-   + 
-    ((wind_3.xyz * tmpvar_14.y) * bendingFact_2)
-  ) * wind_3.w));
-  pos_7.xyz = (pos_7.xyz + (bendingFact_2 * wind_3.xyz));
-  gl_Position = (glstate_matrix_mvp * pos_7);
-  xlv_TEXCOORD0 = ((_glesMultiTexCoord0.xy * _MainTex_ST.xy) + _MainTex_ST.zw);
-  xlv_TEXCOORD1 = ((_glesMultiTexCoord1.xy * unity_LightmapST.xy) + unity_LightmapST.zw);
-  xlv_TEXCOORD2 = tmpvar_1.xyz;
-}
+	
+	v2f vert (appdata_full v)
+	{
+		v2f o;
+		
+		float4	wind;
+		
+		float			bendingFact	= v.color.a;
+		
+		wind.xyz	= mul((float3x3)unity_WorldToObject,_Wind.xyz);
+		wind.w		= _Wind.w  * bendingFact;
+		
+		
+		float4	windParams	= float4(0,_WindEdgeFlutter,bendingFact.xx);
+		float 		windTime 		= _Time.y * float2(_WindEdgeFlutterFreqScale,1);
+		float4	mdlPos			= AnimateVertex2(v.vertex,v.normal,windParams,wind,windTime);
+		
+		o.pos = UnityObjectToClipPos(mdlPos);
+		o.uv = TRANSFORM_TEX(v.texcoord, _MainTex);
+		
+		o.spec = v.color;
+		
+		#ifndef LIGHTMAP_OFF
+		o.lmap = v.texcoord1.xy * unity_LightmapST.xy + unity_LightmapST.zw;
+		#endif
+		
+		return o;
+	}
+	ENDCG
 
 
-
-#endif
-#ifdef FRAGMENT
-
-
-layout(location=0) out mediump vec4 _glesFragData[4];
-uniform sampler2D _MainTex;
-uniform sampler2D unity_Lightmap;
-in highp vec2 xlv_TEXCOORD0;
-in highp vec2 xlv_TEXCOORD1;
-void main ()
-{
-  lowp vec4 c_1;
-  lowp vec4 tmpvar_2;
-  tmpvar_2 = texture (_MainTex, xlv_TEXCOORD0);
-  c_1.w = tmpvar_2.w;
-  c_1.xyz = (tmpvar_2.xyz * (2.0 * texture (unity_Lightmap, xlv_TEXCOORD1).xyz));
-  _glesFragData[0] = c_1;
-}
-
-
-
-#endif"
+	Pass {
+		CGPROGRAM
+		#pragma debug
+		#pragma vertex vert
+		#pragma fragment frag
+		#pragma fragmentoption ARB_precision_hint_fastest		
+		fixed4 frag (v2f i) : COLOR
+		{
+			fixed4 tex = tex2D (_MainTex, i.uv);
+			
+			fixed4 c;
+			c.rgb = tex.rgb;
+			c.a = tex.a;
+			
+			#ifndef LIGHTMAP_OFF
+			fixed3 lm = DecodeLightmap (UNITY_SAMPLE_TEX2D(unity_Lightmap, i.lmap));
+			c.rgb *= lm;
+			#endif
+			
+			return c;
+		}
+		ENDCG 
+	}	
 }
 }
-Program "fp" {
-SubProgram "gles " {
-"!!GLES"
-}
-SubProgram "gles3 " {
-"!!GLES3"
-}
-}
- }
-}
-}
+
+
