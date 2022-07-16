@@ -1,6 +1,5 @@
 // Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
-
 Shader "MADFINGER/Environment/Scroll 2 Layers Sine AlphaBlended" {
 Properties {
 	_MainTex ("Base layer (RGB)", 2D) = "white" {}

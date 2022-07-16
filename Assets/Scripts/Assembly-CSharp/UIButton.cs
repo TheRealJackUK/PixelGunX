@@ -1,206 +1,248 @@
-using System;
-using System.Collections.Generic;
+//-------------------------------------------------
+//            NGUI: Next-Gen UI kit
+// Copyright © 2011-2017 Tasharen Entertainment Inc
+//-------------------------------------------------
+
 using UnityEngine;
+using System.Collections.Generic;
+
+/// <summary>
+/// Similar to UIButtonColor, but adds a 'disabled' state based on whether the collider is enabled or not.
+/// </summary>
 
 [AddComponentMenu("NGUI/Interaction/Button")]
 public class UIButton : UIButtonColor
 {
-	public static UIButton current;
+	/// <summary>
+	/// Current button that sent out the onClick event.
+	/// </summary>
 
-	public bool dragHighlight;
+	static public UIButton current;
+
+	/// <summary>
+	/// Whether the button will highlight when you drag something over it.
+	/// </summary>
+
+	public bool dragHighlight = false;
+
+	/// <summary>
+	/// Name of the hover state sprite.
+	/// </summary>
 
 	public string hoverSprite;
 
+	/// <summary>
+	/// Name of the pressed sprite.
+	/// </summary>
+
 	public string pressedSprite;
+
+	/// <summary>
+	/// Name of the disabled sprite.
+	/// </summary>
 
 	public string disabledSprite;
 
-	public Sprite hoverSprite2D;
+	/// <summary>
+	/// Name of the hover state sprite.
+	/// </summary>
 
-	public Sprite pressedSprite2D;
+	public UnityEngine.Sprite hoverSprite2D;
 
-	public Sprite disabledSprite2D;
+	/// <summary>
+	/// Name of the pressed sprite.
+	/// </summary>
 
-	public bool pixelSnap;
+	public UnityEngine.Sprite pressedSprite2D;
+
+	/// <summary>
+	/// Name of the disabled sprite.
+	/// </summary>
+
+	public UnityEngine.Sprite disabledSprite2D;
+
+	/// <summary>
+	/// Whether the sprite changes will elicit a call to MakePixelPerfect() or not.
+	/// </summary>
+
+	public bool pixelSnap = false;
+
+	/// <summary>
+	/// Click event listener.
+	/// </summary>
 
 	public List<EventDelegate> onClick = new List<EventDelegate>();
 
-	[NonSerialized]
-	private UISprite mSprite;
+	// Cached value
+	[System.NonSerialized] UISprite mSprite;
+	[System.NonSerialized] UI2DSprite mSprite2D;
+	[System.NonSerialized] string mNormalSprite;
+	[System.NonSerialized] UnityEngine.Sprite mNormalSprite2D;
 
-	[NonSerialized]
-	private UI2DSprite mSprite2D;
-
-	[NonSerialized]
-	private string mNormalSprite;
-
-	[NonSerialized]
-	private Sprite mNormalSprite2D;
+	/// <summary>
+	/// Whether the button should be enabled.
+	/// </summary>
 
 	public override bool isEnabled
 	{
 		get
 		{
-			if (!base.enabled)
-			{
-				return false;
-			}
-			Collider collider = base.GetComponent<Collider>();
-			if ((bool)collider && collider.enabled)
-			{
-				return true;
-			}
-			Collider2D component = GetComponent<Collider2D>();
-			return (bool)component && component.enabled;
+			if (!enabled) return false;
+#if UNITY_4_3 || UNITY_4_5 || UNITY_4_6 || UNITY_4_7
+			Collider col = collider;
+#else
+			Collider col = gameObject.GetComponent<Collider>();
+#endif
+			if (col && col.enabled) return true;
+			Collider2D c2d = GetComponent<Collider2D>();
+			return (c2d && c2d.enabled);
 		}
 		set
 		{
-			if (isEnabled == value)
+			if (isEnabled != value)
 			{
-				return;
-			}
-			Collider collider = base.GetComponent<Collider>();
-			if (collider != null)
-			{
-				collider.enabled = value;
-				SetState((!value) ? State.Disabled : State.Normal, false);
-				return;
-			}
-			Collider2D component = GetComponent<Collider2D>();
-			if (component != null)
-			{
-				component.enabled = value;
-				SetState((!value) ? State.Disabled : State.Normal, false);
-			}
-			else
-			{
-				base.enabled = value;
+#if UNITY_4_3 || UNITY_4_5 || UNITY_4_6 || UNITY_4_7
+				Collider col = collider;
+#else
+				Collider col = gameObject.GetComponent<Collider>();
+#endif
+				if (col != null)
+				{
+					col.enabled = value;
+					UIButton[] buttons = GetComponents<UIButton>();
+					foreach (UIButton btn in buttons) btn.SetState(value ? State.Normal : State.Disabled, false);
+				}
+				else
+				{
+					Collider2D c2d = GetComponent<Collider2D>();
+
+					if (c2d != null)
+					{
+						c2d.enabled = value;
+						UIButton[] buttons = GetComponents<UIButton>();
+						foreach (UIButton btn in buttons) btn.SetState(value ? State.Normal : State.Disabled, false);
+					}
+					else enabled = value;
+				}
 			}
 		}
 	}
+
+	/// <summary>
+	/// Convenience function that changes the normal sprite.
+	/// </summary>
 
 	public string normalSprite
 	{
 		get
 		{
-			if (!mInitDone)
-			{
-				OnInit();
-			}
+			if (!mInitDone) OnInit();
 			return mNormalSprite;
 		}
 		set
 		{
-			if (!mInitDone)
-			{
-				OnInit();
-			}
+			if (!mInitDone) OnInit();
 			if (mSprite != null && !string.IsNullOrEmpty(mNormalSprite) && mNormalSprite == mSprite.spriteName)
 			{
 				mNormalSprite = value;
 				SetSprite(value);
 				NGUITools.SetDirty(mSprite);
-				return;
 			}
-			mNormalSprite = value;
-			if (mState == State.Normal)
+			else
 			{
-				SetSprite(value);
+				mNormalSprite = value;
+				if (mState == State.Normal) SetSprite(value);
 			}
 		}
 	}
 
-	public Sprite normalSprite2D
+	/// <summary>
+	/// Convenience function that changes the normal sprite.
+	/// </summary>
+
+	public UnityEngine.Sprite normalSprite2D
 	{
 		get
 		{
-			if (!mInitDone)
-			{
-				OnInit();
-			}
+			if (!mInitDone) OnInit();
 			return mNormalSprite2D;
 		}
 		set
 		{
-			if (!mInitDone)
-			{
-				OnInit();
-			}
+			if (!mInitDone) OnInit();
 			if (mSprite2D != null && mNormalSprite2D == mSprite2D.sprite2D)
 			{
 				mNormalSprite2D = value;
 				SetSprite(value);
 				NGUITools.SetDirty(mSprite);
-				return;
 			}
-			mNormalSprite2D = value;
-			if (mState == State.Normal)
+			else
 			{
-				SetSprite(value);
+				mNormalSprite2D = value;
+				if (mState == State.Normal) SetSprite(value);
 			}
 		}
 	}
+	/// <summary>
+	/// Cache the sprite we'll be working with.
+	/// </summary>
 
-	protected override void OnInit()
+	protected override void OnInit ()
 	{
 		base.OnInit();
-		mSprite = mWidget as UISprite;
-		mSprite2D = mWidget as UI2DSprite;
-		if (mSprite != null)
-		{
-			mNormalSprite = mSprite.spriteName;
-		}
-		if (mSprite2D != null)
-		{
-			mNormalSprite2D = mSprite2D.sprite2D;
-		}
+		mSprite = (mWidget as UISprite);
+		mSprite2D = (mWidget as UI2DSprite);
+		if (mSprite != null) mNormalSprite = mSprite.spriteName;
+		if (mSprite2D != null) mNormalSprite2D = mSprite2D.sprite2D;
 	}
 
-	protected override void OnEnable()
+	/// <summary>
+	/// Set the initial state.
+	/// </summary>
+
+	protected override void OnEnable ()
 	{
+#if UNITY_EDITOR
+		if (!Application.isPlaying)
+		{
+			mInitDone = false;
+			return;
+		}
+#endif
 		if (isEnabled)
 		{
-			if (mInitDone)
-			{
-				if (UICamera.currentScheme == UICamera.ControlScheme.Controller)
-				{
-					OnHover(UICamera.selectedObject == base.gameObject);
-				}
-				else if (UICamera.currentScheme == UICamera.ControlScheme.Mouse)
-				{
-					OnHover(UICamera.hoveredObject == base.gameObject);
-				}
-				else
-				{
-					SetState(State.Normal, false);
-				}
-			}
+			if (mInitDone) OnHover(UICamera.hoveredObject == gameObject);
 		}
-		else
-		{
-			SetState(State.Disabled, true);
-		}
+		else SetState(State.Disabled, true);
 	}
 
-	protected override void OnDragOver()
+	/// <summary>
+	/// Drag over state logic is a bit different for the button.
+	/// </summary>
+
+	protected override void OnDragOver ()
 	{
-		if (isEnabled && (dragHighlight || UICamera.currentTouch.pressed == base.gameObject))
-		{
+		if (isEnabled && (dragHighlight || UICamera.currentTouch.pressed == gameObject))
 			base.OnDragOver();
-		}
 	}
 
-	protected override void OnDragOut()
+	/// <summary>
+	/// Drag out state logic is a bit different for the button.
+	/// </summary>
+
+	protected override void OnDragOut ()
 	{
-		if (isEnabled && (dragHighlight || UICamera.currentTouch.pressed == base.gameObject))
-		{
+		if (isEnabled && (dragHighlight || UICamera.currentTouch.pressed == gameObject))
 			base.OnDragOut();
-		}
 	}
 
-	protected virtual void OnClick()
+	/// <summary>
+	/// Call the listener function.
+	/// </summary>
+
+	protected virtual void OnClick ()
 	{
-		if (current == null && isEnabled)
+		if (current == null && isEnabled && UICamera.currentTouchID != -2 && UICamera.currentTouchID != -3)
 		{
 			current = this;
 			EventDelegate.Execute(onClick);
@@ -208,68 +250,59 @@ public class UIButton : UIButtonColor
 		}
 	}
 
-	public override void SetState(State state, bool immediate)
+	/// <summary>
+	/// Change the visual state.
+	/// </summary>
+
+	public override void SetState (State state, bool immediate)
 	{
 		base.SetState(state, immediate);
+
 		if (mSprite != null)
 		{
 			switch (state)
 			{
-			case State.Normal:
-				SetSprite(mNormalSprite);
-				break;
-			case State.Hover:
-				SetSprite((!string.IsNullOrEmpty(hoverSprite)) ? hoverSprite : mNormalSprite);
-				break;
-			case State.Pressed:
-				SetSprite(pressedSprite);
-				break;
-			case State.Disabled:
-				SetSprite(disabledSprite);
-				break;
+				case State.Normal: SetSprite(mNormalSprite); break;
+				case State.Hover: SetSprite(string.IsNullOrEmpty(hoverSprite) ? mNormalSprite : hoverSprite); break;
+				case State.Pressed: SetSprite(pressedSprite); break;
+				case State.Disabled: SetSprite(disabledSprite); break;
 			}
 		}
 		else if (mSprite2D != null)
 		{
 			switch (state)
 			{
-			case State.Normal:
-				SetSprite(mNormalSprite2D);
-				break;
-			case State.Hover:
-				SetSprite((!(hoverSprite2D == null)) ? hoverSprite2D : mNormalSprite2D);
-				break;
-			case State.Pressed:
-				SetSprite(pressedSprite2D);
-				break;
-			case State.Disabled:
-				SetSprite(disabledSprite2D);
-				break;
+				case State.Normal: SetSprite(mNormalSprite2D); break;
+				case State.Hover: SetSprite(hoverSprite2D == null ? mNormalSprite2D : hoverSprite2D); break;
+				case State.Pressed: SetSprite(pressedSprite2D); break;
+				case State.Disabled: SetSprite(disabledSprite2D); break;
 			}
 		}
 	}
 
-	protected void SetSprite(string sp)
+	/// <summary>
+	/// Convenience function that changes the sprite.
+	/// </summary>
+
+	protected void SetSprite (string sp)
 	{
 		if (mSprite != null && !string.IsNullOrEmpty(sp) && mSprite.spriteName != sp)
 		{
 			mSprite.spriteName = sp;
-			if (pixelSnap)
-			{
-				mSprite.MakePixelPerfect();
-			}
+			if (pixelSnap) mSprite.MakePixelPerfect();
 		}
 	}
 
-	protected void SetSprite(Sprite sp)
+	/// <summary>
+	/// Convenience function that changes the sprite.
+	/// </summary>
+
+	protected void SetSprite (UnityEngine.Sprite sp)
 	{
 		if (sp != null && mSprite2D != null && mSprite2D.sprite2D != sp)
 		{
 			mSprite2D.sprite2D = sp;
-			if (pixelSnap)
-			{
-				mSprite2D.MakePixelPerfect();
-			}
+			if (pixelSnap) mSprite2D.MakePixelPerfect();
 		}
 	}
 }

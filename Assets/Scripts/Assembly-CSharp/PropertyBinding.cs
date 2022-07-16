@@ -1,4 +1,13 @@
+//-------------------------------------------------
+//            NGUI: Next-Gen UI kit
+// Copyright © 2011-2017 Tasharen Entertainment Inc
+//-------------------------------------------------
+
 using UnityEngine;
+
+/// <summary>
+/// Property binding lets you bind two fields or properties so that changing one will update the other.
+/// </summary>
 
 [ExecuteInEditMode]
 [AddComponentMenu("NGUI/Internal/Property Binding")]
@@ -9,106 +18,121 @@ public class PropertyBinding : MonoBehaviour
 		OnStart,
 		OnUpdate,
 		OnLateUpdate,
-		OnFixedUpdate
+		OnFixedUpdate,
 	}
 
 	public enum Direction
 	{
 		SourceUpdatesTarget,
 		TargetUpdatesSource,
-		BiDirectional
+		BiDirectional,
 	}
+
+	/// <summary>
+	/// First property reference.
+	/// </summary>
 
 	public PropertyReference source;
 
+	/// <summary>
+	/// Second property reference.
+	/// </summary>
+
 	public PropertyReference target;
 
-	public Direction direction;
+	/// <summary>
+	/// Direction of updates.
+	/// </summary>
+
+	public Direction direction = Direction.SourceUpdatesTarget;
+
+	/// <summary>
+	/// When the property update will occur.
+	/// </summary>
 
 	public UpdateCondition update = UpdateCondition.OnUpdate;
 
+	/// <summary>
+	/// Whether the values will update while in edit mode.
+	/// </summary>
+
 	public bool editMode = true;
 
-	private object mLastValue;
+	// Cached value from the last update, used to see which property changes for bi-directional updates.
+	object mLastValue = null;
 
-	private void Start()
+	void Start ()
 	{
 		UpdateTarget();
-		if (update == UpdateCondition.OnStart)
-		{
-			base.enabled = false;
-		}
+		if (update == UpdateCondition.OnStart) enabled = false;
 	}
 
-	private void Update()
+	void Update ()
 	{
-		if (update == UpdateCondition.OnUpdate)
-		{
-			UpdateTarget();
-		}
+#if UNITY_EDITOR
+		if (!editMode && !Application.isPlaying) return;
+#endif
+		if (update == UpdateCondition.OnUpdate) UpdateTarget();
 	}
 
-	private void LateUpdate()
+	void LateUpdate ()
 	{
-		if (update == UpdateCondition.OnLateUpdate)
-		{
-			UpdateTarget();
-		}
+#if UNITY_EDITOR
+		if (!editMode && !Application.isPlaying) return;
+#endif
+		if (update == UpdateCondition.OnLateUpdate) UpdateTarget();
 	}
 
-	private void FixedUpdate()
+	void FixedUpdate ()
 	{
-		if (update == UpdateCondition.OnFixedUpdate)
-		{
-			UpdateTarget();
-		}
+#if UNITY_EDITOR
+		if (!editMode && !Application.isPlaying) return;
+#endif
+		if (update == UpdateCondition.OnFixedUpdate) UpdateTarget();
 	}
 
-	private void OnValidate()
+	void OnValidate ()
 	{
-		if (source != null)
-		{
-			source.Reset();
-		}
-		if (target != null)
-		{
-			target.Reset();
-		}
+		if (source != null) source.Reset();
+		if (target != null) target.Reset();
 	}
+
+	/// <summary>
+	/// Immediately update the bound data.
+	/// </summary>
 
 	[ContextMenu("Update Now")]
-	public void UpdateTarget()
+	public void UpdateTarget ()
 	{
-		if (source == null || target == null || !source.isValid || !target.isValid)
+		if (source != null && target != null && source.isValid && target.isValid)
 		{
-			return;
-		}
-		if (direction == Direction.SourceUpdatesTarget)
-		{
-			target.Set(source.Get());
-		}
-		else if (direction == Direction.TargetUpdatesSource)
-		{
-			source.Set(target.Get());
-		}
-		else
-		{
-			if (source.GetPropertyType() != target.GetPropertyType())
+			if (direction == Direction.SourceUpdatesTarget)
 			{
-				return;
+				target.Set(source.Get());
 			}
-			object obj = source.Get();
-			if (mLastValue == null || !mLastValue.Equals(obj))
+			else if (direction == Direction.TargetUpdatesSource)
 			{
-				mLastValue = obj;
-				target.Set(obj);
-				return;
+				source.Set(target.Get());
 			}
-			obj = target.Get();
-			if (!mLastValue.Equals(obj))
+			else if (source.GetPropertyType() == target.GetPropertyType())
 			{
-				mLastValue = obj;
-				source.Set(obj);
+				object current = source.Get();
+
+				if (mLastValue == null || !mLastValue.Equals(current))
+				{
+					mLastValue = current;
+					target.Set(current);
+				}
+				else
+				{
+					current = target.Get();
+
+					if (!mLastValue.Equals(current))
+					{
+						mLastValue = current;
+						source.Set(current);
+					}
+				}
 			}
 		}
 	}

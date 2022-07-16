@@ -1,36 +1,68 @@
-using System;
+//-------------------------------------------------
+//            NGUI: Next-Gen UI kit
+// Copyright © 2011-2017 Tasharen Entertainment Inc
+//-------------------------------------------------
+
 using UnityEngine;
+using System.Collections.Generic;
+
+/// <summary>
+/// Sprite is a textured element in the UI hierarchy.
+/// </summary>
 
 [ExecuteInEditMode]
 [AddComponentMenu("NGUI/UI/NGUI Sprite")]
 public class UISprite : UIBasicSprite
 {
-	[SerializeField]
-	[HideInInspector]
-	private UIAtlas mAtlas;
+	// Cached and saved values
+	[HideInInspector][SerializeField] UIAtlas mAtlas;
+	[HideInInspector][SerializeField] string mSpriteName;
 
-	[SerializeField]
-	[HideInInspector]
-	private string mSpriteName;
+	// Deprecated, no longer used
+	[HideInInspector][SerializeField] bool mFillCenter = true;
 
-	[HideInInspector]
-	[SerializeField]
-	private bool mFillCenter = true;
+	[System.NonSerialized] protected UISpriteData mSprite;
+	[System.NonSerialized] bool mSpriteSet = false;
 
-	[NonSerialized]
-	protected UISpriteData mSprite;
+	/// <summary>
+	/// Main texture is assigned on the atlas.
+	/// </summary>
 
-	[NonSerialized]
-	private bool mSpriteSet;
+	public override Texture mainTexture
+	{
+		get
+		{
+			var mat = (mAtlas != null) ? mAtlas.spriteMaterial : null;
+			return (mat != null) ? mat.mainTexture : null;
+		}
+		set
+		{
+			base.mainTexture = value;
+		}
+	}
+
+	/// <summary>
+	/// Material comes from the base class first, and sprite atlas last.
+	/// </summary>
 
 	public override Material material
 	{
 		get
 		{
-			return (!(mAtlas != null)) ? null : mAtlas.spriteMaterial;
+			var mat = base.material;
+			if (mat != null) return mat;
+			return (mAtlas != null ? mAtlas.spriteMaterial : null);
+		}
+		set
+		{
+			base.material = value;
 		}
 	}
 
+	/// <summary>
+	/// Atlas used by this widget.
+	/// </summary>
+ 
 	public UIAtlas atlas
 	{
 		get
@@ -42,25 +74,37 @@ public class UISprite : UIBasicSprite
 			if (mAtlas != value)
 			{
 				RemoveFromPanel();
+
 				mAtlas = value;
 				mSpriteSet = false;
 				mSprite = null;
-				if (string.IsNullOrEmpty(mSpriteName) && mAtlas != null && mAtlas.spriteList.Count > 0)
+
+				// Automatically choose the first sprite
+				if (string.IsNullOrEmpty(mSpriteName))
 				{
-					SetAtlasSprite(mAtlas.spriteList[0]);
-					mSpriteName = mSprite.name;
+					if (mAtlas != null && mAtlas.spriteList.Count > 0)
+					{
+						SetAtlasSprite(mAtlas.spriteList[0]);
+						mSpriteName = mSprite.name;
+					}
 				}
+
+				// Re-link the sprite
 				if (!string.IsNullOrEmpty(mSpriteName))
 				{
-					string text = mSpriteName;
-					mSpriteName = string.Empty;
-					spriteName = text;
+					string sprite = mSpriteName;
+					mSpriteName = "";
+					spriteName = sprite;
 					MarkAsChanged();
 				}
 			}
 		}
 	}
 
+	/// <summary>
+	/// Sprite within the atlas used to draw this widget.
+	/// </summary>
+ 
 	public string spriteName
 	{
 		get
@@ -71,16 +115,18 @@ public class UISprite : UIBasicSprite
 		{
 			if (string.IsNullOrEmpty(value))
 			{
-				if (!string.IsNullOrEmpty(mSpriteName))
-				{
-					mSpriteName = string.Empty;
-					mSprite = null;
-					mChanged = true;
-					mSpriteSet = false;
-				}
+				// If the sprite name hasn't been set yet, no need to do anything
+				if (string.IsNullOrEmpty(mSpriteName)) return;
+
+				// Clear the sprite name and the sprite reference
+				mSpriteName = "";
+				mSprite = null;
+				mChanged = true;
+				mSpriteSet = false;
 			}
 			else if (mSpriteName != value)
 			{
+				// If the sprite name changes, the sprite reference should also be updated
 				mSpriteName = value;
 				mSprite = null;
 				mChanged = true;
@@ -89,15 +135,17 @@ public class UISprite : UIBasicSprite
 		}
 	}
 
-	public bool isValid
-	{
-		get
-		{
-			return GetAtlasSprite() != null;
-		}
-	}
+	/// <summary>
+	/// Is there a valid sprite to work with?
+	/// </summary>
 
-	[Obsolete("Use 'centerType' instead")]
+	public bool isValid { get { return GetAtlasSprite() != null; } }
+
+	/// <summary>
+	/// Whether the center part of the sprite will be filled or not. Turn it off if you want only to borders to show up.
+	/// </summary>
+
+	[System.Obsolete("Use 'centerType' instead")]
 	public bool fillCenter
 	{
 		get
@@ -108,168 +156,255 @@ public class UISprite : UIBasicSprite
 		{
 			if (value != (centerType != AdvancedType.Invisible))
 			{
-				centerType = (value ? AdvancedType.Sliced : AdvancedType.Invisible);
+				centerType = value ? AdvancedType.Sliced : AdvancedType.Invisible;
 				MarkAsChanged();
 			}
 		}
 	}
 
+	/// <summary>
+	/// Whether a gradient will be applied.
+	/// </summary>
+
+	public bool applyGradient
+	{
+		get
+		{
+			return mApplyGradient;
+		}
+		set
+		{
+			if (mApplyGradient != value)
+			{
+				mApplyGradient = value;
+				MarkAsChanged();
+			}
+		}
+	}
+
+	/// <summary>
+	/// Top gradient color.
+	/// </summary>
+
+	public Color gradientTop
+	{
+		get
+		{
+			return mGradientTop;
+		}
+		set
+		{
+			if (mGradientTop != value)
+			{
+				mGradientTop = value;
+				if (mApplyGradient) MarkAsChanged();
+			}
+		}
+	}
+
+	/// <summary>
+	/// Bottom gradient color.
+	/// </summary>
+
+	public Color gradientBottom
+	{
+		get
+		{
+			return mGradientBottom;
+		}
+		set
+		{
+			if (mGradientBottom != value)
+			{
+				mGradientBottom = value;
+				if (mApplyGradient) MarkAsChanged();
+			}
+		}
+	}
+
+	/// <summary>
+	/// Sliced sprites generally have a border. X = left, Y = bottom, Z = right, W = top.
+	/// </summary>
+
 	public override Vector4 border
 	{
 		get
 		{
-			UISpriteData atlasSprite = GetAtlasSprite();
-			if (atlasSprite == null)
-			{
-				return base.border;
-			}
-			return new Vector4(atlasSprite.borderLeft, atlasSprite.borderBottom, atlasSprite.borderRight, atlasSprite.borderTop);
+			UISpriteData sp = GetAtlasSprite();
+			if (sp == null) return base.border;
+			return new Vector4(sp.borderLeft, sp.borderBottom, sp.borderRight, sp.borderTop);
 		}
 	}
 
-	public override float pixelSize
-	{
-		get
-		{
-			return (!(mAtlas != null)) ? 1f : mAtlas.pixelSize;
-		}
-	}
+	/// <summary>
+	/// Size of the pixel -- used for drawing.
+	/// </summary>
 
-	public override int minWidth
+	override public float pixelSize { get { return mAtlas != null ? mAtlas.pixelSize : 1f; } }
+
+	/// <summary>
+	/// Minimum allowed width for this widget.
+	/// </summary>
+
+	override public int minWidth
 	{
 		get
 		{
 			if (type == Type.Sliced || type == Type.Advanced)
 			{
-				Vector4 vector = border * pixelSize;
-				int num = Mathf.RoundToInt(vector.x + vector.z);
-				UISpriteData atlasSprite = GetAtlasSprite();
-				if (atlasSprite != null)
-				{
-					num += atlasSprite.paddingLeft + atlasSprite.paddingRight;
-				}
-				return Mathf.Max(base.minWidth, ((num & 1) != 1) ? num : (num + 1));
+				float ps = pixelSize;
+				Vector4 b = border * pixelSize;
+				int min = Mathf.RoundToInt(b.x + b.z);
+
+				UISpriteData sp = GetAtlasSprite();
+				if (sp != null) min += Mathf.RoundToInt(ps * (sp.paddingLeft + sp.paddingRight));
+
+				return Mathf.Max(base.minWidth, ((min & 1) == 1) ? min + 1 : min);
 			}
 			return base.minWidth;
 		}
 	}
 
-	public override int minHeight
+	/// <summary>
+	/// Minimum allowed height for this widget.
+	/// </summary>
+
+	override public int minHeight
 	{
 		get
 		{
 			if (type == Type.Sliced || type == Type.Advanced)
 			{
-				Vector4 vector = border * pixelSize;
-				int num = Mathf.RoundToInt(vector.y + vector.w);
-				UISpriteData atlasSprite = GetAtlasSprite();
-				if (atlasSprite != null)
-				{
-					num += atlasSprite.paddingTop + atlasSprite.paddingBottom;
-				}
-				return Mathf.Max(base.minHeight, ((num & 1) != 1) ? num : (num + 1));
+				float ps = pixelSize;
+				Vector4 b = border * pixelSize;
+				int min = Mathf.RoundToInt(b.y + b.w);
+
+				UISpriteData sp = GetAtlasSprite();
+				if (sp != null) min += Mathf.RoundToInt(ps * (sp.paddingTop + sp.paddingBottom));
+
+				return Mathf.Max(base.minHeight, ((min & 1) == 1) ? min + 1 : min);
 			}
 			return base.minHeight;
 		}
 	}
 
+	/// <summary>
+	/// Sprite's dimensions used for drawing. X = left, Y = bottom, Z = right, W = top.
+	/// This function automatically adds 1 pixel on the edge if the sprite's dimensions are not even.
+	/// It's used to achieve pixel-perfect sprites even when an odd dimension sprite happens to be centered.
+	/// </summary>
+
 	public override Vector4 drawingDimensions
 	{
 		get
 		{
-			Vector2 vector = base.pivotOffset;
-			float num = (0f - vector.x) * (float)mWidth;
-			float num2 = (0f - vector.y) * (float)mHeight;
-			float num3 = num + (float)mWidth;
-			float num4 = num2 + (float)mHeight;
+			Vector2 offset = pivotOffset;
+
+			float x0 = -offset.x * mWidth;
+			float y0 = -offset.y * mHeight;
+			float x1 = x0 + mWidth;
+			float y1 = y0 + mHeight;
+
 			if (GetAtlasSprite() != null && mType != Type.Tiled)
 			{
-				int paddingLeft = mSprite.paddingLeft;
-				int paddingBottom = mSprite.paddingBottom;
-				int num5 = mSprite.paddingRight;
-				int num6 = mSprite.paddingTop;
-				int num7 = mSprite.width + paddingLeft + num5;
-				int num8 = mSprite.height + paddingBottom + num6;
-				float num9 = 1f;
-				float num10 = 1f;
-				if (num7 > 0 && num8 > 0 && (mType == Type.Simple || mType == Type.Filled))
+				int padLeft = mSprite.paddingLeft;
+				int padBottom = mSprite.paddingBottom;
+				int padRight = mSprite.paddingRight;
+				int padTop = mSprite.paddingTop;
+
+				if (mType != Type.Simple)
 				{
-					if (((uint)num7 & (true ? 1u : 0u)) != 0)
+					float ps = pixelSize;
+
+					if (ps != 1f)
 					{
-						num5++;
+						padLeft = Mathf.RoundToInt(ps * padLeft);
+						padBottom = Mathf.RoundToInt(ps * padBottom);
+						padRight = Mathf.RoundToInt(ps * padRight);
+						padTop = Mathf.RoundToInt(ps * padTop);
 					}
-					if (((uint)num8 & (true ? 1u : 0u)) != 0)
-					{
-						num6++;
-					}
-					num9 = 1f / (float)num7 * (float)mWidth;
-					num10 = 1f / (float)num8 * (float)mHeight;
 				}
+
+				int w = mSprite.width + padLeft + padRight;
+				int h = mSprite.height + padBottom + padTop;
+				float px = 1f;
+				float py = 1f;
+
+				if (w > 0 && h > 0 && (mType == Type.Simple || mType == Type.Filled))
+				{
+					if ((w & 1) != 0) ++padRight;
+					if ((h & 1) != 0) ++padTop;
+
+					px = (1f / w) * mWidth;
+					py = (1f / h) * mHeight;
+				}
+
 				if (mFlip == Flip.Horizontally || mFlip == Flip.Both)
 				{
-					num += (float)num5 * num9;
-					num3 -= (float)paddingLeft * num9;
+					x0 += padRight * px;
+					x1 -= padLeft * px;
 				}
 				else
 				{
-					num += (float)paddingLeft * num9;
-					num3 -= (float)num5 * num9;
+					x0 += padLeft * px;
+					x1 -= padRight * px;
 				}
+
 				if (mFlip == Flip.Vertically || mFlip == Flip.Both)
 				{
-					num2 += (float)num6 * num10;
-					num4 -= (float)paddingBottom * num10;
+					y0 += padTop * py;
+					y1 -= padBottom * py;
 				}
 				else
 				{
-					num2 += (float)paddingBottom * num10;
-					num4 -= (float)num6 * num10;
+					y0 += padBottom * py;
+					y1 -= padTop * py;
 				}
 			}
-			Vector4 vector2 = ((!(mAtlas != null)) ? Vector4.zero : (border * pixelSize));
-			float num11 = vector2.x + vector2.z;
-			float num12 = vector2.y + vector2.w;
-			float x = Mathf.Lerp(num, num3 - num11, mDrawRegion.x);
-			float y = Mathf.Lerp(num2, num4 - num12, mDrawRegion.y);
-			float z = Mathf.Lerp(num + num11, num3, mDrawRegion.z);
-			float w = Mathf.Lerp(num2 + num12, num4, mDrawRegion.w);
-			return new Vector4(x, y, z, w);
+
+			Vector4 br = (mAtlas != null) ? border * pixelSize : Vector4.zero;
+
+			float fw = br.x + br.z;
+			float fh = br.y + br.w;
+
+			float vx = Mathf.Lerp(x0, x1 - fw, mDrawRegion.x);
+			float vy = Mathf.Lerp(y0, y1 - fh, mDrawRegion.y);
+			float vz = Mathf.Lerp(x0 + fw, x1, mDrawRegion.z);
+			float vw = Mathf.Lerp(y0 + fh, y1, mDrawRegion.w);
+
+			return new Vector4(vx, vy, vz, vw);
 		}
 	}
 
-	public override bool premultipliedAlpha
-	{
-		get
-		{
-			return mAtlas != null && mAtlas.premultipliedAlpha;
-		}
-	}
+	/// <summary>
+	/// Whether the texture is using a premultiplied alpha material.
+	/// </summary>
 
-	public UISpriteData GetAtlasSprite()
+	public override bool premultipliedAlpha { get { return (mAtlas != null) && mAtlas.premultipliedAlpha; } }
+
+	/// <summary>
+	/// Retrieve the atlas sprite referenced by the spriteName field.
+	/// </summary>
+
+	public UISpriteData GetAtlasSprite ()
 	{
-		if (!mSpriteSet)
-		{
-			mSprite = null;
-		}
+		if (!mSpriteSet) mSprite = null;
+
 		if (mSprite == null && mAtlas != null)
 		{
 			if (!string.IsNullOrEmpty(mSpriteName))
 			{
-				UISpriteData sprite = mAtlas.GetSprite(mSpriteName);
-				if (sprite == null)
-				{
-					return null;
-				}
-				SetAtlasSprite(sprite);
+				UISpriteData sp = mAtlas.GetSprite(mSpriteName);
+				if (sp == null) return null;
+				SetAtlasSprite(sp);
 			}
+
 			if (mSprite == null && mAtlas.spriteList.Count > 0)
 			{
-				UISpriteData uISpriteData = mAtlas.spriteList[0];
-				if (uISpriteData == null)
-				{
-					return null;
-				}
-				SetAtlasSprite(uISpriteData);
+				UISpriteData sp = mAtlas.spriteList[0];
+				if (sp == null) return null;
+				SetAtlasSprite(sp);
+
 				if (mSprite == null)
 				{
 					Debug.LogError(mAtlas.name + " seems to have a null sprite!");
@@ -281,10 +416,15 @@ public class UISprite : UIBasicSprite
 		return mSprite;
 	}
 
-	protected void SetAtlasSprite(UISpriteData sp)
+	/// <summary>
+	/// Set the atlas sprite directly.
+	/// </summary>
+
+	protected void SetAtlasSprite (UISpriteData sp)
 	{
 		mChanged = true;
 		mSpriteSet = true;
+
 		if (sp != null)
 		{
 			mSprite = sp;
@@ -292,58 +432,68 @@ public class UISprite : UIBasicSprite
 		}
 		else
 		{
-			mSpriteName = ((mSprite == null) ? string.Empty : mSprite.name);
+			mSpriteName = (mSprite != null) ? mSprite.name : "";
 			mSprite = sp;
 		}
 	}
 
-	public override void MakePixelPerfect()
+	/// <summary>
+	/// Adjust the scale of the widget to make it pixel-perfect.
+	/// </summary>
+
+	public override void MakePixelPerfect ()
 	{
-		if (!isValid)
-		{
-			return;
-		}
+		if (!isValid) return;
 		base.MakePixelPerfect();
-		if (mType == Type.Tiled)
+		if (mType == Type.Tiled) return;
+
+		UISpriteData sp = GetAtlasSprite();
+		if (sp == null) return;
+
+		Texture tex = mainTexture;
+		if (tex == null) return;
+
+		if (mType == Type.Simple || mType == Type.Filled || !sp.hasBorder)
 		{
-			return;
-		}
-		UISpriteData atlasSprite = GetAtlasSprite();
-		if (atlasSprite == null)
-		{
-			return;
-		}
-		Texture texture = mainTexture;
-		if (!(texture == null) && (mType == Type.Simple || mType == Type.Filled || !atlasSprite.hasBorder) && texture != null)
-		{
-			int num = Mathf.RoundToInt(pixelSize * (float)(atlasSprite.width + atlasSprite.paddingLeft + atlasSprite.paddingRight));
-			int num2 = Mathf.RoundToInt(pixelSize * (float)(atlasSprite.height + atlasSprite.paddingTop + atlasSprite.paddingBottom));
-			if ((num & 1) == 1)
+			if (tex != null)
 			{
-				num++;
+				int x = Mathf.RoundToInt(pixelSize * (sp.width + sp.paddingLeft + sp.paddingRight));
+				int y = Mathf.RoundToInt(pixelSize * (sp.height + sp.paddingTop + sp.paddingBottom));
+				
+				if ((x & 1) == 1) ++x;
+				if ((y & 1) == 1) ++y;
+
+				width = x;
+				height = y;
 			}
-			if ((num2 & 1) == 1)
-			{
-				num2++;
-			}
-			base.width = num;
-			base.height = num2;
 		}
 	}
 
-	protected override void OnInit()
+	/// <summary>
+	/// Auto-upgrade.
+	/// </summary>
+
+	protected override void OnInit ()
 	{
 		if (!mFillCenter)
 		{
 			mFillCenter = true;
 			centerType = AdvancedType.Invisible;
+#if UNITY_EDITOR
+			NGUITools.SetDirty(this);
+#endif
 		}
 		base.OnInit();
 	}
 
-	protected override void OnUpdate()
+	/// <summary>
+	/// Update the UV coordinates.
+	/// </summary>
+
+	protected override void OnUpdate ()
 	{
 		base.OnUpdate();
+
 		if (mChanged || !mSpriteSet)
 		{
 			mSpriteSet = true;
@@ -352,29 +502,30 @@ public class UISprite : UIBasicSprite
 		}
 	}
 
-	public override void OnFill(BetterList<Vector3> verts, BetterList<Vector2> uvs, BetterList<Color32> cols)
+	/// <summary>
+	/// Virtual function called by the UIPanel that fills the buffers.
+	/// </summary>
+
+	public override void OnFill (List<Vector3> verts, List<Vector2> uvs, List<Color> cols)
 	{
-		Texture texture = mainTexture;
-		if (texture == null)
-		{
-			return;
-		}
-		if (mSprite == null)
-		{
-			mSprite = atlas.GetSprite(spriteName);
-		}
-		if (mSprite != null)
-		{
-			Rect rect = new Rect(mSprite.x, mSprite.y, mSprite.width, mSprite.height);
-			Rect rect2 = new Rect(mSprite.x + mSprite.borderLeft, mSprite.y + mSprite.borderTop, mSprite.width - mSprite.borderLeft - mSprite.borderRight, mSprite.height - mSprite.borderBottom - mSprite.borderTop);
-			rect = NGUIMath.ConvertToTexCoords(rect, texture.width, texture.height);
-			rect2 = NGUIMath.ConvertToTexCoords(rect2, texture.width, texture.height);
-			int size = verts.size;
-			Fill(verts, uvs, cols, rect, rect2);
-			if (onPostFill != null)
-			{
-				onPostFill(this, size, verts, uvs, cols);
-			}
-		}
+		Texture tex = mainTexture;
+		if (tex == null) return;
+
+		if (mSprite == null) mSprite = atlas.GetSprite(spriteName);
+		if (mSprite == null) return;
+
+		Rect outer = new Rect(mSprite.x, mSprite.y, mSprite.width, mSprite.height);
+		Rect inner = new Rect(mSprite.x + mSprite.borderLeft, mSprite.y + mSprite.borderTop,
+			mSprite.width - mSprite.borderLeft - mSprite.borderRight,
+			mSprite.height - mSprite.borderBottom - mSprite.borderTop);
+
+		outer = NGUIMath.ConvertToTexCoords(outer, tex.width, tex.height);
+		inner = NGUIMath.ConvertToTexCoords(inner, tex.width, tex.height);
+
+		int offset = verts.Count;
+		Fill(verts, uvs, cols, outer, inner);
+
+		if (onPostFill != null)
+			onPostFill(this, offset, verts, uvs, cols);
 	}
 }

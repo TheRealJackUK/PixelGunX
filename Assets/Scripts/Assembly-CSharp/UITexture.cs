@@ -1,49 +1,39 @@
-using System;
-using UnityEngine;
+//-------------------------------------------------
+//            NGUI: Next-Gen UI kit
+// Copyright © 2011-2017 Tasharen Entertainment Inc
+//-------------------------------------------------
 
-[AddComponentMenu("NGUI/UI/NGUI Texture")]
+using UnityEngine;
+using System.Collections.Generic;
+
+/// <summary>
+/// If you don't have or don't wish to create an atlas, you can simply use this script to draw a texture.
+/// Keep in mind though that this will create an extra draw call with each UITexture present, so it's
+/// best to use it only for backgrounds or temporary visible widgets.
+/// </summary>
+
 [ExecuteInEditMode]
+[AddComponentMenu("NGUI/UI/NGUI Texture")]
 public class UITexture : UIBasicSprite
 {
-	[SerializeField]
-	[HideInInspector]
-	private Rect mRect = new Rect(0f, 0f, 1f, 1f);
+	[HideInInspector][SerializeField] Rect mRect = new Rect(0f, 0f, 1f, 1f);
+	[HideInInspector][SerializeField] Texture mTexture;
+	[HideInInspector][SerializeField] Shader mShader;
+	[HideInInspector][SerializeField] Vector4 mBorder = Vector4.zero;
+	[HideInInspector][SerializeField] bool mFixedAspect = false;
 
-	[SerializeField]
-	[HideInInspector]
-	private Texture mTexture;
+	[System.NonSerialized] int mPMA = -1;
 
-	[SerializeField]
-	[HideInInspector]
-	private Material mMat;
-
-	[SerializeField]
-	[HideInInspector]
-	private Shader mShader;
-
-	[SerializeField]
-	[HideInInspector]
-	private Vector4 mBorder = Vector4.zero;
-
-	[HideInInspector]
-	[SerializeField]
-	private bool mFixedAspect;
-
-	[NonSerialized]
-	private int mPMA = -1;
+	/// <summary>
+	/// Texture used by the UITexture. You can set it directly, without the need to specify a material.
+	/// </summary>
 
 	public override Texture mainTexture
 	{
 		get
 		{
-			if (mTexture != null)
-			{
-				return mTexture;
-			}
-			if (mMat != null)
-			{
-				return mMat.mainTexture;
-			}
+			if (mTexture != null) return mTexture;
+			if (mMat != null) return mMat.mainTexture;
 			return null;
 		}
 		set
@@ -54,15 +44,21 @@ public class UITexture : UIBasicSprite
 				{
 					mTexture = value;
 					drawCall.mainTexture = value;
-					return;
 				}
-				RemoveFromPanel();
-				mTexture = value;
-				mPMA = -1;
-				MarkAsChanged();
+				else
+				{
+					RemoveFromPanel();
+					mTexture = value;
+					mPMA = -1;
+					MarkAsChanged();
+				}
 			}
 		}
 	}
+
+	/// <summary>
+	/// Material used by the widget.
+	/// </summary>
 
 	public override Material material
 	{
@@ -83,18 +79,16 @@ public class UITexture : UIBasicSprite
 		}
 	}
 
+	/// <summary>
+	/// Shader used by the texture when creating a dynamic material (when the texture was specified, but the material was not).
+	/// </summary>
+
 	public override Shader shader
 	{
 		get
 		{
-			if (mMat != null)
-			{
-				return mMat.shader;
-			}
-			if (mShader == null)
-			{
-				mShader = Shader.Find("Unlit/Transparent Colored");
-			}
+			if (mMat != null) return mMat.shader;
+			if (mShader == null) mShader = Shader.Find("Unlit/Transparent Colored");
 			return mShader;
 		}
 		set
@@ -105,16 +99,22 @@ public class UITexture : UIBasicSprite
 				{
 					mShader = value;
 					drawCall.shader = value;
-					return;
 				}
-				RemoveFromPanel();
-				mShader = value;
-				mPMA = -1;
-				mMat = null;
-				MarkAsChanged();
+				else
+				{
+					RemoveFromPanel();
+					mShader = value;
+					mPMA = -1;
+					mMat = null;
+					MarkAsChanged();
+				}
 			}
 		}
 	}
+
+	/// <summary>
+	/// Whether the texture is using a premultiplied alpha material.
+	/// </summary>
 
 	public override bool premultipliedAlpha
 	{
@@ -122,12 +122,17 @@ public class UITexture : UIBasicSprite
 		{
 			if (mPMA == -1)
 			{
-				Material material = this.material;
-				mPMA = ((material != null && material.shader != null && material.shader.name.Contains("Premultiplied")) ? 1 : 0);
+				Material mat = material;
+				mPMA = (mat != null && mat.shader != null && mat.shader.name.Contains("Premultiplied")) ? 1 : 0;
 			}
-			return mPMA == 1;
+			return (mPMA == 1);
 		}
 	}
+
+
+	/// <summary>
+	/// Sprite's border. X = left, Y = bottom, Z = right, W = top.
+	/// </summary>
 
 	public override Vector4 border
 	{
@@ -145,6 +150,10 @@ public class UITexture : UIBasicSprite
 		}
 	}
 
+	/// <summary>
+	/// UV rectangle used by the texture.
+	/// </summary>
+
 	public Rect uvRect
 	{
 		get
@@ -161,73 +170,82 @@ public class UITexture : UIBasicSprite
 		}
 	}
 
+	/// <summary>
+	/// Widget's dimensions used for drawing. X = left, Y = bottom, Z = right, W = top.
+	/// This function automatically adds 1 pixel on the edge if the texture's dimensions are not even.
+	/// It's used to achieve pixel-perfect sprites even when an odd dimension widget happens to be centered.
+	/// </summary>
+
 	public override Vector4 drawingDimensions
 	{
 		get
 		{
-			Vector2 vector = base.pivotOffset;
-			float num = (0f - vector.x) * (float)mWidth;
-			float num2 = (0f - vector.y) * (float)mHeight;
-			float num3 = num + (float)mWidth;
-			float num4 = num2 + (float)mHeight;
-			if (mTexture != null && mType != Type.Tiled)
+			Vector2 offset = pivotOffset;
+
+			float x0 = -offset.x * mWidth;
+			float y0 = -offset.y * mHeight;
+			float x1 = x0 + mWidth;
+			float y1 = y0 + mHeight;
+
+			if (mTexture != null && mType != UISprite.Type.Tiled)
 			{
-				int num5 = mTexture.width;
-				int num6 = mTexture.height;
-				int num7 = 0;
-				int num8 = 0;
-				float num9 = 1f;
-				float num10 = 1f;
-				if (num5 > 0 && num6 > 0 && (mType == Type.Simple || mType == Type.Filled))
+				int w = mTexture.width;
+				int h = mTexture.height;
+				int padRight = 0;
+				int padTop = 0;
+
+				float px = 1f;
+				float py = 1f;
+
+				if (w > 0 && h > 0 && (mType == UISprite.Type.Simple || mType == UISprite.Type.Filled))
 				{
-					if (((uint)num5 & (true ? 1u : 0u)) != 0)
-					{
-						num7++;
-					}
-					if (((uint)num6 & (true ? 1u : 0u)) != 0)
-					{
-						num8++;
-					}
-					num9 = 1f / (float)num5 * (float)mWidth;
-					num10 = 1f / (float)num6 * (float)mHeight;
+					if ((w & 1) != 0) ++padRight;
+					if ((h & 1) != 0) ++padTop;
+
+					px = (1f / w) * mWidth;
+					py = (1f / h) * mHeight;
 				}
-				if (mFlip == Flip.Horizontally || mFlip == Flip.Both)
+
+				if (mFlip == UISprite.Flip.Horizontally || mFlip == UISprite.Flip.Both)
 				{
-					num += (float)num7 * num9;
+					x0 += padRight * px;
 				}
-				else
+				else x1 -= padRight * px;
+
+				if (mFlip == UISprite.Flip.Vertically || mFlip == UISprite.Flip.Both)
 				{
-					num3 -= (float)num7 * num9;
+					y0 += padTop * py;
 				}
-				if (mFlip == Flip.Vertically || mFlip == Flip.Both)
-				{
-					num2 += (float)num8 * num10;
-				}
-				else
-				{
-					num4 -= (float)num8 * num10;
-				}
+				else y1 -= padTop * py;
 			}
-			float num11;
-			float num12;
+
+			float fw, fh;
+
 			if (mFixedAspect)
 			{
-				num11 = 0f;
-				num12 = 0f;
+				fw = 0f;
+				fh = 0f;
 			}
 			else
 			{
-				Vector4 vector2 = border;
-				num11 = vector2.x + vector2.z;
-				num12 = vector2.y + vector2.w;
+				Vector4 br = border;
+				fw = br.x + br.z;
+				fh = br.y + br.w;
 			}
-			float x = Mathf.Lerp(num, num3 - num11, mDrawRegion.x);
-			float y = Mathf.Lerp(num2, num4 - num12, mDrawRegion.y);
-			float z = Mathf.Lerp(num + num11, num3, mDrawRegion.z);
-			float w = Mathf.Lerp(num2 + num12, num4, mDrawRegion.w);
-			return new Vector4(x, y, z, w);
+
+			float vx = Mathf.Lerp(x0, x1 - fw, mDrawRegion.x);
+			float vy = Mathf.Lerp(y0, y1 - fh, mDrawRegion.y);
+			float vz = Mathf.Lerp(x0 + fw, x1, mDrawRegion.z);
+			float vw = Mathf.Lerp(y0 + fh, y1, mDrawRegion.w);
+
+			return new Vector4(vx, vy, vz, vw);
 		}
 	}
+
+	/// <summary>
+	/// Whether the drawn texture will always maintain a fixed aspect ratio.
+	/// This setting is not compatible with drawRegion adjustments (sliders, progress bars, etc).
+	/// </summary>
 
 	public bool fixedAspect
 	{
@@ -246,96 +264,105 @@ public class UITexture : UIBasicSprite
 		}
 	}
 
-	public override void MakePixelPerfect()
+	/// <summary>
+	/// Adjust the scale of the widget to make it pixel-perfect.
+	/// </summary>
+
+	public override void MakePixelPerfect ()
 	{
 		base.MakePixelPerfect();
-		if (mType == Type.Tiled)
+		if (mType == Type.Tiled) return;
+
+		Texture tex = mainTexture;
+		if (tex == null) return;
+
+		if (mType == Type.Simple || mType == Type.Filled || !hasBorder)
 		{
-			return;
-		}
-		Texture texture = mainTexture;
-		if (!(texture == null) && (mType == Type.Simple || mType == Type.Filled || !base.hasBorder) && texture != null)
-		{
-			int num = texture.width;
-			int num2 = texture.height;
-			if ((num & 1) == 1)
+			if (tex != null)
 			{
-				num++;
+				int w = tex.width;
+				int h = tex.height;
+
+				if ((w & 1) == 1) ++w;
+				if ((h & 1) == 1) ++h;
+
+				width = w;
+				height = h;
 			}
-			if ((num2 & 1) == 1)
-			{
-				num2++;
-			}
-			base.width = num;
-			base.height = num2;
 		}
 	}
 
-	protected override void OnUpdate()
+	/// <summary>
+	/// Adjust the draw region if the texture is using a fixed aspect ratio.
+	/// </summary>
+
+	protected override void OnUpdate ()
 	{
 		base.OnUpdate();
-		if (!mFixedAspect)
+		
+		if (mFixedAspect)
 		{
-			return;
-		}
-		Texture texture = mainTexture;
-		if (texture != null)
-		{
-			int num = texture.width;
-			int num2 = texture.height;
-			if ((num & 1) == 1)
+			Texture tex = mainTexture;
+
+			if (tex != null)
 			{
-				num++;
-			}
-			if ((num2 & 1) == 1)
-			{
-				num2++;
-			}
-			float num3 = mWidth;
-			float num4 = mHeight;
-			float num5 = num3 / num4;
-			float num6 = (float)num / (float)num2;
-			if (num6 < num5)
-			{
-				float num7 = (num3 - num4 * num6) / num3 * 0.5f;
-				base.drawRegion = new Vector4(num7, 0f, 1f - num7, 1f);
-			}
-			else
-			{
-				float num8 = (num4 - num3 / num6) / num4 * 0.5f;
-				base.drawRegion = new Vector4(0f, num8, 1f, 1f - num8);
+				int w = tex.width;
+				int h = tex.height;
+				if ((w & 1) == 1) ++w;
+				if ((h & 1) == 1) ++h;
+				float widgetWidth = mWidth;
+				float widgetHeight = mHeight;
+				float widgetAspect = widgetWidth / widgetHeight;
+				float textureAspect = (float)w / h;
+
+				if (textureAspect < widgetAspect)
+				{
+					float x = (widgetWidth - widgetHeight * textureAspect) / widgetWidth * 0.5f;
+					drawRegion = new Vector4(x, 0f, 1f - x, 1f);
+				}
+				else
+				{
+					float y = (widgetHeight - widgetWidth / textureAspect) / widgetHeight * 0.5f;
+					drawRegion = new Vector4(0f, y, 1f, 1f - y);
+				}
 			}
 		}
 	}
 
-	public override void OnFill(BetterList<Vector3> verts, BetterList<Vector2> uvs, BetterList<Color32> cols)
+	/// <summary>
+	/// Virtual function called by the UIPanel that fills the buffers.
+	/// </summary>
+
+	public override void OnFill (List<Vector3> verts, List<Vector2> uvs, List<Color> cols)
 	{
-		Texture texture = mainTexture;
-		if (!(texture == null))
-		{
-			Rect rect = new Rect(mRect.x * (float)texture.width, mRect.y * (float)texture.height, (float)texture.width * mRect.width, (float)texture.height * mRect.height);
-			Rect inner = rect;
-			Vector4 vector = border;
-			inner.xMin += vector.x;
-			inner.yMin += vector.y;
-			inner.xMax -= vector.z;
-			inner.yMax -= vector.w;
-			float num = 1f / (float)texture.width;
-			float num2 = 1f / (float)texture.height;
-			rect.xMin *= num;
-			rect.xMax *= num;
-			rect.yMin *= num2;
-			rect.yMax *= num2;
-			inner.xMin *= num;
-			inner.xMax *= num;
-			inner.yMin *= num2;
-			inner.yMax *= num2;
-			int size = verts.size;
-			Fill(verts, uvs, cols, rect, inner);
-			if (onPostFill != null)
-			{
-				onPostFill(this, size, verts, uvs, cols);
-			}
-		}
+		Texture tex = mainTexture;
+		if (tex == null) return;
+
+		Rect outer = new Rect(mRect.x * tex.width, mRect.y * tex.height, tex.width * mRect.width, tex.height * mRect.height);
+		Rect inner = outer;
+		Vector4 br = border;
+		inner.xMin += br.x;
+		inner.yMin += br.y;
+		inner.xMax -= br.z;
+		inner.yMax -= br.w;
+
+		float w = 1f / tex.width;
+		float h = 1f / tex.height;
+
+		outer.xMin *= w;
+		outer.xMax *= w;
+		outer.yMin *= h;
+		outer.yMax *= h;
+
+		inner.xMin *= w;
+		inner.xMax *= w;
+		inner.yMin *= h;
+		inner.yMax *= h;
+
+		int offset = verts.Count;
+		Fill(verts, uvs, cols, outer, inner);
+
+		if (onPostFill != null)
+			onPostFill(this, offset, verts, uvs, cols);
 	}
 }
