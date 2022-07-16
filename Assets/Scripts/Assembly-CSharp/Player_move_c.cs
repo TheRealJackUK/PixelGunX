@@ -4364,11 +4364,16 @@ public sealed class Player_move_c : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		if (inGameGUI.pausePanel.GetActive() && CurHealth > 0 && canlock) 
+		if (inGameGUI.pausePanel != null) 
 		{
-			Cursor.lockState = CursorLockMode.None;
-			Cursor.visible = true;
-		} else if (Cursor.visible == true && Cursor.lockState == CursorLockMode.None) {
+			if (inGameGUI.pausePanel.GetActive() && CurHealth > 0 && canlock) 
+			{
+				Cursor.lockState = CursorLockMode.None;
+				Cursor.visible = true;
+			}
+		}
+		if (Cursor.visible == true && Cursor.lockState == CursorLockMode.None && !canlock) 
+		{
 			Cursor.visible = false;
 			Cursor.lockState = CursorLockMode.Locked;
 		}
