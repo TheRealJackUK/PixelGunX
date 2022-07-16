@@ -138,6 +138,8 @@ public class TouchPadController : MonoBehaviour
 
 	private void SetSpritesState()
 	{
+		if (Application.isMobilePlatform)
+		{
 		SetGrenadeUISpriteState();
 		if (!(WeaponManager.sharedManager != null) || !WeaponManager.sharedManager.currentWeaponSounds.gameObject.name.Equals("WeaponGrenade(Clone)"))
 		{
@@ -154,6 +156,7 @@ public class TouchPadController : MonoBehaviour
 			{
 				jetPackIcon.SetActive(Defs.isJetpackEnabled);
 			}
+		}
 		}
 	}
 
