@@ -135,6 +135,8 @@ public sealed class Player_move_c : MonoBehaviour
 	public Material[] mechGunMaterials;
 
 	public Material[] mechBodyMaterials;
+	
+	public static bool canlock = true;
 
 	private int numShootInDoubleShot = 1;
 
@@ -948,6 +950,7 @@ public sealed class Player_move_c : MonoBehaviour
 
 	private void Awake()
 	{
+		canlock = true;
 		myCamera.fieldOfView = Storager.getInt("camerafov", false);
 		isTraining = Defs.IsTraining;
 		isSurvival = Defs.IsSurvival;
@@ -4361,7 +4364,7 @@ public sealed class Player_move_c : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		if (inGameGUI.pausePanel.GetActive() && CurHealth > 0) 
+		if (inGameGUI.pausePanel.GetActive() && CurHealth > 0 && canlock) 
 		{
 			Cursor.lockState = CursorLockMode.None;
 			Cursor.visible = true;
@@ -5173,7 +5176,7 @@ public sealed class Player_move_c : MonoBehaviour
 			return;
 		}
 		_weaponManager.myPlayer.GetComponent<SkinName>().camPlayer.transform.parent = _weaponManager.myPlayer.transform;
-		if (!func())
+		if (!func() && !Defs.isMouseControl)
 		{
 			if (JoystickController.leftJoystick != null)
 			{
@@ -5233,6 +5236,17 @@ public sealed class Player_move_c : MonoBehaviour
 			}
 		}
 		EffectsController.SlowdownCoeff = 1f;
+		RefillAmmo();
+	}
+
+	public void RefillAmmo()
+	{
+		for (int i = 0; i < WeaponManager.sharedManager.playerWeapons.Count; i++)
+		{
+			Weapon weapon = (Weapon)WeaponManager.sharedManager.playerWeapons[i];
+			WeaponSounds component = weapon.weaponPrefab.GetComponent<WeaponSounds>();
+			weapon.currentAmmoInBackpack = component.MaxAmmoWithEffectApplied / 2;
+		}
 	}
 
 	[Obfuscation(Exclude = true)]

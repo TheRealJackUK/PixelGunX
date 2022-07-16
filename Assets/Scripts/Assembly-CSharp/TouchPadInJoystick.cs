@@ -135,7 +135,7 @@ public class TouchPadInJoystick : MonoBehaviour
 		{
 			inGameGUI.playerMoveC.ShotPressed();
 		}
-		if (isActiveFireButton != fireSprite.gameObject.activeSelf)
+		if (fireSprite != null && isActiveFireButton != fireSprite.gameObject.activeSelf)
 		{
 			fireSprite.gameObject.SetActive(isActiveFireButton);
 		}

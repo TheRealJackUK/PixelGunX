@@ -1084,6 +1084,31 @@ public sealed class InGameGUI : MonoBehaviour
 
 	private void Update()
 	{
+		if (JoystickController.leftJoystick != null && JoystickController.leftJoystick.transform.parent.gameObject.active)
+            {
+                JoystickController.leftJoystick.transform.parent.gameObject.SetActive(false);
+            }
+            if (JoystickController.rightJoystick != null && JoystickController.rightJoystick.transform.parent.gameObject.active)
+            {
+                JoystickController.rightJoystick.gameObject.SetActive(false);
+            }
+		if (Defs.isMouseControl && reloadButton != null && reloadButton.active)
+		{
+			Destroy(zoomButton);
+			Destroy(reloadButton);
+			Destroy(fireButton);
+			Destroy(fireButtonInJoystick);
+			Destroy(fireButtonSprite);
+			Destroy(fireButtonSprite2);
+			Destroy(healthAddButton);
+			Destroy(ammoAddButton);
+			Destroy(grenadeButton);
+			Destroy(jumpButton);
+		} else if (ammoAddButton != null)
+		{
+			Destroy(healthAddButton);
+			Destroy(ammoAddButton);
+		}
 		if (currentScrollIndex > 5){
 			currentScrollIndex = 1;
 		}

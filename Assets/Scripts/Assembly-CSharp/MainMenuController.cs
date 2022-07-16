@@ -1074,6 +1074,14 @@ internal sealed class MainMenuController : ControlsSettingsBase
 
 	private void Update()
 	{
+		if (premium.active == true)
+		{
+			premium.SetActive(false);
+		}
+		if (premiumButton.isEnabled) 
+		{
+			premiumButton.isEnabled = false;
+		}
 		if (multiplayerButton.activeSelf != (SkinEditorController.sharedController == null && ExpController.LobbyLevel > 0 && Storager.getInt(Defs.ShownLobbyLevelSN, false) > 0 && (ExpController.LobbyLevel != 2 || Storager.getInt(Defs.ShownLobbyLevelSN, false) != 1)))
 		{
 			multiplayerButton.SetActive(SkinEditorController.sharedController == null && ExpController.LobbyLevel > 0 && Storager.getInt(Defs.ShownLobbyLevelSN, false) > 0);
@@ -1125,9 +1133,9 @@ internal sealed class MainMenuController : ControlsSettingsBase
 		bool flag = true;
 		if (premium.activeSelf != (ExpController.LobbyLevel > 3 && flag && Storager.getInt(Defs.ShownLobbyLevelSN, false) > 3))
 		{
-			premium.SetActive(ExpController.LobbyLevel > 3 && flag && Storager.getInt(Defs.ShownLobbyLevelSN, false) > 3);
+			premium.SetActive(false);
 		}
-		premiumButton.isEnabled = Storager.getInt(Defs.PremiumEnabledFromServer, false) == 1;
+		premiumButton.isEnabled = false;
 		if (premiumUpPlashka.activeSelf != (!(PremiumAccountController.Instance != null) || !PremiumAccountController.Instance.isAccountActive))
 		{
 			premiumUpPlashka.SetActive(!(PremiumAccountController.Instance != null) || !PremiumAccountController.Instance.isAccountActive);

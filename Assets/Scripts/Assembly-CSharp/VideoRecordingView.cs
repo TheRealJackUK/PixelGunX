@@ -12,8 +12,6 @@ internal sealed class VideoRecordingView : MonoBehaviour, IDisposable
 
 	public UIButton pauseButton;
 
-	public UIButton recordButton;
-
 	public UIButton resumeButton;
 
 	public UIButton shareButton;
@@ -94,19 +92,17 @@ internal sealed class VideoRecordingView : MonoBehaviour, IDisposable
 			base.gameObject.SetActive(false);
 			return;
 		}
-		UnityEngine.Object[] source = new UnityEngine.Object[7] { interfaceContainer, caption, pauseButton, recordButton, resumeButton, shareButton, stopButton };
+		UnityEngine.Object[] source = new UnityEngine.Object[6] { interfaceContainer, caption, pauseButton, resumeButton, shareButton, stopButton };
 		if (source.Any((UnityEngine.Object ri) => ri == null))
 		{
 			_disposed = true;
 			return;
 		}
 		BindHandler(pauseButton, HandlePauseButton);
-		BindHandler(recordButton, HandleRecordButton);
 		BindHandler(resumeButton, HandleResumeButton);
 		BindHandler(stopButton, HandleStopButton);
 		BindHandler(shareButton, HandleShareButton);
 		pauseButton.gameObject.SetActive(false);
-		recordButton.gameObject.SetActive(true);
 		resumeButton.gameObject.SetActive(false);
 		shareButton.gameObject.SetActive(false);
 		stopButton.gameObject.SetActive(false);
@@ -135,13 +131,11 @@ internal sealed class VideoRecordingView : MonoBehaviour, IDisposable
 				bool flag2 = Everyplay.IsPaused();
 				bool flag3 = Everyplay.IsRecording();
 				pauseButton.isEnabled = flag && !flag2;
-				recordButton.isEnabled = flag && !flag3;
 				resumeButton.isEnabled = flag && flag2;
 				shareButton.isEnabled = flag && !flag3;
 				stopButton.isEnabled = flag3 || flag2;
 			}
 			pauseButton.gameObject.SetActive(CurrentState == EveryplayWrapper.State.Recording);
-			recordButton.gameObject.SetActive(CurrentState == EveryplayWrapper.State.Initial || CurrentState == EveryplayWrapper.State.Idle);
 			resumeButton.gameObject.SetActive(CurrentState == EveryplayWrapper.State.Paused);
 			bool flag4 = CurrentState == EveryplayWrapper.State.Idle;
 			bool flag5 = CurrentState == EveryplayWrapper.State.Recording || CurrentState == EveryplayWrapper.State.Paused;
