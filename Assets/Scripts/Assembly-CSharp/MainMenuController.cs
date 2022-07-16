@@ -184,7 +184,7 @@ internal sealed class MainMenuController : ControlsSettingsBase
 
 	private MenuLeaderboardsController _menuLeaderboardsController;
 
-	public UIPanel starterPackPanel;
+//	public UIPanel starterPackPanel;
 
 	public UILabel starterPackTimer;
 
@@ -389,8 +389,8 @@ internal sealed class MainMenuController : ControlsSettingsBase
 			ExpController.Instance.Refresh();
 		}
 		PlayerPrefs.SetInt("CountRunMenu", PlayerPrefs.GetInt("CountRunMenu", 0) + 1);
-		freeAwardChestObj = GameObject.FindGameObjectWithTag("FreeAwardChest");
-		freeAwardChestObj.SetActive(false);
+	//	freeAwardChestObj = GameObject.FindGameObjectWithTag("FreeAwardChest");
+//		freeAwardChestObj.SetActive(false);
 		premiumTime.gameObject.SetActive(true);
 		InitializeBannerWindow();
 		bool developerConsoleEnabled = Debug.isDebugBuild || true;
@@ -407,7 +407,7 @@ internal sealed class MainMenuController : ControlsSettingsBase
 				p.gameObject.SetActive(false);
 			}
 		}
-		starterPackPanel.gameObject.SetActive(false);
+		//starterPackPanel.gameObject.SetActive(false);
 		dayOfValorContainer.gameObject.SetActive(false);
 		stubLoading.SetActive(true);
 		string bgTextureName = ConnectSceneNGUIController.MainLoadingTexture();
@@ -1279,7 +1279,7 @@ internal sealed class MainMenuController : ControlsSettingsBase
 		{
 			//starterPackTimer.text = StarterPackController.Get.GetTimeToEndEvent();
 		}
-			freeAwardChestObj.SetActive(true);
+//			freeAwardChestObj.SetActive(true);
 	}
 
 	private void LateUpdate()
@@ -2096,15 +2096,15 @@ internal sealed class MainMenuController : ControlsSettingsBase
 
 	private void OnStarterPackContainerShow(bool enable)
 	{
-		starterPackPanel.gameObject.SetActive(enable);
+	//	starterPackPanel.gameObject.SetActive(enable);
 		if (enable)
 		{
-			buttonBackground.mainTexture = StarterPackController.Get.GetCurrentPackImage();
+//			buttonBackground.mainTexture = StarterPackController.Get.GetCurrentPackImage();
 		}
 		_starterPackEnabled = enable;
-		// funny trick 1! !!! Fuck you
-		starterPackTimer.mAlignment = NGUIText.Alignment.Left;
-		starterPackTimer.text = "";
+		// funny trick 1! !!! (heck) you
+//		starterPackTimer.mAlignment = NGUIText.Alignment.Left;
+	//	starterPackTimer.text = "";
 	}
 
 	public void OnStarterPackButtonClick()

@@ -202,6 +202,9 @@ public sealed class Defs2
 		_mapsInfo.Add(new MapInfo("DevScene", "devscene", "devscene", "Key_0541"));
 		_mapsInfo.Add(new MapInfo("Pool_Abandoned", "Abandoned Pool", "Abandoned Pool", "Key_0541"));
 		_mapsInfo.Add(new MapInfo("Lean_Matrix", "Inside The Lean", "Inside The Lean", "Key_0541"));
+		_mapsInfo.Add(new MapInfo("Tatuan", "Space Desert", "Space Desert", "Large Map"));
+		_mapsInfo.Add(new MapInfo("ChinaPand", "Kung Fu Village", "Kung Fu Village", "Medium Map"));
+		_mapsInfo.Add(new MapInfo("PiratIsland", "Isla De Le Muerte", "Isla De Le Muerte", "Large Map"));
 	}
 
 	public static void SetLocalizeForMaps()

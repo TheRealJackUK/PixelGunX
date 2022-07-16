@@ -2595,6 +2595,9 @@ public static string CAnim(GameObject animator, string con){
 		levelNumsForMusicInMult.Add("Pool", 1001);
 		levelNumsForMusicInMult.Add("Pool_Abandoned", 1050);
 		levelNumsForMusicInMult.Add("Lean_Matrix", 1051);
+		levelNumsForMusicInMult.Add("Tatuan", 1052);
+		levelNumsForMusicInMult.Add("ChinaPand", 1053);
+		levelNumsForMusicInMult.Add("PiratIsland", 1054);
 		levelNumsForMusicInMult.Add("Slender", 9);
 		levelNumsForMusicInMult.Add("Castle", 1002);
 		levelNumsForMusicInMult.Add("Ranch", 1003);
