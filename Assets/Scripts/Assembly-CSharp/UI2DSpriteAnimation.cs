@@ -1,130 +1,163 @@
+//-------------------------------------------------
+//            NGUI: Next-Gen UI kit
+// Copyright © 2011-2017 Tasharen Entertainment Inc
+//-------------------------------------------------
+
 using UnityEngine;
+
+/// <summary>
+/// Small script that makes it easy to create looping 2D sprite animations.
+/// </summary>
 
 public class UI2DSpriteAnimation : MonoBehaviour
 {
-	[SerializeField]
-	protected int framerate = 20;
+	/// <summary>
+	/// Index of the current frame in the sprite animation.
+	/// </summary>
+
+	public int frameIndex = 0;
+
+	/// <summary>
+	/// How many frames there are in the animation per second.
+	/// </summary>
+
+	[SerializeField] protected int framerate = 20;
+
+	/// <summary>
+	/// Should this animation be affected by time scale?
+	/// </summary>
 
 	public bool ignoreTimeScale = true;
 
+	/// <summary>
+	/// Should this animation be looped?
+	/// </summary>
+
 	public bool loop = true;
 
-	public Sprite[] frames;
+	/// <summary>
+	/// Actual sprites used for the animation.
+	/// </summary>
 
-	private SpriteRenderer mUnitySprite;
+	public UnityEngine.Sprite[] frames;
 
-	private UI2DSprite mNguiSprite;
+	UnityEngine.SpriteRenderer mUnitySprite;
+	UI2DSprite mNguiSprite;
+	float mUpdate = 0f;
 
-	private int mIndex;
+	/// <summary>
+	/// Returns is the animation is still playing or not
+	/// </summary>
 
-	private float mUpdate;
+	public bool isPlaying { get { return enabled; } }
 
-	public bool isPlaying
+	/// <summary>
+	/// Animation framerate.
+	/// </summary>
+
+	public int framesPerSecond { get { return framerate; } set { framerate = value; } }
+
+	/// <summary>
+	/// Continue playing the animation. If the animation has reached the end, it will restart from beginning
+	/// </summary>
+
+	public void Play ()
 	{
-		get
+		if (frames != null && frames.Length > 0)
 		{
-			return base.enabled;
-		}
-	}
-
-	public int framesPerSecond
-	{
-		get
-		{
-			return framerate;
-		}
-		set
-		{
-			framerate = value;
-		}
-	}
-
-	public void Play()
-	{
-		if (frames == null || frames.Length <= 0)
-		{
-			return;
-		}
-		if (!base.enabled && !loop)
-		{
-			int num = ((framerate <= 0) ? (mIndex - 1) : (mIndex + 1));
-			if (num < 0 || num >= frames.Length)
+			if (!enabled && !loop)
 			{
-				mIndex = ((framerate < 0) ? (frames.Length - 1) : 0);
+				int newIndex = framerate > 0 ? frameIndex + 1 : frameIndex - 1;
+				if (newIndex < 0 || newIndex >= frames.Length)
+					frameIndex = framerate < 0 ? frames.Length - 1 : 0;
 			}
+			
+			enabled = true;
+			UpdateSprite();
 		}
-		base.enabled = true;
+	}
+
+	/// <summary>
+	/// Pause the animation.
+	/// </summary>
+
+	public void Pause () { enabled = false; }
+
+	/// <summary>
+	/// Reset the animation to the beginning.
+	/// </summary>
+
+	public void ResetToBeginning ()
+	{
+		frameIndex = framerate < 0 ? frames.Length - 1 : 0;
 		UpdateSprite();
 	}
 
-	public void Pause()
-	{
-		base.enabled = false;
-	}
+	/// <summary>
+	/// Start playing the animation right away.
+	/// </summary>
 
-	public void ResetToBeginning()
-	{
-		mIndex = ((framerate < 0) ? (frames.Length - 1) : 0);
-		UpdateSprite();
-	}
+	void Start () { Play(); }
 
-	private void Start()
-	{
-		Play();
-	}
+	/// <summary>
+	/// Advance the animation as necessary.
+	/// </summary>
 
-	private void Update()
+	void Update ()
 	{
 		if (frames == null || frames.Length == 0)
 		{
-			base.enabled = false;
+			enabled = false;
 		}
-		else
+		else if (framerate != 0)
 		{
-			if (framerate == 0)
+			float time = ignoreTimeScale ? RealTime.time : Time.time;
+
+			if (mUpdate < time)
 			{
-				return;
-			}
-			float num = ((!ignoreTimeScale) ? Time.time : RealTime.time);
-			if (mUpdate < num)
-			{
-				mUpdate = num;
-				int num2 = ((framerate <= 0) ? (mIndex - 1) : (mIndex + 1));
-				if (!loop && (num2 < 0 || num2 >= frames.Length))
+				mUpdate = time;
+				int newIndex = framerate > 0 ? frameIndex + 1 : frameIndex - 1;
+
+				if (!loop && (newIndex < 0 || newIndex >= frames.Length))
 				{
-					base.enabled = false;
+					enabled = false;
 					return;
 				}
-				mIndex = NGUIMath.RepeatIndex(num2, frames.Length);
+
+				frameIndex = NGUIMath.RepeatIndex(newIndex, frames.Length);
 				UpdateSprite();
 			}
 		}
 	}
 
-	private void UpdateSprite()
+	/// <summary>
+	/// Immediately update the visible sprite.
+	/// </summary>
+
+	void UpdateSprite ()
 	{
 		if (mUnitySprite == null && mNguiSprite == null)
 		{
-			mUnitySprite = GetComponent<SpriteRenderer>();
+			mUnitySprite = GetComponent<UnityEngine.SpriteRenderer>();
 			mNguiSprite = GetComponent<UI2DSprite>();
+
 			if (mUnitySprite == null && mNguiSprite == null)
 			{
-				base.enabled = false;
+				enabled = false;
 				return;
 			}
 		}
-		float num = ((!ignoreTimeScale) ? Time.time : RealTime.time);
-		if (framerate != 0)
-		{
-			mUpdate = num + Mathf.Abs(1f / (float)framerate);
-		}
+
+		float time = ignoreTimeScale ? RealTime.time : Time.time;
+		if (framerate != 0) mUpdate = time + Mathf.Abs(1f / framerate);
+
 		if (mUnitySprite != null)
 		{
-			mUnitySprite.sprite = frames[mIndex];
+			mUnitySprite.sprite = frames[frameIndex];
 		}
 		else if (mNguiSprite != null)
 		{
-			mNguiSprite.nextSprite = frames[mIndex];
+			mNguiSprite.nextSprite = frames[frameIndex];
 		}
 	}
 }

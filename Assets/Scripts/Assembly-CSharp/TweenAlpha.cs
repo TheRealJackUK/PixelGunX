@@ -1,123 +1,114 @@
-using System;
+//-------------------------------------------------
+//            NGUI: Next-Gen UI kit
+// Copyright © 2011-2017 Tasharen Entertainment Inc
+//-------------------------------------------------
+
 using UnityEngine;
+
+/// <summary>
+/// Tween the object's alpha. Works with both UI widgets as well as renderers.
+/// </summary>
 
 [AddComponentMenu("NGUI/Tween/Tween Alpha")]
 public class TweenAlpha : UITweener
 {
-	[Range(0f, 1f)]
-	public float from = 1f;
+	[Range(0f, 1f)] public float from = 1f;
+	[Range(0f, 1f)] public float to = 1f;
 
-	[Range(0f, 1f)]
-	public float to = 1f;
+	bool mCached = false;
+	UIRect mRect;
+	Material mMat;
+	Light mLight;
+	SpriteRenderer mSr;
+	float mBaseIntensity = 1f;
 
-	private bool mCached;
+	[System.Obsolete("Use 'value' instead")]
+	public float alpha { get { return this.value; } set { this.value = value; } }
 
-	private UIRect mRect;
-
-	private Material mMat;
-
-	private SpriteRenderer mSr;
-
-	[Obsolete("Use 'value' instead")]
-	public float alpha
+	void Cache ()
 	{
-		get
+		mCached = true;
+		mRect = GetComponent<UIRect>();
+		mSr = GetComponent<SpriteRenderer>();
+
+		if (mRect == null && mSr == null)
 		{
-			return value;
-		}
-		set
-		{
-			this.value = value;
+			mLight = GetComponent<Light>();
+
+			if (mLight == null)
+			{
+				Renderer ren = GetComponent<Renderer>();
+				if (ren != null) mMat = ren.material;
+				if (mMat == null) mRect = GetComponentInChildren<UIRect>();
+			}
+			else mBaseIntensity = mLight.intensity;
 		}
 	}
+
+	/// <summary>
+	/// Tween's current value.
+	/// </summary>
 
 	public float value
 	{
 		get
 		{
-			if (!mCached)
-			{
-				Cache();
-			}
-			if (mRect != null)
-			{
-				return mRect.alpha;
-			}
-			if (mSr != null)
-			{
-				return mSr.color.a;
-			}
-			return (!(mMat != null)) ? 1f : mMat.color.a;
+			if (!mCached) Cache();
+			if (mRect != null) return mRect.alpha;
+			if (mSr != null) return mSr.color.a;
+			return mMat != null ? mMat.color.a : 1f;
 		}
 		set
 		{
-			if (!mCached)
-			{
-				Cache();
-			}
+			if (!mCached) Cache();
+
 			if (mRect != null)
 			{
 				mRect.alpha = value;
 			}
 			else if (mSr != null)
 			{
-				Color color = mSr.color;
-				color.a = value;
-				mSr.color = color;
+				Color c = mSr.color;
+				c.a = value;
+				mSr.color = c;
 			}
 			else if (mMat != null)
 			{
-				Color color2 = mMat.color;
-				color2.a = value;
-				mMat.color = color2;
+				Color c = mMat.color;
+				c.a = value;
+				mMat.color = c;
+			}
+			else if (mLight != null)
+			{
+				mLight.intensity = mBaseIntensity * value;
 			}
 		}
 	}
 
-	private void Cache()
-	{
-		mCached = true;
-		mRect = GetComponent<UIRect>();
-		mSr = GetComponent<SpriteRenderer>();
-		if (mRect == null && mSr == null)
-		{
-			Renderer component = GetComponent<Renderer>();
-			if (component != null)
-			{
-				mMat = component.material;
-			}
-			if (mMat == null)
-			{
-				mRect = GetComponentInChildren<UIRect>();
-			}
-		}
-	}
+	/// <summary>
+	/// Tween the value.
+	/// </summary>
 
-	protected override void OnUpdate(float factor, bool isFinished)
-	{
-		value = Mathf.Lerp(from, to, factor);
-	}
+	protected override void OnUpdate (float factor, bool isFinished) { value = Mathf.Lerp(from, to, factor); }
 
-	public static TweenAlpha Begin(GameObject go, float duration, float alpha)
+	/// <summary>
+	/// Start the tweening operation.
+	/// </summary>
+
+	static public TweenAlpha Begin (GameObject go, float duration, float alpha, float delay = 0f)
 	{
-		TweenAlpha tweenAlpha = UITweener.Begin<TweenAlpha>(go, duration);
-		tweenAlpha.from = tweenAlpha.value;
-		tweenAlpha.to = alpha;
+		TweenAlpha comp = UITweener.Begin<TweenAlpha>(go, duration, delay);
+		comp.from = comp.value;
+		comp.to = alpha;
+
 		if (duration <= 0f)
 		{
-			tweenAlpha.Sample(1f, true);
-			tweenAlpha.enabled = false;
+			comp.Sample(1f, true);
+			comp.enabled = false;
 		}
-		return tweenAlpha;
+		return comp;
 	}
 
-	public override void SetStartToCurrentValue()
-	{
-		from = value;
-	}
-
-	public override void SetEndToCurrentValue()
-	{
-		to = value;
-	}
+	public override void SetStartToCurrentValue () { from = value; }
+	public override void SetEndToCurrentValue () { to = value; }
 }

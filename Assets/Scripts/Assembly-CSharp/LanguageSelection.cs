@@ -1,35 +1,41 @@
+//-------------------------------------------------
+//            NGUI: Next-Gen UI kit
+// Copyright © 2011-2017 Tasharen Entertainment Inc
+//-------------------------------------------------
+
 using UnityEngine;
 
-[AddComponentMenu("NGUI/Interaction/Language Selection")]
+/// <summary>
+/// Turns the popup list it's attached to into a language selection list.
+/// </summary>
+
 [RequireComponent(typeof(UIPopupList))]
+[AddComponentMenu("NGUI/Interaction/Language Selection")]
 public class LanguageSelection : MonoBehaviour
 {
-	private UIPopupList mList;
+	UIPopupList mList;
 
-	private void Awake()
+	void Awake ()
 	{
 		mList = GetComponent<UIPopupList>();
 		Refresh();
 	}
 
-	private void Start()
-	{
-		EventDelegate.Add(mList.onChange, delegate
-		{
-			Localization.language = UIPopupList.current.value;
-		});
-	}
+	void Start () { EventDelegate.Add(mList.onChange, delegate() { Localization.language = UIPopupList.current.value; }); }
 
-	public void Refresh()
+	/// <summary>
+	/// Immediately refresh the list of known languages.
+	/// </summary>
+
+	public void Refresh ()
 	{
 		if (mList != null && Localization.knownLanguages != null)
 		{
-			mList.items.Clear();
-			int i = 0;
-			for (int num = Localization.knownLanguages.Length; i < num; i++)
-			{
+			mList.Clear();
+
+			for (int i = 0, imax = Localization.knownLanguages.Length; i < imax; ++i)
 				mList.items.Add(Localization.knownLanguages[i]);
-			}
+
 			mList.value = Localization.language;
 		}
 	}

@@ -1,233 +1,307 @@
+//-------------------------------------------------
+//            NGUI: Next-Gen UI kit
+// Copyright © 2011-2017 Tasharen Entertainment Inc
+//-------------------------------------------------
+
 using UnityEngine;
+
+/// <summary>
+/// Attaching this script to a widget makes it react to key events such as tab, up, down, etc.
+/// </summary>
 
 [AddComponentMenu("NGUI/Interaction/Key Navigation")]
 public class UIKeyNavigation : MonoBehaviour
 {
+	/// <summary>
+	/// List of all the active UINavigation components.
+	/// </summary>
+
+	static public BetterList<UIKeyNavigation> list = new BetterList<UIKeyNavigation>();
+
 	public enum Constraint
 	{
 		None,
 		Vertical,
 		Horizontal,
-		Explicit
+		Explicit,
 	}
 
-	public static BetterList<UIKeyNavigation> list = new BetterList<UIKeyNavigation>();
+	/// <summary>
+	/// If a selection target is not set, the target can be determined automatically, restricted by this constraint.
+	/// 'None' means free movement on both horizontal and vertical axis. 'Explicit' means the automatic logic will
+	/// not execute, and only the explicitly set values will be used.
+	/// </summary>
 
-	public Constraint constraint;
+	public Constraint constraint = Constraint.None;
+
+	/// <summary>
+	/// Which object will be selected when the Up button is pressed.
+	/// </summary>
 
 	public GameObject onUp;
 
+	/// <summary>
+	/// Which object will be selected when the Down button is pressed.
+	/// </summary>
+
 	public GameObject onDown;
+
+	/// <summary>
+	/// Which object will be selected when the Left button is pressed.
+	/// </summary>
 
 	public GameObject onLeft;
 
+	/// <summary>
+	/// Which object will be selected when the Right button is pressed.
+	/// </summary>
+
 	public GameObject onRight;
+
+	/// <summary>
+	/// Which object will get selected on click.
+	/// </summary>
 
 	public GameObject onClick;
 
-	public bool startsSelected;
+	/// <summary>
+	/// Which object will get selected on tab.
+	/// </summary>
 
-	protected virtual void OnEnable()
+	public GameObject onTab;
+
+	/// <summary>
+	/// Whether the object this script is attached to will get selected as soon as this script is enabled.
+	/// </summary>
+
+	public bool startsSelected = false;
+
+	/// <summary>
+	/// Convenience function that returns the current key navigation selection.
+	/// </summary>
+
+	static public UIKeyNavigation current
+	{
+		get
+		{
+			GameObject go = UICamera.hoveredObject;
+			if (go == null) return null;
+			return go.GetComponent<UIKeyNavigation>();
+		}
+	}
+
+	/// <summary>
+	/// Whether the collider is enabled and the widget can be interacted with.
+	/// </summary>
+
+	public bool isColliderEnabled
+	{
+		get
+		{
+			if (enabled && gameObject.activeInHierarchy)
+			{
+				Collider c = GetComponent<Collider>();
+				if (c != null) return c.enabled;
+				Collider2D b = GetComponent<Collider2D>();
+				return (b != null && b.enabled);
+			}
+			return false;
+		}
+	}
+
+	[System.NonSerialized] bool mStarted = false;
+
+	protected virtual void OnEnable ()
 	{
 		list.Add(this);
-		if (startsSelected && (UICamera.selectedObject == null || !NGUITools.GetActive(UICamera.selectedObject)))
-		{
-			UICamera.currentScheme = UICamera.ControlScheme.Controller;
-			UICamera.selectedObject = base.gameObject;
-		}
+		if (mStarted) Start();
 	}
 
-	protected virtual void OnDisable()
+	void Start ()
 	{
-		list.Remove(this);
+#if UNITY_EDITOR
+		if (!Application.isPlaying) return;
+#endif
+		mStarted = true;
+		if (startsSelected && isColliderEnabled)
+			UICamera.hoveredObject = gameObject;
 	}
 
-	protected GameObject GetLeft()
+	protected virtual void OnDisable () { list.Remove(this); }
+
+	static bool IsActive (GameObject go)
 	{
-		if (NGUITools.GetActive(onLeft))
+		if (go && go.activeInHierarchy)
 		{
-			return onLeft;
+			Collider c = go.GetComponent<Collider>();
+			if (c != null) return c.enabled;
+			Collider2D b = go.GetComponent<Collider2D>();
+			return (b != null && b.enabled);
 		}
-		if (constraint == Constraint.Vertical || constraint == Constraint.Explicit)
-		{
-			return null;
-		}
-		return Get(Vector3.left, true);
+		return false;
 	}
 
-	private GameObject GetRight()
+	public GameObject GetLeft ()
 	{
-		if (NGUITools.GetActive(onRight))
-		{
-			return onRight;
-		}
-		if (constraint == Constraint.Vertical || constraint == Constraint.Explicit)
-		{
-			return null;
-		}
-		return Get(Vector3.right, true);
+		if (IsActive(onLeft)) return onLeft;
+		if (constraint == Constraint.Vertical || constraint == Constraint.Explicit) return null;
+		return Get(Vector3.left, 1f, 2f);
 	}
 
-	protected GameObject GetUp()
+	public GameObject GetRight ()
 	{
-		if (NGUITools.GetActive(onUp))
-		{
-			return onUp;
-		}
-		if (constraint == Constraint.Horizontal || constraint == Constraint.Explicit)
-		{
-			return null;
-		}
-		return Get(Vector3.up, false);
+		if (IsActive(onRight)) return onRight;
+		if (constraint == Constraint.Vertical || constraint == Constraint.Explicit) return null;
+		return Get(Vector3.right, 1f, 2f);
 	}
 
-	protected GameObject GetDown()
+	public GameObject GetUp ()
 	{
-		if (NGUITools.GetActive(onDown))
-		{
-			return onDown;
-		}
-		if (constraint == Constraint.Horizontal || constraint == Constraint.Explicit)
-		{
-			return null;
-		}
-		return Get(Vector3.down, false);
+		if (IsActive(onUp)) return onUp;
+		if (constraint == Constraint.Horizontal || constraint == Constraint.Explicit) return null;
+		return Get(Vector3.up, 2f, 1f);
 	}
 
-	protected GameObject Get(Vector3 myDir, bool horizontal)
+	public GameObject GetDown ()
 	{
-		Transform transform = base.transform;
-		myDir = transform.TransformDirection(myDir);
-		Vector3 center = GetCenter(base.gameObject);
-		float num = float.MaxValue;
-		GameObject result = null;
-		for (int i = 0; i < list.size; i++)
+		if (IsActive(onDown)) return onDown;
+		if (constraint == Constraint.Horizontal || constraint == Constraint.Explicit) return null;
+		return Get(Vector3.down, 2f, 1f);
+	}
+
+	public GameObject Get (Vector3 myDir, float x = 1f, float y = 1f)
+	{
+		Transform t = transform;
+		myDir = t.TransformDirection(myDir);
+		Vector3 myCenter = GetCenter(gameObject);
+		float min = float.MaxValue;
+		GameObject go = null;
+
+		for (int i = 0; i < list.size; ++i)
 		{
-			UIKeyNavigation uIKeyNavigation = list[i];
-			if (uIKeyNavigation == this)
+			UIKeyNavigation nav = list[i];
+			if (nav == this || nav.constraint == Constraint.Explicit || !nav.isColliderEnabled) continue;
+
+			// Ignore invisible widgets
+			UIWidget widget = nav.GetComponent<UIWidget>();
+			if (widget != null && widget.alpha == 0f) continue;
+
+			// Reject objects that are not within a 45 degree angle of the desired direction
+			Vector3 dir = GetCenter(nav.gameObject) - myCenter;
+			float dot = Vector3.Dot(myDir, dir.normalized);
+			if (dot < 0.707f) continue;
+
+			// Exaggerate the movement in the undesired direction
+			dir = t.InverseTransformDirection(dir);
+			dir.x *= x;
+			dir.y *= y;
+
+			// Compare the distance
+			float mag = dir.sqrMagnitude;
+			if (mag > min) continue;
+			go = nav.gameObject;
+			min = mag;
+		}
+		return go;
+	}
+
+	static protected Vector3 GetCenter (GameObject go)
+	{
+		UIWidget w = go.GetComponent<UIWidget>();
+		UICamera cam = UICamera.FindCameraForLayer(go.layer);
+
+		if (cam != null)
+		{
+			Vector3 center = go.transform.position;
+
+			if (w != null)
 			{
-				continue;
+				Vector3[] corners = w.worldCorners;
+				center = (corners[0] + corners[2]) * 0.5f;
 			}
-			UIButton component = uIKeyNavigation.GetComponent<UIButton>();
-			if (component != null && !component.isEnabled)
-			{
-				continue;
-			}
-			Vector3 direction = GetCenter(uIKeyNavigation.gameObject) - center;
-			float num2 = Vector3.Dot(myDir, direction.normalized);
-			if (!(num2 < 0.707f))
-			{
-				direction = transform.InverseTransformDirection(direction);
-				if (horizontal)
-				{
-					direction.y *= 2f;
-				}
-				else
-				{
-					direction.x *= 2f;
-				}
-				float sqrMagnitude = direction.sqrMagnitude;
-				if (!(sqrMagnitude > num))
-				{
-					result = uIKeyNavigation.gameObject;
-					num = sqrMagnitude;
-				}
-			}
-		}
-		return result;
-	}
 
-	protected static Vector3 GetCenter(GameObject go)
-	{
-		UIWidget component = go.GetComponent<UIWidget>();
-		UICamera uICamera = UICamera.FindCameraForLayer(go.layer);
-		if (uICamera != null)
-		{
-			Vector3 position = go.transform.position;
-			if (component != null)
-			{
-				Vector3[] worldCorners = component.worldCorners;
-				position = (worldCorners[0] + worldCorners[2]) * 0.5f;
-			}
-			position = uICamera.cachedCamera.WorldToScreenPoint(position);
-			position.z = 0f;
-			return position;
+			center = cam.cachedCamera.WorldToScreenPoint(center);
+			center.z = 0;
+			return center;
 		}
-		if (component != null)
+		else if (w != null)
 		{
-			Vector3[] worldCorners2 = component.worldCorners;
-			return (worldCorners2[0] + worldCorners2[2]) * 0.5f;
+			Vector3[] corners = w.worldCorners;
+			return (corners[0] + corners[2]) * 0.5f;
 		}
 		return go.transform.position;
 	}
 
-	protected virtual void OnKey(KeyCode key)
+	static public int mLastFrame = 0;
+
+	/// <summary>
+	/// React to navigation.
+	/// </summary>
+
+	public virtual void OnNavigate (KeyCode key)
 	{
-		if (!NGUITools.GetActive(this))
-		{
-			return;
-		}
-		GameObject gameObject = null;
+		if (UIPopupList.isOpen) return;
+		if (mLastFrame == Time.frameCount) return;
+		mLastFrame = Time.frameCount;
+
+		GameObject go = null;
+
 		switch (key)
 		{
-		case KeyCode.LeftArrow:
-			gameObject = GetLeft();
-			break;
-		case KeyCode.RightArrow:
-			gameObject = GetRight();
-			break;
-		case KeyCode.UpArrow:
-			gameObject = GetUp();
-			break;
-		case KeyCode.DownArrow:
-			gameObject = GetDown();
-			break;
-		case KeyCode.Tab:
-			if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
-			{
-				gameObject = GetLeft();
-				if (gameObject == null)
-				{
-					gameObject = GetUp();
-				}
-				if (gameObject == null)
-				{
-					gameObject = GetDown();
-				}
-				if (gameObject == null)
-				{
-					gameObject = GetRight();
-				}
-			}
-			else
-			{
-				gameObject = GetRight();
-				if (gameObject == null)
-				{
-					gameObject = GetDown();
-				}
-				if (gameObject == null)
-				{
-					gameObject = GetUp();
-				}
-				if (gameObject == null)
-				{
-					gameObject = GetLeft();
-				}
-			}
-			break;
+			case KeyCode.LeftArrow:		go = GetLeft();		break;
+			case KeyCode.RightArrow:	go = GetRight();	break;
+			case KeyCode.UpArrow:		go = GetUp();		break;
+			case KeyCode.DownArrow:		go = GetDown();		break;
 		}
-		if (gameObject != null)
+
+		if (go != null) UICamera.hoveredObject = go;
+	}
+
+	/// <summary>
+	/// React to any additional keys, such as Tab.
+	/// </summary>
+
+	public virtual void OnKey (KeyCode key)
+	{
+		if (UIPopupList.isOpen) return;
+		if (mLastFrame == Time.frameCount) return;
+		mLastFrame = Time.frameCount;
+
+		if (key == KeyCode.Tab)
 		{
-			UICamera.selectedObject = gameObject;
+			GameObject go = onTab;
+
+			if (go == null)
+			{
+				if (UICamera.GetKey(KeyCode.LeftShift) || UICamera.GetKey(KeyCode.RightShift))
+				{
+					go = GetLeft();
+					if (go == null) go = GetUp();
+					if (go == null) go = GetDown();
+					if (go == null) go = GetRight();
+				}
+				else
+				{
+					go = GetRight();
+					if (go == null) go = GetDown();
+					if (go == null) go = GetUp();
+					if (go == null) go = GetLeft();
+				}
+			}
+
+			if (go != null)
+			{
+				UICamera.currentScheme = UICamera.ControlScheme.Controller;
+				UICamera.hoveredObject = go;
+				UIInput inp = go.GetComponent<UIInput>();
+				if (inp != null) inp.isSelected = true;
+			}
 		}
 	}
 
-	protected virtual void OnClick()
+	protected virtual void OnClick ()
 	{
-		if (NGUITools.GetActive(this) && NGUITools.GetActive(onClick))
-		{
-			UICamera.selectedObject = onClick;
-		}
+		if (NGUITools.GetActive(onClick))
+			UICamera.hoveredObject = onClick;
 	}
 }

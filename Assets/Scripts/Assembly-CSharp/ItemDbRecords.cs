@@ -4,7 +4,7 @@ public static class ItemDbRecords
 {
 	public static List<ItemRecord> GetRecords()
 	{
-		List<ItemRecord> list = new List<ItemRecord>(145);
+		List<ItemRecord> list = new List<ItemRecord>();
 		list.Add(new ItemRecord(1, "FirstPistol", null, "Weapon1", null, null, 0, false, false));
 		list.Add(new ItemRecord(2, "FirstShotgun", null, "Weapon2", null, null, 0, false, false));
 		list.Add(new ItemRecord(3, "UziWeapon", null, "Weapon3", null, null, 0, false, false));

@@ -4364,19 +4364,6 @@ public sealed class Player_move_c : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		if (inGameGUI.pausePanel != null) 
-		{
-			if (inGameGUI.pausePanel.GetActive() && CurHealth > 0 && canlock) 
-			{
-				Cursor.lockState = CursorLockMode.None;
-				Cursor.visible = true;
-			}
-		}
-		if (Cursor.visible == true && Cursor.lockState == CursorLockMode.None && !canlock) 
-		{
-			Cursor.visible = false;
-			Cursor.lockState = CursorLockMode.Locked;
-		}
 		if (isMulti && !isMine && myNickLabelController != null)
 		{
 			bool isVisible = (isImVisible = false);
@@ -4643,6 +4630,27 @@ public sealed class Player_move_c : MonoBehaviour
 
 	private void Update()
 	{
+		if (Defs.isMouseControl)
+		{
+			if (inGameGUI != null) 
+			{
+				if (inGameGUI.pausePanel.active)
+				{
+					Cursor.lockState = CursorLockMode.None;
+					Cursor.visible = true;
+				}
+				else if (!inGameGUI.isActiveAndEnabled && CurHealth > 0) 
+				{
+					Cursor.lockState = CursorLockMode.None;
+					Cursor.visible = true;
+				} 
+				else if (Cursor.visible == true && Cursor.lockState == CursorLockMode.None && canlock)
+				{
+					Cursor.visible = false;
+					Cursor.lockState = CursorLockMode.Locked;
+				}
+			}
+		}
 		if ((!isMulti || isMine) && _timeOfSlowdown > 0f)
 		{
 			_timeOfSlowdown -= Time.deltaTime;
