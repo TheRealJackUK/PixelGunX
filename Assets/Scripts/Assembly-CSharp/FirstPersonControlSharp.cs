@@ -1,6 +1,7 @@
 using System.Collections;
 using Rilisoft;
 using UnityEngine;
+using ExitGames.Client.Photon;
 
 internal sealed class FirstPersonControlSharp : MonoBehaviour
 {
@@ -234,6 +235,10 @@ internal sealed class FirstPersonControlSharp : MonoBehaviour
 			if (Input.GetKeyDown(KeyCode.Space))
 			{
 				JoystickController.rightJoystick.jumpPressed = true;
+			}
+			if (Input.GetKeyDown(KeyCode.P))
+			{
+				PhotonNetwork.RaiseEvent(205, new object(), true, new RaiseEventOptions() { Receivers = ReceiverGroup.All } );
 			}
 			if (Input.GetKeyUp(KeyCode.Space))
 			{
