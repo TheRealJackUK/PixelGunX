@@ -1103,11 +1103,11 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 		else if (!isInet)
 		{
-			component2.AddMessage(text, Time.time, -1, myPlayerTransform.GetComponent<NetworkView>().viewID, 0, _clanLogo);
+			component2.AddMessage(text, Time.time, -1, myPlayerTransform.GetComponent<PhotonView>().viewID, _clanLogo);
 		}
 		else
 		{
-			component2.AddMessage(text, Time.time, myPlayerTransform.GetComponent<PhotonView>().viewID, myPlayerTransform.GetComponent<NetworkView>().viewID, myCommand, _clanLogo);
+			component2.AddMessage(text, Time.time, myPlayerTransform.GetComponent<PhotonView>().viewID, myCommand, _clanLogo);
 		}
 	}
 
@@ -1127,13 +1127,12 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 	}
 
-	public void AddMessage(string text, float time, int ID, NetworkViewID IDLocal, int _command, string clanLogo)
+	public void AddMessage(string text, float time, int ID, int _command, string clanLogo)
 	{
 		MessageChat item = default(MessageChat);
 		item.text = text;
 		item.time = time;
 		item.ID = ID;
-		item.IDLocal = IDLocal;
 		item.command = _command;
 		if (!string.IsNullOrEmpty(clanLogo))
 		{
