@@ -244,15 +244,15 @@ public class UIRoot : MonoBehaviour
 
 	protected virtual void Awake () 
 	{
-	if (Storager.getInt("camerafov", false) == 0 || Storager.getInt("camerafov", false) == null || Storager.getInt("camerafov", false) == 180)
-    {
-        Storager.setInt("camerafov", 44, false);
-    }
-    Storager.setInt(Defs.ShownLobbyLevelSN, 31, false);
-    PhotonNetwork.PhotonServerSettings.AppID = "06ad256f-363b-4a93-9dd3-eba47c6bfe9c";
-    PhotonNetwork.PhotonServerSettings.HostType = ServerSettings.HostingOption.PhotonCloud;
-		mTrans = transform; 
-	}
+		if (Storager.getInt("camerafov", false) == 0 || Storager.getInt("camerafov", false) == null || Storager.getInt("camerafov", false) == 180)
+    	{
+    	    Storager.setInt("camerafov", 44, false);
+    	}
+    	Storager.setInt(Defs.ShownLobbyLevelSN, 31, false);
+    	PhotonNetwork.PhotonServerSettings.AppID = "06ad256f-363b-4a93-9dd3-eba47c6bfe9c";
+    	PhotonNetwork.PhotonServerSettings.HostType = ServerSettings.HostingOption.PhotonCloud;
+			mTrans = transform; 
+		}
 	protected virtual void OnEnable () { list.Add(this); }
 	protected virtual void OnDisable () { list.Remove(this); }
 
@@ -282,6 +282,11 @@ public class UIRoot : MonoBehaviour
 
 	void Update ()
 	{
+		if (Application.loadedLevelName.StartsWith("Menu_") || Application.loadedLevelName == "ConnectScene")
+		{
+			Cursor.visible = true;
+			Cursor.lockState = CursorLockMode.None;
+		}
 		if (Application.isMobilePlatform && GameObject.Find("Main Camera").GetComponent<PostProcessLayer>() != null)
 		{
 		    PostProcessLayer renderer = GameObject.Find("Main Camera").GetComponent<PostProcessLayer>();
