@@ -74,28 +74,30 @@ public class ConnectSceneNGUIController : MonoBehaviour
 
 	public static int gameTier = 1;
 
-	public static string[] masMapName = new string[31]
+	public static string[] masMapName = new string[32]
 	{
 		"Paradise", "Pizza", "Christmas_Town", "NuclearCity", "Supermarket", "Sky_islands", "Sniper", "Knife", "Heaven", "Hill",
 		"Ants", "Underwater", "Matrix", "Ships", "Portal", "Space", "Estate", "Parkour", "Pool", "School",
-		"Coliseum_MP", "Bridge", "Jail", "Slender_Multy", "Train", "DevScene", "Pool_Abandoned", "Lean_Matrix", "Tatuan", "ChinaPand", "PiratIsland"
+		"Coliseum_MP", "Bridge", "Jail", "Slender_Multy", "Train", "DevScene", "Pool_Abandoned", "Lean_Matrix", "Tatuan", "ChinaPand", "PiratIsland",
+		"emperors_palace" 
 	};
 
 	public static string[] masMapNameHunger = new string[5] { "Hungry", "Hungry_Night", "Hungry_2", "Gluk_3", "Cube" };
 
 	public static string[] masMapNameCOOP = new string[6] { "Utopia", "Arena", "Bridge", "Assault", "Dust", "Winter" };
 
-	public static string[] masMapNameCompany = new string[29]
+	public static string[] masMapNameCompany = new string[31]
 	{
 		"Heaven", "Barge", "Pizza", "Bota", "Paradise", "Christmas_Town_Night", "Space", "Train", "Day_D", "Sniper",
 		"Knife", "Ants", "Underwater", "Matrix", "Ships_Night", "Portal", "Estate", "Parkour", "Pool", "Ranch",
-		"Assault", "Aztec", "Dust", "Sky_islands", "NuclearCity", "Lean_Matrix", "Tatuan", "ChinaPand", "PiratIsland"
+		"Assault", "Aztec", "Dust", "Sky_islands", "NuclearCity", "Lean_Matrix", "Tatuan", "ChinaPand", "PiratIsland", "emperors_palace",
+		"Christmas_dinner"
 	};
 
-	public static string[] masMapNameflag = new string[15]
+	public static string[] masMapNameflag = new string[17]
 	{
 		"Two_Castles", "Barge", "Bota", "Paradise", "Parkour", "NuclearCity", "Day_D", "Ants", "Underwater", "Matrix",
-		"Portal", "Space", "Dust", "Ships", "Lean_Matrix"
+		"Portal", "Space", "Dust", "Ships", "Lean_Matrix", "emperors_palace", "Christmas_dinner"
 	};
 
 	public static string[] masMapNameCapturePoints = new string[4] { "Mine", "Bota", "Paradise", "Parkour" };

@@ -205,6 +205,8 @@ public sealed class Defs2
 		_mapsInfo.Add(new MapInfo("Tatuan", "Space Desert", "Space Desert", "Large Map"));
 		_mapsInfo.Add(new MapInfo("ChinaPand", "Kung Fu Village", "Kung Fu Village", "Medium Map"));
 		_mapsInfo.Add(new MapInfo("PiratIsland", "Isla De Le Muerte", "Isla De Le Muerte", "Large Map"));
+		_mapsInfo.Add(new MapInfo("emperors_palace", "Emperor's Palace", "Emperor's Palace", "Large Map"));
+		_mapsInfo.Add(new MapInfo("Christmas_dinner", "Christmas Dinner", "Christmas Dinner", "Large Map"));
 	}
 
 	public static void SetLocalizeForMaps()
