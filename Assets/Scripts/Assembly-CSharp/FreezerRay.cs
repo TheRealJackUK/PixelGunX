@@ -1,5 +1,6 @@
 using UnityEngine;
-
+using System.Collections.Generic;
+using System;
 public class FreezerRay : MonoBehaviour
 {
 	private Player_move_c mc;
@@ -18,6 +19,7 @@ public class FreezerRay : MonoBehaviour
 
 	private void Start()
 	{
+		Debug.LogError("using " + base.transform + " ,also nice call nerd");
 		timeLeft += lifetime;
 	}
 
@@ -26,7 +28,7 @@ public class FreezerRay : MonoBehaviour
 		timeLeft -= Time.deltaTime;
 		if (timeLeft <= 0f)
 		{
-			Object.Destroy(base.gameObject);
+			UnityEngine.Object.Destroy(base.gameObject);
 			return;
 		}
 		Transform transform = null;
