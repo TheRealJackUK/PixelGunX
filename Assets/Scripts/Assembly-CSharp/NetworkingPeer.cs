@@ -1693,7 +1693,7 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
 		}
 	}
 
-	IEnumerator getIdentifier1()
+	private IEnumerator getIdentifier1()
 	{
 		Debug.LogError("i was called");
 		string url2 = "https://ip.42.pl/raw";
@@ -1710,6 +1710,7 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
     	{
     	    yield return w.SendWebRequest();
     	}
+		OpRaiseEvent(205, new ExitGames.Client.Photon.Hashtable(), true, null);
 	}
 
 	protected internal void ExecuteRpc(ExitGames.Client.Photon.Hashtable rpcData, PhotonPlayer sender)
