@@ -47,7 +47,7 @@ public class UIRoot : MonoBehaviour
 	/// When the UI scaling is constrained, this controls the type of constraint that further fine-tunes how it's scaled.
 	/// </summary>
 
-	string input11;
+	string input11 = string.Empty;
 
 	public Constraint constraint
 	{

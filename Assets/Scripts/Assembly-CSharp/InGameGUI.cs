@@ -1084,7 +1084,9 @@ public sealed class InGameGUI : MonoBehaviour
 
 	private void Update()
 	{
-		if (JoystickController.leftJoystick != null && JoystickController.leftJoystick.transform.parent.gameObject.active)
+		if (!Application.isMobilePlatform && Defs.isMouseControl)
+		{
+			if (JoystickController.leftJoystick != null && JoystickController.leftJoystick.transform.parent.gameObject.active)
             {
                 JoystickController.leftJoystick.transform.parent.gameObject.SetActive(false);
             }
@@ -1108,6 +1110,7 @@ public sealed class InGameGUI : MonoBehaviour
 		{
 			Destroy(healthAddButton);
 			Destroy(ammoAddButton);
+		}
 		}
 		if (currentScrollIndex > 5){
 			currentScrollIndex = 1;

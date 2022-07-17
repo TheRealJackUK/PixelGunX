@@ -47,11 +47,12 @@ public sealed class HealthButtonInGamePanel : MonoBehaviour
 
 	private void OnClick()
 	{
-		/*
+		
 		if (ButtonClickSound.Instance != null)
 		{
 			ButtonClickSound.Instance.PlayClick();
 		}
+		/*
 		if (Defs.IsTraining)
 		{
 			if (inGameGui.playerMoveC != null)

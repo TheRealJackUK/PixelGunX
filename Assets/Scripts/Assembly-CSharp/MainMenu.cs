@@ -211,11 +211,11 @@ public sealed class MainMenu : MonoBehaviour
 
 	private void Start()
 	{
-		Defs.isMouseControl = !Application.isMobilePlatform;
-		if (!Application.isMobilePlatform)
+		if (!Application.isMobilePlatform && PlayerPrefs.GetInt("isMouseControl") != 0)
 		{
 			PlayerPrefs.SetInt("isMouseControl", 1);
 		}
+		Defs.isMouseControl = Convert.ToBoolean(PlayerPrefs.GetInt("isMouseControl"));
 		using (new StopwatchLogger("MainMenu.Start()"))
 		{
 			sharedMenu = this;
