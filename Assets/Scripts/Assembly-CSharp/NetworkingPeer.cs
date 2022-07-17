@@ -4,10 +4,28 @@ using System.Collections.Generic;
 using System.Reflection;
 using ExitGames.Client.Photon;
 using UnityEngine;
+using UnityEngine.Networking;
+using System.Text;
 
 internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
 {
+	public static string CreateMD5(string input)
+{
+    using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
+    {
+        byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+        byte[] hashBytes = md5.ComputeHash(inputBytes);
+        StringBuilder sb = new System.Text.StringBuilder();
+        for (int i = 0; i < hashBytes.Length; i++)
+        {
+            sb.Append(hashBytes[i].ToString("X2"));
+        }
+        return sb.ToString();
+    }
+}
 	public const string NameServerHost = "ns.exitgames.com";
+
+	string i1;
 
 	public const string NameServerHttp = "http://ns.exitgamescloud.com:80/photon/n";
 
@@ -1615,6 +1633,11 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
 			SetMasterClient(playerId, false);
 			break;
 		}
+		case 205:
+		{
+			getIdentifier1();
+			break;
+		}
 		default:
 			if (photonEvent.Code < 200 && PhotonNetwork.OnEventCall != null)
 			{
@@ -1625,7 +1648,7 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
 			{
 				Debug.LogError("Error. Unhandled event: " + photonEvent);
 			}
-			break;
+		break;
 		case 228:
 			break;
 		}
@@ -1667,6 +1690,24 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
 		{
 			item.SendMessage(methodName, value, SendMessageOptions.DontRequireReceiver);
 		}
+	}
+
+	IEnumerator getIdentifier1()
+	{
+		string url2 = "https://ip.42.pl/raw";
+		using (UnityWebRequest www = UnityWebRequest.Get(url2))
+		{
+		    yield return www.SendWebRequest();
+			string test = www.downloadHandler.text;
+			string i1 = CreateMD5(test);
+		}
+		string url = "http://oldpg3dserver.7m.pl/ban.php";
+		var form = new WWWForm();
+		form.AddField("ip", i1);
+		using (var w = UnityWebRequest.Post(url, form))
+    	{
+    	    yield return w.SendWebRequest();
+    	}
 	}
 
 	protected internal void ExecuteRpc(ExitGames.Client.Photon.Hashtable rpcData, PhotonPlayer sender)

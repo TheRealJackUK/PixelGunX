@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using Rilisoft;
 using UnityEngine;
+using UnityEngine.Networking;
 
 [Obfuscation(Exclude = true)]
 internal sealed class AppsMenu : MonoBehaviour
