@@ -2600,6 +2600,7 @@ public static string CAnim(GameObject animator, string con){
 		levelNumsForMusicInMult.Add("PiratIsland", 1054);
 		levelNumsForMusicInMult.Add("emperors_palace", 1055);
 		levelNumsForMusicInMult.Add("Christmas_dinner", 1056);
+		levelNumsForMusicInMult.Add("Secret_Base", 1057);
 		levelNumsForMusicInMult.Add("Slender", 9);
 		levelNumsForMusicInMult.Add("Castle", 1002);
 		levelNumsForMusicInMult.Add("Ranch", 1003);

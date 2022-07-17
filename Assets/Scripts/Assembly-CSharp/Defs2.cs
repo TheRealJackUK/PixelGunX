@@ -207,6 +207,7 @@ public sealed class Defs2
 		_mapsInfo.Add(new MapInfo("PiratIsland", "Isla De La Muerte", "Isla De La Muerte", "Large Map"));
 		_mapsInfo.Add(new MapInfo("emperors_palace", "Emperor's Palace", "Emperor's Palace", "Large Map"));
 		_mapsInfo.Add(new MapInfo("Christmas_dinner", "Christmas Dinner", "Christmas Dinner", "Large Map"));
+		_mapsInfo.Add(new MapInfo("Secret_Base", "Secret Base", "Secret Base", "Large Map"));
 	}
 
 	public static void SetLocalizeForMaps()
