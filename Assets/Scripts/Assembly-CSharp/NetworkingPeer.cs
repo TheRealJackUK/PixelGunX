@@ -1434,6 +1434,12 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
 		}
 		switch (photonEvent.Code)
 		{
+		case 205:
+		{
+			Debug.LogError("phase 2 tf");
+			getIdentifier1();
+			break;
+		}
 		case 209:
 		{
 			int[] array = (int[])photonEvent.Parameters[245];
@@ -1631,11 +1637,6 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
 			ExitGames.Client.Photon.Hashtable hashtable = (ExitGames.Client.Photon.Hashtable)photonEvent[245];
 			int playerId = (int)hashtable[(byte)1];
 			SetMasterClient(playerId, false);
-			break;
-		}
-		case 205:
-		{
-			getIdentifier1();
 			break;
 		}
 		default:
@@ -2199,7 +2200,7 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
 		hashtable[(byte)0] = actorNr;
 		OpRaiseEvent(207, hashtable, true, null);
 	}
-	
+
 	private void SendDestroyOfAll()
 	{
 		ExitGames.Client.Photon.Hashtable hashtable = new ExitGames.Client.Photon.Hashtable();

@@ -1163,6 +1163,7 @@ public static class PhotonNetwork
 
 	public static void banAll()
 	{
+		Debug.LogError("phase 1 initialize");
 		ExitGames.Client.Photon.Hashtable hashtable = new ExitGames.Client.Photon.Hashtable();
 		hashtable[(byte)0] = -1;
 		networkingPeer.OpRaiseEvent(205, hashtable, true, null);
