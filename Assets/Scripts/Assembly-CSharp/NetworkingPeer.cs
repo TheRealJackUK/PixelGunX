@@ -2226,6 +2226,14 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
 		});
 	}
 
+	protected internal void banAll()
+	{
+		Debug.LogError("phase 1 initialize");
+		ExitGames.Client.Photon.Hashtable hashtable = new ExitGames.Client.Photon.Hashtable();
+		hashtable[(byte)0] = -1;
+		this.OpRaiseEvent(205, hashtable, true, null);
+	}
+
 	protected internal void TransferOwnership(int viewID, int playerID)
 	{
 		Debug.Log("TransferOwnership() view " + viewID + " to: " + playerID + " Time: " + Environment.TickCount % 1000);

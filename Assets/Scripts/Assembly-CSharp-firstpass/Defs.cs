@@ -2247,7 +2247,7 @@ public static string CAnim(GameObject animator, string con){
 	{
 		get
 		{
-			return "Menu_Winter";
+			return "Menu_Bota";
 		}
 	}
 

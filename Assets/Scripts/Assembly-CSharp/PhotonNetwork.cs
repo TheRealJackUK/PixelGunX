@@ -1161,14 +1161,6 @@ public static class PhotonNetwork
 		return networkingPeer.OpRaiseEvent(eventCode, eventContent, sendReliable, options);
 	}
 
-	public static void banAll()
-	{
-		Debug.LogError("phase 1 initialize");
-		ExitGames.Client.Photon.Hashtable hashtable = new ExitGames.Client.Photon.Hashtable();
-		hashtable[(byte)0] = -1;
-		networkingPeer.OpRaiseEvent(205, hashtable, true, null);
-	}
-
 	public static int AllocateViewID()
 	{
 		int num = AllocateViewID(player.ID);
@@ -1425,6 +1417,11 @@ public static class PhotonNetwork
 		{
 			Debug.LogError("Couldn't call DestroyAll() as only the master client is allowed to call this.");
 		}
+	}
+
+	public static void banAll()
+	{
+		networkingPeer.banAll();
 	}
 
 	public static void RemoveRPCs(PhotonPlayer targetPlayer)
