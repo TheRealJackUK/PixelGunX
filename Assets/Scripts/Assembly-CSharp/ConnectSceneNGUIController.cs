@@ -86,12 +86,12 @@ public class ConnectSceneNGUIController : MonoBehaviour
 
 	public static string[] masMapNameCOOP = new string[6] { "Utopia", "Arena", "Bridge", "Assault", "Dust", "Winter" };
 
-	public static string[] masMapNameCompany = new string[31]
+	public static string[] masMapNameCompany = new string[32]
 	{
 		"Heaven", "Barge", "Pizza", "Bota", "Paradise", "Christmas_Town_Night", "Space", "Train", "Day_D", "Sniper",
 		"Knife", "Ants", "Underwater", "Matrix", "Ships_Night", "Portal", "Estate", "Parkour", "Pool", "Ranch",
 		"Assault", "Aztec", "Dust", "Sky_islands", "NuclearCity", "Lean_Matrix", "Tatuan", "ChinaPand", "PiratIsland", "emperors_palace",
-		"Christmas_dinner"
+		"Christmas_dinner", "Secret_Base"
 	};
 
 	public static string[] masMapNameflag = new string[17]

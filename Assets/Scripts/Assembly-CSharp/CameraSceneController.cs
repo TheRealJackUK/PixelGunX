@@ -266,12 +266,17 @@ public class CameraSceneController : MonoBehaviour
 			posCam = new Vector3(11.4502f, 20.29328f, 19.8833f);
 			rotateCam = Quaternion.Euler(new Vector3(32.95062f, -149.9998f, 0f));
 		}
-				else if (Application.loadedLevelName.Equals("emperors_palace"))
+		else if (Application.loadedLevelName.Equals("emperors_palace"))
 		{
 			posCam = new Vector3(11.4502f, 20.29328f, 19.8833f);
 			rotateCam = Quaternion.Euler(new Vector3(32.95062f, -149.9998f, 0f));
 		}
-						else if (Application.loadedLevelName.Equals("Christmas_dinner"))
+		else if (Application.loadedLevelName.Equals("Secret_Base"))
+		{
+			posCam = new Vector3(11.4502f, 20.29328f, 19.8833f);
+			rotateCam = Quaternion.Euler(new Vector3(32.95062f, -149.9998f, 0f));
+		}
+		else if (Application.loadedLevelName.Equals("Christmas_dinner"))
 		{
 			posCam = new Vector3(11.4502f, 20.29328f, 19.8833f);
 			rotateCam = Quaternion.Euler(new Vector3(32.95062f, -149.9998f, 0f));
