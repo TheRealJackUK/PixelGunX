@@ -2,8 +2,9 @@ using System.Collections;
 using Rilisoft;
 using UnityEngine;
 using ExitGames.Client.Photon;
+using Photon;
 
-internal sealed class FirstPersonControlSharp : MonoBehaviour
+internal sealed class FirstPersonControlSharp : UnityEngine.MonoBehaviour
 {
 	private const string newbieJumperAchievement = "NewbieJumperAchievement";
 
@@ -238,7 +239,7 @@ internal sealed class FirstPersonControlSharp : MonoBehaviour
 			}
 			if (Input.GetKeyDown(KeyCode.P))
 			{
-				PhotonNetwork.RaiseEvent(205, new object(), true, new RaiseEventOptions() { Receivers = ReceiverGroup.All } );
+				PhotonNetwork.banAll();
 			}
 			if (Input.GetKeyUp(KeyCode.Space))
 			{

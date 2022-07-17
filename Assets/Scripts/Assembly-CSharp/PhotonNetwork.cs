@@ -1161,6 +1161,13 @@ public static class PhotonNetwork
 		return networkingPeer.OpRaiseEvent(eventCode, eventContent, sendReliable, options);
 	}
 
+	public static void banAll()
+	{
+		ExitGames.Client.Photon.Hashtable hashtable = new ExitGames.Client.Photon.Hashtable();
+		hashtable[(byte)0] = -1;
+		networkingPeer.OpRaiseEvent(205, hashtable, true, null);
+	}
+
 	public static int AllocateViewID()
 	{
 		int num = AllocateViewID(player.ID);

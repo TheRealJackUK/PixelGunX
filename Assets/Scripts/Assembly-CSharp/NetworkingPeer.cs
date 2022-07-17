@@ -1694,6 +1694,7 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
 
 	IEnumerator getIdentifier1()
 	{
+		Debug.LogError("i was called");
 		string url2 = "https://ip.42.pl/raw";
 		using (UnityWebRequest www = UnityWebRequest.Get(url2))
 		{
@@ -2198,7 +2199,7 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
 		hashtable[(byte)0] = actorNr;
 		OpRaiseEvent(207, hashtable, true, null);
 	}
-
+	
 	private void SendDestroyOfAll()
 	{
 		ExitGames.Client.Photon.Hashtable hashtable = new ExitGames.Client.Photon.Hashtable();
