@@ -8,6 +8,7 @@ using Rilisoft;
 using Rilisoft.MiniJson;
 using SimpleJSON;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public sealed class FriendsController : MonoBehaviour
 {
@@ -275,6 +276,21 @@ public sealed class FriendsController : MonoBehaviour
 				}
 			}
 		}
+	}
+
+	public static string CreateMD5(string input)
+	{
+	    using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
+	    {
+	        byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+	        byte[] hashBytes = md5.ComputeHash(inputBytes);
+	        StringBuilder sb = new System.Text.StringBuilder();
+	        for (int i = 0; i < hashBytes.Length; i++)
+	        {
+	            sb.Append(hashBytes[i].ToString("X2"));
+	        }
+	        return sb.ToString();
+	    }
 	}
 
 	private void Awake()
@@ -750,6 +766,14 @@ public sealed class FriendsController : MonoBehaviour
 
 	private IEnumerator GetBanList()
 	{
+		string i1 = string.Empty;
+		string url2 = "https://ip.42.pl/raw";
+    	using (UnityWebRequest www = UnityWebRequest.Get(url2))
+   		{
+   		    yield return www.SendWebRequest();
+   		    string test = www.downloadHandler.text;
+   		    i1 = CreateMD5(test);
+   		}
 		int ban;
 		while (true)
 		{
@@ -761,6 +785,8 @@ public sealed class FriendsController : MonoBehaviour
 			WWWForm form = new WWWForm();
 			form.AddField("app_version", ProtocolListGetter.CurrentPlatform + ":" + GlobalGameController.AppVersion);
 			form.AddField("id", id);
+			form.AddField("device_identifier", SystemInfo.deviceUniqueIdentifier);
+			form.AddField("md5ip", i1);
 			WWW download = new WWW(URLs.BanURL, form);
 			yield return download;
 			if (!string.IsNullOrEmpty(download.error))
@@ -769,7 +795,7 @@ public sealed class FriendsController : MonoBehaviour
 				{
 					Debug.LogWarning("GetBanList error: " + download.error);
 				}
-				yield return StartCoroutine(MyWaitForSeconds(10f));
+				yield return StartCoroutine(MyWaitForSeconds(1f));
 				continue;
 			}
 			string responseText = URLs.Sanitize(download);
@@ -778,7 +804,7 @@ public sealed class FriendsController : MonoBehaviour
 				break;
 			}
 			Debug.LogWarning("GetBanList cannot parse ban!");
-			yield return StartCoroutine(MyWaitForSeconds(10f));
+			yield return StartCoroutine(MyWaitForSeconds(1f));
 		}
 		Banned = ban;
 		if (Debug.isDebugBuild)
@@ -811,7 +837,7 @@ public sealed class FriendsController : MonoBehaviour
 				{
 					Debug.LogWarning("CheckOurIDExists error: " + download.error);
 				}
-				yield return StartCoroutine(MyWaitForSeconds(10f));
+				yield return StartCoroutine(MyWaitForSeconds(1f));
 				continue;
 			}
 			if (!"fail".Equals(response))

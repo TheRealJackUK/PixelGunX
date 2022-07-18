@@ -14,6 +14,7 @@ internal sealed class crossHair : MonoBehaviour
 
 	private void Start()
 	{
+		Debug.LogError("i was called from: " + base.gameObject + " or " + this.gameObject);
 		photonView = PhotonView.Get(this);
 		if ((((!Defs.isInet && base.GetComponent<NetworkView>().isMine) || (Defs.isInet && photonView.isMine)) && Defs.isMulti) || !Defs.isMulti)
 		{

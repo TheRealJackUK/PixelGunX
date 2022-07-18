@@ -211,7 +211,7 @@ public sealed class MainMenu : MonoBehaviour
 
 	private void Start()
 	{
-		if (!Application.isMobilePlatform && PlayerPrefs.GetInt("isMouseControl") != 0)
+		if (!Application.isMobilePlatform && PlayerPrefs.GetInt("isMouseControl") == 0)
 		{
 			PlayerPrefs.SetInt("isMouseControl", 1);
 		}

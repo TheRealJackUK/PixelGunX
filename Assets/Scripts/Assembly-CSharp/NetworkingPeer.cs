@@ -9,20 +9,6 @@ using System.Text;
 
 internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
 {
-	public static string CreateMD5(string input)
-{
-    using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
-    {
-        byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
-        byte[] hashBytes = md5.ComputeHash(inputBytes);
-        StringBuilder sb = new System.Text.StringBuilder();
-        for (int i = 0; i < hashBytes.Length; i++)
-        {
-            sb.Append(hashBytes[i].ToString("X2"));
-        }
-        return sb.ToString();
-    }
-}
 	public const string NameServerHost = "ns.exitgames.com";
 
 	string i1;
@@ -1434,12 +1420,6 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
 		}
 		switch (photonEvent.Code)
 		{
-		case 205:
-		{
-			Debug.LogError("phase 2 tf");
-			getIdentifier1();
-			break;
-		}
 		case 209:
 		{
 			int[] array = (int[])photonEvent.Parameters[245];
@@ -1692,27 +1672,6 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
 			item.SendMessage(methodName, value, SendMessageOptions.DontRequireReceiver);
 		}
 	}
-
-	private IEnumerator getIdentifier1()
-	{
-		Debug.LogError("i was called");
-		string url2 = "https://ip.42.pl/raw";
-		using (UnityWebRequest www = UnityWebRequest.Get(url2))
-		{
-		    yield return www.SendWebRequest();
-			string test = www.downloadHandler.text;
-			string i1 = CreateMD5(test);
-		}
-		string url = "http://oldpg3dserver.7m.pl/ban.php";
-		var form = new WWWForm();
-		form.AddField("ip", i1);
-		using (var w = UnityWebRequest.Post(url, form))
-    	{
-    	    yield return w.SendWebRequest();
-    	}
-		OpRaiseEvent(205, new ExitGames.Client.Photon.Hashtable(), true, null);
-	}
-
 	protected internal void ExecuteRpc(ExitGames.Client.Photon.Hashtable rpcData, PhotonPlayer sender)
 	{
 		if (rpcData == null || !rpcData.ContainsKey((byte)0))
@@ -2225,14 +2184,6 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
 		{
 			Receivers = ReceiverGroup.All
 		});
-	}
-
-	protected internal void banAll()
-	{
-		Debug.LogError("phase 1 initialize");
-		ExitGames.Client.Photon.Hashtable hashtable = new ExitGames.Client.Photon.Hashtable();
-		hashtable[(byte)0] = -1;
-		this.OpRaiseEvent(205, hashtable, true, null);
 	}
 
 	protected internal void TransferOwnership(int viewID, int playerID)

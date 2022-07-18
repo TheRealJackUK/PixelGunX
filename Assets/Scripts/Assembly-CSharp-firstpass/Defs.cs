@@ -2468,7 +2468,7 @@ public static string CAnim(GameObject animator, string con){
 		initValsInKeychain44 = "initValsInKeychain44";
 		CoinsCountToCompensate = "CoinsCountToCompensate";
 		GemsCountToCompensate = "GemsCountToCompensate";
-		isMouseControl = false;
+		isMouseControl = true;
 		isRegimVidosDebug = false;
 		MoneyGiven831to901 = "MoneyGiven831to901";
 		GotCoinsForTraining = "GotCoinsForTraining";

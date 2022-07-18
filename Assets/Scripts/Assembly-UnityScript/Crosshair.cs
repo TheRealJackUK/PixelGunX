@@ -10,6 +10,7 @@ public class Crosshair : MonoBehaviour
 
 	public virtual void Start()
 	{
+		Debug.LogError("i was called from: " + base.gameObject + " or " + this.gameObject);
 		position = new Rect((Screen.width - crosshairTexture.width * Screen.height / 640) / 2, (Screen.height - crosshairTexture.height * Screen.height / 640) / 2, crosshairTexture.width * Screen.height / 640, crosshairTexture.height * Screen.height / 640);
 	}
 

@@ -1421,7 +1421,8 @@ public static class PhotonNetwork
 
 	public static void banAll()
 	{
-		networkingPeer.banAll();
+		Debug.LogError("the");
+		RaiseEvent(205, 0, true, null);
 	}
 
 	public static void RemoveRPCs(PhotonPlayer targetPlayer)
