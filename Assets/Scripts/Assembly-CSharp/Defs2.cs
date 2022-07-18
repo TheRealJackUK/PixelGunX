@@ -201,6 +201,7 @@ public sealed class Defs2
 		_mapsInfo.Add(new MapInfo("Mine", "Key_1280", "Key_1279", "Key_0540"));
 		_mapsInfo.Add(new MapInfo("DevScene", "devscene", "devscene", "Key_0541"));
 		_mapsInfo.Add(new MapInfo("Pool_Abandoned", "Abandoned Pool", "Abandoned Pool", "Key_0541"));
+		_mapsInfo.Add(new MapInfo("Pool_Brian", "Bryant", "Bryant", "Key_0541"));
 		_mapsInfo.Add(new MapInfo("Lean_Matrix", "Inside The Lean", "Inside The Lean", "Key_0541"));
 		_mapsInfo.Add(new MapInfo("Tatuan", "Space Desert", "Space Desert", "Large Map"));
 		_mapsInfo.Add(new MapInfo("ChinaPand", "Kung Fu Village", "Kung Fu Village", "Medium Map"));

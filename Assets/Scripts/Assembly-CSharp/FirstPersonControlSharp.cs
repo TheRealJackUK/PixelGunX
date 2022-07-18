@@ -259,11 +259,15 @@ internal sealed class FirstPersonControlSharp : UnityEngine.MonoBehaviour
 			{
 				//InGameGUI.sharedInGameGUI.playerMoveC.CurHealth = Player_move_c.MaxPlayerHealth;
 			}
-			if (Defs.isMulti && Input.GetKeyDown("t") && !_moveC.showRanks)
+			if (Defs.isMulti && Input.GetKeyDown("t") && !_moveC.showChat)
+			{
+				_moveC.ShowChat();
+			}
+			if (Defs.isMulti && Input.GetKeyDown("tab") && !_moveC.showRanks)
 			{
 				_moveC.RanksPressed();
 			}
-			if (Defs.isMulti && Input.GetKeyUp("t") && _moveC.showRanks)
+			if (Defs.isMulti && Input.GetKeyUp("tab") && _moveC.showRanks)
 			{
 				NetworkStartTableNGUIController.sharedController.BackPressFromRanksTable(true);
 			}
