@@ -358,9 +358,13 @@ namespace RilisoftBot
 
 		public void TryPlayAudioClip(AudioClip audioClip)
 		{
-			if (Defs.isSoundFX && !(audioClip == null))
-			{
-				base.GetComponent<AudioSource>().PlayOneShot(audioClip);
+			try {
+				if (Defs.isSoundFX && !(audioClip == null))
+				{
+					base.GetComponent<AudioSource>().PlayOneShot(audioClip);
+				}
+			} catch (Exception e) {
+				
 			}
 		}
 
@@ -371,18 +375,26 @@ namespace RilisoftBot
 
 		public void TryPlayDeathSound(float delay)
 		{
-			if (Defs.isSoundFX && IsCanPlayDeathSound(delay))
-			{
-				base.GetComponent<AudioSource>().PlayOneShot(deathSound);
+			try {
+				if (Defs.isSoundFX && IsCanPlayDeathSound(delay))
+				{
+					base.GetComponent<AudioSource>().PlayOneShot(deathSound);
+				}
+			} catch (Exception e){
+
 			}
 		}
 
 		public void TryPlayDamageSound(float delay)
 		{
-			if (Defs.isSoundFX && !_isPlayingDamageSound)
-			{
-				StartCoroutine(CheckCanPlayDamageAudio(delay));
-				base.GetComponent<AudioSource>().PlayOneShot(damageSound);
+			try {
+				if (Defs.isSoundFX && !_isPlayingDamageSound)
+				{
+					StartCoroutine(CheckCanPlayDamageAudio(delay));
+					base.GetComponent<AudioSource>().PlayOneShot(damageSound);
+				}
+			} catch (Exception e){
+				
 			}
 		}
 
