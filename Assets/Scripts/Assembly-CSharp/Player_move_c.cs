@@ -1409,7 +1409,7 @@ public sealed class Player_move_c : MonoBehaviour
 		{
 			while (deltaAngle < 40f && !Defs.isTurretWeapon && !isMechActive)
 			{
-				deltaAngle += 300f * Time.deltaTime * 70;
+				deltaAngle += 300f * Time.deltaTime / 5;
 				yield return null;
 			}
 		}
