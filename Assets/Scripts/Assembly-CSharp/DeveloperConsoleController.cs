@@ -28,6 +28,7 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 	public void HandleClearKeychainAndPlayerPrefs()
 	{
 		Debug.Log("[Clear Keychain] pressed.");
+		Debug.LogError("Deleting all data");
 		PlayerPrefs.DeleteAll();
 		Application.Quit();
 	}
@@ -258,6 +259,7 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 		CampaignProgress.SaveCampaignProgress();
 		Storager.setString(Defs.WeaponsGotInCampaign, string.Empty, false);
 		Storager.setString(Defs.LevelsWhereGetCoinS, string.Empty, false);
+		Debug.LogError("Deleting all data");
 		PlayerPrefs.DeleteAll();
 	}
 

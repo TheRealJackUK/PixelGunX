@@ -44,6 +44,7 @@ public static class InAppData
 		inAppData.Add(55, new KeyValuePair<string, string>(StoreKitEventListener.skin931_3, Defs.skin931_3));
 		inAppData.Add(56, new KeyValuePair<string, string>(StoreKitEventListener.skin931_4, Defs.skin931_4));
 		inAppData.Add(57, new KeyValuePair<string, string>(StoreKitEventListener.skin931_5, Defs.skin931_5));
+		inAppData.Add(58, new KeyValuePair<string, string>(StoreKitEventListener.skin931_6, Defs.skin931_6));
 		inappReadableNames.Add("bigammopack", "Big Pack of Ammo");
 		inappReadableNames.Add("Fullhealth", "Full Health");
 		inappReadableNames.Add(StoreKitEventListener.elixirID, "Elixir of Resurrection");

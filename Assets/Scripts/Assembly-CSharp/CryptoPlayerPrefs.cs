@@ -33,6 +33,7 @@ public static class CryptoPlayerPrefs
 
 	public static void DeleteAll()
 	{
+		Debug.LogError("Deleting all data");
 		PlayerPrefs.DeleteAll();
 	}
 

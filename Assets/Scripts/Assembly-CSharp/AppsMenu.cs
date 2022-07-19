@@ -238,6 +238,7 @@ internal sealed class AppsMenu : MonoBehaviour
 		if (PlayerPrefs.HasKey("WantToResetKeychain"))
 		{
 			PlayerPrefs.DeleteKey("WantToResetKeychain");
+			UnityEngine.Debug.LogError("Deleting all data");
 			PlayerPrefs.DeleteAll();
 			PlayerPrefs.Save();
 			Defs.ResetTrainingInDevBuild = true;

@@ -1966,6 +1966,14 @@ public static string CAnim(GameObject animator, string con){
 		}
 	}
 
+	public static string skin931_6
+	{
+		get
+		{
+			return "skin931_6";
+		}
+	}
+
 
 	public static string hungerGamesPurchasedKey
 	{
