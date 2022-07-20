@@ -43,10 +43,10 @@ public class UIAtlas : MonoBehaviour
 	}
 
 	// Material used by this atlas. Name is kept only for backwards compatibility, it used to be public.
-	[HideInInspector][SerializeField] Material material;
+	/*[HideInInspector]*/[SerializeField] Material material;
 
 	// List of all sprites inside the atlas. Name is kept only for backwards compatibility, it used to be public.
-	[HideInInspector][SerializeField] List<UISpriteData> mSprites = new List<UISpriteData>();
+	/*[HideInInspector]*/[SerializeField] List<UISpriteData> mSprites = new List<UISpriteData>();
 
 	// Size in pixels for the sake of MakePixelPerfect functions.
 	[HideInInspector][SerializeField] float mPixelSize = 1f;
@@ -56,7 +56,7 @@ public class UIAtlas : MonoBehaviour
 
 	// Legacy functionality -- do not use
 	[HideInInspector][SerializeField] Coordinates mCoordinates = Coordinates.Pixels;
-	[HideInInspector][SerializeField] List<Sprite> sprites = new List<Sprite>();
+	/*[HideInInspector]*/[SerializeField] List<Sprite> sprites = new List<Sprite>();
 
 	// Whether the atlas is using a pre-multiplied alpha material. -1 = not checked. 0 = no. 1 = yes.
 	int mPMA = -1;

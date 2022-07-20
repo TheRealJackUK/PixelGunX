@@ -432,8 +432,13 @@ namespace RilisoftBot
 			botAiController.isDetectPlayer = false;
 			botAiController.IsCanMove = false;
 			IsDeath = true;
-			float num = deathSound.length;
-			TryPlayDeathSound(num);
+			float num = 0;
+			try {
+				num = deathSound.length;
+				TryPlayDeathSound(num);
+			}catch (Exception e){
+
+			}
 			animations.Stop();
 			if ((bool)animations[animationsName.Death])
 			{
@@ -720,7 +725,11 @@ namespace RilisoftBot
 			{
 				GlobalGameController.Score += 5;
 			}
-			TryPlayDamageSound(damageSound.length);
+			try {
+				TryPlayDamageSound(damageSound.length);
+			}catch (Exception e){
+
+			}
 			if (instigator != null && health > 0f)
 			{
 				botAiController.SetTargetForced(instigator);
