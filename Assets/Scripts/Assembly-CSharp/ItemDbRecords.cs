@@ -362,7 +362,7 @@ public static class ItemDbRecords
 			new ItemPrice(305, "Coins"),
 			new ItemPrice(255, "Coins")
 		}, true));
-				list.Add(new ItemRecord(277, "OGUzi", "OGUzi", "Weapon278", "OGUzi", "OGUzi", true, false, new List<ItemPrice>
+		list.Add(new ItemRecord(277, "OGUzi", "OGUzi", "Weapon278", "OGUzi", "OGUzi", true, false, new List<ItemPrice>
 		{
 			new ItemPrice(170, "Coins"),
 			new ItemPrice(305, "Coins"),
