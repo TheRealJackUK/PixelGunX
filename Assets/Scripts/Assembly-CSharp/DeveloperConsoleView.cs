@@ -184,6 +184,16 @@ internal sealed class DeveloperConsoleView : MonoBehaviour
 		}
 	}
 
+	public string setFpsLabel
+	{
+		set
+		{
+			if (GameObject.Find("set60FpsCheckbox") != null)
+			{
+				GameObject.Find("set60FpsCheckbox").GetComponentInChildren<UILabel>().text = value;
+			}
+		}
+	}
 	public bool TempGunActive
 	{
 		set

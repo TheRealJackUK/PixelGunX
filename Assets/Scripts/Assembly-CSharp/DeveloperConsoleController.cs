@@ -115,7 +115,7 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 		{
 			if (toggle.value)
 			{
-				Application.targetFrameRate = 60;
+				Application.targetFrameRate = 9999;
 			}
 		}
 	}
@@ -445,7 +445,7 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 		int @int = Storager.getInt(Defs.TrainingCompleted_4_4_Sett, false);
 		view.TrainingCompleted = Convert.ToBoolean(@int);
 		view.TempGunActive = TempItemsController.sharedController.ContainsItem(WeaponTags.Impulse_Sniper_Rifle_Tag);
-		view.Set60FPSActive = Application.targetFrameRate == 60;
+		view.Set60FPSActive = Application.targetFrameRate == 9999;
 		view.IsPayingUser = FlurryPluginWrapper.IsPayingUser();
 		view.isDebugGuiVisibleCheckbox.value = isDebugGuiVisible;
 		view.SetMouseControll = Convert.ToBoolean(PlayerPrefs.GetInt("isMouseControl"));
@@ -516,6 +516,7 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 
 	private IEnumerator Start()
 	{
+		view.setFpsLabel = "Uncap FPS";
 		RefreshFOV();
 		can = true;
 		if (view != null)
