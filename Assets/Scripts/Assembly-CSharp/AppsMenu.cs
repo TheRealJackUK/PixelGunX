@@ -250,10 +250,7 @@ internal sealed class AppsMenu : MonoBehaviour
 			Storager.setInt(Defs.TrainingCompleted_4_4_Sett, 1, false);
 		}
 		Defs.isTrainingFlag = Storager.getInt(Defs.TrainingCompleted_4_4_Sett, false) == 0;
-		if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.WP8Player)
-		{
-			Application.targetFrameRate = 240;
-		}
+		Application.targetFrameRate = 240;
 		_startFrameIndex = Time.frameCount;
 		yield return 0.2f;
 		if (!Launcher.UsingNewLauncher)
