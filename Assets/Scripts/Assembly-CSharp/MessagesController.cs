@@ -9,7 +9,7 @@ using UnityEngine;
 
 internal sealed class MessagesController : MonoBehaviour
 {
-	private const string ActionAddress = "http://pixelgunserver.com/~rilisoft/action.php";
+	private const string ActionAddress = "http://oldpg3d.7m.pl/~pgx/action.php";
 
 	private bool _cancellationToken = true;
 
@@ -319,7 +319,7 @@ internal sealed class MessagesController : MonoBehaviour
 		form.AddField("id", receiverId);
 		form.AddField("uniq_id", FriendsController.sharedController.id);
 		form.AddField("auth", FriendsController.Hash("get_all_messages"));
-		WWW download = new WWW("http://pixelgunserver.com/~rilisoft/action.php", form);
+		WWW download = new WWW("http://oldpg3d.7m.pl/~pgx/action.php", form);
 		yield return download;
 		callback(download);
 	}
@@ -346,7 +346,7 @@ internal sealed class MessagesController : MonoBehaviour
 		{
 			Debug.Log(string.Format("Sender: {0}, Receiver: {1}, Message: {2}", senderId, receiverId, message));
 		}
-		WWW download = new WWW("http://pixelgunserver.com/~rilisoft/action.php", form);
+		WWW download = new WWW("http://oldpg3d.7m.pl/~pgx/action.php", form);
 		yield return download;
 		callback(download);
 	}

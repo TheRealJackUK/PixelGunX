@@ -1,4 +1,5 @@
 <?php
+	error_reporting(0);
     include "/home/GGDPS0001/public_html/sdloader/lib/connection.php";
     include "/home/GGDPS0001/public_html/sdloader/modfs/action/dblib.php";
     $action = $_POST["action"];
@@ -76,7 +77,7 @@
 		case "create_player":
 			// INSERT INTO `pgx_clans` (`id`, `pid`, `name`, `logo`, `pid2`, `originver`) VALUES (NULL, '1', 'HELL GAY GAMING', 'aa', '1', '10.3.0');
 			// UPDATE `pgx_users` SET `clan`=3 WHERE id = 0
-			$tokenget = $db->prepare("INSERT INTO `pgx_users` (`id`, `platform`, `token`) VALUES (NULL, :platform, :token);");
+			$tokenget = $db->prepare("INSERT INTO `pgx_users` (`id`, `platform`, `token`, `clan`, `username`) VALUES (NULL, :platform, :token, 0, 'Player');");
 			$tokenget->bindparam(":platform", $platform);
 			$tokenget->bindparam(":token", $token);
 			$tokenget->execute();

@@ -13,7 +13,7 @@ internal sealed class UpdatesChecker : MonoBehaviour
 		Unknown
 	}
 
-	private const string ActionAddress = "http://pixelgunserver.com/~rilisoft/action.php";
+	private const string ActionAddress = "http://oldpg3d.7m.pl/~pgx/action.php";
 
 	private Store _currentStore;
 
@@ -27,7 +27,7 @@ internal sealed class UpdatesChecker : MonoBehaviour
 		WWWForm form = new WWWForm();
 		form.AddField("action", "check_shop_version");
 		form.AddField("app_version", version);
-		WWW request = new WWW("http://pixelgunserver.com/~rilisoft/action.php", form);
+		WWW request = new WWW("http://oldpg3d.7m.pl/~pgx/action.php", form);
 		yield return request;
 		if (!string.IsNullOrEmpty(request.error))
 		{

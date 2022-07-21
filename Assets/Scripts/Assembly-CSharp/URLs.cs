@@ -201,7 +201,7 @@ public class URLs
 	{
 		get
 		{
-			return "http://pixelgunserver.com/~rilisoft/action.php";
+			return "http://oldpg3d.7m.pl/~pgx/action.php";
 		}
 	}
 
