@@ -249,7 +249,7 @@ public class UIRoot : MonoBehaviour
     	    Storager.setInt("camerafov", 44, false);
     	}
     	Storager.setInt(Defs.ShownLobbyLevelSN, 31, false);
-    	PhotonNetwork.PhotonServerSettings.AppID = "06ad256f-363b-4a93-9dd3-eba47c6bfe9c";
+    	PhotonNetwork.PhotonServerSettings.AppID = "c844400a-3502-4117-85cd-a2a3b7b7bcf8";
     	PhotonNetwork.PhotonServerSettings.HostType = ServerSettings.HostingOption.PhotonCloud;
 			mTrans = transform; 
 		}
