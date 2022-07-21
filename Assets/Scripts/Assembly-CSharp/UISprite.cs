@@ -15,14 +15,14 @@ using System.Collections.Generic;
 public class UISprite : UIBasicSprite
 {
 	// Cached and saved values
-	/*[HideInInspector]*/[SerializeField] UIAtlas mAtlas;
-	/*[HideInInspector]*/[SerializeField] string mSpriteName;
+	[HideInInspector][SerializeField] UIAtlas mAtlas;
+	[HideInInspector][SerializeField] string mSpriteName;
 
 	// Deprecated, no longer used
 	[HideInInspector][SerializeField] bool mFillCenter = true;
 
-	/*[System.NonSerialized]*/ [SerializeField]protected UISpriteData mSprite;
-	/*[System.NonSerialized]*/ [SerializeField]bool mSpriteSet = false;
+	[System.NonSerialized] protected UISpriteData mSprite;
+	[System.NonSerialized] bool mSpriteSet = false;
 
 	/// <summary>
 	/// Main texture is assigned on the atlas.

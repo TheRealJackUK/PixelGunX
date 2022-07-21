@@ -4,7 +4,6 @@
 //-------------------------------------------------
 
 using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
 using System.Collections.Generic;
 
 /// <summary>
@@ -46,8 +45,6 @@ public class UIRoot : MonoBehaviour
 	/// <summary>
 	/// When the UI scaling is constrained, this controls the type of constraint that further fine-tunes how it's scaled.
 	/// </summary>
-
-	string input11 = string.Empty;
 
 	public Constraint constraint
 	{
@@ -242,17 +239,7 @@ public class UIRoot : MonoBehaviour
 
 	Transform mTrans;
 
-	protected virtual void Awake () 
-	{
-		if (Storager.getInt("camerafov", false) == 0 || Storager.getInt("camerafov", false) == null || Storager.getInt("camerafov", false) == 180)
-    	{
-    	    Storager.setInt("camerafov", 44, false);
-    	}
-    	Storager.setInt(Defs.ShownLobbyLevelSN, 31, false);
-    	PhotonNetwork.PhotonServerSettings.AppID = "c844400a-3502-4117-85cd-a2a3b7b7bcf8";
-    	PhotonNetwork.PhotonServerSettings.HostType = ServerSettings.HostingOption.PhotonCloud;
-			mTrans = transform; 
-		}
+	protected virtual void Awake () { mTrans = transform; }
 	protected virtual void OnEnable () { list.Add(this); }
 	protected virtual void OnDisable () { list.Remove(this); }
 
@@ -270,32 +257,8 @@ public class UIRoot : MonoBehaviour
 		else UpdateScale(false);
 	}
 
-	public void OnGUI()
-	{
-	    if (Application.loadedLevelName == "DeveloperConsole") {
-	        input11 = GUI.TextField(new Rect(10, 120, 100, 20), input11, 25);
-	        if (GUI.Button(new Rect(10, 140, 80, 20), "load scene")) {
-	            Application.LoadLevel(input11);
-	        }
-	    }
-	}
-
 	void Update ()
 	{
-		if (Application.loadedLevelName.StartsWith("Menu_") || Application.loadedLevelName == "ConnectScene")
-		{
-			Cursor.visible = true;
-			Cursor.lockState = CursorLockMode.None;
-		}
-		if (Application.isMobilePlatform && GameObject.Find("Main Camera").GetComponent<PostProcessLayer>() != null)
-		{
-		    PostProcessLayer renderer = GameObject.Find("Main Camera").GetComponent<PostProcessLayer>();
-		    if (renderer != null && renderer.enabled != false && Application.isMobilePlatform && GameObject.Find("Pers_Main_Point").GetComponent<PostProcessVolume>() != null && GameObject.Find("Pers_Main_Point").GetComponent<PostProcessVolume>().enabled)
-		    {
-		           Destroy(renderer);
-		        Destroy(GameObject.Find("Pers_Main_Point").GetComponent<PostProcessVolume>());
-		    }
-		}
 #if UNITY_EDITOR
 		if (!Application.isPlaying && gameObject.layer != 0)
 			UnityEditor.EditorPrefs.SetInt("NGUI Layer", gameObject.layer);
