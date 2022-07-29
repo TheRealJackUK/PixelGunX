@@ -214,6 +214,7 @@ public sealed class Defs2
 		_mapsInfo.Add(new MapInfo("train_robbery", "Train Robbery", "Train Robbery", "Small Map"));
 		_mapsInfo.Add(new MapInfo("Candyland", "Candy Land", "Candy Land", "Medium Map"));
 		_mapsInfo.Add(new MapInfo("actualgame", "My Front Yard", "My Front Yard", "Front Yard Size But You're An Ant!"));
+		_mapsInfo.Add(new MapInfo("AntsButBetter", "Low Budget Ant's Life", "Low Budget Ant's Life", "Very Very Very Very Big."));
 	}
 
 	public static void SetLocalizeForMaps()
