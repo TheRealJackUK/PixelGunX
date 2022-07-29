@@ -328,11 +328,6 @@ public class CameraSceneController : MonoBehaviour
 		}
 		else if (Application.loadedLevelName.Equals("Pool_Abandoned"))
 		{
-			posCam = new Vector3(-48.8773f, 36.3f, 113.7431f);
-			rotateCam = Quaternion.Euler(new Vector3(1.703643f, 154.7453f, 5.338445e-08f));
-		}
-		else if (Application.loadedLevelName.Equals("actualgame"))
-		{
 			posCam = new Vector3(-48.1f, 53.7483f, -57.59f);
 			rotateCam = Quaternion.Euler(new Vector3(25.468f, 42.66f, 0f));
 		}
