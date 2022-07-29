@@ -209,9 +209,13 @@ public sealed class ZombieCreator : MonoBehaviour
 			GameObject gameObject3 = GameObject.FindGameObjectWithTag("BackgroundMusic");
 			if (gameObject3 != null && (bool)gameObject3.GetComponent<AudioSource>())
 			{
-							if (Application.loadedLevelName.Equals("Code_campaign3"))
+			if (Application.loadedLevelName.Equals("Code_campaign3"))
 			{
-bossMus = Resources.Load("Snd/final_boss_music") as AudioClip;
+			bossMus = Resources.Load("Snd/final_boss_music") as AudioClip;
+			}
+			else if (Application.loadedLevelName.Equals("Jail"))
+			{
+			bossMus = Resources.Load("Snd/jail_boss") as AudioClip;
 			}
 			else
 			{
