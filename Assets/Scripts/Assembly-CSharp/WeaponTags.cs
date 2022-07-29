@@ -430,6 +430,8 @@ public static class WeaponTags
 
 	public static readonly string PX_3000_Tag = "PX-3000";
 
+	public static readonly string AdvancedScoutRifle_Tag = "AdvancedScoutRifle";
+
 	public static readonly string Sunrise_Tag = "Sunrise";
 
 	public static readonly string Bastion_Tag = "Bastion";
