@@ -77,7 +77,7 @@ public class ConnectSceneNGUIController : MonoBehaviour
 	public static string[] masMapName = new string[37]
 	{
 		"Paradise", "Pizza", "Christmas_Town", "NuclearCity", "Supermarket", "Sky_islands", "Sniper", "Knife", "Heaven", "Hill",
-		"Ants", "Underwater", "Matrix", "Ships", "Portal", "Space", "Estate", "Parkour", "Pool", "School",
+		"Ants", "Underwater", "Matrix", "Ships", "Portal", "Space", "actualgame", "Estate", "Parkour", "Pool", "School",
 		"Coliseum_MP", "Bridge", "Jail", "Pool_Brian", "Slender_Multy", "Train", "DevScene", "Pool_Abandoned", "Lean_Matrix", "Tatuan", "ChinaPand", "PiratIsland",
 		"emperors_palace", "Helicarrier", "train_robbery", "Candyland", "epilepsy"
 	};
@@ -86,10 +86,10 @@ public class ConnectSceneNGUIController : MonoBehaviour
 
 	public static string[] masMapNameCOOP = new string[6] { "Utopia", "Arena", "Bridge", "Assault", "Dust", "Winter" };
 
-	public static string[] masMapNameCompany = new string[35]
+	public static string[] masMapNameCompany = new string[36]
 	{
 		"Heaven", "Barge", "Pizza", "Bota", "Paradise", "Christmas_Town_Night", "Space", "Train", "Day_D", "Sniper",
-		"Knife", "Ants", "Underwater", "Matrix", "Ships_Night", "Portal", "Estate", "Parkour", "Pool", "Ranch",
+		"Knife", "Ants", "Underwater", "Matrix", "Ships_Night", "Portal", "actualgame", "Estate", "Parkour", "Pool", "Ranch",
 		"Assault", "Aztec", "Dust", "Sky_islands", "NuclearCity", "Lean_Matrix", "Tatuan", "ChinaPand", "PiratIsland", "emperors_palace",
 		"Christmas_dinner", "Secret_Base", "Helicarrier", "train_robbery", "Candyland"
 	};
