@@ -1179,11 +1179,7 @@ public sealed class Player_move_c : MonoBehaviour
 			}
 			if ((bool)___weaponManager && (bool)___weaponManager.currentWeaponSounds && ___weaponManager.currentWeaponSounds.animationObject != null)
 			{
-				if (___weaponManager.currentWeaponSounds.animationObject.name.Contains("Weapon280_Inner")){
-					___weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>().CrossFade(myCAnim("idle"));
-				}else{
-					___weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>().CrossFade(myCAnim("Idle"));
-				}
+				___weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>().CrossFade(myCAnim("Idle"));
 			}
 		}
 	}
@@ -6108,13 +6104,13 @@ public sealed class Player_move_c : MonoBehaviour
 		{
 			if (!_weaponManager.currentWeaponSounds.isDoubleShot)
 			{
-				if (___weaponManager.currentWeaponSounds.animationObject.name.Contains("Weapon280_Inner")){
-					_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>().Play(myCAnim("nokiaSchut"));
-					num = _weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()[myCAnim("nokiaSchut")].length;
-				}else{
-					_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>().Play(myCAnim("Shoot"));
-					num = _weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()[myCAnim("Shoot")].length;
+				foreach (AnimationState ac in _weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()){
+					string nm = ac.name.ToString();
+					Debug.LogError("found anim: " + nm);
 				}
+				Debug.LogError(myCAnim("Shoot"));
+				_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>().Play(myCAnim("Shoot"));
+				num = _weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()[myCAnim("Shoot")].length;
 			}
 			else
 			{
