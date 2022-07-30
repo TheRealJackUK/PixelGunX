@@ -2032,7 +2032,9 @@ public sealed class WeaponManager : MonoBehaviour
 		}
 		try
 		{
-			_weaponsByCat[component.categoryNabor - 1].Add(w);
+			if (component.categoryNabor != 6){
+				_weaponsByCat[component.categoryNabor - 1].Add(w);
+			}
 		}
 		catch (Exception ex)
 		{

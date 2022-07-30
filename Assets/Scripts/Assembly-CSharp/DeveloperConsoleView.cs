@@ -36,6 +36,8 @@ internal sealed class DeveloperConsoleView : MonoBehaviour
 
 	public UIToggle isDebugGuiVisibleCheckbox;
 
+	public UIToggle isPvpOffCheckbox;
+
 	public UIToggle isEventX3ForcedCheckbox;
 
 	public UIToggle adIdCheckbox;

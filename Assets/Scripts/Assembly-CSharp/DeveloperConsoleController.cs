@@ -10,6 +10,7 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 	public DeveloperConsoleView view;
 
 	public static bool isDebugGuiVisible;
+	public static bool isPvpOff;
 
 	private bool? _enemiesInCampaignDirty;
 
@@ -186,6 +187,14 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 		if (!(toggle == null) && _initialized)
 		{
 			isDebugGuiVisible = toggle.value;
+		}
+	}
+
+	public void HandleIsPvpOffChanged(UIToggle toggle)
+	{
+		if (!(toggle == null) && _initialized)
+		{
+			isPvpOff = toggle.value;
 		}
 	}
 
@@ -448,6 +457,7 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 		view.Set60FPSActive = Application.targetFrameRate == 9999;
 		view.IsPayingUser = FlurryPluginWrapper.IsPayingUser();
 		view.isDebugGuiVisibleCheckbox.value = isDebugGuiVisible;
+		view.isPvpOffCheckbox.value = isPvpOff;
 		view.SetMouseControll = Convert.ToBoolean(PlayerPrefs.GetInt("isMouseControl"));
 		view.SetSpectatorMode = Defs.isRegimVidosDebug;
 		string @string = PlayerPrefs.GetString("RemotePushNotificationToken", string.Empty);
