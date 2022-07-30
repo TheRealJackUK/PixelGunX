@@ -438,7 +438,13 @@ public static class WeaponTags
 
 	public static readonly string GiantSword_Tag = "GiantSword";
 
-	public static readonly string TigerPistol_Tag = "TigerPistol";
+	public static readonly string TigerThing_Tag = "TigerThing";
+
+	public static readonly string PiratPistols_Tag = "PiratPistols";
+
+	public static readonly string SeaCannon_Tag = "SeaCannon";
+
+	public static readonly string PirateMusket_Tag = "PirateMusket";
 
 	public static readonly string Sunrise_Tag = "Sunrise";
 
