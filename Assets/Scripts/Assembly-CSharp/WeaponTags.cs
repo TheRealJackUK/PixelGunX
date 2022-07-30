@@ -438,6 +438,8 @@ public static class WeaponTags
 
 	public static readonly string GiantSword_Tag = "GiantSword";
 
+	public static readonly string TigerPistol_Tag = "TigerPistol";
+
 	public static readonly string Sunrise_Tag = "Sunrise";
 
 	public static readonly string Bastion_Tag = "Bastion";
