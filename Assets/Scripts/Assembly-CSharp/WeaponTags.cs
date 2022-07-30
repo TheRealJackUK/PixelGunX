@@ -432,6 +432,8 @@ public static class WeaponTags
 
 	public static readonly string AdvancedScoutRifle_Tag = "AdvancedScoutRifle";
 
+	public static readonly string OGUzi_Tag = "OGUzi";
+
 	public static readonly string Sunrise_Tag = "Sunrise";
 
 	public static readonly string Bastion_Tag = "Bastion";
@@ -501,8 +503,6 @@ public static class WeaponTags
 	public static readonly string TacticalBow_Tag = "TacticalBow";
 
 	public static readonly string FutureRifle_Tag = "FutureRifle";
-
-	public static readonly string OGUzi_Tag = "OGUzi";
 
 	public static readonly string RapidFireRifle_Tag = "RapidFireRifle";
 

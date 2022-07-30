@@ -282,6 +282,7 @@ public static class ItemDbRecords
 		list.Add(new ItemRecord(218, "PX-3000", "PX-3000", "Weapon220", "PX-3000", "PX-3000", 289, true, false, "GemsCurrency"));
 		// AdvancedScoutRifle
 		list.Add(new ItemRecord(218, "AdvancedScoutRifle", "AdvancedScoutRifle", "Weapon278", "AdvancedScoutRifle", "AdvancedScoutRifle", 500, true, false, "Coins"));
+		list.Add(new ItemRecord(279, "OGUzi", "OGUzi", "Weapon279", "OGUzi", "OGUzi", 50, true, false, "Coins"));
 		list.Add(new ItemRecord(219, "Sunrise", "Sunrise", "Weapon221", "Sunrise", "Sunrise", 295, true, false, "GemsCurrency"));
 		list.Add(new ItemRecord(220, "Bastion", "Bastion", "Weapon222", "Bastion", "Bastion", 310, true, false, "GemsCurrency"));
 		list.Add(new ItemRecord(221, "SteamPower_2", "SteamPower_2", "Weapon225", "SteamPower_2", "SteamPower_2", 85, true, false, "Coins", -1, true));
@@ -359,12 +360,6 @@ public static class ItemDbRecords
 			new ItemPrice(255, "Coins")
 		}, true));
 		list.Add(new ItemRecord(276, "FutureRifle_2", "FutureRifle_2", "Weapon277", "FutureRifle_2", "FutureRifle_2", true, false, new List<ItemPrice>
-		{
-			new ItemPrice(170, "Coins"),
-			new ItemPrice(305, "Coins"),
-			new ItemPrice(255, "Coins")
-		}, true));
-		list.Add(new ItemRecord(277, "OGUzi", "OGUzi", "Weapon278", "OGUzi", "OGUzi", true, false, new List<ItemPrice>
 		{
 			new ItemPrice(170, "Coins"),
 			new ItemPrice(305, "Coins"),
