@@ -6110,10 +6110,10 @@ public sealed class Player_move_c : MonoBehaviour
 			{
 				if (___weaponManager.currentWeaponSounds.animationObject.name.Contains("Weapon280_Inner")){
 					_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>().Play(myCAnim("nokiaSchut"));
-				num = _weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()[myCAnim("nokiaSchut")].length;
+					num = _weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()[myCAnim("nokiaSchut")].length;
 				}else{
 					_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>().Play(myCAnim("Shoot"));
-				num = _weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()[myCAnim("Shoot")].length;
+					num = _weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()[myCAnim("Shoot")].length;
 				}
 			}
 			else
