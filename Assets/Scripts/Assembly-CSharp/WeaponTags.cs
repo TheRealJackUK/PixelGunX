@@ -434,6 +434,8 @@ public static class WeaponTags
 
 	public static readonly string OGUzi_Tag = "OGUzi";
 
+	public static readonly string GiantSword_Tag = "GiantSword";
+
 	public static readonly string Sunrise_Tag = "Sunrise";
 
 	public static readonly string Bastion_Tag = "Bastion";

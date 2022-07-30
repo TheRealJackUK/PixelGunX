@@ -283,6 +283,7 @@ public static class ItemDbRecords
 		// AdvancedScoutRifle
 		list.Add(new ItemRecord(218, "AdvancedScoutRifle", "AdvancedScoutRifle", "Weapon278", "AdvancedScoutRifle", "AdvancedScoutRifle", 500, true, false, "Coins"));
 		list.Add(new ItemRecord(279, "OGUzi", "OGUzi", "Weapon279", "OGUzi", "OGUzi", 50, true, false, "Coins"));
+		list.Add(new ItemRecord(395, "GiantSword", "GiantSword", "Weapon395", "GiantSword", "GiantSword", 300, true, false, "GemsCurrency"));
 		list.Add(new ItemRecord(219, "Sunrise", "Sunrise", "Weapon221", "Sunrise", "Sunrise", 295, true, false, "GemsCurrency"));
 		list.Add(new ItemRecord(220, "Bastion", "Bastion", "Weapon222", "Bastion", "Bastion", 310, true, false, "GemsCurrency"));
 		list.Add(new ItemRecord(221, "SteamPower_2", "SteamPower_2", "Weapon225", "SteamPower_2", "SteamPower_2", 85, true, false, "Coins", -1, true));

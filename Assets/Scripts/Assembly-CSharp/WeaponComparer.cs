@@ -75,7 +75,6 @@ public sealed class WeaponComparer : IComparer
 		WeaponTags.DualUzi_2_Tag,
 		WeaponTags.DualUzi_3_Tag,
 		WeaponTags.FutureRifle_Tag,
-		WeaponTags.OGUzi_Tag,
 		WeaponTags.FutureRifle_2_Tag,
 		WeaponTags.PlasmaShotgun_Tag,
 		WeaponTags.PlasmaShotgun_2_Tag,
