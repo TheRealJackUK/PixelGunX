@@ -722,10 +722,7 @@ public class StarterPackController : MonoBehaviour
 		{
 			return string.Empty;
 		}
-		if (Application.isEditor)
-		{
-			return string.Format("{0}$", VirtualCurrencyHelper.starterPackFakePrice[_orderCurrentPack]);
-		}
+		return string.Empty;
 		string productId = StoreKitEventListener.starterPackIds[_orderCurrentPack];
 		IMarketProduct marketProduct = _storeKitEventListener.Products.FirstOrDefault((IMarketProduct p) => p.Id == productId);
 		if (marketProduct != null)

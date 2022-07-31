@@ -175,13 +175,13 @@ public class StarterPackView : BannerWindow
 		else
 		{
 			empty = "Textures/Bank/Coins_Shop_Gem_5";
-			num = currentPackData.gemsCount;
+			num = 69420;
 		}
 		Texture mainTexture = Resources.Load<Texture>(empty);
 		moneyLeftSprite.mainTexture = mainTexture;
 		moneyRightSprite.mainTexture = mainTexture;
 		SetCountMoneyLabel(num, isCoins);
-		SetSaleLabel(currentPackData.sale);
+		//SetSaleLabel(currentPackData.sale);
 	}
 
 	private void ShowCustomInterface()
