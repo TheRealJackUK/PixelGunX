@@ -448,6 +448,12 @@ public static class WeaponTags
 
 	public static readonly string PiratBlunderbuss_Tag = "PiratBlunderbuss";
 
+	public static readonly string PirateFlamer_Tag = "PirateFlamer";
+
+	public static readonly string PiratSword_Tag = "PiratSword";
+
+	public static readonly string PiratSword2_Tag = "PiratSword2";
+
 	public static readonly string Sunrise_Tag = "Sunrise";
 
 	public static readonly string Bastion_Tag = "Bastion";

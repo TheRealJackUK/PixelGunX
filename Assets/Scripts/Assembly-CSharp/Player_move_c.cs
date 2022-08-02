@@ -2754,7 +2754,10 @@ public sealed class Player_move_c : MonoBehaviour
 		WeaponSounds weaponSounds = ((!isMechActive) ? _weaponManager.currentWeaponSounds : mechWeaponSounds);
 		if (weaponSounds.isDoubleShot)
 		{
+			if (!_weaponManager.currentWeaponSounds.isMelee)
+			{
 			weaponSounds.gunFlashDouble[numShootInDoubleShot - 1].GetChild(0).gameObject.SetActive(state);
+			}
 			if (state)
 			{
 				return;

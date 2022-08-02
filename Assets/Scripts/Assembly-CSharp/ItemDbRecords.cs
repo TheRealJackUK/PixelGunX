@@ -283,13 +283,16 @@ public static class ItemDbRecords
 		// AdvancedScoutRifle
 		list.Add(new ItemRecord(218, "AdvancedScoutRifle", "AdvancedScoutRifle", "Weapon278", "AdvancedScoutRifle", "AdvancedScoutRifle", 500, true, false, "Coins"));
 		list.Add(new ItemRecord(279, "OGUzi", "OGUzi", "Weapon279", "OGUzi", "OGUzi", 50, true, false, "Coins"));
-		// list.Add(new ItemRecord(280, "Nokia", "Nokia", "Weapon280", "Nokia", "Nokia", 420, true, false, "GemsCurrency"));
+		 list.Add(new ItemRecord(280, "Nokia", "Nokia", "Weapon280", "Nokia", "Nokia", 420, true, false, "GemsCurrency"));
 		list.Add(new ItemRecord(395, "GiantSword", "GiantSword", "Weapon395", "GiantSword", "GiantSword", 300, true, false, "GemsCurrency"));
 		list.Add(new ItemRecord(399, "TigerThing", "TigerThing", "Weapon399", "TigerThing", "TigerThing", 250, true, false, "GemsCurrency"));
 		list.Add(new ItemRecord(404, "PiratBlunderbuss", "PiratBlunderbuss", "Weapon404", "PiratBlunderbuss", "PiratBlunderbuss", 325, true, false, "GemsCurrency"));
 		list.Add(new ItemRecord(403, "PiratPistols", "PiratPistols", "Weapon403", "PiratPistols", "PiratPistols", 300, true, false, "GemsCurrency"));
 		list.Add(new ItemRecord(406, "PirateMusket", "PirateMusket", "Weapon406", "PirateMusket", "PirateMusket", 350, true, false, "GemsCurrency"));
 		list.Add(new ItemRecord(407, "SeaCannon", "SeaCannon", "Weapon407", "SeaCannon", "SeaCannon", 700, true, false, "Coins"));
+		list.Add(new ItemRecord(402, "PiratSword", "PiratSword", "Weapon402", "PiratSword", "PiratSword", 150, true, false, "GemsCurrency"));
+		list.Add(new ItemRecord(281, "PiratSword2", "PiratSword2", "Weapon281", "PiratSword2", "PiratSword2", 250, true, false, "GemsCurrency"));
+		list.Add(new ItemRecord(405, "PirateFlamer", "PirateFlamer", "Weapon405", "PirateFlamer", "PirateFlamer", 550, true, false, "Coins"));
 		list.Add(new ItemRecord(219, "Sunrise", "Sunrise", "Weapon221", "Sunrise", "Sunrise", 295, true, false, "GemsCurrency"));
 		list.Add(new ItemRecord(220, "Bastion", "Bastion", "Weapon222", "Bastion", "Bastion", 310, true, false, "GemsCurrency"));
 		list.Add(new ItemRecord(221, "SteamPower_2", "SteamPower_2", "Weapon225", "SteamPower_2", "SteamPower_2", 85, true, false, "Coins", -1, true));
