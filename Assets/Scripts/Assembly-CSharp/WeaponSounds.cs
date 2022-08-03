@@ -46,6 +46,8 @@ public sealed class WeaponSounds : MonoBehaviour
 
 	public int categoryNabor = 1;
 
+	public int numOfMaximumShootDouble = 3;
+
 	public bool isGrenadeWeapon;
 
 	public int damageShop;

@@ -1689,6 +1689,10 @@ public sealed class Player_move_c : MonoBehaviour
 			{
 				_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()[myCAnim("Shoot1")].layer = 1;
 				_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()[myCAnim("Shoot2")].layer = 1;
+				if (_weaponManager.currentWeaponSounds.numOfMaximumShootDouble == 4)
+				{
+				_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()[myCAnim("Shoot3")].layer = 1;
+				}
 			}
 		}
 		if (!_weaponManager.currentWeaponSounds.isMelee)
@@ -2887,7 +2891,7 @@ public sealed class Player_move_c : MonoBehaviour
 	private int GetNumShootInDouble()
 	{
 		numShootInDoubleShot++;
-		if (numShootInDoubleShot == 3)
+		if (numShootInDoubleShot >= _weaponManager.currentWeaponSounds.numOfMaximumShootDouble)
 		{
 			numShootInDoubleShot = 1;
 		}
@@ -6016,7 +6020,7 @@ public sealed class Player_move_c : MonoBehaviour
 			return;
 		}
 		Animation animation = ((!isMechActive) ? _weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>() : mechGunAnimation);
-		if (animation.IsPlaying(myCAnim("Shoot1")) || animation.IsPlaying(myCAnim("Shoot2")) || animation.IsPlaying(myCAnim("Shoot")) || animation.IsPlaying(myCAnim("Shoot1")) || animation.IsPlaying(myCAnim("Shoot2")) || animation.IsPlaying(myCAnim("Reload")) || animation.IsPlaying(myCAnim("Empty")))
+		if (animation.IsPlaying(myCAnim("Shoot1")) || animation.IsPlaying(myCAnim("Shoot2")) || animation.IsPlaying(myCAnim("Shoot3")) || animation.IsPlaying(myCAnim("Shoot")) || animation.IsPlaying(myCAnim("Shoot1")) || animation.IsPlaying(myCAnim("Shoot2")) || animation.IsPlaying(myCAnim("Shoot3")) || animation.IsPlaying(myCAnim("Reload")) || animation.IsPlaying(myCAnim("Empty")))
 		{
 			return;
 		}

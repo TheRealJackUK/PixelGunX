@@ -454,6 +454,14 @@ public static class WeaponTags
 
 	public static readonly string PiratSword2_Tag = "PiratSword2";
 
+	public static readonly string LightSwords_Tag = "LightSwords";
+
+	public static readonly string DarkSwords_Tag = "DarkSwords";
+
+	public static readonly string ElecGlove_Tag = "ElecGlove";
+
+	//public static readonly string AssaultShotgun_Tag = "AssaultShotgun";
+
 	public static readonly string Sunrise_Tag = "Sunrise";
 
 	public static readonly string Bastion_Tag = "Bastion";
