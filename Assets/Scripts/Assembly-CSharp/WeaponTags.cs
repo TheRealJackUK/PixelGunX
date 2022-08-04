@@ -465,8 +465,16 @@ public static class WeaponTags
 	public static readonly string LightSwords_Tag = "LightSwords";
 
 	public static readonly string DarkSwords_Tag = "DarkSwords";
+	
+	public static readonly string GreenBow_Tag = "GreenBow";
+
+	public static readonly string BlueDragon_Tag = "BlueDragon";
+
+	public static readonly string FireworkBow_Tag = "FireworkBow";
 
 	public static readonly string ElecGlove_Tag = "ElecGlove";
+
+	public static readonly string FlyTrap_Tag = "FlyTrap";
 
 	//public static readonly string AssaultShotgun_Tag = "AssaultShotgun";
 

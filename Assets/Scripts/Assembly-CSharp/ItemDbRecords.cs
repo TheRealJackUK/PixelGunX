@@ -298,6 +298,10 @@ public static class ItemDbRecords
 		list.Add(new ItemRecord(397, "DragonCannon", "DragonCannon", "Weapon397", "DragonCannon", "DragonCannon", 500, true, false, "GemsCurrency"));
 		list.Add(new ItemRecord(430, "LuckyShotgun", "LuckyShotgun", "Weapon430", "LuckyShotgun", "LuckyShotgun", 350, true, false, "GemsCurrency"));
 		list.Add(new ItemRecord(434, "BodySnatcher", "BodySnatcher", "Weapon434", "BodySnatcher", "BodySnatcher", 890, true, false, "Coins"));
+		list.Add(new ItemRecord(398, "FireworkBow", "FireworkBow", "Weapon398", "FireworkBow", "FireworkBow", 750, true, false, "Coins"));
+		list.Add(new ItemRecord(425, "GreenBow", "GreenBow", "Weapon425", "GreenBow", "GreenBow", 350, true, false, "GemsCurrency"));
+		list.Add(new ItemRecord(400, "BlueDragon", "BlueDragon", "Weapon400", "BlueDragon", "BlueDragon", 550, true, false, "GemsCurrency"));
+		list.Add(new ItemRecord(427, "FlyTrap", "FlyTrap", "Weapon427", "FlyTrap", "FlyTrap", 700, true, false, "Coins"));
 		list.Add(new ItemRecord(435, "RabbitPistols", "RabbitPistols", "Weapon435", "RabbitPistols", "RabbitPistols", 500, true, false, "Coins"));
 		list.Add(new ItemRecord(421, "UmbrellaShotgun", "UmbrellaShotgun", "Weapon421", "UmbrellaShotgun", "UmbrellaShotgun", 200, true, false, "GemsCurrency"));
 		//list.Add(new ItemRecord(555, "AssaultShotgun", "AssaultShotgun", "Weapon555", "AssaultShotgun", "AssaultShotgun", 300, true, false, "GemsCurrency"));
