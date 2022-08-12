@@ -446,6 +446,38 @@ public static class WeaponTags
 
 	public static readonly string PirateMusket_Tag = "PirateMusket";
 
+	public static readonly string PiratBlunderbuss_Tag = "PiratBlunderbuss";
+
+	public static readonly string PirateFlamer_Tag = "PirateFlamer";
+
+	public static readonly string PiratSword_Tag = "PiratSword";
+
+	public static readonly string PiratSword2_Tag = "PiratSword2";
+
+	public static readonly string UmbrellaShotgun_Tag = "UmbrellaShotgun";
+
+	public static readonly string LuckyShotgun_Tag = "LuckyShotgun";
+
+	public static readonly string BodySnatcher_Tag = "BodySnatcher";
+
+	public static readonly string RabbitPistols_Tag = "RabbitPistols";
+
+	public static readonly string LightSwords_Tag = "LightSwords";
+
+	public static readonly string DarkSwords_Tag = "DarkSwords";
+	
+	public static readonly string GreenBow_Tag = "GreenBow";
+
+	public static readonly string BlueDragon_Tag = "BlueDragon";
+
+	public static readonly string FireworkBow_Tag = "FireworkBow";
+
+	public static readonly string ElecGlove_Tag = "ElecGlove";
+
+	public static readonly string FlyTrap_Tag = "FlyTrap";
+
+	//public static readonly string AssaultShotgun_Tag = "AssaultShotgun";
+
 	public static readonly string Sunrise_Tag = "Sunrise";
 
 	public static readonly string Bastion_Tag = "Bastion";
