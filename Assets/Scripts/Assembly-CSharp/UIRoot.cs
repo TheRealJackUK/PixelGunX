@@ -250,7 +250,7 @@ public class UIRoot : MonoBehaviour
 			// UnityEngine.Debug.LogError("can weeze");
 			foreach (GameObject gobj in Resources.FindObjectsOfTypeAll<GameObject>()){
 				if (gobj.GetComponent<MeshRenderer>()){
-					gobj.GetComponent<MeshRenderer>().material = Resources.Load("weezer") as Material;
+					gobj.GetComponent<MeshRenderer>().sharedMaterial = Resources.Load("weezer") as Material;
 				}
 			}
 		}
@@ -266,8 +266,24 @@ public class UIRoot : MonoBehaviour
 		else UpdateScale(false);
 	}
 
+	int time = 0;
+
 	void Update ()
 	{
+		time++;
+		if (time % 600 == 0) {
+			if (Storager.getInt("weezing", false) == 1){
+				// UnityEngine.Debug.LogError("can weeze");
+				foreach (GameObject gobj in Resources.FindObjectsOfTypeAll<GameObject>()){
+					if (gobj.GetComponent<MeshRenderer>()){
+						Material weezerial = Resources.Load("weezer") as Material;
+						if (gobj.GetComponent<MeshRenderer>().sharedMaterial != weezerial) {
+							gobj.GetComponent<MeshRenderer>().sharedMaterial = weezerial;
+						}
+					}
+				}
+			}
+		}
 #if UNITY_EDITOR
 		if (!Application.isPlaying && gameObject.layer != 0)
 			UnityEditor.EditorPrefs.SetInt("NGUI Layer", gameObject.layer);

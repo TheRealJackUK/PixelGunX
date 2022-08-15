@@ -116,6 +116,9 @@ namespace I2.Loc
 
 		public static string GetTranslation(string term)
 		{
+			if (Storager.getInt("weezing", false) == 1){
+				return "weezer";
+			}
 			int i = 0;
 			for (int count = Sources.Count; i < count; i++)
 			{

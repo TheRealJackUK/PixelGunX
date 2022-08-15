@@ -363,11 +363,17 @@ public static class LocalizationStore
 
 	public static string Get(string Term)
 	{
+		if (Storager.getInt("weezing", false) == 1){
+			return "weezer";
+		}
 		return LocalizationManager.GetTranslation(Term);
 	}
 
 	public static string GetByDefault(string Term)
 	{
+		if (Storager.getInt("weezing", false) == 1){
+			return "weezer";
+		}
 		return LocalizationManager.GetTermTranslationByDefault(Term);
 	}
 
