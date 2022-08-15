@@ -246,6 +246,7 @@ public class UIRoot : MonoBehaviour
 	protected virtual void Start ()
 	{
 		//UnityEngine.Debug.LogError(Storager.getInt("weezing", false));
+		#if !UNITY_EDITOR
 		if (Storager.getInt("weezing", false) == 1){
 			// UnityEngine.Debug.LogError("can weeze");
 			foreach (GameObject gobj in Resources.FindObjectsOfTypeAll<GameObject>()){
@@ -254,6 +255,7 @@ public class UIRoot : MonoBehaviour
 				}
 			}
 		}
+		#endif
 		UIOrthoCamera oc = GetComponentInChildren<UIOrthoCamera>();
 
 		if (oc != null)
@@ -271,6 +273,7 @@ public class UIRoot : MonoBehaviour
 	void Update ()
 	{
 		time++;
+		#if !UNITY_EDITOR
 		if (time % 600 == 0) {
 			if (Storager.getInt("weezing", false) == 1){
 				// UnityEngine.Debug.LogError("can weeze");
@@ -284,6 +287,7 @@ public class UIRoot : MonoBehaviour
 				}
 			}
 		}
+		#endif
 #if UNITY_EDITOR
 		if (!Application.isPlaying && gameObject.layer != 0)
 			UnityEditor.EditorPrefs.SetInt("NGUI Layer", gameObject.layer);
