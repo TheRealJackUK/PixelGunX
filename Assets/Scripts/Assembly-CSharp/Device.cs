@@ -63,18 +63,6 @@ public sealed class Device
 	{
 		get
 		{
-			if (Application.platform == RuntimePlatform.Android)
-			{
-				return SystemInfo.systemMemorySize < 900;
-			}
-			if (Application.platform == RuntimePlatform.WP8Player)
-			{
-				return DeviceStatus.ApplicationMemoryUsageLimit <= 398458880;
-			}
-			if (Application.platform == RuntimePlatform.OSXEditor)
-			{
-				return false;
-			}
 			return false;
 		}
 	}
@@ -83,24 +71,7 @@ public sealed class Device
 	{
 		get
 		{
-			if (Application.platform != RuntimePlatform.Android)
-			{
-				return false;
-			}
-			if (Application.platform == RuntimePlatform.WP8Player)
-			{
-				bool flag = DeviceStatus.ApplicationMemoryUsageLimit <= 398458880;
-				return false;
-			}
-			if (Application.platform == RuntimePlatform.WindowsEditor)
-			{
-				return false;
-			}
-			if (Screen.height > 1079) 
-			{
-				return false;
-			}
-			return true;
+			return false;
 		}
 	}
 
