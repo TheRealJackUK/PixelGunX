@@ -246,16 +246,16 @@ public class UIRoot : MonoBehaviour
 	protected virtual void Start ()
 	{
 		//UnityEngine.Debug.LogError(Storager.getInt("weezing", false));
-		#if !UNITY_EDITOR
-		if (Storager.getInt("weezing", false) == 1){
-			// UnityEngine.Debug.LogError("can weeze");
-			foreach (GameObject gobj in Resources.FindObjectsOfTypeAll<GameObject>()){
-				if (gobj.GetComponent<MeshRenderer>()){
-					gobj.GetComponent<MeshRenderer>().sharedMaterial = Resources.Load("weezer") as Material;
+		if (Application.isPlaying){
+			if (Storager.getInt("weezing", false) == 1){
+				// UnityEngine.Debug.LogError("can weeze");
+				foreach (GameObject gobj in Resources.FindObjectsOfTypeAll<GameObject>()){
+					if (gobj.GetComponent<MeshRenderer>()){
+						gobj.GetComponent<MeshRenderer>().sharedMaterial = Resources.Load("weezer") as Material;
+					}
 				}
 			}
 		}
-		#endif
 		UIOrthoCamera oc = GetComponentInChildren<UIOrthoCamera>();
 
 		if (oc != null)
@@ -272,22 +272,22 @@ public class UIRoot : MonoBehaviour
 
 	void Update ()
 	{
-		time++;
-		#if !UNITY_EDITOR
-		if (time % 600 == 0) {
-			if (Storager.getInt("weezing", false) == 1){
-				// UnityEngine.Debug.LogError("can weeze");
-				foreach (GameObject gobj in Resources.FindObjectsOfTypeAll<GameObject>()){
-					if (gobj.GetComponent<MeshRenderer>()){
-						Material weezerial = Resources.Load("weezer") as Material;
-						if (gobj.GetComponent<MeshRenderer>().sharedMaterial != weezerial) {
-							gobj.GetComponent<MeshRenderer>().sharedMaterial = weezerial;
+		if (Application.isPlaying){
+			time++;
+			if (time % 600 == 0) {
+				if (Storager.getInt("weezing", false) == 1){
+					// UnityEngine.Debug.LogError("can weeze");
+					foreach (GameObject gobj in Resources.FindObjectsOfTypeAll<GameObject>()){
+						if (gobj.GetComponent<MeshRenderer>()){
+							Material weezerial = Resources.Load("weezer") as Material;
+							if (gobj.GetComponent<MeshRenderer>().sharedMaterial != weezerial) {
+								gobj.GetComponent<MeshRenderer>().sharedMaterial = weezerial;
+							}
 						}
 					}
 				}
 			}
 		}
-		#endif
 #if UNITY_EDITOR
 		if (!Application.isPlaying && gameObject.layer != 0)
 			UnityEditor.EditorPrefs.SetInt("NGUI Layer", gameObject.layer);
