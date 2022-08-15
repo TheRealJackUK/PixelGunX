@@ -1226,6 +1226,9 @@ public class ShopNGUIController : MonoBehaviour
 		{
 			texture = Resources.Load<Texture>("ShopIcons/" + text2);
 		}
+		if (texture == null){
+			UnityEngine.Debug.LogWarning("no find txture for " + text2);
+		}
 		return texture;
 	}
 
