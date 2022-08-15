@@ -34,6 +34,11 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 		Application.Quit();
 	}
 
+	public void HandleForceError()
+	{
+		Application.LoadLevel("FallbackErrorMenu");
+	}
+
 	public void HandleLevelMinusButton()
 	{
 		if (ExperienceController.sharedController != null && ExperienceController.sharedController.currentLevel > 1)

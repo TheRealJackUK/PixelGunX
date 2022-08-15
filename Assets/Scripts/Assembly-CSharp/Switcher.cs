@@ -572,10 +572,14 @@ internal sealed class Switcher : MonoBehaviour
 		}
 		else if (!GameObject.FindGameObjectWithTag("ExperienceController"))
 		{
-			using (new StopwatchLogger("Instantiate ExperienceController: " + _progress.ToString("P0")))
-			{
-				UnityEngine.Object experienceController = UnityEngine.Object.Instantiate(ExperienceControllerPrefab, Vector3.zero, Quaternion.identity);
-				UnityEngine.Debug.Log("Initialized ExperienceController with name:    " + experienceController.name);
+			try {
+				using (new StopwatchLogger("Instantiate ExperienceController: " + _progress.ToString("P0")))
+				{
+					UnityEngine.Object experienceController = UnityEngine.Object.Instantiate(ExperienceControllerPrefab, Vector3.zero, Quaternion.identity);
+					UnityEngine.Debug.Log("Initialized ExperienceController with name:    " + experienceController.name);
+				}
+			}catch(Exception e){
+				Application.LoadLevel("FallbackErrorMenu");
 			}
 			_progress = bounds.Lerp(_progress, 0.1f);
 			yield return _progress;
@@ -603,12 +607,16 @@ internal sealed class Switcher : MonoBehaviour
 		{
 			if (UnityEngine.Object.FindObjectsOfType<ExpController>().Length == 0)
 			{
-				UnityEngine.Object expGui;
-				using (new StopwatchLogger("Instantiate ExperienceGui: " + _progress.ToString("P0")))
-				{
-					expGui = UnityEngine.Object.Instantiate(experienceGuiPrefab, Vector3.zero, Quaternion.identity);
+				try {
+					UnityEngine.Object expGui;
+					using (new StopwatchLogger("Instantiate ExperienceGui: " + _progress.ToString("P0")))
+					{
+						expGui = UnityEngine.Object.Instantiate(experienceGuiPrefab, Vector3.zero, Quaternion.identity);
+					}
+					UnityEngine.Object.DontDestroyOnLoad(expGui);
+				}catch(Exception e){
+					Application.LoadLevel("FallbackErrorMenu");
 				}
-				UnityEngine.Object.DontDestroyOnLoad(expGui);
 				yield return _progress;
 			}
 		}

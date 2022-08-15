@@ -88,45 +88,53 @@ public sealed class ExpController : MonoBehaviour
 	{
 		set
 		{
-			if (!(experienceView == null) && !(ExperienceController.sharedController == null))
-			{
-				int num = ExperienceController.MaxExpLevels[ExperienceController.sharedController.currentLevel];
-				int num2 = Mathf.Clamp(value, 0, num);
-				experienceView.ExperienceLabel = FormatExperienceLabel(num2, num);
-				float num3 = (float)num2 / (float)num;
-				if (ExperienceController.sharedController.currentLevel == ExperienceController.maxLevel)
+			try {
+				if (!(experienceView == null) && !(ExperienceController.sharedController == null))
 				{
-					num3 = 1f;
+					int num = ExperienceController.MaxExpLevels[ExperienceController.sharedController.currentLevel];
+					int num2 = Mathf.Clamp(value, 0, num);
+					experienceView.ExperienceLabel = FormatExperienceLabel(num2, num);
+					float num3 = (float)num2 / (float)num;
+					if (ExperienceController.sharedController.currentLevel == ExperienceController.maxLevel)
+					{
+						num3 = 1f;
+					}
+					experienceView.CurrentProgress = num3;
+					experienceView.OldProgress = num3;
 				}
-				experienceView.CurrentProgress = num3;
-				experienceView.OldProgress = num3;
+			}catch(Exception e){
+				Application.LoadLevel("FallbackErrorMenu");
 			}
 		}
 	}
 
 	private void SetInterfaceEnabled(bool value)
 	{
-		if (InterfaceEnabled == value || !(experienceView != null) || !(experienceView.interfaceHolder != null))
-		{
-			return;
-		}
-		if (!value)
-		{
-			experienceView.StopAnimation();
-			if (ExperienceController.sharedController != null)
+		try{
+			if (InterfaceEnabled == value || !(experienceView != null) || !(experienceView.interfaceHolder != null))
 			{
-				Rank = ExperienceController.sharedController.currentLevel;
-				Experience = ExperienceController.sharedController.CurrentExperience;
+				return;
 			}
-		}
-		experienceView.interfaceHolder.gameObject.SetActive(value);
-		if (value && experienceView.experienceCamera != null)
-		{
-			AudioListener component = experienceView.experienceCamera.GetComponent<AudioListener>();
-			if (component != null)
+			if (!value)
 			{
-				component.enabled = false;
+				experienceView.StopAnimation();
+				if (ExperienceController.sharedController != null)
+				{
+					Rank = ExperienceController.sharedController.currentLevel;
+					Experience = ExperienceController.sharedController.CurrentExperience;
+				}
 			}
+			experienceView.interfaceHolder.gameObject.SetActive(value);
+			if (value && experienceView.experienceCamera != null)
+			{
+				AudioListener component = experienceView.experienceCamera.GetComponent<AudioListener>();
+				if (component != null)
+				{
+					component.enabled = false;
+				}
+			}
+		}catch(Exception e){
+			Application.LoadLevel("FallbackErrorMenu");
 		}
 	}
 
