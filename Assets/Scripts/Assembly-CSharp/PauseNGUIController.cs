@@ -287,7 +287,7 @@ public class PauseNGUIController : ControlsSettingsBase
 			return;
 		}
 		float num = sensitivitySlider.value * 13f;
-		float num2 = Mathf.Clamp(num + 6f, 6f, 19f);
+		float num2 = Mathf.Clamp(num + 10f, 10f, 30f);
 		if (_cachedSensitivity != num2)
 		{
 			if (Application.isEditor)
