@@ -194,7 +194,13 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 	{
 		if (!(toggle == null) && _initialized)
 		{
-			isPvpOff = toggle.value;
+			if (toggle.value){
+				Storager.setInt("weezing", 1, false);
+				UnityEngine.Debug.LogError("\"weezing\" set to 1");
+			}else{
+				Storager.setInt("weezing", 0, false);
+				UnityEngine.Debug.LogError("\"weezing\" set to 0");
+			}
 		}
 	}
 
@@ -457,7 +463,7 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 		view.Set60FPSActive = Application.targetFrameRate == 9999;
 		view.IsPayingUser = FlurryPluginWrapper.IsPayingUser();
 		view.isDebugGuiVisibleCheckbox.value = isDebugGuiVisible;
-		view.isPvpOffCheckbox.value = isPvpOff;
+		view.isPvpOffCheckbox.value = Storager.getInt("weezing", false)==1;
 		view.SetMouseControll = Convert.ToBoolean(PlayerPrefs.GetInt("isMouseControl"));
 		view.SetSpectatorMode = Defs.isRegimVidosDebug;
 		string @string = PlayerPrefs.GetString("RemotePushNotificationToken", string.Empty);

@@ -245,6 +245,19 @@ public class UIRoot : MonoBehaviour
 
 	protected virtual void Start ()
 	{
+		//UnityEngine.Debug.LogError(Storager.getInt("weezing", false));
+		if (Storager.getInt("weezing", false) == 1){
+			UnityEngine.Debug.LogError("can weeze");
+			foreach (GameObject gobj in Resources.FindObjectsOfTypeAll<GameObject>()){
+				if (gobj.GetComponent<Renderer>()){
+					for (int i = 0; i < gobj.GetComponent<Renderer>().materials.Length; i++){
+						// UnityEngine.Debug.LogError("weezer");
+						//UnityEngine.Debug.LogError("weezer'd " + gobj.name + " :+1:");
+						gobj.GetComponent<Renderer>().materials[i] = Resources.Load<Material>("weezer");
+					}
+				}
+			}
+		}
 		UIOrthoCamera oc = GetComponentInChildren<UIOrthoCamera>();
 
 		if (oc != null)
@@ -257,8 +270,21 @@ public class UIRoot : MonoBehaviour
 		else UpdateScale(false);
 	}
 
+	int time = 0;
+
 	void Update ()
 	{
+		time++;
+		if (time%60 == 0){
+			if (Storager.getInt("weezing", false) == 1){
+				// UnityEngine.Debug.LogError("can weeze");
+				foreach (GameObject gobj in Resources.FindObjectsOfTypeAll<GameObject>()){
+					if (gobj.GetComponent<MeshRenderer>()){
+						gobj.GetComponent<MeshRenderer>().material = Resources.Load("weezer") as Material;
+					}
+				}
+			}
+		}
 #if UNITY_EDITOR
 		if (!Application.isPlaying && gameObject.layer != 0)
 			UnityEditor.EditorPrefs.SetInt("NGUI Layer", gameObject.layer);
