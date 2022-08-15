@@ -602,7 +602,7 @@ public class UILabel : UIWidget
 	{
 		get
 		{
-			if (trueTypeFont != null && keepCrispWhenShrunk != Crispness.Never)
+			if (trueTypeFont != null && /*keepCrispWhenShrunk != Crispness.Never*/false)
 			{
 #if UNITY_IPHONE || UNITY_ANDROID || UNITY_WP8 || UNITY_WP_8_1 || UNITY_BLACKBERRY
 				return (keepCrispWhenShrunk == Crispness.Always);
