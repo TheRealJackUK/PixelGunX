@@ -175,6 +175,8 @@ public class ConnectSceneNGUIController : MonoBehaviour
 	public GameObject clearBtn;
 
 	public GameObject searchBtn;
+	
+	public static string mapList;
 
 	public GameObject showSearchPanelBtn;
 
