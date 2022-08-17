@@ -211,6 +211,7 @@ public sealed class Defs2
 		_mapsInfo.Add(new MapInfo("Christmas_dinner", "Christmas Dinner", "Christmas Dinner", "Large Map"));
 		_mapsInfo.Add(new MapInfo("Secret_Base", "Secret Base", "Secret Base", "Large Map"));
 		_mapsInfo.Add(new MapInfo("Helicarrier", "Aircraft Carrier", "Aircraft Carrier", "Very Large Map"));
+		_mapsInfo.Add(new MapInfo("RunAndJump", "Run n' Jump", "Run n' Jump", "Very Large Map"));
 		_mapsInfo.Add(new MapInfo("train_robbery", "Train Robbery", "Train Robbery", "Small Map"));
 		_mapsInfo.Add(new MapInfo("Candyland", "Candy Land", "Candy Land", "Medium Map"));
 		_mapsInfo.Add(new MapInfo("actualgame", "My Front Yard", "My Front Yard", "Front Yard Size But You're An Ant!"));
