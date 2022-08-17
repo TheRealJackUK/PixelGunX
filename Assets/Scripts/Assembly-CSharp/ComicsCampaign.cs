@@ -57,7 +57,7 @@ internal sealed class ComicsCampaign : MonoBehaviour
 	{
 		if (subtitlesText != null)
 		{
-			subtitlesText.transform.parent.gameObject.SetActive(LocalizationStore.CurrentLanguage != "English");
+			subtitlesText.transform.parent.gameObject.SetActive(/*LocalizationStore.CurrentLanguage != "English"*/ true);
 		}
 		_frameCount = Math.Min(4, comicFrames.Length);
 		_isFirstLaunch = DetermineIfFirstLaunch();
