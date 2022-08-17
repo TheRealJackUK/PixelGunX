@@ -2,6 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1001 &100100000
 Prefab:
+  m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
@@ -10,8 +11,28 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1929707880160984}
   m_IsPrefabParent: 1
+--- !u!1 &1123588599851248
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4656663797963563}
+  - component: {fileID: 33284781109777637}
+  - component: {fileID: 23682174624443018}
+  m_Layer: 0
+  m_Name: JetPack_Mesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1929707880160984
 GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4458545958704667}
@@ -25,44 +46,23 @@ GameObject:
   m_IsActive: 1
 --- !u!4 &4458545958704667
 Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1929707880160984}
-  m_LocalRotation: {x: 1.545431E-08, y: -0.7071068, z: 1.545431E-08, w: 0.7071068}
+  m_LocalRotation: {x: 0.00000001545431, y: -0.7071068, z: 0.00000001545431, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -0.001345367, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4656663797963563}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 2.504478E-06, y: 90, z: 0}
---- !u!114 &114398523841733651
-MonoBehaviour:
-  m_GameObject: {fileID: 1929707880160984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f472c02c637f38940977a077a803e733, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  tier: 3
-  scaleShop: 121.6011
-  positionShop: {x: 6.172363, y: 4.157013, z: 4.81474}
-  rotationShop: {x: 1.98988, y: 49.91253, z: 351.5021}
-  localizeKey: Key_0772
---- !u!1 &1123588599851248
-GameObject:
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4656663797963563}
-  - component: {fileID: 33284781109777637}
-  - component: {fileID: 23682174624443018}
-  m_Layer: 0
-  m_Name: JetPack_Mesh
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_LocalEulerAnglesHint: {x: 0.000002504478, y: 90, z: 0}
 --- !u!4 &4656663797963563
 Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1123588599851248}
   m_LocalRotation: {x: 0.05653113, y: 0.7048434, z: -0.05653113, w: 0.7048434}
   m_LocalPosition: {x: -0.1462616, y: 1.497632, z: 0.009140167}
@@ -71,12 +71,11 @@ Transform:
   m_Father: {fileID: 4458545958704667}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 9.171049, y: -90, z: 0}
---- !u!33 &33284781109777637
-MeshFilter:
-  m_GameObject: {fileID: 1123588599851248}
-  m_Mesh: {fileID: 4300000, guid: 8b083bc5504c015458b44ba1610ac59c, type: 2}
 --- !u!23 &23682174624443018
 MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1123588599851248}
   m_Enabled: 1
   m_CastShadows: 1
@@ -86,7 +85,7 @@ MeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 078c44ca921b3914cbe9cb6c6e9235b0, type: 2}
+  - {fileID: 2100000, guid: 9ffc4425c343e446b8b97cbfa9f7f70c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -106,3 +105,26 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!33 &33284781109777637
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1123588599851248}
+  m_Mesh: {fileID: 4300000, guid: 8b083bc5504c015458b44ba1610ac59c, type: 2}
+--- !u!114 &114398523841733651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1929707880160984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f472c02c637f38940977a077a803e733, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tier: 3
+  scaleShop: 121.6011
+  positionShop: {x: 6.172363, y: 4.157013, z: 4.81474}
+  rotationShop: {x: 1.98988, y: 49.91253, z: 351.5021}
+  localizeKey: Key_0772
