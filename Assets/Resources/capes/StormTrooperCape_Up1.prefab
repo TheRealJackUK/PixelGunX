@@ -2,7 +2,6 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1001 &100100000
 Prefab:
-  m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
@@ -11,28 +10,8 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1732073887647700}
   m_IsPrefabParent: 1
---- !u!1 &1312290012418920
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4250532702699896}
-  - component: {fileID: 33030666750591240}
-  - component: {fileID: 23497940882639025}
-  m_Layer: 0
-  m_Name: cape_EliteCrafter
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1732073887647700
 GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4441572436919759}
@@ -45,24 +24,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4250532702699896
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1312290012418920}
-  m_LocalRotation: {x: 0.05653127, y: 0.7048434, z: -0.05653127, w: 0.7048434}
-  m_LocalPosition: {x: -0.1462616, y: 1.497632, z: 0.009140319}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4441572436919759}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 9.171072, y: -90, z: 0}
 --- !u!4 &4441572436919759
 Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1732073887647700}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -72,11 +35,67 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!111 &111687822410347924
+Animation:
+  m_GameObject: {fileID: 1732073887647700}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 752c01faad292c3489fc4aad62513492, type: 2}
+  - {fileID: 7400000, guid: da8672b8bf643144c8c2084577a32fd9, type: 2}
+  - {fileID: 7400000, guid: ebdcaa74cc2ad7047b12c56c7caf06c1, type: 2}
+  - {fileID: 7400000, guid: 0dee829ac2057ac488c325b6d4686950, type: 2}
+  - {fileID: 7400000, guid: fcd403eebc6238c4998cda47817266aa, type: 2}
+  - {fileID: 7400000, guid: 6a19340b6775ec7499eebd7f043a19e0, type: 2}
+  - {fileID: 7400000, guid: 37037b9fc656d264083dbe003a01d8cc, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!114 &114377504084131926
+MonoBehaviour:
+  m_GameObject: {fileID: 1732073887647700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f472c02c637f38940977a077a803e733, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  tier: 1
+  scaleShop: 150
+  positionShop: {x: -0.7250977, y: -0.05223846, z: 0.1859985}
+  rotationShop: {x: 0, y: 30, z: -15}
+  localizeKey: Key_1097
+--- !u!1 &1312290012418920
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4250532702699896}
+  - component: {fileID: 33030666750591240}
+  - component: {fileID: 23497940882639025}
+  m_Layer: 0
+  m_Name: cape_EliteCrafter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4250532702699896
+Transform:
+  m_GameObject: {fileID: 1312290012418920}
+  m_LocalRotation: {x: 0.05653127, y: 0.7048434, z: -0.05653127, w: 0.7048434}
+  m_LocalPosition: {x: -0.1462616, y: 1.497632, z: 0.009140319}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4441572436919759}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 9.171072, y: -90, z: 0}
+--- !u!33 &33030666750591240
+MeshFilter:
+  m_GameObject: {fileID: 1312290012418920}
+  m_Mesh: {fileID: 4300000, guid: 4f9a542ff5ad06a4388bf6d4052baee5, type: 2}
 --- !u!23 &23497940882639025
 MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1312290012418920}
   m_Enabled: 1
   m_CastShadows: 1
@@ -86,7 +105,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 9ffc4425c343e446b8b97cbfa9f7f70c, type: 2}
+  - {fileID: 2100000, guid: 63afdc3ea5f14d447a440ae8c6ed5891, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -106,47 +125,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33030666750591240
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1312290012418920}
-  m_Mesh: {fileID: 4300000, guid: 4f9a542ff5ad06a4388bf6d4052baee5, type: 2}
---- !u!111 &111687822410347924
-Animation:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1732073887647700}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations:
-  - {fileID: 7400000, guid: 752c01faad292c3489fc4aad62513492, type: 2}
-  - {fileID: 7400000, guid: da8672b8bf643144c8c2084577a32fd9, type: 2}
-  - {fileID: 7400000, guid: ebdcaa74cc2ad7047b12c56c7caf06c1, type: 2}
-  - {fileID: 7400000, guid: 0dee829ac2057ac488c325b6d4686950, type: 2}
-  - {fileID: 7400000, guid: fcd403eebc6238c4998cda47817266aa, type: 2}
-  - {fileID: 7400000, guid: 6a19340b6775ec7499eebd7f043a19e0, type: 2}
-  - {fileID: 7400000, guid: 37037b9fc656d264083dbe003a01d8cc, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
---- !u!114 &114377504084131926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1732073887647700}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f472c02c637f38940977a077a803e733, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tier: 1
-  scaleShop: 150
-  positionShop: {x: -0.7250977, y: -0.05223846, z: 0.1859985}
-  rotationShop: {x: 0, y: 30, z: -15}
-  localizeKey: Key_1097

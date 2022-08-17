@@ -39,6 +39,15 @@ internal sealed class InternetChecker : MonoBehaviour
 			Cursor.visible = true;
 			Cursor.lockState = CursorLockMode.None;
 		}
+		if (Application.isMobilePlatform && GameObject.Find("Main Camera").GetComponent<PostProcessLayer>() != null)
+		{
+		    PostProcessLayer renderer = GameObject.Find("Main Camera").GetComponent<PostProcessLayer>();
+		    if (renderer != null && renderer.enabled != false && Application.isMobilePlatform && GameObject.Find("Pers_Main_Point").GetComponent<PostProcessVolume>() != null && GameObject.Find("Pers_Main_Point").GetComponent<PostProcessVolume>().enabled)
+		    {
+		           Destroy(renderer);
+		        Destroy(GameObject.Find("Pers_Main_Point").GetComponent<PostProcessVolume>());
+		    }
+		}
 	}
 
 	public static void CheckForInternetConn()

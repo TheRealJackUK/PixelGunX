@@ -289,8 +289,6 @@ public static class ItemDbRecords
 		list.Add(new ItemRecord(404, "PiratBlunderbuss", "PiratBlunderbuss", "Weapon404", "PiratBlunderbuss", "PiratBlunderbuss", 325, true, false, "GemsCurrency"));
 		list.Add(new ItemRecord(403, "PiratPistols", "PiratPistols", "Weapon403", "PiratPistols", "PiratPistols", 300, true, false, "GemsCurrency"));
 		list.Add(new ItemRecord(406, "PirateMusket", "PirateMusket", "Weapon406", "PirateMusket", "PirateMusket", 350, true, false, "GemsCurrency"));
-		list.Add(new ItemRecord(424, "FreezerGun", "FreezerGun", "Weapon424", "FreezerGun", "FreezerGun", 750, true, false, "Coins"));
-		list.Add(new ItemRecord(424, "GoldenTrident", "GoldenTrident", "Weapon423", "GoldenTrident", "GoldenTrident", 900, true, false, "Coins"));
 		list.Add(new ItemRecord(407, "SeaCannon", "SeaCannon", "Weapon407", "SeaCannon", "SeaCannon", 700, true, false, "Coins"));
 		list.Add(new ItemRecord(402, "PiratSword", "PiratSword", "Weapon402", "PiratSword", "PiratSword", 150, true, false, "GemsCurrency"));
 		list.Add(new ItemRecord(408, "LightSwords", "LightSwords", "Weapon408", "LightSwords", "LightSwords", 500, true, false, "GemsCurrency"));

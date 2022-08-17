@@ -2,7 +2,6 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1001 &100100000
 Prefab:
-  m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
@@ -11,11 +10,45 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1996867351195263}
   m_IsPrefabParent: 1
+--- !u!1 &1996867351195263
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4930766386649872}
+  - component: {fileID: 114777921894356353}
+  m_Layer: 0
+  m_Name: hat_DiamondHelmet
+  m_TagString: hat_DiamondHelmet
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4930766386649872
+Transform:
+  m_GameObject: {fileID: 1996867351195263}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4372530272810009}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114777921894356353
+MonoBehaviour:
+  m_GameObject: {fileID: 1996867351195263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f472c02c637f38940977a077a803e733, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  tier: 0
+  scaleShop: 177.62
+  positionShop: {x: -1.364502, y: 7.187279, z: -27.99821}
+  rotationShop: {x: 284.9999, y: 195.0009, z: 270}
+  localizeKey: Key_0709
 --- !u!1 &1060261468346145
 GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4372530272810009}
@@ -28,27 +61,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1996867351195263
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4930766386649872}
-  - component: {fileID: 114777921894356353}
-  m_Layer: 0
-  m_Name: hat_DiamondHelmet
-  m_TagString: hat_DiamondHelmet
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!4 &4372530272810009
 Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1060261468346145}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -57,25 +71,12 @@ Transform:
   m_Father: {fileID: 4930766386649872}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4930766386649872
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1996867351195263}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4372530272810009}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &33759237778559192
+MeshFilter:
+  m_GameObject: {fileID: 1060261468346145}
+  m_Mesh: {fileID: 4300000, guid: ff9f65a455825a44ebd40ddeb8cd303c, type: 2}
 --- !u!23 &23264399323709038
 MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1060261468346145}
   m_Enabled: 1
   m_CastShadows: 1
@@ -85,7 +86,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 9ffc4425c343e446b8b97cbfa9f7f70c, type: 2}
+  - {fileID: 2100000, guid: f1dbd1d81055f6e4cbef31b4faa517f6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -105,26 +106,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33759237778559192
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1060261468346145}
-  m_Mesh: {fileID: 4300000, guid: ff9f65a455825a44ebd40ddeb8cd303c, type: 2}
---- !u!114 &114777921894356353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1996867351195263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f472c02c637f38940977a077a803e733, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tier: 0
-  scaleShop: 177.62
-  positionShop: {x: -1.364502, y: 7.187279, z: -27.99821}
-  rotationShop: {x: 284.9999, y: 195.0009, z: 270}
-  localizeKey: Key_0709
