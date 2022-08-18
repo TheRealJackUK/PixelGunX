@@ -225,7 +225,7 @@ internal sealed class FirstPersonControlSharp : UnityEngine.MonoBehaviour
 		if (!character.isGrounded){
 			tmr = 0;
 		}
-		if (tmr > 10){
+		if (tmr > 5){
 			mult = 1;
 		}
 		if ((isMulti && !isMine) || JoystickController.leftJoystick == null || JoystickController.rightJoystick == null)
