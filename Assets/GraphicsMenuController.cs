@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Rilisoft;
+using Holoville.HOTween;
 
 public class GraphicsMenuController : MonoBehaviour {
 
@@ -12,14 +13,17 @@ public class GraphicsMenuController : MonoBehaviour {
 	public ButtonHandler quitBtn;
 
 	public void SwitchBtn(bool on, ButtonHandler btn) {
+		HOTween.Init(true, true, true);
 		if (on){
-			btn.gameObject.transform.localPosition = new Vector3(12, 0, 0);
+			//btn.gameObject.transform.localPosition = new Vector3(12, 0, 0);
+			HOTween.To(btn.gameObject.transform, 0.3f, "localPosition", new Vector3(12, 0, 0));
 			btn.gameObject.GetComponent<UISprite>().color = new Color(0, 1, 0, 1);
 			btn.gameObject.GetComponent<UIButton>().defaultColor = new Color(0, 1, 0, 1);
 			btn.gameObject.GetComponent<UIButton>().hover = new Color(0, 0.9f, 0, 1);
 			btn.gameObject.GetComponent<UIButton>().pressed = new Color(0, 0.7f, 0, 1);
 		}else{
-			btn.gameObject.transform.localPosition = new Vector3(-12, 0, 0);
+			//btn.gameObject.transform.localPosition = new Vector3(-12, 0, 0);
+			HOTween.To(btn.gameObject.transform, 0.3f, "localPosition", new Vector3(-12, 0, 0));
 			btn.gameObject.GetComponent<UISprite>().color = new Color(1, 0, 0, 1);
 			btn.gameObject.GetComponent<UIButton>().defaultColor = new Color(1, 0, 0, 1);
 			btn.gameObject.GetComponent<UIButton>().hover = new Color(0.9f, 0, 0, 1);
