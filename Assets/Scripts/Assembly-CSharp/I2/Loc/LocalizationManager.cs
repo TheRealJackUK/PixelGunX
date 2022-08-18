@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Globalization;
 
 namespace I2.Loc
 {
@@ -108,10 +109,16 @@ namespace I2.Loc
 				}
 				if (termData.Languages.Length != 0)
 				{
-					return termData.Languages[0];
+					string retardoTerm = termData.Languages[0].ToLower().ToTitleCase();
+					return retardoTerm;
 				}
 			}
 			return string.Empty;
+		}
+
+		public static string ToTitleCase(this string title)
+		{
+			return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(title.ToLower()); 
 		}
 
 		public static string GetTranslation(string term)
@@ -141,7 +148,8 @@ namespace I2.Loc
 					return termData.Languages[0];
 				}
 			}
-			return term;
+			string retardoTerm = term.ToLower().ToTitleCase();
+			return retardoTerm;
 		}
 
 		internal static void LocalizeAll()

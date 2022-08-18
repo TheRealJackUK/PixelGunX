@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using I2.Loc;
 using UnityEngine;
+using System.Globalization;
 
 public static class LocalizationStore
 {
@@ -361,12 +362,18 @@ public static class LocalizationStore
 		}
 	}
 
+	public static string ToTitleCase(this string title)
+	{
+		return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(title.ToLower()); 
+	}
+
 	public static string Get(string Term)
 	{
 		/*if (Storager.getInt("weezing", false) == 1){
 			return "weezer";
 		}*/
-		return LocalizationManager.GetTranslation(Term);
+		string retardoTerm = LocalizationManager.GetTranslation(Term).ToLower().ToTitleCase();
+		return retardoTerm;
 	}
 
 	public static string GetByDefault(string Term)
@@ -374,7 +381,8 @@ public static class LocalizationStore
 		/*if (Storager.getInt("weezing", false) == 1){
 			return "weezer";
 		}*/
-		return LocalizationManager.GetTermTranslationByDefault(Term);
+		string retardoTerm = LocalizationManager.GetTermTranslationByDefault(Term).ToLower().ToTitleCase();
+		return retardoTerm;
 	}
 
 	public static void AddEventCallAfterLocalize(LocalizationManager.OnLocalizeCallback addEvent)
