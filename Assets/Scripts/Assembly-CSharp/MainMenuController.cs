@@ -15,6 +15,8 @@ internal sealed class MainMenuController : ControlsSettingsBase
 
 	public GameObject premium;
 
+	public ButtonHandler graphicsBtn;
+
 	public GameObject daysOfValor;
 
 	public GameObject adventureButton;
@@ -372,8 +374,16 @@ internal sealed class MainMenuController : ControlsSettingsBase
 		}
 	}
 
+	public void HandleGraphicsClicked(object sender, System.EventArgs e)
+	{
+		Application.LoadLevel("Graphics");
+	}
+
 	private new IEnumerator Start()
 	{
+		if (graphicsBtn != null){
+			graphicsBtn.Clicked += HandleGraphicsClicked;
+		}
 		if (Defs.IsDeveloperBuild)
 		{
 			Debug.Log("Resetting request for interstitial advertisement.");

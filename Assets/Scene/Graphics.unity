@@ -470,8 +470,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenTarget: {fileID: 691682988}
-  hover: {r: 0.88235295, g: 0.78431374, b: 0.5882353, a: 1}
-  pressed: {r: 0.7176471, g: 0.6392157, b: 0.48235294, a: 1}
+  hover: {r: 1, g: 1, b: 1, a: 1}
+  pressed: {r: 1, g: 1, b: 1, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   duration: 0.2
   dragHighlight: 0
@@ -754,6 +754,7 @@ GameObject:
   - component: {fileID: 865671075}
   - component: {fileID: 865671074}
   - component: {fileID: 865671073}
+  - component: {fileID: 865671076}
   m_Layer: 10
   m_Name: Button
   m_TagString: Untagged
@@ -786,14 +787,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenTarget: {fileID: 865671071}
-  hover: {r: 0.88235295, g: 0.78431374, b: 0.5882353, a: 1}
-  pressed: {r: 0.7176471, g: 0.6392157, b: 0.48235294, a: 1}
+  hover: {r: 0.9117647, g: 0.9117647, b: 0.9117647, a: 1}
+  pressed: {r: 0.6911765, g: 0.6911765, b: 0.6911765, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   duration: 0.2
   dragHighlight: 0
-  hoverSprite: green_btn
-  pressedSprite: green_btn_n
-  disabledSprite: green_btn
+  hoverSprite: white_btn
+  pressedSprite: grey_btn_n
+  disabledSprite: white_btn
   hoverSprite2D: {fileID: 0}
   pressedSprite2D: {fileID: 0}
   disabledSprite2D: {fileID: 0}
@@ -839,13 +840,13 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mColor: {r: 0, g: 1, b: 0, a: 1}
   mPivot: 4
   mWidth: 44
   mHeight: 24
   mDepth: 2
   mMat: {fileID: 0}
-  autoResizeBoxCollider: 0
+  autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1.8333334
@@ -863,8 +864,20 @@ MonoBehaviour:
   bottomType: 1
   topType: 1
   mAtlas: {fileID: 114366749522955277, guid: 30f97ffcdef3b594da9e35d724d3753e, type: 2}
-  mSpriteName: green_btn
+  mSpriteName: white_btn
   mFillCenter: 1
+--- !u!65 &865671076
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 865671071}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 44, y: 24, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1076843995
 GameObject:
   m_ObjectHideFlags: 0
@@ -1120,6 +1133,7 @@ GameObject:
   - component: {fileID: 1379243896}
   - component: {fileID: 1379243898}
   - component: {fileID: 1379243897}
+  - component: {fileID: 1379243899}
   m_Layer: 10
   m_Name: Button
   m_TagString: Untagged
@@ -1168,13 +1182,13 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mColor: {r: 0, g: 1, b: 0, a: 1}
   mPivot: 4
   mWidth: 44
   mHeight: 24
   mDepth: 2
   mMat: {fileID: 0}
-  autoResizeBoxCollider: 0
+  autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1.8333334
@@ -1192,7 +1206,7 @@ MonoBehaviour:
   bottomType: 1
   topType: 1
   mAtlas: {fileID: 114366749522955277, guid: 30f97ffcdef3b594da9e35d724d3753e, type: 2}
-  mSpriteName: green_btn
+  mSpriteName: white_btn
   mFillCenter: 1
 --- !u!114 &1379243897
 MonoBehaviour:
@@ -1206,14 +1220,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenTarget: {fileID: 1379243894}
-  hover: {r: 0.88235295, g: 0.78431374, b: 0.5882353, a: 1}
-  pressed: {r: 0.7176471, g: 0.6392157, b: 0.48235294, a: 1}
+  hover: {r: 0.9117647, g: 0.9117647, b: 0.9117647, a: 1}
+  pressed: {r: 0.6911765, g: 0.6911765, b: 0.6911765, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   duration: 0.2
   dragHighlight: 0
-  hoverSprite: green_btn
-  pressedSprite: green_btn_n
-  disabledSprite: green_btn
+  hoverSprite: white_btn
+  pressedSprite: grey_btn_n
+  disabledSprite: white_btn
   hoverSprite2D: {fileID: 0}
   pressedSprite2D: {fileID: 0}
   disabledSprite2D: {fileID: 0}
@@ -1231,6 +1245,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   noSound: 0
+--- !u!65 &1379243899
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1379243894}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 44, y: 24, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1460686033
 GameObject:
   m_ObjectHideFlags: 0
@@ -2128,6 +2154,7 @@ GameObject:
   - component: {fileID: 2018849910}
   - component: {fileID: 2018849909}
   - component: {fileID: 2018849908}
+  - component: {fileID: 2018849912}
   m_Layer: 10
   m_Name: UI Root
   m_TagString: Untagged
@@ -2235,6 +2262,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2018849912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2018849907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed341aea5c6df42f3a9c9d41a3a11bbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bloomBtn: {fileID: 1379243898}
+  aoBtn: {fileID: 2038824904}
+  cgBtn: {fileID: 865671074}
+  mbBtn: {fileID: 2146603022}
+  quitBtn: {fileID: 691682992}
 --- !u!1 &2038824901
 GameObject:
   m_ObjectHideFlags: 0
@@ -2246,6 +2289,7 @@ GameObject:
   - component: {fileID: 2038824905}
   - component: {fileID: 2038824904}
   - component: {fileID: 2038824903}
+  - component: {fileID: 2038824906}
   m_Layer: 10
   m_Name: Button
   m_TagString: Untagged
@@ -2278,14 +2322,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenTarget: {fileID: 2038824901}
-  hover: {r: 0.88235295, g: 0.78431374, b: 0.5882353, a: 1}
-  pressed: {r: 0.7176471, g: 0.6392157, b: 0.48235294, a: 1}
+  hover: {r: 0.9117647, g: 0.9117647, b: 0.9117647, a: 1}
+  pressed: {r: 0.6911765, g: 0.6911765, b: 0.6911765, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   duration: 0.2
   dragHighlight: 0
-  hoverSprite: green_btn
-  pressedSprite: green_btn_n
-  disabledSprite: green_btn
+  hoverSprite: white_btn
+  pressedSprite: grey_btn_n
+  disabledSprite: white_btn
   hoverSprite2D: {fileID: 0}
   pressedSprite2D: {fileID: 0}
   disabledSprite2D: {fileID: 0}
@@ -2331,13 +2375,13 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mColor: {r: 0, g: 1, b: 0, a: 1}
   mPivot: 4
   mWidth: 44
   mHeight: 24
   mDepth: 2
   mMat: {fileID: 0}
-  autoResizeBoxCollider: 0
+  autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1.8333334
@@ -2355,8 +2399,20 @@ MonoBehaviour:
   bottomType: 1
   topType: 1
   mAtlas: {fileID: 114366749522955277, guid: 30f97ffcdef3b594da9e35d724d3753e, type: 2}
-  mSpriteName: green_btn
+  mSpriteName: white_btn
   mFillCenter: 1
+--- !u!65 &2038824906
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2038824901}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 44, y: 24, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2146603019
 GameObject:
   m_ObjectHideFlags: 0
@@ -2368,6 +2424,7 @@ GameObject:
   - component: {fileID: 2146603023}
   - component: {fileID: 2146603022}
   - component: {fileID: 2146603021}
+  - component: {fileID: 2146603024}
   m_Layer: 10
   m_Name: Button
   m_TagString: Untagged
@@ -2400,14 +2457,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenTarget: {fileID: 2146603019}
-  hover: {r: 0.88235295, g: 0.78431374, b: 0.5882353, a: 1}
-  pressed: {r: 0.7176471, g: 0.6392157, b: 0.48235294, a: 1}
+  hover: {r: 0.9117647, g: 0.9117647, b: 0.9117647, a: 1}
+  pressed: {r: 0.6911765, g: 0.6911765, b: 0.6911765, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   duration: 0.2
   dragHighlight: 0
-  hoverSprite: green_btn
-  pressedSprite: green_btn_n
-  disabledSprite: green_btn
+  hoverSprite: white_btn
+  pressedSprite: grey_btn_n
+  disabledSprite: white_btn
   hoverSprite2D: {fileID: 0}
   pressedSprite2D: {fileID: 0}
   disabledSprite2D: {fileID: 0}
@@ -2453,13 +2510,13 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mColor: {r: 0, g: 1, b: 0, a: 1}
   mPivot: 4
   mWidth: 44
   mHeight: 24
   mDepth: 2
   mMat: {fileID: 0}
-  autoResizeBoxCollider: 0
+  autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1.8333334
@@ -2477,5 +2534,17 @@ MonoBehaviour:
   bottomType: 1
   topType: 1
   mAtlas: {fileID: 114366749522955277, guid: 30f97ffcdef3b594da9e35d724d3753e, type: 2}
-  mSpriteName: green_btn
+  mSpriteName: white_btn
   mFillCenter: 1
+--- !u!65 &2146603024
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2146603019}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 44, y: 24, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
