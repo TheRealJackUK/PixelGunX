@@ -186,6 +186,7 @@ internal sealed class FirstPersonControlSharp : UnityEngine.MonoBehaviour
 		if (!Defs.isJetpackEnabled)
 		{
 			mySkinName.sendAnimJump();
+			mult += 0.3f;
 		}
 		if ((BuildSettings.BuildTarget != BuildTarget.Android && BuildSettings.BuildTarget != BuildTarget.iPhone) || !Social.localUser.authenticated)
 		{
@@ -215,8 +216,18 @@ internal sealed class FirstPersonControlSharp : UnityEngine.MonoBehaviour
 		});
 	}
 
+	public float mult = 1;
+	public int tmr = 0;
+
 	private void Update()
 	{
+		tmr++;
+		if (!character.isGrounded){
+			tmr = 0;
+		}
+		if (tmr > 10){
+			mult = 1;
+		}
 		if ((isMulti && !isMine) || JoystickController.leftJoystick == null || JoystickController.rightJoystick == null)
 		{
 			return;
@@ -409,6 +420,9 @@ internal sealed class FirstPersonControlSharp : UnityEngine.MonoBehaviour
 		_movement += velocity;
 		_movement += Physics.gravity * gravityMultiplier;
 		_movement *= Time.deltaTime;
+		float my = _movement.y;
+		_movement *= mult;
+		_movement = new Vector3(_movement.x, my, _movement.z);
 		timeUpdateAnim -= Time.deltaTime;
 		if (timeUpdateAnim < 0f && character.isGrounded)
 		{
