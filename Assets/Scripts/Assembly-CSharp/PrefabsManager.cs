@@ -13,10 +13,58 @@ public class PrefabsManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
     }
 
-    public void Update(){
-        
+    public static GameObject[] GetDontDestroyOnLoadObjects()
+	{
+		GameObject temp = null;
+		try
+		{
+			temp = new GameObject();
+			UnityEngine.Object.DontDestroyOnLoad( temp );
+			UnityEngine.SceneManagement.Scene dontDestroyOnLoad = temp.scene;
+			UnityEngine.Object.DestroyImmediate( temp );
+			temp = null;
+			return dontDestroyOnLoad.GetRootGameObjects();
+		}
+		finally
+		{
+			if( temp != null )
+				UnityEngine.Object.DestroyImmediate( temp );
+		}
+	}
+
+    public void FixedUpdate(){
         if (Application.loadedLevelName != curScene){
             curScene = Application.loadedLevelName;
+            //GameObject.Instantiate(Resources.Load<GameObject>("PPV"), new Vector3(0, 0, 0), Quaternion.identity);
+            //if (Application.isPlaying) {
+                bool lo = false;
+                /*foreach (GameObject gobj in Resources.FindObjectsOfTypeAll<GameObject>()){
+                    if (gobj.GetComponent<PostProcessVolume>()){
+                        lo = true;
+                    }
+                }*/
+                /*if (curScene == "AppCenter" || curScene == "Loading" || curScene == "PromScene"){
+                    lo = true;
+                }*/
+                if (!lo){
+                    foreach (GameObject gobj in Resources.FindObjectsOfTypeAll<GameObject>()){
+                        if (!gobj.name.Contains("(Clone)") && !gobj.name.Contains("Camera")){
+                            bool jugf = false;
+                            foreach (GameObject c in GetDontDestroyOnLoadObjects()) {
+                                if (gobj.name.Equals(c)) {
+                                    jugf = true;
+                                }
+                            }
+                            if (!jugf){
+                                if (gobj.layer == 0) {
+                                    gobj.layer = 29;
+                                }
+                            }
+                        }
+                    }
+                    GameObject.Instantiate(Resources.Load<GameObject>("PPV"), new Vector3(0, 0, 0), Quaternion.identity);
+                }
+            //}
             foreach (GameObject gobj in Resources.FindObjectsOfTypeAll<GameObject>()){
                 if (gobj.GetComponent<PostProcessVolume>()){
                     bool bloom = Storager.getInt("bloom", false) == 1;

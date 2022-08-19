@@ -8,6 +8,7 @@ public class LoginController : MonoBehaviour {
 	public ButtonHandler login;
 	public ButtonHandler signup;
 	public UILabel captcha;
+	public UIInput captchaInput;
 
 	public void HandleLogin(object sender, System.EventArgs e){
 
@@ -15,6 +16,7 @@ public class LoginController : MonoBehaviour {
 
 	public void HandleSignup(object sender, System.EventArgs e){
 		string captchaText = captcha.text;
+		string input = captchaInput.value;
 		CreateNewCaptcha();
 	}
 
