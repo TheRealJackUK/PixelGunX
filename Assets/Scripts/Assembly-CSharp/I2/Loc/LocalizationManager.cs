@@ -149,6 +149,9 @@ namespace I2.Loc
 				}
 			}
 			string retardoTerm = term.ToLower().ToTitleCase();
+			if (retardoTerm.ToLower().Contains("minecraft")) {
+				return Storager.getString("currentfont", false);
+			}
 			return retardoTerm;
 		}
 

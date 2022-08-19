@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using Rilisoft;
 using UnityEngine;
 using UnityEngine.Networking;
+using I2.Loc;
 
 [Obfuscation(Exclude = true)]
 internal sealed class AppsMenu : MonoBehaviour
@@ -235,6 +236,10 @@ internal sealed class AppsMenu : MonoBehaviour
 
 	internal static IEnumerable<float> AppsMenuAwakeCoroutine()
 	{
+		if (!Storager.hasKey("currentfont")) {
+			Storager.setString("currentfont", "minecraft", false);
+		}
+		Resources.Load<LanguageSource>("I2Languages").UpdateTheFont();
 		if (PlayerPrefs.HasKey("WantToResetKeychain"))
 		{
 			PlayerPrefs.DeleteKey("WantToResetKeychain");

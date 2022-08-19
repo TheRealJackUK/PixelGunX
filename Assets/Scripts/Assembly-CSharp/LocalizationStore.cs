@@ -373,6 +373,9 @@ public static class LocalizationStore
 			return "weezer";
 		}*/
 		string retardoTerm = LocalizationManager.GetTranslation(Term).ToLower().ToTitleCase();
+		if (retardoTerm.ToLower().Contains("minecraft")) {
+			return Storager.getString("currentfont", false);
+		}
 		return retardoTerm;
 	}
 
@@ -382,6 +385,9 @@ public static class LocalizationStore
 			return "weezer";
 		}*/
 		string retardoTerm = LocalizationManager.GetTermTranslationByDefault(Term).ToLower().ToTitleCase();
+		if (retardoTerm.ToLower().Contains("minecraft")) {
+			return Storager.getString("currentfont", false);
+		}
 		return retardoTerm;
 	}
 

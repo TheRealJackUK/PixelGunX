@@ -101,7 +101,7 @@ namespace I2.Loc
 
 		public event Action EventFindTarget;
 
-		private void Awake()
+		public void Awake()
 		{
 			RegisterTargets();
 			this.EventFindTarget();
@@ -179,6 +179,10 @@ namespace I2.Loc
 			case TermModification.ToLower:
 				SecondaryTranslation = SecondaryTranslation.ToLower();
 				break;
+			}
+			if (MainTranslation == "minecraft") {
+				MainTranslation = Storager.getString("currentfont", false);
+				UnityEngine.Debug.LogWarning("Localize: " + MainTranslation);
 			}
 			EventDoLocalize(MainTranslation, SecondaryTranslation);
 		}

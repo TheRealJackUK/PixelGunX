@@ -94,6 +94,16 @@ namespace I2.Loc
 			}
 		}
 
+		public void UpdateTheFont() {
+			foreach (TermData term in mTerms) {
+				for (int i = 0; i < term.Languages.Length; i++) {
+					if (term.Languages[i] == "minecraft" || term.Languages[i] == "MINI" || term.Languages[i] == "Ponderosa"){
+						term.Languages[i] = Storager.getString("currentfont", false);
+					}
+				}
+			}
+		}
+
 		public WWW Export_Google_CreateWWWcall(eSpreadsheetUpdateMode UpdateMode = eSpreadsheetUpdateMode.Replace)
 		{
 			string value = Export_Google_CreateData();

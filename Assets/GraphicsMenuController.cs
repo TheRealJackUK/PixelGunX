@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Rilisoft;
 using Holoville.HOTween;
+using I2.Loc;
 
 public class GraphicsMenuController : MonoBehaviour {
 
@@ -11,6 +12,10 @@ public class GraphicsMenuController : MonoBehaviour {
 	public ButtonHandler cgBtn;
 	public ButtonHandler mbBtn;
 	public ButtonHandler quitBtn;
+
+	public ButtonHandler mojanglesBtn;
+	public ButtonHandler miniBtn;
+	public ButtonHandler ponderosaBtn;
 
 	public void SwitchBtn(bool on, ButtonHandler btn) {
 		HOTween.Init(true, true, true);
@@ -59,11 +64,44 @@ public class GraphicsMenuController : MonoBehaviour {
 		Application.LoadLevel(Defs.MainMenuScene);
 	}
 
+	public void HandleMojangles(object sender, System.EventArgs e){
+		Storager.setString("currentfont", "minecraft", false);
+		Resources.Load<LanguageSource>("I2Languages").UpdateTheFont();
+		SwitchBtn(true, mojanglesBtn);
+		SwitchBtn(false, miniBtn);
+		SwitchBtn(false, ponderosaBtn);
+	}
+
+	public void HandleMini(object sender, System.EventArgs e){
+		Storager.setString("currentfont", "MINI", false);
+		Resources.Load<LanguageSource>("I2Languages").UpdateTheFont();
+		SwitchBtn(false, mojanglesBtn);
+		SwitchBtn(true, miniBtn);
+		SwitchBtn(false, ponderosaBtn);
+	}
+
+	public void HandlePonderosa(object sender, System.EventArgs e){
+		Storager.setString("currentfont", "Ponderosa", false);
+		Resources.Load<LanguageSource>("I2Languages").UpdateTheFont();
+		foreach (UILabel lbl in GameObject.FindObjectsOfType<UILabel>()){
+			if (lbl.GetComponent<Localize>()) {
+				lbl.GetComponent<Localize>().Awake();
+			}
+		}
+		SwitchBtn(false, mojanglesBtn);
+		SwitchBtn(false, miniBtn);
+		SwitchBtn(true, ponderosaBtn);
+	}
+
 	void Start () {
 		SwitchBtn(Storager.getInt("bloom", false) == 1, bloomBtn);
 		SwitchBtn(Storager.getInt("ao", false) == 1, aoBtn);
 		SwitchBtn(Storager.getInt("cg", false) == 1, cgBtn);
 		SwitchBtn(Storager.getInt("mb", false) == 1, mbBtn);
+		SwitchBtn(Storager.getString("currentfont", false) == "minecraft", mojanglesBtn);
+		SwitchBtn(Storager.getString("currentfont", false) == "MINI", miniBtn);
+		SwitchBtn(Storager.getString("currentfont", false) == "Ponderosa", ponderosaBtn);
+		Resources.Load<LanguageSource>("I2Languages").UpdateTheFont();
 		if (bloomBtn != null)
 		{
 			bloomBtn.Clicked += HandleBloom;
@@ -83,6 +121,18 @@ public class GraphicsMenuController : MonoBehaviour {
 		if (quitBtn != null)
 		{
 			quitBtn.Clicked += HandleQuit;
+		}
+		if (mojanglesBtn != null)
+		{
+			mojanglesBtn.Clicked += HandleMojangles;
+		}
+		if (miniBtn != null)
+		{
+			miniBtn.Clicked += HandleMini;
+		}
+		if (ponderosaBtn != null)
+		{
+			ponderosaBtn.Clicked += HandlePonderosa;
 		}
 	}
 }
