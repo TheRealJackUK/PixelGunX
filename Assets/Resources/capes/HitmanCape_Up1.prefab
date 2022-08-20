@@ -2,6 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1001 &100100000
 Prefab:
+  m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
@@ -10,22 +11,58 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1420317027292322}
   m_IsPrefabParent: 1
+--- !u!1 &1178546782317774
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4152819389426874}
+  - component: {fileID: 33122712175486690}
+  - component: {fileID: 23266164965726490}
+  m_Layer: 29
+  m_Name: cape_ Archimage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1420317027292322
 GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4222396099299112}
   - component: {fileID: 111045660716655235}
   - component: {fileID: 114319237663355972}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: HitmanCape_Up1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4152819389426874
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1178546782317774}
+  m_LocalRotation: {x: 0.05653114, y: 0.7048434, z: -0.05653114, w: 0.7048434}
+  m_LocalPosition: {x: -0.1462616, y: 1.497632, z: 0.009140319}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4222396099299112}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 9.171051, y: -90, z: 0}
 --- !u!4 &4222396099299112
 Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1420317027292322}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -35,67 +72,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!111 &111045660716655235
-Animation:
-  m_GameObject: {fileID: 1420317027292322}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations:
-  - {fileID: 7400000, guid: 0127ae5c5865d27448ec8d8fd829269b, type: 2}
-  - {fileID: 7400000, guid: 547ffb4f016174c488a3a9b9a7e0644c, type: 2}
-  - {fileID: 7400000, guid: c0e1d64a2131efa439e339ac5f028eba, type: 2}
-  - {fileID: 7400000, guid: 0cc8c00a7cc629a499efa98a749fa8e1, type: 2}
-  - {fileID: 7400000, guid: 33c1af2ee7bb9d34ab235c86b1bebdc5, type: 2}
-  - {fileID: 7400000, guid: 005b80b28c688be41b247ba33eef1b5b, type: 2}
-  - {fileID: 7400000, guid: db32c095d0dc33b428eb76d151259c5f, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
---- !u!114 &114319237663355972
-MonoBehaviour:
-  m_GameObject: {fileID: 1420317027292322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f472c02c637f38940977a077a803e733, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  tier: 1
-  scaleShop: 150
-  positionShop: {x: -1.120117, y: -0.01952362, z: 0.2942598}
-  rotationShop: {x: 0, y: 30, z: -15}
-  localizeKey: Key_1095
---- !u!1 &1178546782317774
-GameObject:
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4152819389426874}
-  - component: {fileID: 33122712175486690}
-  - component: {fileID: 23266164965726490}
-  m_Layer: 0
-  m_Name: cape_ Archimage
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4152819389426874
-Transform:
-  m_GameObject: {fileID: 1178546782317774}
-  m_LocalRotation: {x: 0.05653114, y: 0.7048434, z: -0.05653114, w: 0.7048434}
-  m_LocalPosition: {x: -0.1462616, y: 1.497632, z: 0.009140319}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4222396099299112}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 9.171051, y: -90, z: 0}
---- !u!33 &33122712175486690
-MeshFilter:
-  m_GameObject: {fileID: 1178546782317774}
-  m_Mesh: {fileID: 4300000, guid: 86afb3ec3fc63124387c5d3a20057067, type: 2}
 --- !u!23 &23266164965726490
 MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1178546782317774}
   m_Enabled: 1
   m_CastShadows: 1
@@ -125,3 +106,47 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!33 &33122712175486690
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1178546782317774}
+  m_Mesh: {fileID: 4300000, guid: 86afb3ec3fc63124387c5d3a20057067, type: 2}
+--- !u!111 &111045660716655235
+Animation:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1420317027292322}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 0127ae5c5865d27448ec8d8fd829269b, type: 2}
+  - {fileID: 7400000, guid: 547ffb4f016174c488a3a9b9a7e0644c, type: 2}
+  - {fileID: 7400000, guid: c0e1d64a2131efa439e339ac5f028eba, type: 2}
+  - {fileID: 7400000, guid: 0cc8c00a7cc629a499efa98a749fa8e1, type: 2}
+  - {fileID: 7400000, guid: 33c1af2ee7bb9d34ab235c86b1bebdc5, type: 2}
+  - {fileID: 7400000, guid: 005b80b28c688be41b247ba33eef1b5b, type: 2}
+  - {fileID: 7400000, guid: db32c095d0dc33b428eb76d151259c5f, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!114 &114319237663355972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1420317027292322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f472c02c637f38940977a077a803e733, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tier: 1
+  scaleShop: 150
+  positionShop: {x: -1.120117, y: -0.01952362, z: 0.2942598}
+  rotationShop: {x: 0, y: 30, z: -15}
+  localizeKey: Key_1095

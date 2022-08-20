@@ -5,7 +5,7 @@ using UnityEngine.Rendering.PostProcessing;
 public class PrefabsManager : MonoBehaviour {
     
     public static PrefabsManager instance;
-    public string curScene = "";
+    public string curScene = string.Empty;
     public Material weeze;
     
     void Awake() {

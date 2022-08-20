@@ -2,6 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1001 &100100000
 Prefab:
+  m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
@@ -12,12 +13,32 @@ Prefab:
   m_IsPrefabParent: 1
 --- !u!1 &1287119252366308
 GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4159112113056849}
   - component: {fileID: 114521142844849628}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: PixlManForSkins
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1797694839256526
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4484961947592459}
+  - component: {fileID: 33183900684310075}
+  - component: {fileID: 23551440870627456}
+  m_Layer: 29
+  m_Name: Body001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,6 +46,9 @@ GameObject:
   m_IsActive: 1
 --- !u!4 &4159112113056849
 Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1287119252366308}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -34,49 +58,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114521142844849628
-MonoBehaviour:
-  m_GameObject: {fileID: 1287119252366308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f472c02c637f38940977a077a803e733, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  tier: 10
-  scaleShop: 120
-  positionShop: {x: -8.625977, y: -44.4, z: 0.04395813}
-  rotationShop: {x: 8.110779, y: -150.6727, z: 3.273709}
-  localizeKey:
---- !u!1 &1797694839256526
-GameObject:
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4484961947592459}
-  - component: {fileID: 33183900684310075}
-  - component: {fileID: 23551440870627456}
-  m_Layer: 0
-  m_Name: Body001
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!4 &4484961947592459
 Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1797694839256526}
-  m_LocalRotation: {x: 1.629207E-07, y: -7.12149E-15, z: -4.371139E-08, w: 1}
-  m_LocalPosition: {x: -0.0001320267, y: 0, z: 1.014709E-05}
+  m_LocalRotation: {x: 0.0000001629207, y: -7.12149e-15, z: -0.00000004371139, w: 1}
+  m_LocalPosition: {x: -0.0001320267, y: 0, z: 0.00001014709}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4159112113056849}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 1.866934E-05, y: 3.71159E-20, z: 5.008956E-06}
---- !u!33 &33183900684310075
-MeshFilter:
-  m_GameObject: {fileID: 1797694839256526}
-  m_Mesh: {fileID: 4300000, guid: 93f3dff8c8b024d43ad9f1c371f5ce19, type: 2}
+  m_LocalEulerAnglesHint: {x: 0.00001866934, y: 3.71159e-20, z: 0.000005008956}
 --- !u!23 &23551440870627456
 MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1797694839256526}
   m_Enabled: 1
   m_CastShadows: 1
@@ -106,3 +105,26 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!33 &33183900684310075
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1797694839256526}
+  m_Mesh: {fileID: 4300000, guid: 93f3dff8c8b024d43ad9f1c371f5ce19, type: 2}
+--- !u!114 &114521142844849628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1287119252366308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f472c02c637f38940977a077a803e733, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tier: 10
+  scaleShop: 120
+  positionShop: {x: -8.625977, y: -44.4, z: 0.04395813}
+  rotationShop: {x: 8.110779, y: -150.6727, z: 3.273709}
+  localizeKey: 

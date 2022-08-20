@@ -2,6 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1001 &100100000
 Prefab:
+  m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
@@ -12,13 +13,16 @@ Prefab:
   m_IsPrefabParent: 1
 --- !u!1 &1207796806229352
 GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4905958019946393}
   - component: {fileID: 114490596278670578}
   - component: {fileID: 114685175165277782}
   - component: {fileID: 114495960266928307}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: ZombiManager
   m_TagString: ZombiCreator
   m_Icon: {fileID: 0}
@@ -27,6 +31,9 @@ GameObject:
   m_IsActive: 1
 --- !u!4 &4905958019946393
 Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1207796806229352}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -28.09812, y: -2.95436, z: -22.58756}
@@ -37,20 +44,44 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114490596278670578
 MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1207796806229352}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e19a09906fdd2b24baceecae929aede7, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114495960266928307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1207796806229352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29e723b5fc396b742a75f75b9f391815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeGame: 0
+  nextTimeSynch: 0
+  nextAddZombi: 0
+  zombiePrefabs: []
+  startGame: 0
+  maxTimeGame: 240
+  photonView: {fileID: 0}
 --- !u!114 &114685175165277782
 MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1207796806229352}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15f56636f18fc4a40ad3a7f0a115eb8d, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   ownerId: 0
   group: 0
   prefixBackup: -1
@@ -65,18 +96,3 @@ MonoBehaviour:
   viewIdField: 0
   instantiationId: -1
   isRuntimeInstantiated: 0
---- !u!114 &114495960266928307
-MonoBehaviour:
-  m_GameObject: {fileID: 1207796806229352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29e723b5fc396b742a75f75b9f391815, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  timeGame: 0
-  nextTimeSynch: 0
-  nextAddZombi: 0
-  zombiePrefabs: []
-  startGame: 0
-  maxTimeGame: 240
-  photonView: {fileID: 0}

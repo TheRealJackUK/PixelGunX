@@ -2,6 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1001 &100100000
 Prefab:
+  m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
@@ -12,21 +13,45 @@ Prefab:
   m_IsPrefabParent: 1
 --- !u!1 &1393810868075880
 GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4200659233940577}
   - component: {fileID: 114728145756406196}
   - component: {fileID: 114167967622663139}
   - component: {fileID: 114699824364145430}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: Bonus_4
   m_TagString: Bonus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1406773891394499
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4209924509616511}
+  - component: {fileID: 33733181837260349}
+  - component: {fileID: 23446380845065256}
+  - component: {fileID: 111040644097732859}
+  m_Layer: 29
+  m_Name: Grenade_Bonus
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &4200659233940577
 Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1393810868075880}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -36,83 +61,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114728145756406196
-MonoBehaviour:
-  m_GameObject: {fileID: 1393810868075880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15f56636f18fc4a40ad3a7f0a115eb8d, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  ownerId: 0
-  group: 0
-  prefixBackup: -1
-  observed: {fileID: 0}
-  synchronization: 0
-  onSerializeTransformOption: 3
-  onSerializeRigidBodyOption: 2
-  ownershipTransfer: 0
-  ObservedComponents: []
-  ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
-  isRuntimeInstantiated: 0
---- !u!114 &114167967622663139
-MonoBehaviour:
-  m_GameObject: {fileID: 1393810868075880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42e58af89b6c6304e9b3fab3f6b14d4e, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  typeOfMass: 0
-  numberSpawnZone: -1
---- !u!114 &114699824364145430
-MonoBehaviour:
-  m_GameObject: {fileID: 1393810868075880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b6c1325e86f5b446ac6fb3a6b8e7367, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  isKilled: 0
-  itemUp: {fileID: 8300000, guid: 7c31fdfab10a1a540bd48afc2b84d142, type: 3}
-  photonView: {fileID: 114728145756406196}
-  type: 4
-  currentTime: 0
-  timeKill: -1
-  isTimeBonus: 0
---- !u!1 &1406773891394499
-GameObject:
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4209924509616511}
-  - component: {fileID: 33733181837260349}
-  - component: {fileID: 23446380845065256}
-  - component: {fileID: 111040644097732859}
-  m_Layer: 0
-  m_Name: Grenade_Bonus
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!4 &4209924509616511
 Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1406773891394499}
-  m_LocalRotation: {x: 6.657903E-08, y: 5.960464E-08, z: 1.490116E-08, w: 1}
+  m_LocalRotation: {x: 0.00000006657903, y: 0.00000005960464, z: 0.00000001490116,
+    w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4200659233940577}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 7.629395E-06, y: -6.830189E-06, z: -1.707547E-06}
---- !u!33 &33733181837260349
-MeshFilter:
-  m_GameObject: {fileID: 1406773891394499}
-  m_Mesh: {fileID: 4300000, guid: 95662c2462b5c604eb2cfe3dee57e4da, type: 2}
+  m_LocalEulerAnglesHint: {x: 0.000007629395, y: -0.000006830189, z: -0.000001707547}
 --- !u!23 &23446380845065256
 MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1406773891394499}
   m_Enabled: 1
   m_CastShadows: 1
@@ -142,8 +109,18 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!33 &33733181837260349
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1406773891394499}
+  m_Mesh: {fileID: 4300000, guid: 95662c2462b5c604eb2cfe3dee57e4da, type: 2}
 --- !u!111 &111040644097732859
 Animation:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1406773891394499}
   m_Enabled: 1
   serializedVersion: 3
@@ -154,3 +131,58 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &114167967622663139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1393810868075880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42e58af89b6c6304e9b3fab3f6b14d4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeOfMass: 0
+  numberSpawnZone: -1
+--- !u!114 &114699824364145430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1393810868075880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b6c1325e86f5b446ac6fb3a6b8e7367, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isKilled: 0
+  itemUp: {fileID: 8300000, guid: 7c31fdfab10a1a540bd48afc2b84d142, type: 3}
+  photonView: {fileID: 114728145756406196}
+  type: 4
+  currentTime: 0
+  timeKill: -1
+  isTimeBonus: 0
+--- !u!114 &114728145756406196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1393810868075880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15f56636f18fc4a40ad3a7f0a115eb8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+  group: 0
+  prefixBackup: -1
+  observed: {fileID: 0}
+  synchronization: 0
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents: []
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 0
+  instantiationId: -1
+  isRuntimeInstantiated: 0

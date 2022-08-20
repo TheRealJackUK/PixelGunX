@@ -2,6 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1001 &100100000
 Prefab:
+  m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
@@ -12,21 +13,43 @@ Prefab:
   m_IsPrefabParent: 1
 --- !u!1 &1343476363354968
 GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4092179301680803}
   - component: {fileID: 114328762423587067}
   - component: {fileID: 114705522154972063}
   - component: {fileID: 114435941259251661}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: NetworkTable
   m_TagString: NetworkTable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1981233890177553
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4824666433767497}
+  - component: {fileID: 114636251152011872}
+  m_Layer: 29
+  m_Name: GUIObj
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!4 &4092179301680803
 Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1343476363354968}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.4877882, y: 1.497373, z: 1.513635}
@@ -36,14 +59,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4824666433767497
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1981233890177553}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.709407, y: -2.206779, z: -1.513635}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4092179301680803}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114328762423587067
 MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1343476363354968}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 210dd0a9a8dd321408c812c6455304ca, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   pixelBookID: -1
   timerFlag: 0
   isShowAvard: 0
@@ -51,8 +90,8 @@ MonoBehaviour:
   networkStartTableNGUIController: {fileID: 0}
   isRegimVidos: 0
   currentPlayerMoveCVidos: {fileID: 0}
-  playerVidosNick:
-  playerVidosClanName:
+  playerVidosNick: 
+  playerVidosClanName: 
   playerVidosClanTexture: {fileID: 0}
   currentCamPlayer: {fileID: 0}
   currentFPSPlayer: {fileID: 0}
@@ -61,7 +100,8 @@ MonoBehaviour:
   mySkin: {fileID: 0}
   zombiePrefabs: []
   tempCam: {fileID: 1987798409163160, guid: 62c0f86f8634d344494a3e828264aaa0, type: 2}
-  zombieManagerPrefab: {fileID: 1207796806229352, guid: 50b433cad9157ec4189594f0f4d016ce, type: 2}
+  zombieManagerPrefab: {fileID: 1207796806229352, guid: 50b433cad9157ec4189594f0f4d016ce,
+    type: 2}
   serverLeftTheGame: {fileID: 2800000, guid: 683db312cf77e93469273ff2532e3ae3, type: 3}
   experienceController: {fileID: 0}
   isDeadInHungerGame: 0
@@ -69,12 +109,12 @@ MonoBehaviour:
   myCommand: 0
   myCommandOld: 0
   myClanTexture: {fileID: 0}
-  myClanID:
-  myClanName:
-  myClanLeaderID:
+  myClanID: 
+  myClanName: 
+  myClanLeaderID: 
   isDrawInHanger: 0
   labelStyle:
-    m_Name:
+    m_Name: 
     m_Normal:
       m_Background: {fileID: 2800000, guid: e955141a3ca46f4469833067b12f33cf, type: 3}
       m_ScaledBackgrounds: []
@@ -141,7 +181,7 @@ MonoBehaviour:
     m_StretchWidth: 1
     m_StretchHeight: 0
   messagesStyle:
-    m_Name:
+    m_Name: 
     m_Normal:
       m_Background: {fileID: 0}
       m_ScaledBackgrounds: []
@@ -208,7 +248,7 @@ MonoBehaviour:
     m_StretchWidth: 1
     m_StretchHeight: 0
   ozidanieStyle:
-    m_Name:
+    m_Name: 
     m_Normal:
       m_Background: {fileID: 0}
       m_ScaledBackgrounds: []
@@ -277,29 +317,29 @@ MonoBehaviour:
   _purchaseActivityIndicator: {fileID: 0}
   _weaponManager: {fileID: 0}
   _showTable: 0
-  nickPobeditelya:
+  nickPobeditelya: 
   _isShowNickTable: 0
   runGame: 0
   zoneCreatePlayer: []
   isDrawInDeathMatch: 0
   showDisconnectFromServer: 0
   showDisconnectFromMasterServer: 0
-  NamePlayer:
+  NamePlayer: 
   CountKills: 0
   oldCountKills: -1
   oldSpisokName: []
   oldCountLilsSpisok: []
   oldScoreSpisok: []
-  oldSpisokRanks:
+  oldSpisokRanks: 
   oldSpisokNameBlue: []
   oldCountLilsSpisokBlue: []
-  oldSpisokRanksBlue:
+  oldSpisokRanksBlue: 
   oldSpisokNameRed: []
   oldCountLilsSpisokRed: []
   oldScoreSpisokRed: []
   oldScoreSpisokBlue: []
-  oldSpisokRanksRed:
-  oldIsDeadInHungerGame:
+  oldSpisokRanksRed: 
+  oldIsDeadInHungerGame: 
   oldSpisokPixelBookID: []
   oldSpisokPixelBookIDBlue: []
   oldSpisokPixelBookIDRed: []
@@ -311,22 +351,17 @@ MonoBehaviour:
   scoreOld: -1
   myRanks: 1
   myPlayerMoveC: {fileID: 0}
---- !u!114 &114705522154972063
-MonoBehaviour:
-  m_GameObject: {fileID: 1343476363354968}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fec03ae6b114523488fd691afc782d6a, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
 --- !u!114 &114435941259251661
 MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1343476363354968}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15f56636f18fc4a40ad3a7f0a115eb8d, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   ownerId: 0
   group: 0
   prefixBackup: -1
@@ -340,35 +375,26 @@ MonoBehaviour:
   viewIdField: 0
   instantiationId: -1
   isRuntimeInstantiated: 0
---- !u!1 &1981233890177553
-GameObject:
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4824666433767497}
-  - component: {fileID: 114636251152011872}
-  m_Layer: 0
-  m_Name: GUIObj
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &4824666433767497
-Transform:
-  m_GameObject: {fileID: 1981233890177553}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.709407, y: -2.206779, z: -1.513635}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4092179301680803}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114636251152011872
 MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1981233890177553}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cfa9bbc2a7288cc4c9af0b3a0aa7bbbd, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   myTable: {fileID: 114328762423587067}
+--- !u!114 &114705522154972063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1343476363354968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fec03ae6b114523488fd691afc782d6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

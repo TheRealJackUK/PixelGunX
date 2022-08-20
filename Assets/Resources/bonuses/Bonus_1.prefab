@@ -2,6 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1001 &100100000
 Prefab:
+  m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
@@ -12,6 +13,9 @@ Prefab:
   m_IsPrefabParent: 1
 --- !u!1 &1748911517499609
 GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4988181685903054}
@@ -21,7 +25,7 @@ GameObject:
   - component: {fileID: 114888057340910256}
   - component: {fileID: 114286209957202543}
   - component: {fileID: 114383103602418721}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: Bonus_1
   m_TagString: Bonus
   m_Icon: {fileID: 0}
@@ -30,20 +34,22 @@ GameObject:
   m_IsActive: 1
 --- !u!4 &4988181685903054
 Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1748911517499609}
-  m_LocalRotation: {x: -9.415697E-08, y: 0.7071068, z: 0.7071068, w: 9.415697E-08}
+  m_LocalRotation: {x: -0.00000009415697, y: 0.7071068, z: 0.7071068, w: 0.00000009415697}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: -1.525879E-05, z: 180}
---- !u!33 &33329394520084988
-MeshFilter:
-  m_GameObject: {fileID: 1748911517499609}
-  m_Mesh: {fileID: 4300000, guid: 9584f8406c7aef24b8ba331bb744f0b1, type: 2}
+  m_LocalEulerAnglesHint: {x: 90, y: -0.00001525879, z: 180}
 --- !u!23 &23243053051421276
 MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1748911517499609}
   m_Enabled: 1
   m_CastShadows: 1
@@ -73,8 +79,18 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!33 &33329394520084988
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1748911517499609}
+  m_Mesh: {fileID: 4300000, guid: 9584f8406c7aef24b8ba331bb744f0b1, type: 2}
 --- !u!111 &111021081298948512
 Animation:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1748911517499609}
   m_Enabled: 1
   serializedVersion: 3
@@ -85,14 +101,48 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &114286209957202543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1748911517499609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42e58af89b6c6304e9b3fab3f6b14d4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeOfMass: 0
+  numberSpawnZone: -1
+--- !u!114 &114383103602418721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1748911517499609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b6c1325e86f5b446ac6fb3a6b8e7367, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isKilled: 0
+  itemUp: {fileID: 8300000, guid: e8cb41648bfa29646a51ba161c58fc0e, type: 3}
+  photonView: {fileID: 114888057340910256}
+  type: 1
+  currentTime: 0
+  timeKill: -1
+  isTimeBonus: 0
 --- !u!114 &114888057340910256
 MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1748911517499609}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15f56636f18fc4a40ad3a7f0a115eb8d, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   ownerId: 0
   group: 0
   prefixBackup: -1
@@ -106,28 +156,3 @@ MonoBehaviour:
   viewIdField: 0
   instantiationId: -1
   isRuntimeInstantiated: 0
---- !u!114 &114286209957202543
-MonoBehaviour:
-  m_GameObject: {fileID: 1748911517499609}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42e58af89b6c6304e9b3fab3f6b14d4e, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  typeOfMass: 0
-  numberSpawnZone: -1
---- !u!114 &114383103602418721
-MonoBehaviour:
-  m_GameObject: {fileID: 1748911517499609}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b6c1325e86f5b446ac6fb3a6b8e7367, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  isKilled: 0
-  itemUp: {fileID: 8300000, guid: e8cb41648bfa29646a51ba161c58fc0e, type: 3}
-  photonView: {fileID: 114888057340910256}
-  type: 1
-  currentTime: 0
-  timeKill: -1
-  isTimeBonus: 0

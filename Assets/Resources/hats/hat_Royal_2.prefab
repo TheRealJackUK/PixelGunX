@@ -2,6 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1001 &100100000
 Prefab:
+  m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
@@ -10,13 +11,33 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1837855223362123}
   m_IsPrefabParent: 1
+--- !u!1 &1333930581505238
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4376321891853651}
+  - component: {fileID: 33625640984554183}
+  - component: {fileID: 23855003451527053}
+  m_Layer: 29
+  m_Name: hat_Royal_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1837855223362123
 GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4290978996890795}
   - component: {fileID: 114966793983462785}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: hat_Royal_2
   m_TagString: hat_Royal_2
   m_Icon: {fileID: 0}
@@ -25,6 +46,9 @@ GameObject:
   m_IsActive: 1
 --- !u!4 &4290978996890795
 Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1837855223362123}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -34,35 +58,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114966793983462785
-MonoBehaviour:
-  m_GameObject: {fileID: 1837855223362123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f472c02c637f38940977a077a803e733, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  tier: 2
-  scaleShop: 158.3744
-  positionShop: {x: -2.690674, y: 0.6722488, z: -26.21949}
-  rotationShop: {x: 284.9999, y: 195.0009, z: 0}
-  localizeKey: Key_0714
---- !u!1 &1333930581505238
-GameObject:
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4376321891853651}
-  - component: {fileID: 33625640984554183}
-  - component: {fileID: 23855003451527053}
-  m_Layer: 0
-  m_Name: hat_Royal_2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!4 &4376321891853651
 Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1333930581505238}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -71,12 +71,11 @@ Transform:
   m_Father: {fileID: 4290978996890795}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
---- !u!33 &33625640984554183
-MeshFilter:
-  m_GameObject: {fileID: 1333930581505238}
-  m_Mesh: {fileID: 4300000, guid: 2155c033bb293e24b97643148bf17559, type: 2}
 --- !u!23 &23855003451527053
 MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1333930581505238}
   m_Enabled: 1
   m_CastShadows: 1
@@ -106,3 +105,26 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!33 &33625640984554183
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1333930581505238}
+  m_Mesh: {fileID: 4300000, guid: 2155c033bb293e24b97643148bf17559, type: 2}
+--- !u!114 &114966793983462785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1837855223362123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f472c02c637f38940977a077a803e733, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tier: 2
+  scaleShop: 158.3744
+  positionShop: {x: -2.690674, y: 0.6722488, z: -26.21949}
+  rotationShop: {x: 284.9999, y: 195.0009, z: 0}
+  localizeKey: Key_0714

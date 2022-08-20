@@ -2,6 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1001 &100100000
 Prefab:
+  m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
@@ -12,20 +13,43 @@ Prefab:
   m_IsPrefabParent: 1
 --- !u!1 &1431809317766706
 GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4363399266292244}
   - component: {fileID: 111257496465655792}
   - component: {fileID: 114954552363944153}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: DemolitionCape_Up2
   m_TagString: cape_RoyalKnight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1781043719077251
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4736327314015389}
+  - component: {fileID: 33722544644200504}
+  - component: {fileID: 23303429170034219}
+  m_Layer: 29
+  m_Name: cape_RoyalKnight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &4363399266292244
 Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1431809317766706}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -35,53 +59,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!111 &111257496465655792
-Animation:
-  m_GameObject: {fileID: 1431809317766706}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations:
-  - {fileID: 7400000, guid: ddbbde78b7d5c9040979411728d3ea4c, type: 2}
-  - {fileID: 7400000, guid: 9a065fee57be65d4f8b3b2aecb0e66f7, type: 2}
-  - {fileID: 7400000, guid: 93f20eafdae9af24c8286509dca06d75, type: 2}
-  - {fileID: 7400000, guid: 3a92eecd67952e34b92e1159b881473b, type: 2}
-  - {fileID: 7400000, guid: d4334c043f9e3ca45a18a03a6a598863, type: 2}
-  - {fileID: 7400000, guid: 20f91d8ee08180841b30dd12d84ed297, type: 2}
-  - {fileID: 7400000, guid: 6fb25dac38ac79845aea3865c5119d4f, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
---- !u!114 &114954552363944153
-MonoBehaviour:
-  m_GameObject: {fileID: 1431809317766706}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f472c02c637f38940977a077a803e733, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  tier: 2
-  scaleShop: 150
-  positionShop: {x: -6.615479, y: -0.05453491, z: 0.2321405}
-  rotationShop: {x: 0, y: 30, z: -15}
-  localizeKey: Key_1103
---- !u!1 &1781043719077251
-GameObject:
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4736327314015389}
-  - component: {fileID: 33722544644200504}
-  - component: {fileID: 23303429170034219}
-  m_Layer: 0
-  m_Name: cape_RoyalKnight
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!4 &4736327314015389
 Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1781043719077251}
   m_LocalRotation: {x: 0.05653127, y: 0.7048434, z: -0.05653127, w: 0.7048434}
   m_LocalPosition: {x: -0.1462616, y: 1.497632, z: 0.009140319}
@@ -90,12 +72,11 @@ Transform:
   m_Father: {fileID: 4363399266292244}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 9.171072, y: -90, z: 0}
---- !u!33 &33722544644200504
-MeshFilter:
-  m_GameObject: {fileID: 1781043719077251}
-  m_Mesh: {fileID: 4300000, guid: 5ef4c680cfae6a0439ad618588db7763, type: 2}
 --- !u!23 &23303429170034219
 MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1781043719077251}
   m_Enabled: 1
   m_CastShadows: 1
@@ -125,3 +106,47 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!33 &33722544644200504
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1781043719077251}
+  m_Mesh: {fileID: 4300000, guid: 5ef4c680cfae6a0439ad618588db7763, type: 2}
+--- !u!111 &111257496465655792
+Animation:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1431809317766706}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: ddbbde78b7d5c9040979411728d3ea4c, type: 2}
+  - {fileID: 7400000, guid: 9a065fee57be65d4f8b3b2aecb0e66f7, type: 2}
+  - {fileID: 7400000, guid: 93f20eafdae9af24c8286509dca06d75, type: 2}
+  - {fileID: 7400000, guid: 3a92eecd67952e34b92e1159b881473b, type: 2}
+  - {fileID: 7400000, guid: d4334c043f9e3ca45a18a03a6a598863, type: 2}
+  - {fileID: 7400000, guid: 20f91d8ee08180841b30dd12d84ed297, type: 2}
+  - {fileID: 7400000, guid: 6fb25dac38ac79845aea3865c5119d4f, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!114 &114954552363944153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1431809317766706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f472c02c637f38940977a077a803e733, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tier: 2
+  scaleShop: 150
+  positionShop: {x: -6.615479, y: -0.05453491, z: 0.2321405}
+  rotationShop: {x: 0, y: 30, z: -15}
+  localizeKey: Key_1103

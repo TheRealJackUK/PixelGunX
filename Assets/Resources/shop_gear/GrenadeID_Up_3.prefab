@@ -2,6 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1001 &100100000
 Prefab:
+  m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
@@ -10,21 +11,59 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1606996002895669}
   m_IsPrefabParent: 1
+--- !u!1 &1036078335092708
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4024148497736291}
+  - component: {fileID: 33375513566428597}
+  - component: {fileID: 23667621487839098}
+  - component: {fileID: 111730582720812668}
+  m_Layer: 29
+  m_Name: Grenade_Bonus
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1606996002895669
 GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4664868992025959}
   - component: {fileID: 114113084706559385}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: GrenadeID_Up_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4024148497736291
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1036078335092708}
+  m_LocalRotation: {x: 0.00000006657903, y: 0.00000005960464, z: 0.00000001490116,
+    w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4664868992025959}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0.000007629395, y: -0.000006830189, z: -0.000001707547}
 --- !u!4 &4664868992025959
 Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1606996002895669}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -34,50 +73,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114113084706559385
-MonoBehaviour:
-  m_GameObject: {fileID: 1606996002895669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f472c02c637f38940977a077a803e733, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  tier: 3
-  scaleShop: 291.5
-  positionShop: {x: -1.197266, y: 14.0071, z: 8.30762E-11}
-  rotationShop: {x: 4.268868E-07, y: 29.99995, z: 330}
-  localizeKey: Key_0739
---- !u!1 &1036078335092708
-GameObject:
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4024148497736291}
-  - component: {fileID: 33375513566428597}
-  - component: {fileID: 23667621487839098}
-  - component: {fileID: 111730582720812668}
-  m_Layer: 0
-  m_Name: Grenade_Bonus
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4024148497736291
-Transform:
-  m_GameObject: {fileID: 1036078335092708}
-  m_LocalRotation: {x: 6.657903E-08, y: 5.960464E-08, z: 1.490116E-08, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4664868992025959}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 7.629395E-06, y: -6.830189E-06, z: -1.707547E-06}
---- !u!33 &33375513566428597
-MeshFilter:
-  m_GameObject: {fileID: 1036078335092708}
-  m_Mesh: {fileID: 4300000, guid: 95662c2462b5c604eb2cfe3dee57e4da, type: 2}
 --- !u!23 &23667621487839098
 MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1036078335092708}
   m_Enabled: 1
   m_CastShadows: 1
@@ -107,8 +107,18 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!33 &33375513566428597
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1036078335092708}
+  m_Mesh: {fileID: 4300000, guid: 95662c2462b5c604eb2cfe3dee57e4da, type: 2}
 --- !u!111 &111730582720812668
 Animation:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1036078335092708}
   m_Enabled: 1
   serializedVersion: 3
@@ -119,3 +129,19 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &114113084706559385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1606996002895669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f472c02c637f38940977a077a803e733, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tier: 3
+  scaleShop: 291.5
+  positionShop: {x: -1.197266, y: 14.0071, z: 8.30762e-11}
+  rotationShop: {x: 0.0000004268868, y: 29.99995, z: 330}
+  localizeKey: Key_0739

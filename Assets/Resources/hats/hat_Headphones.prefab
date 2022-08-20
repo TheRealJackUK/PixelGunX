@@ -2,6 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1001 &100100000
 Prefab:
+  m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
@@ -10,13 +11,33 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1894711748229917}
   m_IsPrefabParent: 1
+--- !u!1 &1450552248163156
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4635835746829667}
+  - component: {fileID: 33688765454644379}
+  - component: {fileID: 23969253015138918}
+  m_Layer: 29
+  m_Name: hat_Headphones
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1894711748229917
 GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4585834482883894}
   - component: {fileID: 114125429278065346}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: hat_Headphones
   m_TagString: hat_Headphones
   m_Icon: {fileID: 0}
@@ -25,6 +46,9 @@ GameObject:
   m_IsActive: 1
 --- !u!4 &4585834482883894
 Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1894711748229917}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -34,35 +58,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114125429278065346
-MonoBehaviour:
-  m_GameObject: {fileID: 1894711748229917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f472c02c637f38940977a077a803e733, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  tier: 0
-  scaleShop: 193.05
-  positionShop: {x: -1.343262, y: 0.7304993, z: 0.1643368}
-  rotationShop: {x: 285, y: 194.9995, z: 270.0003}
-  localizeKey: Key_0710
---- !u!1 &1450552248163156
-GameObject:
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4635835746829667}
-  - component: {fileID: 33688765454644379}
-  - component: {fileID: 23969253015138918}
-  m_Layer: 0
-  m_Name: hat_Headphones
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!4 &4635835746829667
 Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1450552248163156}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -71,12 +71,11 @@ Transform:
   m_Father: {fileID: 4585834482883894}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &33688765454644379
-MeshFilter:
-  m_GameObject: {fileID: 1450552248163156}
-  m_Mesh: {fileID: 4300000, guid: ce8e6c2d7980f1140aad24d49887cd9d, type: 2}
 --- !u!23 &23969253015138918
 MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1450552248163156}
   m_Enabled: 1
   m_CastShadows: 1
@@ -106,3 +105,26 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!33 &33688765454644379
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1450552248163156}
+  m_Mesh: {fileID: 4300000, guid: ce8e6c2d7980f1140aad24d49887cd9d, type: 2}
+--- !u!114 &114125429278065346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1894711748229917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f472c02c637f38940977a077a803e733, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tier: 0
+  scaleShop: 193.05
+  positionShop: {x: -1.343262, y: 0.7304993, z: 0.1643368}
+  rotationShop: {x: 285, y: 194.9995, z: 270.0003}
+  localizeKey: Key_0710
