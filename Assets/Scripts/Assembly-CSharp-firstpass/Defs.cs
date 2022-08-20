@@ -2614,6 +2614,7 @@ public static string CAnim(GameObject animator, string con){
 		levelNumsForMusicInMult.Add("Candyland", 1060);
 		levelNumsForMusicInMult.Add("actualgame", 1061);
 		levelNumsForMusicInMult.Add("AntsButBetter", 1062);
+		levelNumsForMusicInMult.Add("survival_7", 2500);
 		levelNumsForMusicInMult.Add("ExtremelyReal", 1063);
 		levelNumsForMusicInMult.Add("Slender", 9);
 		levelNumsForMusicInMult.Add("Castle", 1002);
