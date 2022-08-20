@@ -38,11 +38,11 @@ public class PrefabsManager : MonoBehaviour {
             //GameObject.Instantiate(Resources.Load<GameObject>("PPV"), new Vector3(0, 0, 0), Quaternion.identity);
             //if (Application.isPlaying) {
                 bool lo = false;
-                /*foreach (GameObject gobj in Resources.FindObjectsOfTypeAll<GameObject>()){
+                foreach (GameObject gobj in Resources.FindObjectsOfTypeAll<GameObject>()){
                     if (gobj.GetComponent<PostProcessVolume>()){
                         lo = true;
                     }
-                }*/
+                }
                 /*if (curScene == "AppCenter" || curScene == "Loading" || curScene == "PromScene"){
                     lo = true;
                 }*/
