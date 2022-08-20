@@ -2667,6 +2667,10 @@ public static string CAnim(GameObject animator, string con){
 		levelNumsForMusicInMult.Add("epilepsy", 4205);
 		levelNumsForMusicInMult.Add("RealCube", 4207);
 		levelNumsForMusicInMult.Add("RunAndJump", 4208);
+		levelNumsForMusicInMult.Add("level_0", 9999);
+		levelNumsForMusicInMult.Add("level_1", 10002);
+		levelNumsForMusicInMult.Add("level_4", 10000);
+		levelNumsForMusicInMult.Add("level_5", 10001);
 		_premiumMaps.Add("Ants", 15);
 		_premiumMaps.Add("Lean_Matrix", 2100000000);
 		_premiumMaps.Add("Matrix", 15);
