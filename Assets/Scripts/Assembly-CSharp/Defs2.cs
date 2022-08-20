@@ -212,10 +212,11 @@ public sealed class Defs2
 		_mapsInfo.Add(new MapInfo("Secret_Base", "Secret Base", "Secret Base", "Large Map"));
 		_mapsInfo.Add(new MapInfo("Helicarrier", "Aircraft Carrier", "Aircraft Carrier", "Very Large Map"));
 		_mapsInfo.Add(new MapInfo("RunAndJump", "Run n' Jump", "Run n' Jump", "Very Large Map"));
-		_mapsInfo.Add(new MapInfo("level_0", "The Island", "The Island", "Very Large Map"));
-		_mapsInfo.Add(new MapInfo("level_1", "The Dish", "The Dish", "Very Large Map"));
-		_mapsInfo.Add(new MapInfo("level_4", "The Airport", "The Airport", "Very Large Map"));
-		_mapsInfo.Add(new MapInfo("level_5", "The Big City", "The Big City", "Very Large Map"));
+		_mapsInfo.Add(new MapInfo("level_0", "The Island", "The Island", "Large Map"));
+		_mapsInfo.Add(new MapInfo("level_1", "The Dish", "The Dish", "Medium Map"));
+		_mapsInfo.Add(new MapInfo("level_3", "The Base", "The Base", "Large Map"));
+		_mapsInfo.Add(new MapInfo("level_4", "The Airport", "The Airport", "Large Map"));
+		_mapsInfo.Add(new MapInfo("level_5", "The Big City", "The Big City", "Large Map"));
 		_mapsInfo.Add(new MapInfo("train_robbery", "Train Robbery", "Train Robbery", "Small Map"));
 		_mapsInfo.Add(new MapInfo("Candyland", "Candy Land", "Candy Land", "Medium Map"));
 		_mapsInfo.Add(new MapInfo("actualgame", "My Front Yard", "My Front Yard", "Front Yard Size But You're An Ant!"));

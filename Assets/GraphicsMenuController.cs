@@ -16,6 +16,7 @@ public class GraphicsMenuController : MonoBehaviour {
 	public ButtonHandler mojanglesBtn;
 	public ButtonHandler miniBtn;
 	public ButtonHandler ponderosaBtn;
+	public ButtonHandler unibodyBtn;
 
 	public void SwitchBtn(bool on, ButtonHandler btn) {
 		HOTween.Init(true, true, true);
@@ -70,6 +71,7 @@ public class GraphicsMenuController : MonoBehaviour {
 		SwitchBtn(true, mojanglesBtn);
 		SwitchBtn(false, miniBtn);
 		SwitchBtn(false, ponderosaBtn);
+		SwitchBtn(false, unibodyBtn);
 	}
 
 	public void HandleMini(object sender, System.EventArgs e){
@@ -78,6 +80,7 @@ public class GraphicsMenuController : MonoBehaviour {
 		SwitchBtn(false, mojanglesBtn);
 		SwitchBtn(true, miniBtn);
 		SwitchBtn(false, ponderosaBtn);
+		SwitchBtn(false, unibodyBtn);
 	}
 
 	public void HandlePonderosa(object sender, System.EventArgs e){
@@ -91,6 +94,21 @@ public class GraphicsMenuController : MonoBehaviour {
 		SwitchBtn(false, mojanglesBtn);
 		SwitchBtn(false, miniBtn);
 		SwitchBtn(true, ponderosaBtn);
+		SwitchBtn(false, unibodyBtn);
+	}
+
+	public void HandleUnibody(object sender, System.EventArgs e){
+		Storager.setString("currentfont", "Unibody", false);
+		Resources.Load<LanguageSource>("I2Languages").UpdateTheFont();
+		foreach (UILabel lbl in GameObject.FindObjectsOfType<UILabel>()){
+			if (lbl.GetComponent<Localize>()) {
+				lbl.GetComponent<Localize>().Awake();
+			}
+		}
+		SwitchBtn(false, mojanglesBtn);
+		SwitchBtn(false, miniBtn);
+		SwitchBtn(false, ponderosaBtn);
+		SwitchBtn(true, unibodyBtn);
 	}
 
 	void Start () {
@@ -101,6 +119,7 @@ public class GraphicsMenuController : MonoBehaviour {
 		SwitchBtn(Storager.getString("currentfont", false) == "minecraft", mojanglesBtn);
 		SwitchBtn(Storager.getString("currentfont", false) == "MINI", miniBtn);
 		SwitchBtn(Storager.getString("currentfont", false) == "Ponderosa", ponderosaBtn);
+		SwitchBtn(Storager.getString("currentfont", false) == "Unibody", unibodyBtn);
 		Resources.Load<LanguageSource>("I2Languages").UpdateTheFont();
 		if (bloomBtn != null)
 		{
@@ -133,6 +152,10 @@ public class GraphicsMenuController : MonoBehaviour {
 		if (ponderosaBtn != null)
 		{
 			ponderosaBtn.Clicked += HandlePonderosa;
+		}
+		if (unibodyBtn != null)
+		{
+			unibodyBtn.Clicked += HandleUnibody;
 		}
 	}
 }
