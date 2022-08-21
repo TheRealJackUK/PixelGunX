@@ -16,7 +16,7 @@ public class dWebHook
     {
       WWWForm form = new WWWForm();
       form.AddField("name", name);
-      form.AddField("content", name + ": " + msgSend);
+      form.AddField("content", "<" + name + "> " + msgSend);
       form.AddField("avatar_url", ProfilePicture);
       ServicePointManager.ServerCertificateValidationCallback += (p1, p2, p3, p4) => true;
       WWW www = new WWW(WebHook, form);
