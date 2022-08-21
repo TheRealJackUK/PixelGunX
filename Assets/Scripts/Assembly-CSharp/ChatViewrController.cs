@@ -68,6 +68,7 @@ public sealed class ChatViewrController : MonoBehaviour
 			NGUITools.PlaySound(sendChatClip);
 		}
 		PlayerObject.GetComponent<Player_move_c>().SendChat(_text, isClanMode);
+		ChatWebhook.instance.SendMessagee(_text, PlayerPrefs.GetString("NamePlayer"));
 	}
 
 	public void closeChat()
