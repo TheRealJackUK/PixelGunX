@@ -128,7 +128,7 @@ public class BloomAndLensFlares : PostEffectsBase
 			bool num = source.format == RenderTextureFormat.ARGBHalf;
 			if (num)
 			{
-				num = GetComponent<Camera>().hdr;
+				num = GetComponent<Camera>().allowHDR;
 			}
 			doHdr = num;
 		}

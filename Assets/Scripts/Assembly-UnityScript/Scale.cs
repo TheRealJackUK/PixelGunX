@@ -57,7 +57,7 @@ public class Scale : MonoBehaviour
 		}
 		for (int i = 0; i < 9; i++)
 		{
-			if (firstUpdate)
+			/*if (firstUpdate)
 			{
 				minsize[i] = particleEmitters[i].minSize;
 				maxsize[i] = particleEmitters[i].maxSize;
@@ -71,7 +71,7 @@ public class Scale : MonoBehaviour
 			particleEmitters[i].worldVelocity = worldvelocity[i] * scale;
 			particleEmitters[i].localVelocity = localvelocity[i] * scale;
 			particleEmitters[i].rndVelocity = rndvelocity[i] * scale;
-			particleEmitters[i].transform.localScale = scaleBackUp[i] * scale;
+			particleEmitters[i].transform.localScale = scaleBackUp[i] * scale;*/
 		}
 		firstUpdate = false;
 	}

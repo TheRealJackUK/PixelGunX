@@ -218,7 +218,7 @@ public class HighlightingEffect : MonoBehaviour
 			shaderCamera.cullingMask = layerMask;
 			shaderCamera.rect = new Rect(0f, 0f, 1f, 1f);
 			shaderCamera.renderingPath = RenderingPath.VertexLit;
-			shaderCamera.hdr = false;
+			shaderCamera.allowHDR = false;
 			shaderCamera.useOcclusionCulling = false;
 			shaderCamera.backgroundColor = new Color(0f, 0f, 0f, 0f);
 			shaderCamera.clearFlags = CameraClearFlags.Color;

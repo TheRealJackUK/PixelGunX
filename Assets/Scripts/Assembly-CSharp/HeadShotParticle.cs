@@ -16,7 +16,7 @@ public class HeadShotParticle : MonoBehaviour
 	{
 		myTransform = base.transform;
 		myTransform.position = new Vector3(-10000f, -10000f, -10000f);
-		myParticleSystem.emit = false;
+		//myParticleSystem.emit = false;
 	}
 
 	public void StartShowParticle(Vector3 pos, Quaternion rot, bool _isUseMine)
@@ -25,7 +25,7 @@ public class HeadShotParticle : MonoBehaviour
 		liveTime = maxliveTime;
 		myTransform.position = pos;
 		myTransform.rotation = rot;
-		myParticleSystem.emit = true;
+		//myParticleSystem.emit = true;
 	}
 
 	private void Update()
@@ -36,7 +36,7 @@ public class HeadShotParticle : MonoBehaviour
 			if (liveTime < 0f)
 			{
 				myTransform.position = new Vector3(-10000f, -10000f, -10000f);
-				myParticleSystem.emit = false;
+				//myParticleSystem.emit = false;
 				isUseMine = false;
 			}
 		}

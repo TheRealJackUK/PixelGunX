@@ -16,7 +16,7 @@ public class ExplosionDestroyer : MonoBehaviour
 		ParticleEmitter pe = GetComponent<ParticleEmitter>();
 		if (pe != null)
 		{
-			pe.emit = false;
+			//pe.emit = false;
 		}
 	}
 }
