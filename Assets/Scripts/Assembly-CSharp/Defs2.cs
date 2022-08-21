@@ -214,6 +214,7 @@ public sealed class Defs2
 		_mapsInfo.Add(new MapInfo("RunAndJump", "Run n' Jump", "Run n' Jump", "Very Large Map"));
 		_mapsInfo.Add(new MapInfo("level_0", "The Island", "The Island", "Large Map"));
 		_mapsInfo.Add(new MapInfo("level_1", "The Dish", "The Dish", "Medium Map"));
+		_mapsInfo.Add(new MapInfo("level_2", "The Yacht", "The Yacht", "Medium Map"));
 		_mapsInfo.Add(new MapInfo("level_3", "The Base", "The Base", "Large Map"));
 		_mapsInfo.Add(new MapInfo("level_4", "The Airport", "The Airport", "Large Map"));
 		_mapsInfo.Add(new MapInfo("level_5", "The Big City", "The Big City", "Large Map"));
