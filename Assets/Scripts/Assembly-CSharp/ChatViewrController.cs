@@ -40,20 +40,6 @@ public sealed class ChatViewrController : MonoBehaviour
 		{
 			closeChat();
 		}
-		if (nameButton.Equals("HoldChatButton"))
-		{
-			Debug.Log("HoldChatButton");
-			isHold = true;
-			holdButton.SetActive(false);
-			holdButtonOn.SetActive(true);
-		}
-		if (nameButton.Equals("HoldChatButtonOn"))
-		{
-			Debug.Log("HoldChatButtonOn");
-			isHold = false;
-			holdButton.SetActive(true);
-			holdButtonOn.SetActive(false);
-		}
 		if (nameButton.Equals("KeyboardButton"))
 		{
 			Debug.Log("KeyboardButton");
@@ -123,7 +109,9 @@ public sealed class ChatViewrController : MonoBehaviour
 
 	private void Start()
 	{
-		isHold = false;
+		isHold = true;
+		holdButtonOn.SetActive(false);
+		holdButtonOn.SetActive(true);
 		sharedController = this;
 		_weaponManager = WeaponManager.sharedManager;
 		mKeyboard = TouchScreenKeyboard.Open(string.Empty, TouchScreenKeyboardType.Default, false, false);
