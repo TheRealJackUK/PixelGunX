@@ -74,7 +74,7 @@ public class ConnectSceneNGUIController : MonoBehaviour
 
 	public static int gameTier = 1;
 
-	public static string[] masMapName = new string[59]
+	public static string[] masMapName = new string[50]
 	{
 		"Paradise", "RunAndJump", "Pizza", "Christmas_Town", "level_0", "level_1", "level_2", "level_3", "level_4", "level_5", "NuclearCity", "Supermarket", "Sky_islands", "Sniper", "Knife", "Heaven", "Hill",
 		"Ants", "Underwater", "Matrix", "Ships", "Portal", "Space", "actualgame", "Estate", "Parkour", "Pool", "School",
