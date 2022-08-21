@@ -74,24 +74,26 @@ public class ConnectSceneNGUIController : MonoBehaviour
 
 	public static int gameTier = 1;
 
-	public static string[] masMapName = new string[48]
+	public static string[] masMapName = new string[49]
 	{
 		"Paradise", "RunAndJump", "Pizza", "Christmas_Town", "level_0", "level_1", "level_3", "level_4", "level_5", "NuclearCity", "Supermarket", "Sky_islands", "Sniper", "Knife", "Heaven", "Hill",
 		"Ants", "Underwater", "Matrix", "Ships", "Portal", "Space", "actualgame", "Estate", "Parkour", "Pool", "School",
 		"Coliseum_MP", "Bridge", "Jail", "Pool_Brian", "Slender_Multy", "Train", "DevScene", "Pool_Abandoned", "Lean_Matrix", "Tatuan", "ChinaPand", "PiratIsland",
-		"emperors_palace", "Helicarrier", "train_robbery", "Candyland", "epilepsy", "AntsButBetter", "RealCube", "ExtremelyReal", "survival_7"
+		"emperors_palace", "Helicarrier", "train_robbery", "Candyland", "epilepsy", "AntsButBetter", "RealCube", "ExtremelyReal", "survival_7",
+		"survival_3"
 	};
 
 	public static string[] masMapNameHunger = new string[5] { "Hungry", "Hungry_Night", "Hungry_2", "Gluk_3", "Cube" };
 
 	public static string[] masMapNameCOOP = new string[6] { "Utopia", "Arena", "Bridge", "Assault", "Dust", "Winter" };
 
-	public static string[] masMapNameCompany = new string[39]
+	public static string[] masMapNameCompany = new string[40]
 	{
 		"Heaven", "Barge", "Pizza", "Bota", "Paradise", "Christmas_Town_Night", "Space", "Train", "Day_D", "Sniper",
 		"Knife", "Ants", "Underwater", "Matrix", "Ships_Night", "Portal", "actualgame", "Estate", "Parkour", "Pool", "Ranch",
 		"Assault", "Aztec", "Dust", "Sky_islands", "NuclearCity", "Lean_Matrix", "Tatuan", "ChinaPand", "PiratIsland", "emperors_palace",
-		"Christmas_dinner", "Secret_Base", "Helicarrier", "train_robbery", "Candyland", "AntsButBetter", "ExtremelyReal", "survival_7"
+		"Christmas_dinner", "Secret_Base", "Helicarrier", "train_robbery", "Candyland", "AntsButBetter", "ExtremelyReal", "survival_7",
+		"survival_3"
 	};
 
 	public static string[] masMapNameflag = new string[17]
