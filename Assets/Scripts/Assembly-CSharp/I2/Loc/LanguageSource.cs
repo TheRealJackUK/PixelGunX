@@ -98,7 +98,7 @@ namespace I2.Loc
 			foreach (TermData term in mTerms) {
 				for (int i = 0; i < term.Languages.Length; i++) {
 					if (term.Languages[i] == "minecraft" || term.Languages[i] == "MINI" || term.Languages[i] == "Ponderosa" || term.Languages[i] == "Unibody" || term.Languages[i] == "HandleUnibody"){
-						term.Languages[i] = Storager.getString("currentfont", false);
+						term.Languages[i] = PlayerPrefs.GetString("currentfont");
 					}
 				}
 			}

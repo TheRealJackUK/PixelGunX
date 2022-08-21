@@ -66,7 +66,7 @@ public class GraphicsMenuController : MonoBehaviour {
 	}
 
 	public void HandleMojangles(object sender, System.EventArgs e){
-		Storager.setString("currentfont", "minecraft", false);
+		PlayerPrefs.SetString("currentfont", "minecraft");
 		Resources.Load<LanguageSource>("I2Languages").UpdateTheFont();
 		SwitchBtn(true, mojanglesBtn);
 		SwitchBtn(false, miniBtn);
@@ -75,7 +75,7 @@ public class GraphicsMenuController : MonoBehaviour {
 	}
 
 	public void HandleMini(object sender, System.EventArgs e){
-		Storager.setString("currentfont", "MINI", false);
+		PlayerPrefs.SetString("currentfont", "MINI");
 		Resources.Load<LanguageSource>("I2Languages").UpdateTheFont();
 		SwitchBtn(false, mojanglesBtn);
 		SwitchBtn(true, miniBtn);
@@ -84,7 +84,7 @@ public class GraphicsMenuController : MonoBehaviour {
 	}
 
 	public void HandlePonderosa(object sender, System.EventArgs e){
-		Storager.setString("currentfont", "Ponderosa", false);
+		PlayerPrefs.SetString("currentfont", "Ponderosa");
 		Resources.Load<LanguageSource>("I2Languages").UpdateTheFont();
 		foreach (UILabel lbl in GameObject.FindObjectsOfType<UILabel>()){
 			if (lbl.GetComponent<Localize>()) {
@@ -98,7 +98,7 @@ public class GraphicsMenuController : MonoBehaviour {
 	}
 
 	public void HandleUnibody(object sender, System.EventArgs e){
-		Storager.setString("currentfont", "Unibody", false);
+		PlayerPrefs.SetString("currentfont", "Unibody");
 		Resources.Load<LanguageSource>("I2Languages").UpdateTheFont();
 		foreach (UILabel lbl in GameObject.FindObjectsOfType<UILabel>()){
 			if (lbl.GetComponent<Localize>()) {
@@ -116,10 +116,10 @@ public class GraphicsMenuController : MonoBehaviour {
 		SwitchBtn(Storager.getInt("ao", false) == 1, aoBtn);
 		SwitchBtn(Storager.getInt("cg", false) == 1, cgBtn);
 		SwitchBtn(Storager.getInt("mb", false) == 1, mbBtn);
-		SwitchBtn(Storager.getString("currentfont", false) == "minecraft", mojanglesBtn);
-		SwitchBtn(Storager.getString("currentfont", false) == "MINI", miniBtn);
-		SwitchBtn(Storager.getString("currentfont", false) == "Ponderosa", ponderosaBtn);
-		SwitchBtn(Storager.getString("currentfont", false) == "Unibody", unibodyBtn);
+		SwitchBtn(PlayerPrefs.GetString("currentfont") == "minecraft", mojanglesBtn);
+		SwitchBtn(PlayerPrefs.GetString("currentfont") == "MINI", miniBtn);
+		SwitchBtn(PlayerPrefs.GetString("currentfont") == "Ponderosa", ponderosaBtn);
+		SwitchBtn(PlayerPrefs.GetString("currentfont") == "Unibody", unibodyBtn);
 		Resources.Load<LanguageSource>("I2Languages").UpdateTheFont();
 		if (bloomBtn != null)
 		{

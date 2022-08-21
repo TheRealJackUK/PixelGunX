@@ -341,6 +341,16 @@ public class CameraSceneController : MonoBehaviour
 			posCam = new Vector3(110.8f, -57.8f, -95f);
 			rotateCam = Quaternion.Euler(new Vector3(10.3435f, -147.5507f, 6.509081e-07f));
 		}
+		else if (Application.loadedLevelName.Equals("survival_7"))
+		{
+			posCam = new Vector3(30.24f, -3.38f, 36.53f);
+			rotateCam = Quaternion.Euler(new Vector3(5.80586f, 133.901f, -1.52832f));
+		}
+		else if (Application.loadedLevelName.Equals("survival_3"))
+		{
+			posCam = new Vector3(-36.22f, 12.09f, -32.16f);
+			rotateCam = Quaternion.Euler(new Vector3(0f, 0f, 0f));
+		}
 		else if (Application.loadedLevelName.Equals("Pool_Brian"))
 		{
 			posCam = new Vector3(-48.1f, 53.7483f, -57.59f);
@@ -376,6 +386,11 @@ public class CameraSceneController : MonoBehaviour
 			posCam = new Vector3(-69.97775f, 28.64308f, -56.5951f);
 			rotateCam = Quaternion.Euler(new Vector3(14.71774f, 34.38544f, 5.296422e-06f));
 		}
+		else if (Application.loadedLevelName.Equals("level_2"))
+		{
+			posCam = new Vector3(82.10271f, 29.67769f, 18.61426f);
+			rotateCam = Quaternion.Euler(new Vector3(17.92578f, -124.7807f, -1.974134e-05f));
+		}
 		else if (Application.loadedLevelName.Equals("level_3"))
 		{
 			posCam = new Vector3(13.14911f, 18.67669f, -69.23448f);
@@ -395,8 +410,14 @@ public class CameraSceneController : MonoBehaviour
 
 	private void Start()
 	{
-		myTransform.position = posCam;
-		myTransform.rotation = rotateCam;
+		if (GameObject.Find("_2PhotonAddThisToLevels") != null){
+			myTransform.SetParent(GameObject.Find("_2PhotonAddThisToLevels").transform);
+			myTransform.localPosition = posCam;
+			myTransform.localRotation = rotateCam;
+		}else{
+			myTransform.position = posCam;
+			myTransform.rotation = rotateCam;
+		}
 		killCamController.enabled = false;
 	}
 

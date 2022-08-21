@@ -236,8 +236,8 @@ internal sealed class AppsMenu : MonoBehaviour
 
 	internal static IEnumerable<float> AppsMenuAwakeCoroutine()
 	{
-		if (!Storager.hasKey("currentfont")) {
-			Storager.setString("currentfont", "minecraft", false);
+		if (!PlayerPrefs.HasKey("currentfont")) {
+			PlayerPrefs.SetString("currentfont", "minecraft");
 		}
 		Resources.Load<LanguageSource>("I2Languages").UpdateTheFont();
 		if (PlayerPrefs.HasKey("WantToResetKeychain"))
