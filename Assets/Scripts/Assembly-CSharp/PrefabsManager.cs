@@ -7,10 +7,13 @@ public class PrefabsManager : MonoBehaviour {
     public static PrefabsManager instance;
     public string curScene = string.Empty;
     public Material weeze;
+    public GameObject ppv;
     
     void Awake() {
         instance = this;
+        ppv = GameObject.Instantiate(Resources.Load<GameObject>("PPV"), new Vector3(0, 0, 0), Quaternion.identity);
         DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(ppv);
     }
 
     public static GameObject[] GetDontDestroyOnLoadObjects()
@@ -40,13 +43,16 @@ public class PrefabsManager : MonoBehaviour {
                 bool lo = false;
                 foreach (GameObject gobj in Resources.FindObjectsOfTypeAll<GameObject>()){
                     if (gobj.GetComponent<PostProcessVolume>()){
-                        lo = true;
+                        if (!gobj.name.Contains("(Clone)") && !gobj.name.Contains("Camera")){
+                            lo = true;
+                        }
                     }
                 }
                 /*if (curScene == "AppCenter" || curScene == "Loading" || curScene == "PromScene"){
                     lo = true;
                 }*/
                 if (!lo){
+                    ppv.SetActive(true);
                     foreach (GameObject gobj in Resources.FindObjectsOfTypeAll<GameObject>()){
                         if (!gobj.name.Contains("(Clone)") && !gobj.name.Contains("Camera")){
                             bool jugf = false;
@@ -56,37 +62,45 @@ public class PrefabsManager : MonoBehaviour {
                                 }
                             }
                             if (!jugf){
-                                if (gobj.layer == 0) {
+                                if (!LayerMask.LayerToName(gobj.layer).Contains("NGUI") && !LayerMask.LayerToName(gobj.layer).Contains("Label")){
                                     gobj.layer = 29;
                                 }
                             }
                         }
                     }
-                    GameObject.Instantiate(Resources.Load<GameObject>("PPV"), new Vector3(0, 0, 0), Quaternion.identity);
+                    // GameObject.Instantiate(Resources.Load<GameObject>("PPV"), new Vector3(0, 0, 0), Quaternion.identity);
+                }else{
+                    ppv.SetActive(false);
                 }
             //}
             foreach (GameObject gobj in Resources.FindObjectsOfTypeAll<GameObject>()){
                 if (gobj.GetComponent<PostProcessVolume>()){
-                    bool bloom = Storager.getInt("bloom", false) == 1;
-                    bool ao = Storager.getInt("ao", false) == 1;
-                    bool cg = Storager.getInt("cg", false) == 1;
-                    bool mb = Storager.getInt("mb", false) == 1;
-                    PostProcessVolume volume = gobj.GetComponent<PostProcessVolume>();
-                    // Type type = abc.GetType().GetGenericArguments()[0];
-                    UnityEngine.Rendering.PostProcessing.Bloom bloomLayer;
-                    volume.profile.TryGetSettings(out bloomLayer);
-                    bloomLayer.enabled.value = bloom;
-                    AmbientOcclusion aoLayer;
-                    volume.profile.TryGetSettings(out aoLayer);
-                    aoLayer.enabled.value = ao;
-                    ColorGrading cgLayer;
-                    volume.profile.TryGetSettings(out cgLayer);
-                    cgLayer.enabled.value = cg;
-                    UnityEngine.Rendering.PostProcessing.MotionBlur mbLayer;
-                    volume.profile.TryGetSettings(out mbLayer);
-                    mbLayer.enabled.value = mb;
+                    try {
+                        bool bloom = Storager.getInt("bloom", false) == 1;
+                        bool ao = Storager.getInt("ao", false) == 1;
+                        bool cg = Storager.getInt("cg", false) == 1;
+                        bool mb = Storager.getInt("mb", false) == 1;
+                        PostProcessVolume volume = gobj.GetComponent<PostProcessVolume>();
+                        // Type type = abc.GetType().GetGenericArguments()[0];
+                        UnityEngine.Rendering.PostProcessing.Bloom bloomLayer;
+                        volume.profile.TryGetSettings(out bloomLayer);
+                        bloomLayer.enabled.value = bloom;
+                        UnityEngine.Rendering.PostProcessing.AmbientOcclusion aoLayer;
+                        volume.profile.TryGetSettings(out aoLayer);
+                        aoLayer.enabled.value = ao;
+                        UnityEngine.Rendering.PostProcessing.ColorGrading cgLayer;
+                        volume.profile.TryGetSettings(out cgLayer);
+                        cgLayer.enabled.value = cg;
+                        UnityEngine.Rendering.PostProcessing.MotionBlur mbLayer;
+                        volume.profile.TryGetSettings(out mbLayer);
+                        mbLayer.enabled.value = mb;
+                    } catch (Exception e){
+                        UnityEngine.Debug.LogWarning("error while setting pp: "+ e.Message);
+                    }
                 }
             }
+            /*foreach (Camera gobj in Resources.FindObjectsOfTypeAll<Camera>()){
+                if (gobj.GetComponent<PostProcessLayer>()){*/
         }
     }
     

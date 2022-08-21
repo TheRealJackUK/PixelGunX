@@ -410,8 +410,14 @@ public class CameraSceneController : MonoBehaviour
 
 	private void Start()
 	{
-		myTransform.position = posCam;
-		myTransform.rotation = rotateCam;
+		if (GameObject.Find("_2PhotonAddThisToLevels") != null){
+			myTransform.SetParent(GameObject.Find("_2PhotonAddThisToLevels").transform);
+			myTransform.localPosition = posCam;
+			myTransform.localRotation = rotateCam;
+		}else{
+			myTransform.position = posCam;
+			myTransform.rotation = rotateCam;
+		}
 		killCamController.enabled = false;
 	}
 
