@@ -62,7 +62,7 @@ public class PrefabsManager : MonoBehaviour {
                                 }
                             }
                             if (!jugf){
-                                if (!LayerMask.LayerToName(gobj.layer).Contains("NGUI") && !LayerMask.LayerToName(gobj.layer).Contains("Label")){
+                                if (!LayerMask.LayerToName(gobj.layer).Contains("NGUI") && !LayerMask.LayerToName(gobj.layer).Contains("Label") && !LayerMask.LayerToName(gobj.layer).Contains("Skin")){
                                     gobj.layer = 29;
                                 }
                             }
