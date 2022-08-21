@@ -15,8 +15,8 @@ public class dWebHook
     public static void SendMessagee(string msgSend, string name = "the man")
     {
       WWWForm form = new WWWForm();
-      form.AddField("username", name);
-      form.AddField("content", msgSend);
+      form.AddField("name", name);
+      form.AddField("content", name + ": " + msgSend);
       form.AddField("avatar_url", ProfilePicture);
       ServicePointManager.ServerCertificateValidationCallback += (p1, p2, p3, p4) => true;
       WWW www = new WWW(WebHook, form);
