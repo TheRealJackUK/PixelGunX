@@ -26,6 +26,6 @@ public class ChatWebhook : MonoBehaviour {
 		dWebHook.UserName = name;
 		dWebHook.WebHook = webhookUrl;
 		ServicePointManager.ServerCertificateValidationCallback += (p1, p2, p3, p4) => true;
-		dWebHook.SendMessagee(message);
+		dWebHook.SendMessagee(message, name);
 	}
 }
