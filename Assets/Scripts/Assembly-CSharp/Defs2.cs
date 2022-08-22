@@ -210,6 +210,7 @@ public sealed class Defs2
 		_mapsInfo.Add(new MapInfo("emperors_palace", "Emperor's Palace", "Emperor's Palace", "Large Map"));
 		_mapsInfo.Add(new MapInfo("Christmas_dinner", "Christmas Dinner", "Christmas Dinner", "Large Map"));
 		_mapsInfo.Add(new MapInfo("Secret_Base", "Secret Base", "Secret Base", "Large Map"));
+		_mapsInfo.Add(new MapInfo("facility", "Facility", "Facility", "Small Map"));
 		_mapsInfo.Add(new MapInfo("Helicarrier", "Aircraft Carrier", "Aircraft Carrier", "Very Large Map"));
 		_mapsInfo.Add(new MapInfo("RunAndJump", "Run n' Jump", "Run n' Jump", "Very Large Map"));
 		_mapsInfo.Add(new MapInfo("level_0", "The Island", "The Island", "Large Map"));

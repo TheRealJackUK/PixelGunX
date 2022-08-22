@@ -2609,6 +2609,7 @@ public static string CAnim(GameObject animator, string con){
 		levelNumsForMusicInMult.Add("emperors_palace", 1055);
 		levelNumsForMusicInMult.Add("Christmas_dinner", 1056);
 		levelNumsForMusicInMult.Add("Secret_Base", 1057);
+		levelNumsForMusicInMult.Add("facility", 2530);
 		levelNumsForMusicInMult.Add("Helicarrier", 1058);
 		levelNumsForMusicInMult.Add("train_robbery", 1059);
 		levelNumsForMusicInMult.Add("Candyland", 1060);
