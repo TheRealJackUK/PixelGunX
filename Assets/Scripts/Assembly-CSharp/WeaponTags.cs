@@ -447,6 +447,8 @@ public static class WeaponTags
 	public static readonly string PirateMusket_Tag = "PirateMusket";
 
 	public static readonly string NightHunter_Tag = "NightHunter";
+	
+	public static readonly string SeriousArgument_Tag = "SeriousArgument";
 
 	public static readonly string Veteran_Tag = "Veteran";
 

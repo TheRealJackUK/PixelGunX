@@ -292,6 +292,7 @@ public static class ItemDbRecords
 		list.Add(new ItemRecord(436, "NightHunter", "NightHunter", "Weapon436", "NightHunter", "NightHunter", 700, true, false, "Coins"));
 		list.Add(new ItemRecord(437, "Casanova", "Casanova", "Weapon437", "Casanova", "Casanova", 400, true, false, "GemsCurrency"));
 		list.Add(new ItemRecord(438, "Veteran", "Veteran", "Weapon438", "Veteran", "Veteran", 700, true, false, "Coins"));
+		list.Add(new ItemRecord(439, "SeriousArgument", "SeriousArgument", "Weapon439", "SeriousArgument", "SeriousArgument", 800, true, false, "Coins"));
 		list.Add(new ItemRecord(424, "FreezerGun", "FreezerGun", "Weapon424", "FreezerGun", "FreezerGun", 750, true, false, "Coins"));
 		list.Add(new ItemRecord(423, "GoldenTrident", "GoldenTrident", "Weapon423", "GoldenTrident", "GoldenTrident", 900, true, false, "Coins"));
 		list.Add(new ItemRecord(422, "KryptBlaster", "KryptBlaster", "Weapon422", "KryptBlaster", "KryptBlaster", 500, true, false, "GemsCurrency"));
