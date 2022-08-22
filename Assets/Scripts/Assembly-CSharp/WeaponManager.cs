@@ -1205,8 +1205,8 @@ public sealed class WeaponManager : MonoBehaviour
 		WeaponPreviewsPath = "WeaponPreviews";
 		allWeaponPrefabs = null;
 		campaignBonusWeapons = new Dictionary<string, string>();
-		tagToStoreIDMapping = new Dictionary<string, string>(200);
-		storeIDtoDefsSNMapping = new Dictionary<string, string>(200);
+		tagToStoreIDMapping = new Dictionary<string, string>(999);
+		storeIDtoDefsSNMapping = new Dictionary<string, string>(999);
 		_purchasableWeaponSet = new HashSet<string>();
 		_3_shotgun_2_WN = "Weapon107";
 		_3_shotgun_3_WN = "Weapon108";
@@ -1999,6 +1999,16 @@ public sealed class WeaponManager : MonoBehaviour
 				break;
 			}
 		}
+		/*try {
+			if (Storager.getInt(storeIDtoDefsSNMapping[tagToStoreIDMapping[text]], true) == 1 || LastBoughtTag(text)) UnityEngine.Debug.Log("a");;
+		}catch (Exception e){
+			UnityEngine.Debug.LogError("Error 1: " + e.Message);
+		}
+		try {
+			if (LastBoughtTag(text) != null) UnityEngine.Debug.Log("a");
+		}catch (Exception e){
+			UnityEngine.Debug.LogError("Error 2: " + e.Message);
+		}*/
 		if (flag2)
 		{
 			int num = list.IndexOf(text);
@@ -2024,7 +2034,11 @@ public sealed class WeaponManager : MonoBehaviour
 		}
 		else
 		{
-			flag = ((ExpController.Instance != null && ExpController.Instance.OurTier >= component.tier) || Storager.getInt(storeIDtoDefsSNMapping[tagToStoreIDMapping[text]], true) == 1 || LastBoughtTag(text) != null);
+			try {
+				flag = ((ExpController.Instance != null && ExpController.Instance.OurTier >= component.tier) || Storager.getInt(storeIDtoDefsSNMapping[tagToStoreIDMapping[text]], true) == 1 || LastBoughtTag(text) != null);
+			}catch(Exception e){
+				flag = true;
+			}
 		}
 		if (!flag)
 		{
