@@ -1757,78 +1757,106 @@ public class ConnectSceneNGUIController : MonoBehaviour
 
 	private void Update()
 	{
-		if (Input.GetKeyUp(KeyCode.Escape))
-		{
-			Input.ResetInputAxes();
-			if (BannerWindowController.SharedController != null && BannerWindowController.SharedController.IsAnyBannerShown)
+		try {
+			if (Input.GetKeyUp(KeyCode.Escape))
 			{
-				BannerWindowController.SharedController.HideBannerWindow();
+				Input.ResetInputAxes();
+				if (BannerWindowController.SharedController != null && BannerWindowController.SharedController.IsAnyBannerShown)
+				{
+					BannerWindowController.SharedController.HideBannerWindow();
+				}
+				else
+				{
+					HandleBackBtnClicked(null, EventArgs.Empty);
+				}
+				return;
+			}
+		} catch (Exception e){
+			UnityEngine.Debug.LogError("connectscene update 1: " + e.Message);
+		}
+
+		try {
+			if (customPanel.activeSelf && !Defs.isInet)
+			{
+				UpdateLocalServersList();
+			}
+		} catch (Exception e){
+			UnityEngine.Debug.LogError("connectscene update 2: " + e.Message);
+		}
+
+		try {
+			if (!Defs.isInet)
+			{
+				connectToWiFIInCreateLabel.SetActive(!CheckLocalAvailability());
+				connectToWiFIInCustomLabel.SetActive(!CheckLocalAvailability());
+				if (createRoomUIBtn.isEnabled != CheckLocalAvailability())
+				{
+					createRoomUIBtn.isEnabled = CheckLocalAvailability();
+				}
 			}
 			else
 			{
-				HandleBackBtnClicked(null, EventArgs.Empty);
+				if (connectToWiFIInCreateLabel.activeSelf)
+				{
+					connectToWiFIInCreateLabel.SetActive(false);
+				}
+				if (connectToWiFIInCreateLabel.activeSelf)
+				{
+					connectToWiFIInCustomLabel.SetActive(false);
+				}
 			}
-			return;
+		} catch (Exception e){
+			UnityEngine.Debug.LogError("connectscene update 3: " + e.Message);
 		}
-		if (customPanel.activeSelf && !Defs.isInet)
-		{
-			UpdateLocalServersList();
-		}
-		if (!Defs.isInet)
-		{
-			connectToWiFIInCreateLabel.SetActive(!CheckLocalAvailability());
-			connectToWiFIInCustomLabel.SetActive(!CheckLocalAvailability());
-			if (createRoomUIBtn.isEnabled != CheckLocalAvailability())
+
+		try {
+			if (selectMapPanel.activeInHierarchy && GameObject.FindGameObjectsWithTag("TexureSelectMap").Length > 0)
 			{
-				createRoomUIBtn.isEnabled = CheckLocalAvailability();
+				countMap = grid.transform.childCount;
+				selectIndexMap = Mathf.Abs(Mathf.RoundToInt((ScrollTransform.localPosition.x + startPosX) / widthCell)) % countMap;
+				if (ScrollTransform.localPosition.x > -1f * startPosX)
+				{
+					selectIndexMap = countMap - selectIndexMap;
+				}
+				if (selectIndexMap == countMap)
+				{
+					selectIndexMap = 0;
+				}
 			}
+		} catch (Exception e){
+			UnityEngine.Debug.LogError("connectscene update 4: " + e.Message);
 		}
-		else
-		{
-			if (connectToWiFIInCreateLabel.activeSelf)
+
+		try {
+			if (unlockBtn.activeSelf || (!mainPanel.activeSelf && !createPanel.activeSelf))
 			{
-				connectToWiFIInCreateLabel.SetActive(false);
+				return;
 			}
-			if (connectToWiFIInCreateLabel.activeSelf)
-			{
-				connectToWiFIInCustomLabel.SetActive(false);
-			}
+		} catch (Exception e){
+			UnityEngine.Debug.LogError("connectscene update 5: " + e.Message);
 		}
-		if (selectMapPanel.activeInHierarchy && GameObject.FindGameObjectsWithTag("TexureSelectMap").Length > 0)
-		{
-			countMap = grid.transform.childCount;
-			selectIndexMap = Mathf.Abs(Mathf.RoundToInt((ScrollTransform.localPosition.x + startPosX) / widthCell)) % countMap;
-			if (ScrollTransform.localPosition.x > -1f * startPosX)
+		try {
+			if (!isSetUseMap && Defs.PremiumMaps.ContainsKey(Defs.levelNamesFromNums[masUseMaps[selectIndexMap].ToString()]) && Storager.getInt(Defs.levelNamesFromNums[masUseMaps[selectIndexMap].ToString()] + "Key", true) == 0 && !PremiumAccountController.MapAvailableDueToPremiumAccount(Defs.levelNamesFromNums[masUseMaps[selectIndexMap].ToString()]))
 			{
-				selectIndexMap = countMap - selectIndexMap;
+				if (!unlockMapBtn.activeSelf)
+				{
+					priceMapLabel.text = Defs.PremiumMaps[Defs.levelNamesFromNums[masUseMaps[selectIndexMap].ToString()]].ToString();
+					unlockMapBtn.SetActive(true);
+					goBtn.SetActive(false);
+					priceMapLabelInCreate.text = Defs.PremiumMaps[Defs.levelNamesFromNums[masUseMaps[selectIndexMap].ToString()]].ToString();
+					unlockMapBtnInCreate.SetActive(true);
+					createRoomBtn.SetActive(false);
+				}
 			}
-			if (selectIndexMap == countMap)
+			else if (unlockMapBtn.activeSelf)
 			{
-				selectIndexMap = 0;
+				unlockMapBtn.SetActive(false);
+				goBtn.SetActive(true);
+				unlockMapBtnInCreate.SetActive(false);
+				createRoomBtn.SetActive(true);
 			}
-		}
-		if (unlockBtn.activeSelf || (!mainPanel.activeSelf && !createPanel.activeSelf))
-		{
-			return;
-		}
-		if (!isSetUseMap && Defs.PremiumMaps.ContainsKey(Defs.levelNamesFromNums[masUseMaps[selectIndexMap].ToString()]) && Storager.getInt(Defs.levelNamesFromNums[masUseMaps[selectIndexMap].ToString()] + "Key", true) == 0 && !PremiumAccountController.MapAvailableDueToPremiumAccount(Defs.levelNamesFromNums[masUseMaps[selectIndexMap].ToString()]))
-		{
-			if (!unlockMapBtn.activeSelf)
-			{
-				priceMapLabel.text = Defs.PremiumMaps[Defs.levelNamesFromNums[masUseMaps[selectIndexMap].ToString()]].ToString();
-				unlockMapBtn.SetActive(true);
-				goBtn.SetActive(false);
-				priceMapLabelInCreate.text = Defs.PremiumMaps[Defs.levelNamesFromNums[masUseMaps[selectIndexMap].ToString()]].ToString();
-				unlockMapBtnInCreate.SetActive(true);
-				createRoomBtn.SetActive(false);
-			}
-		}
-		else if (unlockMapBtn.activeSelf)
-		{
-			unlockMapBtn.SetActive(false);
-			goBtn.SetActive(true);
-			unlockMapBtnInCreate.SetActive(false);
-			createRoomBtn.SetActive(true);
+		} catch (Exception e){
+			UnityEngine.Debug.LogError("connectscene update 6: " + e.Message);
 		}
 	}
 
