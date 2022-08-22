@@ -48,9 +48,9 @@ public class PrefabsManager : MonoBehaviour {
                         }
                     }
                 }
-                /*if (curScene == "AppCenter" || curScene == "Loading" || curScene == "PromScene"){
+                if (Application.loadedLevelName == "AppCenter" || Application.loadedLevelName == "Loading" || Application.loadedLevelName == "PromScene"){
                     lo = true;
-                }*/
+                }
                 if (!lo){
                     ppv.SetActive(true);
                     foreach (GameObject gobj in Resources.FindObjectsOfTypeAll<GameObject>()){
@@ -62,7 +62,7 @@ public class PrefabsManager : MonoBehaviour {
                                 }
                             }
                             if (!jugf){
-                                if (!LayerMask.LayerToName(gobj.layer).Contains("NGUI") && !LayerMask.LayerToName(gobj.layer).Contains("Label") && !LayerMask.LayerToName(gobj.layer).Contains("Skin")){
+                                if (!LayerMask.LayerToName(gobj.layer).Contains("NGUI") && !LayerMask.LayerToName(gobj.layer).Contains("Label") && !LayerMask.LayerToName(gobj.layer).Contains("Skin") && !LayerMask.LayerToName(gobj.layer).Contains("Game")){
                                     gobj.layer = 29;
                                 }
                             }
