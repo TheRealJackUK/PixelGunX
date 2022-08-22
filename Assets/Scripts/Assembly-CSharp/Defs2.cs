@@ -218,6 +218,7 @@ public sealed class Defs2
 		_mapsInfo.Add(new MapInfo("level_3", "The Base", "The Base", "Large Map"));
 		_mapsInfo.Add(new MapInfo("level_4", "The Airport", "The Airport", "Large Map"));
 		_mapsInfo.Add(new MapInfo("level_5", "The Big City", "The Big City", "Large Map"));
+		_mapsInfo.Add(new MapInfo("DarkMall", "Dark Mall", "Dark Mall", "Very Large Map"));
 		_mapsInfo.Add(new MapInfo("train_robbery", "Train Robbery", "Train Robbery", "Small Map"));
 		_mapsInfo.Add(new MapInfo("Candyland", "Candy Land", "Candy Land", "Medium Map"));
 		_mapsInfo.Add(new MapInfo("actualgame", "My Front Yard", "My Front Yard", "Front Yard Size But You're An Ant!"));
