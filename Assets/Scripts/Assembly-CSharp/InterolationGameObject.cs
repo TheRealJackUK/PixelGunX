@@ -55,7 +55,7 @@ public class InterolationGameObject : Photon.MonoBehaviour
 
 	private void Start()
 	{
-		if ((Defs.isInet && base.photonView.isMine) || (!Defs.isInet && GetComponent<PhotonView>().isMine))
+		if ((Defs.isInet && base.photonView.isMine) || (!Defs.isInet && GetComponent<NetworkView>().isMine))
 		{
 			isMine = true;
 		}
@@ -88,7 +88,7 @@ public class InterolationGameObject : Photon.MonoBehaviour
 		AddNewSnapshot(correctPlayerPos, correctPlayerRot, correctPlayerTime);
 	}
 
-	private void OnSerializeNetworkView(PhotonStream stream, PhotonMessageInfo info)
+	private void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
 	{
 		if (stream.isWriting)
 		{
@@ -102,7 +102,7 @@ public class InterolationGameObject : Photon.MonoBehaviour
 			{
 				stream.Serialize(ref value2);
 			}
-			float value3 = (float)PhotonNetwork.time;
+			float value3 = (float)Network.time;
 			stream.Serialize(ref value3);
 			return;
 		}

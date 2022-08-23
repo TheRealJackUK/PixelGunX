@@ -65,13 +65,13 @@ namespace I2.Loc
 
 		private RawImage mTarget_uGUI_RawImage;
 
-		private Text mTarget_GUIText;
+		private GUIText mTarget_GUIText;
 
 		private TextMesh mTarget_TextMesh;
 
 		private AudioSource mTarget_AudioSource;
 
-		private Image mTarget_GUITexture;
+		private GUITexture mTarget_GUITexture;
 
 		private GameObject mTarget_Child;
 
@@ -607,12 +607,12 @@ namespace I2.Loc
 
 		public bool SetFinalTerms_GUITexture(string Main, string Secondary, out string PrimaryTerm, out string SecondaryTerm)
 		{
-			if (!mTarget_GUITexture || !mTarget_GUITexture.mainTexture)
+			if (!mTarget_GUITexture || !mTarget_GUITexture.texture)
 			{
 				SetFinalTerms(string.Empty, string.Empty, out PrimaryTerm, out SecondaryTerm);
 				return false;
 			}
-			return SetFinalTerms(mTarget_GUITexture.mainTexture.name, string.Empty, out PrimaryTerm, out SecondaryTerm);
+			return SetFinalTerms(mTarget_GUITexture.texture.name, string.Empty, out PrimaryTerm, out SecondaryTerm);
 		}
 
 		public bool SetFinalTerms_AudioSource(string Main, string Secondary, out string PrimaryTerm, out string SecondaryTerm)
@@ -674,10 +674,10 @@ namespace I2.Loc
 
 		private void DoLocalize_GUITexture(string MainTranslation, string SecondaryTranslation)
 		{
-			Texture texture = mTarget_GUITexture.mainTexture;
+			Texture texture = mTarget_GUITexture.texture;
 			if (!texture || !(texture.name == MainTranslation))
 			{
-				//mTarget_GUITexture.mainTexture = FindTranslatedObject<Texture>(MainTranslation);
+				mTarget_GUITexture.texture = FindTranslatedObject<Texture>(MainTranslation);
 			}
 		}
 

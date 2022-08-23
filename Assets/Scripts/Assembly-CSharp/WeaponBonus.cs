@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Photon;
 using UnityEngine;
 
-
 public class WeaponBonus : Photon.MonoBehaviour
 {
 	public GameObject weaponPrefab;
@@ -120,7 +119,7 @@ public class WeaponBonus : Photon.MonoBehaviour
 		gameObject.transform.parent = base.transform;
 	}
 
-	[PunRPC]
+	[RPC]
 	public void DestroyRPC()
 	{
 		if (PhotonNetwork.isMasterClient)

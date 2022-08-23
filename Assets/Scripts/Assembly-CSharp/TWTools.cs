@@ -11,7 +11,7 @@ public static class TWTools
 	{
 		SetActiveSelf(t.gameObject, true);
 		int i = 0;
-		for (int childCount = t.childCount; i < childCount; i++)
+		for (int childCount = t.GetChildCount(); i < childCount; i++)
 		{
 			Transform child = t.GetChild(i);
 			if (child.gameObject.activeSelf)
@@ -20,7 +20,7 @@ public static class TWTools
 			}
 		}
 		int j = 0;
-		for (int childCount2 = t.childCount; j < childCount2; j++)
+		for (int childCount2 = t.GetChildCount(); j < childCount2; j++)
 		{
 			Transform child2 = t.GetChild(j);
 			Activate(child2);

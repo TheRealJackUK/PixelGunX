@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-
 namespace RilisoftBot
 {
 	public class BaseBot : MonoBehaviour
@@ -895,27 +894,27 @@ namespace RilisoftBot
 			}
 		}
 
-		[PunRPC]
+		[RPC]
 		public void SetBotHealthRPC(float botHealth)
 		{
 			health = botHealth;
 		}
 
-		[PunRPC]
+		[RPC]
 		public void PlayZombieRunRPC()
 		{
 			PlayAnimationZombieWalk();
 			_currentRunNetworkAnimation = RunNetworkAnimationType.ZombieWalk;
 		}
 
-		[PunRPC]
+		[RPC]
 		public void PlayZombieAttackRPC()
 		{
 			PlayAnimationZombieAttackOrStop();
 			_currentRunNetworkAnimation = RunNetworkAnimationType.ZombieAttackOrStop;
 		}
 
-		[PunRPC]
+		[RPC]
 		public void GetDamageRPC(float damage, Transform instigator)
 		{
 			GetDamage(damage, instigator, false);
@@ -927,7 +926,7 @@ namespace RilisoftBot
 			_photonView.RPC("GetDamageRPC", PhotonTargets.Others, damage, instigator);
 		}
 
-		[PunRPC]
+		[RPC]
 		public void ApplyDebuffRPC(int typeDebuff, float timeLife, float parametr)
 		{
 			ApplyDebuff((BotDebuffType)typeDebuff, timeLife, parametr);

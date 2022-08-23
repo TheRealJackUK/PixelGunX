@@ -3935,7 +3935,7 @@ public class ShopNGUIController : MonoBehaviour
 		backHandler = delegate(string n)
 		{
 			SkinEditorController.ExitFromSkinEditor -= backHandler;
-			MenuBackgroundMusic.sharedMusic.StSendOperationMusicFrom(SkinEditorController.sharedController.gameObject);
+			MenuBackgroundMusic.sharedMusic.StopCustomMusicFrom(SkinEditorController.sharedController.gameObject);
 			mainPanel.SetActive(true);
 			if (currentCategory == CategoryNames.CapesCategory || n != null)
 			{

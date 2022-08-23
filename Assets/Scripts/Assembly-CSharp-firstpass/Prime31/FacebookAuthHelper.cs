@@ -46,12 +46,20 @@ namespace Prime31
 
 		public void start()
 		{
+			FacebookAndroid.login();
 		}
 
 		private void sessionOpenedEvent()
 		{
-			afterAuthAction();
-			cleanup();
+			if (requiresPublishPermissions && !FacebookAndroid.getSessionPermissions().Contains("publish_stream"))
+			{
+				FacebookAndroid.reauthorizeWithPublishPermissions(new string[2] { "publish_actions", "publish_stream" }, FacebookSessionDefaultAudience.Everyone);
+			}
+			else
+			{
+				afterAuthAction();
+				cleanup();
+			}
 		}
 
 		private void loginFailedEvent(P31Error error)

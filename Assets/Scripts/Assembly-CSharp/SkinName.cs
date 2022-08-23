@@ -3,7 +3,6 @@ using System.Collections;
 using Rilisoft;
 using UnityEngine;
 
-
 public sealed class SkinName : MonoBehaviour
 {
 	[NonSerialized]
@@ -99,7 +98,7 @@ public sealed class SkinName : MonoBehaviour
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	public void SetAnim(int _typeAnim, bool stealth)
 	{
 		string text = "Idle";
@@ -207,13 +206,13 @@ public sealed class SkinName : MonoBehaviour
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	private void SetAnim(int _typeAnim)
 	{
 		SetAnim(_typeAnim, true);
 	}
 
-	[PunRPC]
+	[RPC]
 	private void setCapeCustomRPC(string str)
 	{
 		if (capesPoint.transform.childCount > 0)
@@ -243,7 +242,7 @@ public sealed class SkinName : MonoBehaviour
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	private void setCapeRPC(string _currentCape)
 	{
 		if (capesPoint.transform.childCount > 0)
@@ -266,13 +265,13 @@ public sealed class SkinName : MonoBehaviour
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	private void setArmorRPC(string _currentArmor)
 	{
 		SetArmorVisInvisibleRPC(_currentArmor, false);
 	}
 
-	[PunRPC]
+	[RPC]
 	private void SetArmorVisInvisibleRPC(string _currentArmor, bool _isInviseble)
 	{
 		if (armorPoint.transform.childCount > 0)
@@ -310,7 +309,7 @@ public sealed class SkinName : MonoBehaviour
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	private void setBootsRPC(string _currentBoots)
 	{
 		for (int i = 0; i < bootsPoint.transform.childCount; i++)
@@ -328,13 +327,13 @@ public sealed class SkinName : MonoBehaviour
 		currentBoots = _currentBoots;
 	}
 
-	[PunRPC]
+	[RPC]
 	private void setHatRPC(string _currentHat)
 	{
 		SetHatWithInvisebleRPC(_currentHat, false);
 	}
 
-	[PunRPC]
+	[RPC]
 	private void SetHatWithInvisebleRPC(string _currentHat, bool _isHatInviseble)
 	{
 		if (hatsPoint.transform.childCount > 0)
@@ -390,7 +389,7 @@ public sealed class SkinName : MonoBehaviour
 		{
 			FPSplayerObject.SetActive(false);
 		}
-		if (!Defs.isMulti || (!Defs.isInet && base.GetComponent<PhotonView>().isMine) || (Defs.isInet && photonView.isMine))
+		if (!Defs.isMulti || (!Defs.isInet && base.GetComponent<NetworkView>().isMine) || (Defs.isInet && photonView.isMine))
 		{
 			base.gameObject.layer = 11;
 			bodyLayer.layer = 11;
@@ -425,7 +424,7 @@ public sealed class SkinName : MonoBehaviour
 			}
 			else
 			{
-				base.GetComponent<PhotonView>().RPC("setCapeRPC", PhotonTargets.OthersBuffered, @string);
+				base.GetComponent<NetworkView>().RPC("setCapeRPC", RPCMode.OthersBuffered, @string);
 			}
 		}
 		else if (@string.Equals(Wear.cape_Custom))
@@ -439,7 +438,7 @@ public sealed class SkinName : MonoBehaviour
 			}
 			else
 			{
-				base.GetComponent<PhotonView>().RPC("setCapeCustomRPC", PhotonTargets.OthersBuffered, text);
+				base.GetComponent<NetworkView>().RPC("setCapeCustomRPC", RPCMode.OthersBuffered, text);
 			}
 		}
 	}
@@ -456,7 +455,7 @@ public sealed class SkinName : MonoBehaviour
 			}
 			else
 			{
-				base.GetComponent<PhotonView>().RPC("SetArmorVisInvisibleRPC", PhotonTargets.Others, @string, flag);
+				base.GetComponent<NetworkView>().RPC("SetArmorVisInvisibleRPC", RPCMode.Others, @string, flag);
 			}
 			IncrementArmorPopularity(@string);
 		}
@@ -471,7 +470,7 @@ public sealed class SkinName : MonoBehaviour
 		}
 		else
 		{
-			base.GetComponent<PhotonView>().RPC("setBootsRPC", PhotonTargets.OthersBuffered, @string);
+			base.GetComponent<NetworkView>().RPC("setBootsRPC", RPCMode.OthersBuffered, @string);
 		}
 	}
 
@@ -486,9 +485,9 @@ public sealed class SkinName : MonoBehaviour
 		}
 	}
 
-	private void OnPlayerConnected(PhotonPlayer player)
+	private void OnPlayerConnected(NetworkPlayer player)
 	{
-		if (base.GetComponent<PhotonView>().isMine)
+		if (base.GetComponent<NetworkView>().isMine)
 		{
 			SetHat();
 			SetCape();
@@ -509,7 +508,7 @@ public sealed class SkinName : MonoBehaviour
 			}
 			else
 			{
-				base.GetComponent<PhotonView>().RPC("SetHatWithInvisebleRPC", PhotonTargets.Others, @string, flag);
+				base.GetComponent<NetworkView>().RPC("SetHatWithInvisebleRPC", RPCMode.Others, @string, flag);
 			}
 		}
 	}

@@ -37,7 +37,7 @@ namespace Prime31
 		public void sessionOpened(string accessToken)
 		{
 			FacebookManager.preLoginSucceededEvent.fire();
-			//Facebook.instance.accessToken = accessToken;
+			Facebook.instance.accessToken = accessToken;
 			FacebookManager.sessionOpenedEvent.fire();
 		}
 

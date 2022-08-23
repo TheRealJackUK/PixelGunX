@@ -142,7 +142,7 @@ public sealed class ChatViewrController : MonoBehaviour
 		for (int num3 = num; num3 >= 0; num3--)
 		{
 			string text = "[00FF26]";
-			if ((!Defs.isInet && component.messages[num3].IDLocal == _weaponManager.myPlayer.GetComponent<PhotonView>()) || (Defs.isInet && component.messages[num3].ID == _weaponManager.myPlayer.GetComponent<PhotonView>().viewID))
+			if ((!Defs.isInet && component.messages[num3].IDLocal == _weaponManager.myPlayer.GetComponent<NetworkView>().viewID) || (Defs.isInet && component.messages[num3].ID == _weaponManager.myPlayer.GetComponent<PhotonView>().viewID))
 			{
 				text = "[00FF26]";
 			}

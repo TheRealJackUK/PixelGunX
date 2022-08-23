@@ -94,7 +94,7 @@ public class FacebookController : MonoBehaviour
 
 	public static void LogEvent(string eventName, Dictionary<string, object> parameters = null)
 	{
-		//FacebookAndroid.logEvent(eventName, parameters);
+		FacebookAndroid.logEvent(eventName, parameters);
 	}
 
 	public static void ShowPostDialog()
@@ -118,17 +118,17 @@ public class FacebookController : MonoBehaviour
 		dictionary.Add("caption", "I've just played the super battle in Pixel Gun 3D :)");
 		dictionary.Add("description", "DOWNLOAD IT FOR FREE AND JOIN ME NOW!");
 		Dictionary<string, object> parameters = dictionary;
-		//FacebookAndroid.showFacebookShareDialog(parameters);
+		FacebookAndroid.showFacebookShareDialog(parameters);
 	}
 
 	public void PostMessage(string _message, Action<string, object> _completionHandler)
 	{
 		Debug.Log("Post to Facebook");
-		//Facebook.instance.postMessage(_message, _completionHandler);
-		//hasPublishActions = GetSessionPermissions().Contains("publish_actions");
+		Facebook.instance.postMessage(_message, _completionHandler);
+		hasPublishActions = GetSessionPermissions().Contains("publish_actions");
 		if (hasPublishActions)
 		{
-			//Facebook.instance.postMessage(_message, _completionHandler);
+			Facebook.instance.postMessage(_message, _completionHandler);
 			return;
 		}
 		Debug.Log("Get permissions for post");
@@ -152,6 +152,28 @@ public class FacebookController : MonoBehaviour
 	public void SetMyId()
 	{
 		Debug.Log("SetMyId Run");
+		Facebook.instance.getMe(delegate(string error, FacebookMeResult result)
+		{
+			if (error != null)
+			{
+				Debug.Log("Facebook.instance.getMe() failed:    " + error);
+			}
+			else if (result == null)
+			{
+				Debug.Log("result == null");
+			}
+			else
+			{
+				selfID = result.id;
+				if (FacebookController.ReceivedSelfID != null)
+				{
+					FacebookController.ReceivedSelfID(result.id);
+				}
+				Debug.Log("My Facebook id:    " + result.id);
+				StartCoroutine(GetPlaingFriends());
+				Defs.FacebookName = result.first_name;
+			}
+		});
 	}
 
 	public string GetMyId()
@@ -161,22 +183,22 @@ public class FacebookController : MonoBehaviour
 
 	private void InitFacebook()
 	{
-		//FacebookAndroid.init(true);
+		FacebookAndroid.init(true);
 		FacebookManager.graphRequestCompletedEvent += delegate(object result)
 		{
 			Utils.logObject(result);
 		};
 		FacebookManager.sessionOpenedEvent += delegate
 		{
-			//List<object> sessionPermissions2 = GetSessionPermissions();
-			//hasPublishPermission = sessionPermissions2.Contains("publish_stream");
-			//hasPublishActions = sessionPermissions2.Contains("publish_actions");
+			List<object> sessionPermissions2 = GetSessionPermissions();
+			hasPublishPermission = sessionPermissions2.Contains("publish_stream");
+			hasPublishActions = sessionPermissions2.Contains("publish_actions");
 		};
 		FacebookManager.reauthorizationSucceededEvent += delegate
 		{
-			//List<object> sessionPermissions = GetSessionPermissions();
-			//hasPublishPermission = sessionPermissions.Contains("publish_stream");
-			//hasPublishActions = sessionPermissions.Contains("publish_actions");
+			List<object> sessionPermissions = GetSessionPermissions();
+			hasPublishPermission = sessionPermissions.Contains("publish_stream");
+			hasPublishActions = sessionPermissions.Contains("publish_actions");
 		};
 	}
 
@@ -208,7 +230,10 @@ public class FacebookController : MonoBehaviour
 		{
 			if (selfID == string.Empty)
 			{
-			
+				Facebook.instance.getMe(delegate(string response, FacebookMeResult result)
+				{
+					selfID = result.id;
+				});
 				while (selfID == string.Empty)
 				{
 					elapsedTime += Time.deltaTime;
@@ -227,6 +252,38 @@ public class FacebookController : MonoBehaviour
 			}
 			loadedAvatars = 0;
 			Dictionary<string, object> parameters = new Dictionary<string, object> { { "q", "SELECT uid,name,is_app_user,pic_square FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1=me())" } };
+			Facebook.instance.graphRequest("fql", HTTPVerb.GET, parameters, delegate(string error, object obj)
+			{
+				if (error != null)
+				{
+					Debug.Log("Error= " + error);
+				}
+				else
+				{
+					Debug.Log(obj);
+					IDictionary dictionary = obj as IDictionary;
+					IList list = dictionary["data"] as IList;
+					friendsList.Clear();
+					for (int i = 0; i < list.Count; i++)
+					{
+						bool flag = false;
+						IDictionary dictionary2 = list[i] as IDictionary;
+						string text = dictionary2["uid"].ToString();
+						string text2 = dictionary2["name"] as string;
+						if (dictionary2["is_app_user"].ToString() == "True")
+						{
+							flag = true;
+						}
+						friendsList.Add(new Friend(text2, text, flag));
+						Debug.Log("id: " + text + " " + flag);
+						Debug.Log("Added friend : " + text2);
+						string text3 = dictionary2["pic_square"] as string;
+					}
+					totalFriends = friendsList.Count;
+					message = "totalFriends= " + totalFriends;
+					showMessageTimer = 3f;
+				}
+			});
 		}
 		else
 		{
@@ -245,7 +302,7 @@ public class FacebookController : MonoBehaviour
 		}
 		else
 		{
-			//FacebookAndroid.logout();
+			FacebookAndroid.logout();
 			string[] permissions2 = new string[1] { "email" };
 			LoginWithReadPermissions(permissions2);
 		}
@@ -266,7 +323,7 @@ public class FacebookController : MonoBehaviour
 			Dictionary<string, string> dictionary = new Dictionary<string, string>();
 			dictionary["message"] = messageInvite;
 			dictionary["title"] = titleInvite;
-			//FacebookAndroid.showDialog("apprequests", dictionary);
+			FacebookAndroid.showDialog("apprequests", dictionary);
 		}
 		else
 		{
@@ -314,33 +371,31 @@ public class FacebookController : MonoBehaviour
 
 	public bool IsSessionValid()
 	{
-		//return FacebookAndroid.isSessionValid();
-		return false;
+		return FacebookAndroid.isSessionValid();
 	}
 
 	public void LoginWithReadPermissions(string[] permissions)
 	{
-		//FacebookAndroid.loginWithReadPermissions(permissions);
+		FacebookAndroid.loginWithReadPermissions(permissions);
 	}
 
 	public void ReauthorizeWithPublishPermissions(string[] permissions, FacebookSessionDefaultAudience defaultAudience)
 	{
 		Debug.Log("ReauthorizeWithPublishPermissions: " + permissions);
-		//FacebookAndroid.reauthorizeWithPublishPermissions(permissions, defaultAudience);
+		FacebookAndroid.reauthorizeWithPublishPermissions(permissions, defaultAudience);
 		Debug.Log("end ");
 	}
 
 	public List<object> GetSessionPermissions()
 	{
-		//return FacebookAndroid.getSessionPermissions();
-		return null;
+		return FacebookAndroid.getSessionPermissions();
 	}
 
 	private void OnEventFacebookSessionOpened()
 	{
-		//List<object> sessionPermissions = GetSessionPermissions();
-		//hasPublishPermission = sessionPermissions.Contains("publish_stream");
-		//hasPublishActions = sessionPermissions.Contains("publish_actions");
+		List<object> sessionPermissions = GetSessionPermissions();
+		hasPublishPermission = sessionPermissions.Contains("publish_stream");
+		hasPublishActions = sessionPermissions.Contains("publish_actions");
 		Debug.Log("OnEventFacebookSessionOpened hasPublishPermission=" + hasPublishActions);
 		SetMyId();
 	}
@@ -363,7 +418,7 @@ public class FacebookController : MonoBehaviour
 			isGetPermitionFromSendMessage = false;
 			PostMessage(postMessage, handlerForPost);
 		}
-		//hasPublishPermission = GetSessionPermissions().Contains("publish_stream");
+		hasPublishPermission = GetSessionPermissions().Contains("publish_stream");
 		Debug.Log("FacebookReauthorizationSucceededEvent hasPublishPermission=" + hasPublishPermission);
 		if (hasPublishPermission)
 		{

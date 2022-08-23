@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 public class BonusController : MonoBehaviour
 {
 	public static BonusController sharedController;
@@ -68,7 +67,7 @@ public class BonusController : MonoBehaviour
 		photonView.RPC("AddWeaponAfterKillPlayerRPC", PhotonTargets.MasterClient, _weaponName, _pos);
 	}
 
-	[PunRPC]
+	[RPC]
 	private void AddWeaponAfterKillPlayerRPC(string _weaponName, Vector3 _pos)
 	{
 		PhotonNetwork.InstantiateSceneObject("Weapon_Bonuses/" + _weaponName + "_Bonus", new Vector3(_pos.x, _pos.y - 0.5f, _pos.z), Quaternion.identity, 0, null);
@@ -82,11 +81,11 @@ public class BonusController : MonoBehaviour
 		}
 		else
 		{
-			base.GetComponent<PhotonView>().RPC("AddBonusAfterKillPlayerRPC", PhotonTargets.All, IndexBonus(), _pos);
+			base.GetComponent<NetworkView>().RPC("AddBonusAfterKillPlayerRPC", RPCMode.All, IndexBonus(), _pos);
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	private void AddBonusAfterKillPlayerRPC(int _type, Vector3 _pos)
 	{
 		if (Defs.isMulti && Defs.isInet)
@@ -167,7 +166,7 @@ public class BonusController : MonoBehaviour
 			gameObject2.GetComponent<SettingBonus>().numberSpawnZone = num2;
 			if (flag)
 			{
-				gameObject2.GetComponent<BonusItem>().SynchTimeKillBonusRPC(PhotonNetwork.time);
+				gameObject2.GetComponent<BonusItem>().SynchTimeKillBonusRPC(Network.time);
 			}
 		}
 		else

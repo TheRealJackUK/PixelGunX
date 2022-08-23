@@ -62,7 +62,7 @@ public class Move : MonoBehaviour
 
 	public float smokeDestroyTime;
 
-	public ParticleSystem smokeStem;
+	public ParticleRenderer smokeStem;
 
 	public float destroySpeed;
 
@@ -81,19 +81,19 @@ public class Move : MonoBehaviour
 		Color color = default(Color);
 		if (destroyEnabled)
 		{
-			ParticleSystem particleRenderer = (ParticleSystem)GetComponent(typeof(ParticleSystem));
-			//color = particleRenderer.GetColor("_TintColor");
-			//Color color2 = smokeStem.material.GetColor("_TintColor");
+			ParticleRenderer particleRenderer = (ParticleRenderer)GetComponent(typeof(ParticleRenderer));
+			color = particleRenderer.material.GetColor("_TintColor");
+			Color color2 = smokeStem.material.GetColor("_TintColor");
 			if (!(color.a <= 0f))
 			{
 				color.a -= destroySpeed * Time.deltaTime;
 			}
-			//if (!(color2.a <= 0f))
-			//{
-			//	color2.a -= destroySpeedStem * Time.deltaTime;
-			//}
-			//smokeStem.material.SetColor("_TintColor", color2);
-			//particleRenderer.material.SetColor("_TintColor", color);
+			if (!(color2.a <= 0f))
+			{
+				color2.a -= destroySpeedStem * Time.deltaTime;
+			}
+			smokeStem.material.SetColor("_TintColor", color2);
+			particleRenderer.material.SetColor("_TintColor", color);
 		}
 		if (!(color.a >= 0f))
 		{

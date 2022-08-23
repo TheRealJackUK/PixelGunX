@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 namespace ExitGames.Client.Photon
 {
 	internal class LoadbalancingPeer : PhotonPeer
@@ -25,7 +24,7 @@ namespace ExitGames.Client.Photon
 		{
 			Dictionary<byte, object> dictionary = new Dictionary<byte, object>();
 			dictionary[224] = appId;
-			return SendOperation(220, dictionary, SendOptions.SendReliable);
+			return OpCustom(220, dictionary, true, 0, true);
 		}
 
 		public virtual bool OpJoinLobby(TypedLobby lobby)
@@ -41,7 +40,7 @@ namespace ExitGames.Client.Photon
 				dictionary[213] = lobby.Name;
 				dictionary[212] = (byte)lobby.Type;
 			}
-			return SendOperation(229, dictionary, SendOptions.SendReliable);
+			return OpCustom(229, dictionary, true);
 		}
 
 		public virtual bool OpLeaveLobby()
@@ -50,8 +49,7 @@ namespace ExitGames.Client.Photon
 			{
 				base.Listener.DebugReturn(DebugLevel.INFO, "OpLeaveLobby()");
 			}
-			//return SendOperation(228, null, SendOptions.SendReliable);
-			return true;
+			return OpCustom(228, null, true);
 		}
 
 		public virtual bool OpCreateRoom(string roomName, RoomOptions roomOptions, TypedLobby lobby, Hashtable playerProperties, bool onGameServer)
@@ -100,7 +98,7 @@ namespace ExitGames.Client.Photon
 					dictionary[237] = true;
 				}
 			}
-			return SendOperation(227, dictionary, SendOptions.SendReliable);
+			return OpCustom(227, dictionary, true);
 		}
 
 		public virtual bool OpJoinRoom(string roomName, RoomOptions roomOptions, TypedLobby lobby, bool createIfNotExists, Hashtable playerProperties, bool onGameServer)
@@ -152,7 +150,7 @@ namespace ExitGames.Client.Photon
 					}
 				}
 			}
-			return SendOperation(226, dictionary, SendOptions.SendReliable);
+			return OpCustom(226, dictionary, true);
 		}
 
 		public virtual bool OpJoinRandomRoom(Hashtable expectedCustomRoomProperties, byte expectedMaxPlayers, Hashtable playerProperties, MatchmakingMode matchingType, TypedLobby typedLobby, string sqlLobbyFilter)
@@ -189,7 +187,7 @@ namespace ExitGames.Client.Photon
 			{
 				dictionary[245] = sqlLobbyFilter;
 			}
-			return SendOperation(225, dictionary, SendOptions.SendReliable);
+			return OpCustom(225, dictionary, true);
 		}
 
 		public virtual bool OpFindFriends(string[] friendsToFind)
@@ -199,7 +197,7 @@ namespace ExitGames.Client.Photon
 			{
 				dictionary[1] = friendsToFind;
 			}
-			return SendOperation(222, dictionary, SendOptions.SendReliable);
+			return OpCustom(222, dictionary, true);
 		}
 
 		public bool OpSetCustomPropertiesOfActor(int actorNr, Hashtable actorProperties, bool broadcast, byte channelId)
@@ -232,7 +230,7 @@ namespace ExitGames.Client.Photon
 			{
 				dictionary.Add(231, expectedValues);
 			}
-			return SendOperation(252, dictionary, SendOptions.SendReliable);
+			return OpCustom(252, dictionary, broadcast, channelId);
 		}
 
 		protected void OpSetPropertyOfRoom(byte propCode, object value)
@@ -263,7 +261,7 @@ namespace ExitGames.Client.Photon
 			{
 				dictionary.Add(231, expectedValues);
 			}
-			return SendOperation(252, dictionary, SendOptions.SendReliable);
+			return OpCustom(252, dictionary, true, channelId);
 		}
 
 		public virtual bool OpAuthenticate(string appId, string appVersion, AuthenticationValues authValues, string regionCode)
@@ -276,7 +274,7 @@ namespace ExitGames.Client.Photon
 			if (authValues != null && authValues.Token != null)
 			{
 				dictionary[221] = authValues.Token;
-				return SendOperation(230, dictionary, SendOptions.SendReliable);
+				return OpCustom(230, dictionary, true, 0, false);
 			}
 			dictionary[220] = appVersion;
 			dictionary[224] = appId;
@@ -313,7 +311,7 @@ namespace ExitGames.Client.Photon
 					}
 				}
 			}
-			bool flag = SendOperation(230, dictionary, SendOptions.SendReliable);
+			bool flag = OpCustom(230, dictionary, true, 0, base.IsEncryptionAvailable);
 			if (!flag)
 			{
 				base.Listener.DebugReturn(DebugLevel.ERROR, "Error calling OpAuthenticate! Did not work. Check log output, CustomAuthenticationValues and if you're connected.");
@@ -336,7 +334,7 @@ namespace ExitGames.Client.Photon
 			{
 				dictionary[238] = groupsToAdd;
 			}
-			return SendOperation(248, dictionary, SendOptions.SendReliable);
+			return OpCustom(248, dictionary, true, 0);
 		}
 
 		public virtual bool OpRaiseEvent(byte eventCode, object customEventContent, bool sendReliable, RaiseEventOptions raiseEventOptions)
@@ -374,7 +372,7 @@ namespace ExitGames.Client.Photon
 					opParameters[234] = true;
 				}
 			}
-			return SendOperation(253, opParameters, SendOptions.SendReliable);
+			return OpCustom(253, opParameters, sendReliable, raiseEventOptions.SequenceChannel, raiseEventOptions.Encrypt);
 		}
 	}
 }

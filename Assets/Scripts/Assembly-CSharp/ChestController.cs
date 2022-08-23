@@ -1,7 +1,6 @@
 using Photon;
 using UnityEngine;
 
-
 public class ChestController : Photon.MonoBehaviour
 {
 	public bool isStartChest = true;
@@ -34,7 +33,7 @@ public class ChestController : Photon.MonoBehaviour
 		base.photonView.RPC("KilledChest", PhotonTargets.All);
 	}
 
-	[PunRPC]
+	[RPC]
 	public void MinusLiveRPC(float _minus)
 	{
 		if (!isKilled)
@@ -48,13 +47,13 @@ public class ChestController : Photon.MonoBehaviour
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	public void SynchLiveRPC(float _live)
 	{
 		live = _live;
 	}
 
-	[PunRPC]
+	[RPC]
 	public void KilledChest()
 	{
 		if (isKilled)
@@ -114,7 +113,7 @@ public class ChestController : Photon.MonoBehaviour
 		base.photonView.RPC("DestroyChestRPC", PhotonTargets.AllBuffered);
 	}
 
-	[PunRPC]
+	[RPC]
 	private void DestroyChestRPC()
 	{
 		Debug.Log("DestroyChestRPC");

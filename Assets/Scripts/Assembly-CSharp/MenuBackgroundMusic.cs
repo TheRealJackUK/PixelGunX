@@ -60,7 +60,7 @@ internal sealed class MenuBackgroundMusic : MonoBehaviour
 		}
 	}
 
-	public void StSendOperationMusicFrom(GameObject audioSourceObj)
+	public void StopCustomMusicFrom(GameObject audioSourceObj)
 	{
 		RemoveNullsFromCustomMusicStack();
 		if (audioSourceObj != null && audioSourceObj.GetComponent<AudioSource>() != null)

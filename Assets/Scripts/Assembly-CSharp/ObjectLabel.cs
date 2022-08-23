@@ -1,8 +1,7 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 
-[RequireComponent(typeof(Text))]
+[RequireComponent(typeof(GUIText))]
 public class ObjectLabel : MonoBehaviour
 {
 	public static Camera currentCamera;
@@ -51,9 +50,9 @@ public class ObjectLabel : MonoBehaviour
 
 	private bool isCompany;
 
-	public Texture clanTexture;
+	public GUITexture clanTexture;
 
-	public Text clanName;
+	public GUIText clanName;
 
 	private void Start()
 	{
@@ -68,12 +67,12 @@ public class ObjectLabel : MonoBehaviour
 		thisTransform = base.transform;
 		cam = currentCamera;
 		camTransform = cam.transform;
-		//base.transform.GetComponent<Texture>().pixelInset = new Rect(-75f * koofScreen, -3f * koofScreen, 30f * koofScreen, 30f * koofScreen);
-		//base.transform.GetComponent<Text>().pixelOffset = new Vector2(-45f * koofScreen, 0f);
-		base.transform.GetComponent<Text>().fontSize = Mathf.RoundToInt(20f * koofScreen);
+		base.transform.GetComponent<GUITexture>().pixelInset = new Rect(-75f * koofScreen, -3f * koofScreen, 30f * koofScreen, 30f * koofScreen);
+		base.transform.GetComponent<GUIText>().pixelOffset = new Vector2(-45f * koofScreen, 0f);
+		base.transform.GetComponent<GUIText>().fontSize = Mathf.RoundToInt(20f * koofScreen);
 		isCompany = Defs.isCompany;
-		//clanTexture. = new Rect(-64f * koofScreen, -18f * koofScreen, 15f * koofScreen, 15f * koofScreen);
-		//clanName.pixelOffset = new Vector2(-41f * koofScreen, -4f);
+		clanTexture.pixelInset = new Rect(-64f * koofScreen, -18f * koofScreen, 15f * koofScreen, 15f * koofScreen);
+		clanName.pixelOffset = new Vector2(-41f * koofScreen, -4f);
 		clanName.fontSize = Mathf.RoundToInt(16f * koofScreen);
 	}
 
@@ -106,7 +105,7 @@ public class ObjectLabel : MonoBehaviour
 		{
 			cam = currentCamera;
 			camTransform = cam.transform;
-			Texture component = base.transform.GetComponent<Texture>();
+			GUITexture component = base.transform.GetComponent<GUITexture>();
 			if (component == null)
 			{
 				Debug.LogError("guiTexture == null");
@@ -119,12 +118,12 @@ public class ObjectLabel : MonoBehaviour
 				{
 					if (component2.myCommand == 1)
 					{
-						base.gameObject.GetComponent<Text>().color = Color.blue;
+						base.gameObject.GetComponent<GUIText>().color = Color.blue;
 						isSetColor = true;
 					}
 					if (component2.myCommand == 2)
 					{
-						base.gameObject.GetComponent<Text>().color = Color.red;
+						base.gameObject.GetComponent<GUIText>().color = Color.red;
 						isSetColor = true;
 					}
 				}
@@ -136,22 +135,22 @@ public class ObjectLabel : MonoBehaviour
 				}
 				else
 				{
-					component = expController.marks[myRanks];
+					component.texture = expController.marks[myRanks];
 				}
-				clanTexture = component2.myTable.GetComponent<NetworkStartTable>().myClanTexture;
+				clanTexture.texture = component2.myTable.GetComponent<NetworkStartTable>().myClanTexture;
 				clanName.text = component2.myTable.GetComponent<NetworkStartTable>().myClanName;
 			}
 			else
 			{
-				//component.pixelInset = new Rect(-130f * koofScreen, -6f * koofScreen, 36f * koofScreen, 36f * koofScreen);
-				//base.transform.GetComponent<Text>().pixelOffset = new Vector2(-85f * koofScreen, 0f);
-				//base.transform.GetComponent<Text>().fontSize = Mathf.RoundToInt(20f * Defs.Coef);
+				component.pixelInset = new Rect(-130f * koofScreen, -6f * koofScreen, 36f * koofScreen, 36f * koofScreen);
+				base.transform.GetComponent<GUIText>().pixelOffset = new Vector2(-85f * koofScreen, 0f);
+				base.transform.GetComponent<GUIText>().fontSize = Mathf.RoundToInt(20f * Defs.Coef);
 				offset = new Vector3(0f, 2.25f, 0f);
-				component = expController.marks[expController.currentLevel];
-				//clanTexture.pixelInset = new Rect(-110f * koofScreen, -18f * koofScreen, 15f * koofScreen, 15f * koofScreen);
-				//clanName.pixelOffset = new Vector2(-85f * koofScreen, -2f);
+				component.texture = expController.marks[expController.currentLevel];
+				clanTexture.pixelInset = new Rect(-110f * koofScreen, -18f * koofScreen, 15f * koofScreen, 15f * koofScreen);
+				clanName.pixelOffset = new Vector2(-85f * koofScreen, -2f);
 				clanName.fontSize = Mathf.RoundToInt(16f * koofScreen);
-				if (clanTexture == null)
+				if (clanTexture.texture == null)
 				{
 					if (!string.IsNullOrEmpty(FriendsController.sharedController.clanLogo))
 					{
@@ -160,11 +159,11 @@ public class ObjectLabel : MonoBehaviour
 						texture2D.LoadImage(data);
 						texture2D.filterMode = FilterMode.Point;
 						texture2D.Apply();
-						clanTexture = texture2D;
+						clanTexture.texture = texture2D;
 					}
 					else
 					{
-						clanTexture = null;
+						clanTexture.texture = null;
 					}
 					clanName.text = FriendsController.sharedController.clanName;
 				}

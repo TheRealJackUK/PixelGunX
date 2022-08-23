@@ -1,4 +1,4 @@
-/*using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
@@ -76,7 +76,7 @@ public class Facebook : P31RestKit
 	{
 		UnityEngine.Object.DontDestroyOnLoad(go);
 		surrogateGameObject = go;
-		base.surrogateMonoBehaviour = mb;
+		base.surrogateMonobehaviour = mb;
 	}
 
 	public void graphRequest(string path, Action<string, object> completionHandler)
@@ -93,7 +93,7 @@ public class Facebook : P31RestKit
 	{
 		if (shouldSendRequest())
 		{
-			base.surrogateMonoBehaviour.StartCoroutine(send(path, verb, parameters, completionHandler));
+			base.surrogateMonobehaviour.StartCoroutine(send(path, verb, parameters, completionHandler));
 			return;
 		}
 		try
@@ -108,7 +108,7 @@ public class Facebook : P31RestKit
 			{
 				Action action = delegate
 				{
-					base.surrogateMonoBehaviour.StartCoroutine(send(path, verb, parameters, completionHandler));
+					base.surrogateMonobehaviour.StartCoroutine(send(path, verb, parameters, completionHandler));
 				};
 				method.Invoke(null, new object[2]
 				{
@@ -131,13 +131,13 @@ public class Facebook : P31RestKit
 			list.Add(request.requestDictionary());
 		}
 		dictionary.Add("batch", Json.encode(list));
-		base.surrogateMonoBehaviour.StartCoroutine(send(string.Empty, HTTPVerb.POST, dictionary, completionHandler));
+		base.surrogateMonobehaviour.StartCoroutine(send(string.Empty, HTTPVerb.POST, dictionary, completionHandler));
 	}
 
 	public void fetchProfileImageForUserId(string userId, Action<Texture2D> completionHandler)
 	{
 		string url = "http://graph.facebook.com/" + userId + "/picture?type=large";
-		base.surrogateMonoBehaviour.StartCoroutine(fetchImageAtUrl(url, completionHandler));
+		base.surrogateMonobehaviour.StartCoroutine(fetchImageAtUrl(url, completionHandler));
 	}
 
 	public IEnumerator fetchImageAtUrl(string url, Action<Texture2D> completionHandler)
@@ -375,4 +375,3 @@ public class Facebook : P31RestKit
 		graphRequest(path, onComplete);
 	}
 }
-*/

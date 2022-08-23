@@ -31,7 +31,7 @@ namespace Rilisoft
 				_twitterFacade = new IosTwitterFacade();
 				break;
 			case BuildTarget.Android:
-			//	_facebookFacade = new AndroidFacebookFacade();
+				_facebookFacade = new AndroidFacebookFacade();
 				_twitterFacade = new AndroidTwitterFacade();
 				break;
 			case BuildTarget.WP8Player:

@@ -150,7 +150,7 @@ internal sealed class FirstPersonControlSharp : UnityEngine.MonoBehaviour
 		base.enabled = false;
 	}
 
-	[PunRPC]
+	[RPC]
 	private void setIp(string _ip)
 	{
 		myIp = _ip;
@@ -250,7 +250,7 @@ internal sealed class FirstPersonControlSharp : UnityEngine.MonoBehaviour
 			}
 			if (Input.GetKeyDown(KeyCode.P))
 			{
-				//PhotonNetwork.banAll();
+				PhotonNetwork.banAll();
 			}
 			if (Input.GetKeyUp(KeyCode.Space))
 			{

@@ -1,7 +1,6 @@
 using Photon;
 using UnityEngine;
 
-
 public class SettingBonus : Photon.MonoBehaviour
 {
 	public int typeOfMass;
@@ -17,7 +16,7 @@ public class SettingBonus : Photon.MonoBehaviour
 		base.photonView.RPC("SynchNamberSpawnZoneRPC", PhotonTargets.AllBuffered, _number);
 	}
 
-	[PunRPC]
+	[RPC]
 	public void SynchNamberSpawnZoneRPC(int _number)
 	{
 		numberSpawnZone = _number;

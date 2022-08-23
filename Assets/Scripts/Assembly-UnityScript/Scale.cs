@@ -5,7 +5,7 @@ using UnityScript.Lang;
 [Serializable]
 public class Scale : MonoBehaviour
 {
-	public ParticleSystem[] particleSystem;
+	public ParticleEmitter[] particleEmitters;
 
 	public float scale;
 

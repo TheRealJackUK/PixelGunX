@@ -80,7 +80,7 @@ public class LANBroadcastService : MonoBehaviour
 	private void Start()
 	{
 		lstReceivedMessages = new List<ReceivedMessage>();
-		//ipaddress = PhotonNetwork.player.ipAddress.ToString();
+		ipaddress = Network.player.ipAddress.ToString();
 	}
 
 	private void Update()

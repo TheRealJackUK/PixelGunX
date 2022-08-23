@@ -9,8 +9,6 @@ using Rilisoft;
 using Rilisoft.MiniJson;
 using RilisoftBot;
 using UnityEngine;
-using UnityEngine.UI;
-
 
 public sealed class Player_move_c : MonoBehaviour
 {
@@ -55,7 +53,7 @@ public sealed class Player_move_c : MonoBehaviour
 
 		public string clanName;
 
-		public PhotonView IDLocal;
+		public NetworkViewID IDLocal;
 	}
 
 	private const string keyKilledPlayerCharactersCount = "KilledPlayerCharactersCount";
@@ -94,7 +92,7 @@ public sealed class Player_move_c : MonoBehaviour
 
 	public int myPlayerID;
 
-	public PhotonView myPlayerIDLocal;
+	public NetworkViewID myPlayerIDLocal;
 
 	public SkinName mySkinName;
 
@@ -446,7 +444,7 @@ public sealed class Player_move_c : MonoBehaviour
 
 	private List<int> myKillAssists = new List<int>();
 
-	private List<PhotonView> myKillAssistsLocal = new List<PhotonView>();
+	private List<NetworkViewID> myKillAssistsLocal = new List<NetworkViewID>();
 
 	[NonSerialized]
 	public string currentWeapon;
@@ -975,7 +973,7 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	private void setMySkin(string str)
 	{
 		byte[] data = Convert.FromBase64String(str);
@@ -1001,12 +999,12 @@ public sealed class Player_move_c : MonoBehaviour
 			}
 			else
 			{
-				base.GetComponent<PhotonView>().RPC("SetJetpackEnabledRPC", PhotonTargets.Others, _isEnabled);
+				base.GetComponent<NetworkView>().RPC("SetJetpackEnabledRPC", RPCMode.Others, _isEnabled);
 			}
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	public void SetJetpackEnabledRPC(bool _isEnabled)
 	{
 		if (Defs.isSoundFX && _isEnabled)
@@ -1045,12 +1043,12 @@ public sealed class Player_move_c : MonoBehaviour
 			}
 			else
 			{
-				base.GetComponent<PhotonView>().RPC("SetJetpackParticleEnabledRPC", PhotonTargets.Others, _isEnabled);
+				base.GetComponent<NetworkView>().RPC("SetJetpackParticleEnabledRPC", RPCMode.Others, _isEnabled);
 			}
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	public void SetJetpackParticleEnabledRPC(bool _isEnabled)
 	{
 		if (_isEnabled)
@@ -1079,7 +1077,7 @@ public sealed class Player_move_c : MonoBehaviour
 		photonView.RPC("setMySkin", PhotonTargets.AllBuffered, text);
 	}
 
-	[PunRPC]
+	[RPC]
 	private void SendChatMessage(string text, bool _clanMode, string _clanLogo, string _ClanID, string _clanName)
 	{
 		if ((_clanMode && !_ClanID.Equals(FriendsController.sharedController.ClanID)) || _weaponManager == null || _weaponManager.myPlayer == null)
@@ -1120,7 +1118,7 @@ public sealed class Player_move_c : MonoBehaviour
 		{
 			if (!isInet)
 			{
-				base.GetComponent<PhotonView>().RPC("SendChatMessage", PhotonTargets.All, "< " + _weaponManager.myTable.GetComponent<NetworkStartTable>().NamePlayer + " > " + text, clanMode, FriendsController.sharedController.clanLogo, FriendsController.sharedController.ClanID, FriendsController.sharedController.clanName);
+				base.GetComponent<NetworkView>().RPC("SendChatMessage", RPCMode.All, "< " + _weaponManager.myTable.GetComponent<NetworkStartTable>().NamePlayer + " > " + text, clanMode, FriendsController.sharedController.clanLogo, FriendsController.sharedController.ClanID, FriendsController.sharedController.clanName);
 			}
 			else
 			{
@@ -1216,7 +1214,7 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	private void SynhIsZoming(bool _isZoomming)
 	{
 		isZooming = _isZoomming;
@@ -1319,7 +1317,7 @@ public sealed class Player_move_c : MonoBehaviour
 		photonView.RPC("minusLiveFromZombiRPC", PhotonTargets.All, _minusLive, posZombi);
 	}
 
-	[PunRPC]
+	[RPC]
 	public void minusLiveFromZombiRPC(float live, Vector3 posZombi)
 	{
 		if (photonView.isMine && !isKilled && !isImmortality)
@@ -1406,7 +1404,7 @@ public sealed class Player_move_c : MonoBehaviour
 	private IEnumerator ChangeWeaponCorutine()
 	{
 		photonView.synchronization = ViewSynchronization.Off;
-//		base.GetComponent<PhotonView>().stateSynchronization = NetworkStateSynchronization.Off;
+//		base.GetComponent<NetworkView>().stateSynchronization = NetworkStateSynchronization.Off;
 		if (!Defs.isTurretWeapon)
 		{
 			while (deltaAngle < 40f && !Defs.isTurretWeapon && !isMechActive)
@@ -1433,7 +1431,7 @@ public sealed class Player_move_c : MonoBehaviour
 			}
 		}
 		photonView.synchronization = ViewSynchronization.Unreliable;
-		//base.GetComponent<PhotonView>().stateSynchronization = NetworkStateSynchronization.Unreliable;
+		//base.GetComponent<NetworkView>().stateSynchronization = NetworkStateSynchronization.Unreliable;
 	}
 
 	public void ChangeWeaponReal(int index, bool shouldSetMaxAmmo = true)
@@ -1511,19 +1509,19 @@ public sealed class Player_move_c : MonoBehaviour
 			}
 			else
 			{
-				base.GetComponent<PhotonView>().RPC("SetWeaponRPC", PhotonTargets.OthersBuffered, gameObject2.name, gameObject2.GetComponent<WeaponSounds>().alternativeName);
+				base.GetComponent<NetworkView>().RPC("SetWeaponRPC", RPCMode.OthersBuffered, gameObject2.name, gameObject2.GetComponent<WeaponSounds>().alternativeName);
 			}
 		}
 		if (index == 1000)
 		{
 			WeaponSounds component2 = gameObject2.GetComponent<WeaponSounds>();
-			GameObject gameObject3 = new GameObject();
+			GameObject gameObject3;
 			if (isMulti)
 			{
 				if (!isInet)
 				{
 					GameObject prefab = Resources.Load("Rocket") as GameObject;
-					gameObject3 = (GameObject)PhotonNetwork.Instantiate("Rocket", new Vector3(-10000f, -10000f, -10000f), base.transform.rotation, 0);
+					gameObject3 = (GameObject)Network.Instantiate(prefab, new Vector3(-10000f, -10000f, -10000f), base.transform.rotation, 0);
 				}
 				else
 				{
@@ -1550,7 +1548,7 @@ public sealed class Player_move_c : MonoBehaviour
 				gameObject3.GetComponent<Rigidbody>().isKinematic = true;
 				if (Defs.isMulti && !Defs.isInet)
 				{
-					component3.SendNetworkViewMyPlayer(base.transform.parent.GetComponent<PhotonView>());
+					component3.SendNetworkViewMyPlayer(base.transform.parent.GetComponent<NetworkView>().viewID);
 				}
 			}
 			currentGrenade = gameObject3;
@@ -1567,16 +1565,16 @@ public sealed class Player_move_c : MonoBehaviour
 				}
 				else
 				{
-					base.GetComponent<PhotonView>().RPC("SyncTurretUpgrade", PhotonTargets.Others, turretUpgrade);
+					base.GetComponent<NetworkView>().RPC("SyncTurretUpgrade", RPCMode.Others, turretUpgrade);
 				}
 			}
-			GameObject gameObject4 = new GameObject();
+			GameObject gameObject4;
 			if (isMulti)
 			{
 				if (!isInet)
 				{
 					UnityEngine.Object prefab2 = Resources.Load("Turret");
-					gameObject4 = (GameObject)PhotonNetwork.Instantiate("Turret", new Vector3(-10000f, -10000f, -10000f), base.transform.rotation, 0);
+					gameObject4 = (GameObject)Network.Instantiate(prefab2, new Vector3(-10000f, -10000f, -10000f), base.transform.rotation, 0);
 				}
 				else
 				{
@@ -1595,7 +1593,7 @@ public sealed class Player_move_c : MonoBehaviour
 				gameObject4.GetComponent<Rigidbody>().isKinematic = true;
 				if (Defs.isMulti && !Defs.isInet)
 				{
-					component4.SendNetworkViewMyPlayer(base.transform.parent.GetComponent<PhotonView>());
+					component4.SendNetworkViewMyPlayer(base.transform.parent.GetComponent<NetworkView>().viewID);
 				}
 			}
 			currentTurret = gameObject4;
@@ -1719,7 +1717,7 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	private void SetWeaponRPC(string _nameWeapon, string _alternativeNameWeapon)
 	{
 		isWeaponSet = true;
@@ -1920,7 +1918,7 @@ public sealed class Player_move_c : MonoBehaviour
 	{
 	}
 
-	[PunRPC]
+	[RPC]
 	private void setIp(string _ip)
 	{
 		myIp = _ip;
@@ -2039,7 +2037,7 @@ public sealed class Player_move_c : MonoBehaviour
 		{
 			if (!isInet)
 			{
-				isMine = base.GetComponent<PhotonView>().isMine;
+				isMine = base.GetComponent<NetworkView>().isMine;
 			}
 			else if (photonView == null)
 			{
@@ -2113,7 +2111,7 @@ public sealed class Player_move_c : MonoBehaviour
 			}
 			else
 			{
-				myPlayerIDLocal = myPlayerTransform.GetComponent<PhotonView>();
+				myPlayerIDLocal = myPlayerTransform.GetComponent<NetworkView>().viewID;
 			}
 		}
 		if (isMulti && !isMine)
@@ -2199,7 +2197,7 @@ public sealed class Player_move_c : MonoBehaviour
 			_player = null;
 		}
 		_weaponManager = WeaponManager.sharedManager;
-		if (Defs.isMulti && ((!Defs.isInet && base.GetComponent<PhotonView>().isMine) || (Defs.isInet && photonView.isMine && PlayerPrefs.GetInt("StartAfterDisconnect") == 0)))
+		if (Defs.isMulti && ((!Defs.isInet && base.GetComponent<NetworkView>().isMine) || (Defs.isInet && photonView.isMine && PlayerPrefs.GetInt("StartAfterDisconnect") == 0)))
 		{
 			foreach (Weapon _w in _weaponManager.allAvailablePlayerWeapons)
 			{
@@ -2211,9 +2209,9 @@ public sealed class Player_move_c : MonoBehaviour
 		{
 			GameObject tmpDamage = Resources.Load("Damage") as GameObject;
 			damage = (GameObject)UnityEngine.Object.Instantiate(tmpDamage);
-			Color rgba = damage.GetComponent<Image>().color;
+			Color rgba = damage.GetComponent<GUITexture>().color;
 			rgba.a = 0f;
-			damage.GetComponent<Image>().color = rgba;
+			damage.GetComponent<GUITexture>().color = rgba;
 		}
 		if (!isMulti || isMine)
 		{
@@ -2249,7 +2247,7 @@ public sealed class Player_move_c : MonoBehaviour
 			}
 			else
 			{
-				base.GetComponent<PhotonView>().RPC("SetNickName", PhotonTargets.AllBuffered, _nameFilter);
+				base.GetComponent<NetworkView>().RPC("SetNickName", RPCMode.AllBuffered, _nameFilter);
 			}
 		}
 		CurrentBaseArmor = 0f;
@@ -2515,10 +2513,10 @@ public sealed class Player_move_c : MonoBehaviour
 		string text = Json.Serialize(EffectsController.ReloadAnimationSpeed ?? WeaponManager.DefaultReloadSpeeds);
 		if (!isInet)
 		{
-			base.GetComponent<PhotonView>().RPC("SetIgnoreHeadshotChance", PhotonTargets.OthersBuffered, EffectsController.ChanceToIgnoreHeadshot);
+			base.GetComponent<NetworkView>().RPC("SetIgnoreHeadshotChance", RPCMode.OthersBuffered, EffectsController.ChanceToIgnoreHeadshot);
 			if (text != null)
 			{
-				base.GetComponent<PhotonView>().RPC("SetRelodAnimtionSpeeds", PhotonTargets.OthersBuffered, text);
+				base.GetComponent<NetworkView>().RPC("SetRelodAnimtionSpeeds", RPCMode.OthersBuffered, text);
 			}
 		}
 		else
@@ -2531,13 +2529,13 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	private void SetIgnoreHeadshotChance(float _chanceToIgnoreHS)
 	{
 		_chanceToIgnoreHeadshot = _chanceToIgnoreHS;
 	}
 
-	[PunRPC]
+	[RPC]
 	private void SetRelodAnimtionSpeeds(string reloadAnimationSpeedsJson)
 	{
 		object obj = Json.Deserialize(reloadAnimationSpeedsJson ?? string.Empty);
@@ -2589,10 +2587,10 @@ public sealed class Player_move_c : MonoBehaviour
 	[Obfuscation(Exclude = true)]
 	private void SetIDMyTableInvoke()
 	{
-		base.GetComponent<PhotonView>().RPC("SetIDMyTableRPC", PhotonTargets.AllBuffered, myTableId);
+		base.GetComponent<NetworkView>().RPC("SetIDMyTableRPC", RPCMode.AllBuffered, myTableId);
 	}
 
-	[PunRPC]
+	[RPC]
 	private void SetIDMyTableRPC(string _id)
 	{
 		myTableId = _id;
@@ -2600,7 +2598,7 @@ public sealed class Player_move_c : MonoBehaviour
 		GameObject[] array2 = array;
 		foreach (GameObject gameObject in array2)
 		{
-			if (gameObject.GetComponent<PhotonView>().viewID.ToString().Equals(_id))
+			if (gameObject.GetComponent<NetworkView>().viewID.ToString().Equals(_id))
 			{
 				myTable = gameObject;
 				setMyTamble(myTable);
@@ -2608,7 +2606,7 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	public void SetNickName(string _nickName)
 	{
 		photonView = PhotonView.Get(this);
@@ -2779,7 +2777,7 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	private void ReloadGun()
 	{
 		if (myTransform.childCount != 0)
@@ -2834,7 +2832,7 @@ public sealed class Player_move_c : MonoBehaviour
 		{
 			if (!isInet)
 			{
-				base.GetComponent<PhotonView>().RPC("ReloadGun", PhotonTargets.Others);
+				base.GetComponent<NetworkView>().RPC("ReloadGun", RPCMode.Others);
 			}
 			else
 			{
@@ -2881,8 +2879,8 @@ public sealed class Player_move_c : MonoBehaviour
 				PhotonNetwork.Destroy(currentTurret);
 				return;
 			}
-			PhotonNetwork.RemoveRPCs(currentTurret.GetComponent<PhotonView>());
-			PhotonNetwork.Destroy(currentTurret);
+			Network.RemoveRPCs(currentTurret.GetComponent<NetworkView>().viewID);
+			Network.Destroy(currentTurret);
 		}
 		else
 		{
@@ -2904,7 +2902,7 @@ public sealed class Player_move_c : MonoBehaviour
 	{
 		if (!isInet)
 		{
-			base.GetComponent<PhotonView>().RPC("imDeath", PhotonTargets.All, _name);
+			base.GetComponent<NetworkView>().RPC("imDeath", RPCMode.All, _name);
 		}
 		else
 		{
@@ -2929,7 +2927,7 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	public void imDeath(string _name)
 	{
 		if (!(_weaponManager == null) && !(_weaponManager.myPlayer == null))
@@ -2972,7 +2970,7 @@ public sealed class Player_move_c : MonoBehaviour
 		AddSystemMessage(_message, string.Empty, string.Empty);
 	}
 
-	[PunRPC]
+	[RPC]
 	public void SendSystemMessegeFromFlagDroppedRPC(bool isBlueFlag, string nick)
 	{
 		if (WeaponManager.sharedManager.myPlayer != null)
@@ -2993,7 +2991,7 @@ public sealed class Player_move_c : MonoBehaviour
 		photonView.RPC("SendSystemMessegeFromFlagReturnedRPC", PhotonTargets.All, isBlueFlag);
 	}
 
-	[PunRPC]
+	[RPC]
 	public void SendSystemMessegeFromFlagReturnedRPC(bool isBlueFlag)
 	{
 		if (WeaponManager.sharedManager.myPlayer != null)
@@ -3009,7 +3007,7 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	public void SendSystemMessegeFromFlagCaptureRPC(bool isBlueFlag, string nick)
 	{
 		if (!(WeaponManager.sharedManager.myPlayer != null))
@@ -3035,7 +3033,7 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	public void SendSystemMessegeFromFlagAddScoreRPC(bool isCommandBlue, string nick)
 	{
 		if (WeaponManager.sharedManager.myPlayer != null)
@@ -3049,14 +3047,14 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	private void CountKillsCommandSynch(int _blue, int _red)
 	{
 		GlobalGameController.countKillsBlue = _blue;
 		GlobalGameController.countKillsRed = _red;
 	}
 
-	[PunRPC]
+	[RPC]
 	private void plusCountKillsCommand(int _command)
 	{
 		Debug.Log("plusCountKillsCommand: " + _command);
@@ -3183,12 +3181,12 @@ public sealed class Player_move_c : MonoBehaviour
 			}
 			else
 			{
-				base.GetComponent<PhotonView>().RPC("ShowMultyKillRPC", PhotonTargets.Others, multiKill);
+				base.GetComponent<NetworkView>().RPC("ShowMultyKillRPC", RPCMode.Others, multiKill);
 			}
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	public void ShowMultyKillRPC(int countMulty)
 	{
 		multiKill = countMulty;
@@ -3210,12 +3208,12 @@ public sealed class Player_move_c : MonoBehaviour
 			}
 			else
 			{
-				base.GetComponent<PhotonView>().RPC("ShowMultyKillRPC", PhotonTargets.Others, 0);
+				base.GetComponent<NetworkView>().RPC("ShowMultyKillRPC", RPCMode.Others, 0);
 			}
 		}
 	}
 
-	public void ImKill(PhotonView idKiller, int _typeKill)
+	public void ImKill(NetworkViewID idKiller, int _typeKill)
 	{
 		countKills++;
 		GlobalGameController.CountKills = countKills;
@@ -3232,7 +3230,7 @@ public sealed class Player_move_c : MonoBehaviour
 				}
 				else
 				{
-					base.GetComponent<PhotonView>().RPC("plusCountKillsCommand", PhotonTargets.Others, 1);
+					base.GetComponent<NetworkView>().RPC("plusCountKillsCommand", RPCMode.Others, 1);
 				}
 			}
 			if (myCommand == 2)
@@ -3244,7 +3242,7 @@ public sealed class Player_move_c : MonoBehaviour
 				}
 				else
 				{
-					base.GetComponent<PhotonView>().RPC("plusCountKillsCommand", PhotonTargets.Others, 2);
+					base.GetComponent<NetworkView>().RPC("plusCountKillsCommand", RPCMode.Others, 2);
 				}
 			}
 		}
@@ -3294,7 +3292,7 @@ public sealed class Player_move_c : MonoBehaviour
 				}
 				else
 				{
-					base.GetComponent<PhotonView>().RPC("plusCountKillsCommand", PhotonTargets.Others, 1);
+					base.GetComponent<NetworkView>().RPC("plusCountKillsCommand", RPCMode.Others, 1);
 				}
 			}
 			if (myCommand == 2)
@@ -3306,7 +3304,7 @@ public sealed class Player_move_c : MonoBehaviour
 				}
 				else
 				{
-					base.GetComponent<PhotonView>().RPC("plusCountKillsCommand", PhotonTargets.Others, 2);
+					base.GetComponent<NetworkView>().RPC("plusCountKillsCommand", RPCMode.Others, 2);
 				}
 			}
 		}
@@ -3356,11 +3354,11 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 		else
 		{
-			base.GetComponent<PhotonView>().RPC("AddScoreDuckHuntRPC", PhotonTargets.All);
+			base.GetComponent<NetworkView>().RPC("AddScoreDuckHuntRPC", RPCMode.All);
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	public void AddScoreDuckHuntRPC()
 	{
 		if (isMine)
@@ -3369,8 +3367,8 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 	}
 
-	[PunRPC]
-	public void Killed(PhotonView idKiller, int _typeKill, int _typeWeapon, string weaponName)
+	[RPC]
+	public void Killed(NetworkViewID idKiller, int _typeKill, int _typeWeapon, string weaponName)
 	{
 		ImKilled(myPlayerTransform.position, myPlayerTransform.rotation, _typeWeapon);
 		if (_weaponManager == null || _weaponManager.myPlayer == null)
@@ -3384,7 +3382,7 @@ public sealed class Player_move_c : MonoBehaviour
 		GameObject[] array2 = array;
 		foreach (GameObject gameObject in array2)
 		{
-			if (!gameObject.GetComponent<PhotonView>().viewID.Equals(idKiller))
+			if (!gameObject.GetComponent<NetworkView>().viewID.Equals(idKiller))
 			{
 				continue;
 			}
@@ -3514,19 +3512,19 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	public void KilledPhoton(int idKiller, int _typekill)
 	{
 		KilledPhoton(idKiller, _typekill, string.Empty);
 	}
 
-	[PunRPC]
+	[RPC]
 	public void KilledPhoton(int idKiller, int _typekill, string weaponName)
 	{
 		KilledPhoton(idKiller, _typekill, weaponName, 0);
 	}
 
-	[PunRPC]
+	[RPC]
 	public void KilledPhoton(int idKiller, int _typekill, string weaponName, int _typeWeapon)
 	{
 		ImKilled(myPlayerTransform.position, myPlayerTransform.rotation, _typeWeapon);
@@ -3713,14 +3711,14 @@ public sealed class Player_move_c : MonoBehaviour
 		_killerInfo.armorValue = (int)playerMoveC.armorSynch;
 	}
 
-	[PunRPC]
-	public void pobeda(PhotonView idKiller)
+	[RPC]
+	public void pobeda(NetworkViewID idKiller)
 	{
 		GameObject[] array = GameObject.FindGameObjectsWithTag("Player");
 		GameObject[] array2 = array;
 		foreach (GameObject gameObject in array2)
 		{
-			if (idKiller.Equals(gameObject.GetComponent<PhotonView>().viewID))
+			if (idKiller.Equals(gameObject.GetComponent<NetworkView>().viewID))
 			{
 				nickPobeditel = gameObject.GetComponent<SkinName>().NickName;
 			}
@@ -3731,7 +3729,7 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	public void pobedaPhoton(int idKiller, int _command)
 	{
 		GameObject[] array = GameObject.FindGameObjectsWithTag("Player");
@@ -3763,12 +3761,12 @@ public sealed class Player_move_c : MonoBehaviour
 			}
 			else
 			{
-				base.GetComponent<PhotonView>().RPC("ShowBonuseParticleRPC", PhotonTargets.Others, (int)_type);
+				base.GetComponent<NetworkView>().RPC("ShowBonuseParticleRPC", RPCMode.Others, (int)_type);
 			}
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	public void ShowBonuseParticleRPC(int _type)
 	{
 		Debug.Log("ShowBonuseParticleRPC " + _type);
@@ -3778,8 +3776,8 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 	}
 
-	[PunRPC]
-	public void MinusLiveRPC(PhotonView idKiller, float minus, int _typeKills, int _typeWeapon, PhotonView idTurret, string weaponName)
+	[RPC]
+	public void MinusLiveRPC(NetworkViewID idKiller, float minus, int _typeKills, int _typeWeapon, NetworkViewID idTurret, string weaponName)
 	{
 		if (_typeKills == 2 && !isMine)
 		{
@@ -3834,7 +3832,7 @@ public sealed class Player_move_c : MonoBehaviour
 					{
 						placemarkerMoveC.isPlacemarker = false;
 					}
-					base.GetComponent<PhotonView>().RPC("Killed", PhotonTargets.All, idKiller, _typeKills, _typeWeapon, weaponName);
+					base.GetComponent<NetworkView>().RPC("Killed", RPCMode.All, idKiller, _typeKills, _typeWeapon, weaponName);
 				}
 				else if (!myKillAssistsLocal.Contains(idKiller))
 				{
@@ -3848,7 +3846,7 @@ public sealed class Player_move_c : MonoBehaviour
 					GameObject[] array2 = array;
 					foreach (GameObject gameObject in array2)
 					{
-						if (gameObject.GetComponent<PhotonView>() != null && gameObject.GetComponent<PhotonView>().viewID.Equals(idKiller))
+						if (gameObject.GetComponent<NetworkView>() != null && gameObject.GetComponent<NetworkView>().viewID.Equals(idKiller))
 						{
 							zero = gameObject.transform.position;
 							ShowDamageDirection(zero);
@@ -3862,7 +3860,7 @@ public sealed class Player_move_c : MonoBehaviour
 					GameObject[] array4 = array3;
 					foreach (GameObject gameObject2 in array4)
 					{
-						if (gameObject2.GetComponent<PhotonView>() != null && gameObject2.GetComponent<PhotonView>().viewID.Equals(idTurret))
+						if (gameObject2.GetComponent<NetworkView>() != null && gameObject2.GetComponent<NetworkView>().viewID.Equals(idTurret))
 						{
 							zero = gameObject2.transform.position;
 							ShowDamageDirection(zero);
@@ -3933,24 +3931,24 @@ public sealed class Player_move_c : MonoBehaviour
 		photonView.RPC("MinusLiveRPCPhoton", PhotonTargets.All, idKiller, minus, (int)_typeKills, _typeWeapon, idTurret, weaponName);
 	}
 
-	public void MinusLive(PhotonView idKiller, float minus, TypeKills _typeKills, int _typeWeapon, string nameWeapon = "")
+	public void MinusLive(NetworkViewID idKiller, float minus, TypeKills _typeKills, int _typeWeapon, string nameWeapon = "")
 	{
-		base.GetComponent<PhotonView>().RPC("MinusLiveRPC", PhotonTargets.All, idKiller, minus, (int)_typeKills, _typeWeapon, nameWeapon);
+		base.GetComponent<NetworkView>().RPC("MinusLiveRPC", RPCMode.All, idKiller, minus, (int)_typeKills, _typeWeapon, nameWeapon);
 	}
 
-	[PunRPC]
+	[RPC]
 	public void MinusLiveRPCWithTurretPhoton(int idKiller, float minus, int _typeKills, int idTurret)
 	{
 		MinusLiveRPCPhoton(idKiller, minus, _typeKills, 0, idTurret, null);
 	}
 
-	[PunRPC]
+	[RPC]
 	public void MinusLiveRPCWithTurretPhoton(int idKiller, float minus, int _typeKills, int idTurret, string weaponName)
 	{
 		MinusLiveRPCPhoton(idKiller, minus, _typeKills, 0, idTurret, null);
 	}
 
-	[PunRPC]
+	[RPC]
 	public void MinusLiveRPCPhoton(int idKiller, float minus, int _typeKills, int _typeWeapon, int idTurret, string weaponName)
 	{
 		if (_typeKills == 2 && !isMine)
@@ -4054,17 +4052,17 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 		else
 		{
-			base.GetComponent<PhotonView>().RPC("SynhHealthRPC", PhotonTargets.All, CurHealth + curArmor, curArmor, isUp);
+			base.GetComponent<NetworkView>().RPC("SynhHealthRPC", RPCMode.All, CurHealth + curArmor, curArmor, isUp);
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	private void SynhHealth(float _synhHealth, bool isUp)
 	{
 		SynhHealthRPC(_synhHealth, (!(_synhHealth > 9f)) ? 0f : (_synhHealth - 9f), isUp);
 	}
 
-	[PunRPC]
+	[RPC]
 	private void SynhHealthRPC(float _synhHealth, float _synchArmor, bool isUp)
 	{
 		if (isMine)
@@ -4302,7 +4300,7 @@ public sealed class Player_move_c : MonoBehaviour
 		return ws.animationObject.GetComponent<Animation>()["Shoot"].length * ws.meleeAttackTimeModifier;
 	}
 
-	[PunRPC]
+	[RPC]
 	private void fireFlash(bool isFlash, int numFlash)
 	{
 		WeaponSounds weaponSounds = (isMechActive ? mechWeaponSounds : ((!(myCurrentWeapon != null)) ? null : myCurrentWeapon.GetComponent<WeaponSounds>()));
@@ -4346,7 +4344,7 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	public void HoleRPC(bool _isBloodParticle, Vector3 _pos, Quaternion _rot)
 	{
 		if (_isBloodParticle)
@@ -4429,7 +4427,7 @@ public sealed class Player_move_c : MonoBehaviour
 			}
 			else
 			{
-				base.GetComponent<PhotonView>().RPC("fireFlash", PhotonTargets.Others, true, numFlash);
+				base.GetComponent<NetworkView>().RPC("fireFlash", RPCMode.Others, true, numFlash);
 			}
 		}
 	}
@@ -4495,7 +4493,7 @@ public sealed class Player_move_c : MonoBehaviour
 		return Math.Min(tier, roomTier);
 	}
 
-	[PunRPC]
+	[RPC]
 	public void AddFreezerRayWithLength(float len)
 	{
 		Transform gunFlash = GunFlash;
@@ -4533,13 +4531,13 @@ public sealed class Player_move_c : MonoBehaviour
 	{
 		for (float i = 0f; i < 1f; i += Time.deltaTime / length)
 		{
-			Color rgba = currentObject.GetComponent<Image>().color;
+			Color rgba = currentObject.GetComponent<GUITexture>().color;
 			rgba.a = Mathf.Lerp(start, end, i);
-			currentObject.GetComponent<Image>().color = rgba;
+			currentObject.GetComponent<GUITexture>().color = rgba;
 			yield return 0;
-			Color rgba_ = currentObject.GetComponent<Image>().color;
+			Color rgba_ = currentObject.GetComponent<GUITexture>().color;
 			rgba_.a = end;
-			currentObject.GetComponent<Image>().color = rgba_;
+			currentObject.GetComponent<GUITexture>().color = rgba_;
 		}
 	}
 
@@ -4552,13 +4550,13 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	private void ImKilled(Vector3 pos, Quaternion rot)
 	{
 		ImKilled(pos, rot, 0);
 	}
 
-	[PunRPC]
+	[RPC]
 	private void ImKilled(Vector3 pos, Quaternion rot, int _typeDead = 0)
 	{
 		if (!isStartAngel || Defs.isCOOP)
@@ -4579,9 +4577,9 @@ public sealed class Player_move_c : MonoBehaviour
 	private IEnumerator FlashWhenHit()
 	{
 		damageShown = true;
-		Color rgba = damage.GetComponent<Image>().color;
+		Color rgba = damage.GetComponent<GUITexture>().color;
 		rgba.a = 0f;
-		damage.GetComponent<Image>().color = rgba;
+		damage.GetComponent<GUITexture>().color = rgba;
 		float danageTime = 0.15f;
 		yield return StartCoroutine(Fade(0f, 1f, danageTime, damage));
 		yield return new WaitForSeconds(0.01f);
@@ -4592,9 +4590,9 @@ public sealed class Player_move_c : MonoBehaviour
 	private IEnumerator FlashWhenDead()
 	{
 		damageShown = true;
-		Color rgba = damage.GetComponent<Image>().color;
+		Color rgba = damage.GetComponent<GUITexture>().color;
 		rgba.a = 0f;
-		damage.GetComponent<Image>().color = rgba;
+		damage.GetComponent<GUITexture>().color = rgba;
 		float danageTime = 0.15f;
 		yield return StartCoroutine(Fade(0f, 1f, danageTime, damage));
 		while (isDeadFrame)
@@ -4976,7 +4974,7 @@ public sealed class Player_move_c : MonoBehaviour
 			{
 				if (myKillAssistsLocal.Count > 0)
 				{
-					base.GetComponent<PhotonView>().RPC("AddScoreKillAssisitLocal", PhotonTargets.Others, (myKillAssistsLocal.Count <= 0) ? default(PhotonView) : myKillAssistsLocal[0], (myKillAssistsLocal.Count <= 1) ? default(PhotonView) : myKillAssistsLocal[1], (myKillAssistsLocal.Count <= 2) ? default(PhotonView) : myKillAssistsLocal[2], (myKillAssistsLocal.Count <= 3) ? default(PhotonView) : myKillAssistsLocal[3], (myKillAssistsLocal.Count <= 4) ? default(PhotonView) : myKillAssistsLocal[4], (myKillAssistsLocal.Count <= 5) ? default(PhotonView) : myKillAssistsLocal[5], (myKillAssistsLocal.Count <= 6) ? default(PhotonView) : myKillAssistsLocal[6], (myKillAssistsLocal.Count <= 7) ? default(PhotonView) : myKillAssistsLocal[7]);
+					base.GetComponent<NetworkView>().RPC("AddScoreKillAssisitLocal", RPCMode.Others, (myKillAssistsLocal.Count <= 0) ? default(NetworkViewID) : myKillAssistsLocal[0], (myKillAssistsLocal.Count <= 1) ? default(NetworkViewID) : myKillAssistsLocal[1], (myKillAssistsLocal.Count <= 2) ? default(NetworkViewID) : myKillAssistsLocal[2], (myKillAssistsLocal.Count <= 3) ? default(NetworkViewID) : myKillAssistsLocal[3], (myKillAssistsLocal.Count <= 4) ? default(NetworkViewID) : myKillAssistsLocal[4], (myKillAssistsLocal.Count <= 5) ? default(NetworkViewID) : myKillAssistsLocal[5], (myKillAssistsLocal.Count <= 6) ? default(NetworkViewID) : myKillAssistsLocal[6], (myKillAssistsLocal.Count <= 7) ? default(NetworkViewID) : myKillAssistsLocal[7]);
 				}
 				myKillAssistsLocal.Clear();
 			}
@@ -5283,7 +5281,7 @@ public sealed class Player_move_c : MonoBehaviour
 		myPlayerTransform.position += Vector3.forward * 0.01f;
 	}
 
-	[PunRPC]
+	[RPC]
 	private void AddScoreKillAssisit(int assist1, int assist2, int assist3, int assist4, int assist5, int assist6, int assist7, int assist8)
 	{
 		if (!(WeaponManager.sharedManager.myPlayerMoveC == null) && (assist1 == WeaponManager.sharedManager.myPlayerMoveC.myPlayerID || assist2 == WeaponManager.sharedManager.myPlayerMoveC.myPlayerID || assist3 == WeaponManager.sharedManager.myPlayerMoveC.myPlayerID || assist4 == WeaponManager.sharedManager.myPlayerMoveC.myPlayerID || assist5 == WeaponManager.sharedManager.myPlayerMoveC.myPlayerID || assist6 == WeaponManager.sharedManager.myPlayerMoveC.myPlayerID || assist7 == WeaponManager.sharedManager.myPlayerMoveC.myPlayerID || assist8 == WeaponManager.sharedManager.myPlayerMoveC.myPlayerID))
@@ -5292,10 +5290,10 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 	}
 
-	[PunRPC]
-	private void AddScoreKillAssisitLocal(PhotonView assist1, PhotonView assist2, PhotonView assist3, PhotonView assist4, PhotonView assist5, PhotonView assist6, PhotonView assist7, PhotonView assist8)
+	[RPC]
+	private void AddScoreKillAssisitLocal(NetworkViewID assist1, NetworkViewID assist2, NetworkViewID assist3, NetworkViewID assist4, NetworkViewID assist5, NetworkViewID assist6, NetworkViewID assist7, NetworkViewID assist8)
 	{
-		if (!(WeaponManager.sharedManager.myPlayerMoveC == null) && (assist1.viewID.Equals(WeaponManager.sharedManager.myPlayerMoveC.myPlayerIDLocal) || assist2.viewID.Equals(WeaponManager.sharedManager.myPlayerMoveC.myPlayerIDLocal) || assist3.viewID.Equals(WeaponManager.sharedManager.myPlayerMoveC.myPlayerIDLocal) || assist4.viewID.Equals(WeaponManager.sharedManager.myPlayerMoveC.myPlayerIDLocal) || assist5.viewID.Equals(WeaponManager.sharedManager.myPlayerMoveC.myPlayerIDLocal) || assist6.viewID.Equals(WeaponManager.sharedManager.myPlayerMoveC.myPlayerIDLocal) || assist7.viewID.Equals(WeaponManager.sharedManager.myPlayerMoveC.myPlayerIDLocal) || assist8.viewID.Equals(WeaponManager.sharedManager.myPlayerMoveC.myPlayerIDLocal)))
+		if (!(WeaponManager.sharedManager.myPlayerMoveC == null) && (assist1.Equals(WeaponManager.sharedManager.myPlayerMoveC.myPlayerIDLocal) || assist2.Equals(WeaponManager.sharedManager.myPlayerMoveC.myPlayerIDLocal) || assist3.Equals(WeaponManager.sharedManager.myPlayerMoveC.myPlayerIDLocal) || assist4.Equals(WeaponManager.sharedManager.myPlayerMoveC.myPlayerIDLocal) || assist5.Equals(WeaponManager.sharedManager.myPlayerMoveC.myPlayerIDLocal) || assist6.Equals(WeaponManager.sharedManager.myPlayerMoveC.myPlayerIDLocal) || assist7.Equals(WeaponManager.sharedManager.myPlayerMoveC.myPlayerIDLocal) || assist8.Equals(WeaponManager.sharedManager.myPlayerMoveC.myPlayerIDLocal)))
 		{
 			WeaponManager.sharedManager.myPlayerMoveC.myScoreController.AddScoreOnEvent(PlayerEventScoreController.ScoreEvent.killAssist);
 		}
@@ -5336,12 +5334,12 @@ public sealed class Player_move_c : MonoBehaviour
 			{
 				if (PlayerPrefs.GetString("TypeGame").Equals("server"))
 				{
-					PhotonNetwork.Disconnect();
+					Network.Disconnect(200);
 					GameObject.FindGameObjectWithTag("NetworkTable").GetComponent<LANBroadcastService>().StopBroadCasting();
 				}
-				else if (PhotonNetwork.countOfPlayers == 1)
+				else if (Network.connections.Length == 1)
 				{
-					PhotonNetwork.Disconnect();
+					Network.CloseConnection(Network.connections[0], true);
 				}
 				if (_purchaseActivityIndicator == null)
 				{
@@ -5586,21 +5584,21 @@ public sealed class Player_move_c : MonoBehaviour
 		PurchaseSuccessful(receipt.sku);
 	}
 
-	private void OnPlayerConnected(PhotonPlayer player)
+	private void OnPlayerConnected(NetworkPlayer player)
 	{
 		if (isMine)
 		{
-			base.GetComponent<PhotonView>().RPC("SetInvisibleRPC", PhotonTargets.Others, isInvisible);
-			base.GetComponent<PhotonView>().RPC("CountKillsCommandSynch", PhotonTargets.Others, countKillsCommandBlue, countKillsCommandRed);
-			base.GetComponent<PhotonView>().RPC("SetWeaponRPC", PhotonTargets.Others, ((Weapon)_weaponManager.playerWeapons[_weaponManager.CurrentWeaponIndex]).weaponPrefab.name, ((Weapon)_weaponManager.playerWeapons[_weaponManager.CurrentWeaponIndex]).weaponPrefab.GetComponent<WeaponSounds>().alternativeName);
+			base.GetComponent<NetworkView>().RPC("SetInvisibleRPC", RPCMode.Others, isInvisible);
+			base.GetComponent<NetworkView>().RPC("CountKillsCommandSynch", RPCMode.Others, countKillsCommandBlue, countKillsCommandRed);
+			base.GetComponent<NetworkView>().RPC("SetWeaponRPC", RPCMode.Others, ((Weapon)_weaponManager.playerWeapons[_weaponManager.CurrentWeaponIndex]).weaponPrefab.name, ((Weapon)_weaponManager.playerWeapons[_weaponManager.CurrentWeaponIndex]).weaponPrefab.GetComponent<WeaponSounds>().alternativeName);
 			SendSynhHealth(false);
 			if (Defs.isJetpackEnabled)
 			{
-				base.GetComponent<PhotonView>().RPC("SetJetpackEnabledRPC", PhotonTargets.Others, Defs.isJetpackEnabled);
+				base.GetComponent<NetworkView>().RPC("SetJetpackEnabledRPC", RPCMode.Others, Defs.isJetpackEnabled);
 			}
 			if (isMechActive)
 			{
-				base.GetComponent<PhotonView>().RPC("ActivateMechRPC", PhotonTargets.Others, mechUpgrade);
+				base.GetComponent<NetworkView>().RPC("ActivateMechRPC", RPCMode.Others, mechUpgrade);
 			}
 		}
 	}
@@ -5646,7 +5644,7 @@ public sealed class Player_move_c : MonoBehaviour
 		{
 			if (!isInet)
 			{
-				base.GetComponent<PhotonView>().RPC("SetInvisibleRPC", PhotonTargets.All, _isInvisible);
+				base.GetComponent<NetworkView>().RPC("SetInvisibleRPC", RPCMode.All, _isInvisible);
 			}
 			else
 			{
@@ -5659,7 +5657,7 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	private void SetInvisibleRPC(bool _isInvisible)
 	{
 		if (Defs.isSoundFX && _isInvisible)
@@ -5786,7 +5784,7 @@ public sealed class Player_move_c : MonoBehaviour
 		{
 			if (!isInet)
 			{
-				base.GetComponent<PhotonView>().RPC("fireFlash", PhotonTargets.All, false, 0);
+				base.GetComponent<NetworkView>().RPC("fireFlash", RPCMode.All, false, 0);
 			}
 			else
 			{
@@ -5843,19 +5841,19 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	public void ActivateMechRPC(int num)
 	{
 		ActivateMech(num);
 	}
 
-	[PunRPC]
+	[RPC]
 	public void ActivateMechRPC()
 	{
 		ActivateMech(0);
 	}
 
-	[PunRPC]
+	[RPC]
 	public void DeactivateMechRPC()
 	{
 		DeactivateMech();
@@ -5929,7 +5927,7 @@ public sealed class Player_move_c : MonoBehaviour
 			}
 			else
 			{
-				base.GetComponent<PhotonView>().RPC("ActivateMechRPC", PhotonTargets.Others, num);
+				base.GetComponent<NetworkView>().RPC("ActivateMechRPC", RPCMode.Others, num);
 			}
 		}
 		for (int i = 0; i < mechWeaponSounds.gunFlashDouble.Length; i++)
@@ -5996,12 +5994,12 @@ public sealed class Player_move_c : MonoBehaviour
 			}
 			else
 			{
-				base.GetComponent<PhotonView>().RPC("DeactivateMechRPC", PhotonTargets.Others);
+				base.GetComponent<NetworkView>().RPC("DeactivateMechRPC", RPCMode.Others);
 			}
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	private void SyncTurretUpgrade(int turretUpgrade)
 	{
 		this.turretUpgrade = turretUpgrade;
@@ -6249,7 +6247,7 @@ public sealed class Player_move_c : MonoBehaviour
 						}
 						else
 						{
-							base.GetComponent<PhotonView>().RPC("AddFreezerRayWithLength", PhotonTargets.Others, magnitude);
+							base.GetComponent<NetworkView>().RPC("AddFreezerRayWithLength", RPCMode.Others, magnitude);
 						}
 					}
 				}
@@ -6320,7 +6318,7 @@ public sealed class Player_move_c : MonoBehaviour
 					{
 						if (!isInet)
 						{
-							base.GetComponent<PhotonView>().RPC("HoleRPC", PhotonTargets.Others, flag2, hitInfo2.point + hitInfo2.normal * 0.001f, Quaternion.FromToRotation(Vector3.up, hitInfo2.normal));
+							base.GetComponent<NetworkView>().RPC("HoleRPC", RPCMode.Others, flag2, hitInfo2.point + hitInfo2.normal * 0.001f, Quaternion.FromToRotation(Vector3.up, hitInfo2.normal));
 						}
 						else
 						{
@@ -6346,7 +6344,7 @@ public sealed class Player_move_c : MonoBehaviour
 		{
 			if (!isInet)
 			{
-				base.GetComponent<PhotonView>().RPC("fireFlash", PhotonTargets.Others, false, 0);
+				base.GetComponent<NetworkView>().RPC("fireFlash", RPCMode.Others, false, 0);
 			}
 			else
 			{
@@ -6454,7 +6452,7 @@ public sealed class Player_move_c : MonoBehaviour
 	public static Rocket CreateRocket(Vector3 pos, Quaternion rot, float customDamageAdd, bool isMulti, bool isInet, int tierOrRoomTier)
 	{
 		GameObject gameObject = null;
-		gameObject = ((!isMulti) ? (UnityEngine.Object.Instantiate(Resources.Load("Rocket") as GameObject, pos, rot) as GameObject) : (isInet ? PhotonNetwork.Instantiate("Rocket", pos, rot, 0) : ((GameObject)PhotonNetwork.Instantiate("Rocket", pos, rot, 0))));
+		gameObject = ((!isMulti) ? (UnityEngine.Object.Instantiate(Resources.Load("Rocket") as GameObject, pos, rot) as GameObject) : (isInet ? PhotonNetwork.Instantiate("Rocket", pos, rot, 0) : ((GameObject)Network.Instantiate(Resources.Load("Rocket") as GameObject, pos, rot, 0))));
 		Rocket component = gameObject.GetComponent<Rocket>();
 		component.rocketNum = WeaponManager.sharedManager.currentWeaponSounds.rocketNum;
 		component.weaponName = WeaponManager.sharedManager.currentWeaponSounds.gameObject.name.Replace("(Clone)", string.Empty);
@@ -6579,7 +6577,7 @@ public sealed class Player_move_c : MonoBehaviour
 					}
 					else
 					{
-						_turretScript.MinusLive(damage2, Convert.ToInt32(WeaponManager.sharedManager.myPlayer.GetComponent<PhotonView>().viewID));
+						_turretScript.MinusLive(damage2, Convert.ToInt32(WeaponManager.sharedManager.myPlayer.GetComponent<NetworkView>().viewID));
 					}
 				}
 			}
@@ -6593,7 +6591,7 @@ public sealed class Player_move_c : MonoBehaviour
 		foreach (GameObject plr in array)
 		{
 			bool isMinePlayers = false;
-			isMinePlayers = (isInet ? plr.GetComponent<PhotonView>().isMine : plr.GetComponent<PhotonView>().isMine);
+			isMinePlayers = (isInet ? plr.GetComponent<PhotonView>().isMine : plr.GetComponent<NetworkView>().isMine);
 			Player_move_c playerMoveC = plr.GetComponent<SkinName>().playerMoveC;
 			if (isCOOP || isMinePlayers || ((isCompany || Defs.isFlag || Defs.isCapturePoints) && ((!isCompany && !Defs.isFlag && !Defs.isCapturePoints) || playerMoveC.myCommand == _weaponManager.myTable.GetComponent<NetworkStartTable>().myCommand)))
 			{
@@ -6620,7 +6618,7 @@ public sealed class Player_move_c : MonoBehaviour
 				float damage3 = (dmMin3 + num * (1f - distanceSqr3 / radiusDamageSQR)) * (1f + koofDamageWeaponFromPotoins + EffectsController.DamageModifsByCats(_weaponManager.currentWeaponSounds.categoryNabor - 1));
 				if (!isInet)
 				{
-					playerMoveC.MinusLive(_weaponManager.myPlayer.GetComponent<PhotonView>().viewID, damage3, TypeKills.none, (int)_weaponManager.currentWeaponSounds.typeDead, _weaponManager.currentWeaponSounds.gameObject.name.Replace("(Clone)", string.Empty));
+					playerMoveC.MinusLive(_weaponManager.myPlayer.GetComponent<NetworkView>().viewID, damage3, TypeKills.none, (int)_weaponManager.currentWeaponSounds.typeDead, _weaponManager.currentWeaponSounds.gameObject.name.Replace("(Clone)", string.Empty));
 				}
 				else
 				{
@@ -6648,7 +6646,7 @@ public sealed class Player_move_c : MonoBehaviour
 				}
 				else
 				{
-					enemyToHit.GetComponent<TurretController>().MinusLive(dm, Convert.ToInt32(myPlayerTransform.GetComponent<PhotonView>().viewID));
+					enemyToHit.GetComponent<TurretController>().MinusLive(dm, Convert.ToInt32(myPlayerTransform.GetComponent<NetworkView>().viewID));
 				}
 			}
 			yield break;
@@ -6682,7 +6680,7 @@ public sealed class Player_move_c : MonoBehaviour
 			float dm2 = ((ExpController.Instance != null && ExpController.Instance.OurTier < _weaponManager.currentWeaponSounds.damageByTier.Length) ? _weaponManager.currentWeaponSounds.damageByTier[TierOrRoomTier(ExpController.Instance.OurTier)] : ((_weaponManager.currentWeaponSounds.damageByTier.Length <= 0) ? 0f : _weaponManager.currentWeaponSounds.damageByTier[0]));
 			if (!isInet)
 			{
-				enemyToHit.GetComponent<SkinName>().playerMoveC.MinusLive(myPlayerTransform.GetComponent<PhotonView>().viewID, dm2 * koofMinus * (1f + koofDamageWeaponFromPotoins + EffectsController.DamageModifsByCats(_weaponManager.currentWeaponSounds.categoryNabor - 1)), isHeadShot ? TypeKills.headshot : TypeKills.none, (int)((!isMechActive) ? _weaponManager.currentWeaponSounds.typeDead : WeaponSounds.TypeDead.angel), _weaponManager.currentWeaponSounds.gameObject.name.Replace("(Clone)", string.Empty));
+				enemyToHit.GetComponent<SkinName>().playerMoveC.MinusLive(myPlayerTransform.GetComponent<NetworkView>().viewID, dm2 * koofMinus * (1f + koofDamageWeaponFromPotoins + EffectsController.DamageModifsByCats(_weaponManager.currentWeaponSounds.categoryNabor - 1)), isHeadShot ? TypeKills.headshot : TypeKills.none, (int)((!isMechActive) ? _weaponManager.currentWeaponSounds.typeDead : WeaponSounds.TypeDead.angel), _weaponManager.currentWeaponSounds.gameObject.name.Replace("(Clone)", string.Empty));
 			}
 			else
 			{
@@ -6732,7 +6730,7 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	public void SlowdownRPC(float coef, float time)
 	{
 		if (isMine || !isMulti)
@@ -6778,7 +6776,7 @@ public sealed class Player_move_c : MonoBehaviour
 			}
 			else
 			{
-				_turret.GetComponent<TurretController>().MinusLive(num, Convert.ToInt32(myPlayerTransform.GetComponent<PhotonView>().viewID));
+				_turret.GetComponent<TurretController>().MinusLive(num, Convert.ToInt32(myPlayerTransform.GetComponent<NetworkView>().viewID));
 			}
 		}
 	}

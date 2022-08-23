@@ -16,22 +16,22 @@ public class Instantiate : MonoBehaviour
 
 	public virtual void OnNetworkLoadedLevel()
 	{
-		PhotonNetwork.Instantiate("SpaceCraft", transform.position, transform.rotation, 0);
+		Network.Instantiate(SpaceCraft, transform.position, transform.rotation, 0);
 		Debug.Log("Network.Instantiate");
 	}
 
-	public virtual void OnPlayerDisconnected(PhotonPlayer player)
+	public virtual void OnPlayerDisconnected(NetworkPlayer player)
 	{
-		PhotonNetwork.RemoveRPCs(player);
-		PhotonNetwork.DestroyPlayerObjects(player);
+		Network.RemoveRPCs(player, 0);
+		Network.DestroyPlayerObjects(player);
 	}
 
-	public virtual void OnNetworkInstantiate(PhotonMessageInfo info)
+	public virtual void OnNetworkInstantiate(NetworkMessageInfo info)
 	{
-		PhotonView[] array = (PhotonView[])GetComponents(typeof(PhotonView));
+		NetworkView[] array = (NetworkView[])GetComponents(typeof(NetworkView));
 		Debug.Log("New prefab network instantiated with views - ");
 		int i = 0;
-		PhotonView[] array2 = array;
+		NetworkView[] array2 = array;
 		for (int length = array2.Length; i < length; i++)
 		{
 			Debug.Log("- " + array2[i].viewID);

@@ -1,7 +1,6 @@
 using ExitGames.Client.Photon;
 using UnityEngine;
 
-
 public class CapturePointController : MonoBehaviour
 {
 	public static CapturePointController sharedController;
@@ -133,7 +132,7 @@ public class CapturePointController : MonoBehaviour
 		photonView.RPC("SynchScoresCommandsNewPlayerRPC", PhotonTargets.Others, player.ID, PhotonNetwork.isMasterClient, scoreBlue, scoreRed);
 	}
 
-	[PunRPC]
+	[RPC]
 	public void SynchScoresCommandsNewPlayerRPC(int _viewId, bool isMaster, float _scoreBlue, float _scoreRed)
 	{
 		if (!isStartUpdateFromMasterClient && PhotonNetwork.player.ID == _viewId)
@@ -143,7 +142,7 @@ public class CapturePointController : MonoBehaviour
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	public void SynchScoresCommandsRPC(float _scoreBlue, float _scoreRed)
 	{
 		scoreBlue = _scoreBlue;

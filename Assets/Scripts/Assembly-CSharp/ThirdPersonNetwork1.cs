@@ -80,7 +80,7 @@ public class ThirdPersonNetwork1 : Photon.MonoBehaviour
 
 	private void Start()
 	{
-		if ((Defs.isInet && base.photonView.isMine) || (!Defs.isInet && GetComponent<PhotonView>().isMine))
+		if ((Defs.isInet && base.photonView.isMine) || (!Defs.isInet && GetComponent<NetworkView>().isMine))
 		{
 			isMine = true;
 		}
@@ -129,7 +129,7 @@ public class ThirdPersonNetwork1 : Photon.MonoBehaviour
 		}
 	}
 
-	private void OnSerializeNetworkView(PhotonStream stream, PhotonMessageInfo info)
+	private void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
 	{
 		if (stream.isWriting)
 		{
@@ -139,7 +139,7 @@ public class ThirdPersonNetwork1 : Photon.MonoBehaviour
 			stream.Serialize(ref value2);
 			iskilled = playerMovec.isKilled;
 			stream.Serialize(ref iskilled);
-			float value3 = (float)PhotonNetwork.time;
+			float value3 = (float)Network.time;
 			stream.Serialize(ref value3);
 			int value4 = myAnim;
 			stream.Serialize(ref value4);

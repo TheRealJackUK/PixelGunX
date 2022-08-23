@@ -32,7 +32,7 @@ public class PlayerScoreController : MonoBehaviour
 
 	private void Start()
 	{
-		if (Defs.isMulti && ((Defs.isInet && !GetComponent<PhotonView>().isMine) || (!Defs.isInet && !base.GetComponent<PhotonView>().isMine)))
+		if (Defs.isMulti && ((Defs.isInet && !GetComponent<PhotonView>().isMine) || (!Defs.isInet && !base.GetComponent<NetworkView>().isMine)))
 		{
 			base.enabled = false;
 			return;

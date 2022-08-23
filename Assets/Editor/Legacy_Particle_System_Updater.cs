@@ -33,7 +33,7 @@
  *
  * v1.6
  * Fixed random force calculation when linear force was not zero.
- 
+ */
 
 #pragma warning disable 618
 
@@ -580,4 +580,3 @@ public class LegacyParticleUpdater : ScriptableWizard
 #endif
 
 #pragma warning restore 618
-*/

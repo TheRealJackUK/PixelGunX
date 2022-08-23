@@ -1,5 +1,4 @@
 using ExitGames.Client.Photon;
-
 using Photon;
 using UnityEngine;
 
@@ -131,7 +130,7 @@ internal sealed class HungerGameController : Photon.MonoBehaviour
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	private void Draw()
 	{
 		Debug.Log("Draw!!!");
@@ -142,37 +141,37 @@ internal sealed class HungerGameController : Photon.MonoBehaviour
 		}
 	}
 
-	[PunRPC]
+	[RPC]
 	private void StartTimer(bool _isStartTimer)
 	{
 		isStartTimer = _isStartTimer;
 	}
 
-	[PunRPC]
+	[RPC]
 	private void SynchStartTimer(float _startTimer)
 	{
 		startTimer = _startTimer;
 	}
 
-	[PunRPC]
+	[RPC]
 	private void SynchTimerGo(float _goTimer)
 	{
 		goTimer = _goTimer;
 	}
 
-	[PunRPC]
+	[RPC]
 	private void SynchGameTimer(float _gameTimer)
 	{
 		gameTimer = _gameTimer;
 	}
 
-	[PunRPC]
+	[RPC]
 	private void StartGame()
 	{
 		isStartGame = true;
 	}
 
-	[PunRPC]
+	[RPC]
 	private void Go()
 	{
 		isGo = true;

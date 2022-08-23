@@ -138,7 +138,7 @@ public sealed class WeaponManager : MonoBehaviour
 
 	public List<string> shownWeapons = new List<string>();
 
-	//public  hostDataServer;
+	public HostData hostDataServer;
 
 	public string ServerIp;
 

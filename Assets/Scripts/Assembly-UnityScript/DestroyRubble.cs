@@ -42,7 +42,7 @@ public class DestroyRubble : MonoBehaviour
 
 	public float maxTime;
 
-	public ParticleSystem[] particleSystem;
+	public ParticleEmitter[] particleEmitters;
 
 	public float time;
 

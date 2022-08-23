@@ -1,4 +1,4 @@
-/*using UnityEngine;
+using UnityEngine;
 
 public class EveryplayFaceCamTest : MonoBehaviour
 {
@@ -64,4 +64,3 @@ public class EveryplayFaceCamTest : MonoBehaviour
 		}
 	}
 }
-*/
