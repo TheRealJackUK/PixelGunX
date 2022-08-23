@@ -23,9 +23,9 @@ public class TwitterUIManager : MonoBehaviourGUI
 		}
 		if (GUILayout.Button("Post Update with Image"))
 		{
-			string path = Application.persistentDataPath + "/" + FacebookUIManager.screenshotFilename;
-			byte[] image = File.ReadAllBytes(path);
-			TwitterAndroid.postStatusUpdate("test update from Unity!", image);
+			//string path = Application.persistentDataPath + "/" + FacebookUIManager.screenshotFilename;
+			//byte[] image = File.ReadAllBytes(path);
+			//TwitterAndroid.postStatusUpdate("test update from Unity!", image);
 		}
 		endColumn(true);
 		if (GUILayout.Button("Logout"))

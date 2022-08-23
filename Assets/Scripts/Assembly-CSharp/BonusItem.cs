@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 public sealed class BonusItem : MonoBehaviour
 {
 	private Player_move_c playerMoveC;
@@ -59,7 +60,7 @@ public sealed class BonusItem : MonoBehaviour
 		photonView.RPC("SynchTimeKillBonusRPC", PhotonTargets.AllBuffered, _time);
 	}
 
-	[RPC]
+	[PunRPC]
 	public void SynchTimeKillBonusRPC(double _time)
 	{
 		isTimeBonus = true;
@@ -69,7 +70,7 @@ public sealed class BonusItem : MonoBehaviour
 		}
 		else
 		{
-			timeKill = Network.time + 15.0;
+			timeKill = PhotonNetwork.time + 15.0;
 		}
 		base.gameObject.tag = "TimeBonus";
 	}
@@ -87,7 +88,7 @@ public sealed class BonusItem : MonoBehaviour
 			oldIsMaster = PhotonNetwork.isMasterClient;
 		}
 		bool flag = false;
-		if ((isTimeBonus && Defs.isInet && PhotonNetwork.time > timeKill && PhotonNetwork.isMasterClient && !isKilled) || (isTimeBonus && !Defs.isInet && Network.time > timeKill))
+		if ((isTimeBonus && Defs.isInet && PhotonNetwork.time > timeKill && PhotonNetwork.isMasterClient && !isKilled) || (isTimeBonus && !Defs.isInet && PhotonNetwork.time > timeKill))
 		{
 			flag = true;
 		}
@@ -190,7 +191,7 @@ public sealed class BonusItem : MonoBehaviour
 		}
 	}
 
-	[RPC]
+	[PunRPC]
 	public void DestroyBonusRPC()
 	{
 		isKilled = true;

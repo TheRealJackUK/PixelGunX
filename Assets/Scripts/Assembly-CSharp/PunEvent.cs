@@ -1,4 +1,4 @@
-internal class PunEvent
+/*internal class PunEvent
 {
 	public const byte RPC = 200;
 
@@ -24,3 +24,4 @@ internal class PunEvent
 
 	public const byte VacantViewIds = 211;
 }
+*/

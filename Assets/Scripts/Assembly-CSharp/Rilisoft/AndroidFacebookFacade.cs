@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Prime31;
 
-namespace Rilisoft
+/*namespace Rilisoft
 {
 	internal sealed class AndroidFacebookFacade : FacebookFacade
 	{
@@ -12,12 +12,12 @@ namespace Rilisoft
 
 		public override List<object> GetSessionPermissions()
 		{
-			return FacebookAndroid.getSessionPermissions();
+			//return FacebookAndroid.getSessionPermissions();
 		}
 
 		public override void Init()
 		{
-			FacebookAndroid.init(true);
+			//FacebookAndroid.init(true);
 		}
 
 		public override bool IsSessionValid()
@@ -41,3 +41,4 @@ namespace Rilisoft
 		}
 	}
 }
+*/

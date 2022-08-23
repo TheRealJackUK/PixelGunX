@@ -1,6 +1,7 @@
 using Photon;
 using UnityEngine;
 
+
 [RequireComponent(typeof(PhotonView))]
 public class OnAwakeUsePhotonView : Photon.MonoBehaviour
 {
@@ -20,13 +21,13 @@ public class OnAwakeUsePhotonView : Photon.MonoBehaviour
 		}
 	}
 
-	[RPC]
+	[PunRPC]
 	public void OnAwakeRPC()
 	{
 		Debug.Log("RPC: 'OnAwakeRPC' PhotonView: " + base.photonView);
 	}
 
-	[RPC]
+	[PunRPC]
 	public void OnAwakeRPC(byte myParameter)
 	{
 		Debug.Log("RPC: 'OnAwakeRPC' Parameter: " + myParameter + " PhotonView: " + base.photonView);

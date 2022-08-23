@@ -26,7 +26,7 @@ public sealed class NetworkInterpolatedTransform : MonoBehaviour
 		myTransform = base.transform;
 	}
 
-	private void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
+	private void OnSerializeNetworkView(PhotonStream stream, PhotonMessageInfo info)
 	{
 		if (stream.isWriting)
 		{
@@ -58,7 +58,7 @@ public sealed class NetworkInterpolatedTransform : MonoBehaviour
 
 	private void Update()
 	{
-		if (Defs.isInet || base.GetComponent<NetworkView>().isMine)
+		if (Defs.isInet || base.GetComponent<PhotonView>().isMine)
 		{
 			return;
 		}

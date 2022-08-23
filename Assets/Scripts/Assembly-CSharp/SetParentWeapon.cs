@@ -24,7 +24,7 @@ internal sealed class SetParentWeapon : MonoBehaviour
 			photonView = PhotonView.Get(this);
 			if (!isInet)
 			{
-				isMine = base.GetComponent<NetworkView>().isMine;
+				isMine = base.GetComponent<PhotonView>().isMine;
 			}
 			else
 			{
@@ -38,7 +38,7 @@ internal sealed class SetParentWeapon : MonoBehaviour
 	private void SetParent()
 	{
 		int num = -1;
-		NetworkPlayer owner = base.GetComponent<NetworkView>().owner;
+		PhotonPlayer owner = base.GetComponent<PhotonView>().owner;
 		if (isInet && (bool)photonView && (bool)photonView && photonView.owner != null)
 		{
 			num = photonView.owner.ID;
@@ -47,7 +47,7 @@ internal sealed class SetParentWeapon : MonoBehaviour
 		GameObject[] array2 = array;
 		foreach (GameObject gameObject in array2)
 		{
-			if ((!isInet || !gameObject.GetComponent<PhotonView>() || gameObject.GetComponent<PhotonView>().owner == null || gameObject.GetComponent<PhotonView>().owner.ID != num) && (isInet || !gameObject.GetComponent<NetworkView>().owner.Equals(owner)))
+			if ((!isInet || !gameObject.GetComponent<PhotonView>() || gameObject.GetComponent<PhotonView>().owner == null || gameObject.GetComponent<PhotonView>().owner.ID != num) && (isInet || !gameObject.GetComponent<PhotonView>().owner.Equals(owner)))
 			{
 				continue;
 			}

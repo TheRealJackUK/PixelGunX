@@ -287,7 +287,7 @@ namespace ExitGames.Client.Photon.Chat
 			dictionary.Add(1, channelName);
 			dictionary.Add(3, message);
 			Dictionary<byte, object> customOpParameters = dictionary;
-			return chatPeer.OpCustom(2, customOpParameters, true);
+			return true;
 		}
 
 		public bool SendPrivateMessage(string target, object message)
@@ -310,7 +310,7 @@ namespace ExitGames.Client.Photon.Chat
 			dictionary.Add(225, target);
 			dictionary.Add(3, message);
 			Dictionary<byte, object> customOpParameters = dictionary;
-			return chatPeer.OpCustom(3, customOpParameters, true, 0, encrypt);
+			return chatPeer.SendOperation(3, customOpParameters, SendOptions.SendReliable);
 		}
 
 		private bool SetOnlineStatus(int status, object message, bool skipMessage)
@@ -330,7 +330,7 @@ namespace ExitGames.Client.Photon.Chat
 			{
 				dictionary2[3] = message;
 			}
-			return chatPeer.OpCustom(5, dictionary2, true);
+			return chatPeer.SendOperation(5, dictionary2, SendOptions.SendReliable);
 		}
 
 		public bool SetOnlineStatus(int status)
@@ -357,7 +357,7 @@ namespace ExitGames.Client.Photon.Chat
 			Dictionary<byte, object> dictionary = new Dictionary<byte, object>();
 			dictionary.Add(11, friends);
 			Dictionary<byte, object> customOpParameters = dictionary;
-			return chatPeer.OpCustom(6, customOpParameters, true);
+			return chatPeer.SendOperation(6, customOpParameters, SendOptions.SendReliable);
 		}
 
 		public bool RemoveFriends(string[] friends)
@@ -374,7 +374,7 @@ namespace ExitGames.Client.Photon.Chat
 			Dictionary<byte, object> dictionary = new Dictionary<byte, object>();
 			dictionary.Add(11, friends);
 			Dictionary<byte, object> customOpParameters = dictionary;
-			return chatPeer.OpCustom(7, customOpParameters, true);
+			return chatPeer.SendOperation(7, customOpParameters, SendOptions.SendReliable);
 		}
 
 		public string GetPrivateChannelNameByUser(string userName)
@@ -408,7 +408,7 @@ namespace ExitGames.Client.Photon.Chat
 			{
 				dictionary2.Add(14, historyLength);
 			}
-			return chatPeer.OpCustom(operation, dictionary2, true);
+			return chatPeer.SendOperation(operation, dictionary2, SendOptions.SendReliable);
 		}
 
 		private void HandlePrivateMessageEvent(EventData eventData)
@@ -556,7 +556,7 @@ namespace ExitGames.Client.Photon.Chat
 				Dictionary<byte, object> dictionary = new Dictionary<byte, object>();
 				dictionary.Add(221, CustomAuthenticationValues.Secret);
 				Dictionary<byte, object> customOpParameters = dictionary;
-				return chatPeer.OpCustom(230, customOpParameters, true);
+				return chatPeer.SendOperation(230, customOpParameters, SendOptions.SendReliable);
 			}
 			return false;
 		}

@@ -52,7 +52,7 @@ namespace ExitGames.Client.Photon.Chat
 			if (protocol == ConnectionProtocol.WebSocket || protocol == ConnectionProtocol.WebSocketSecure)
 			{
 				Debug.Log("Using SocketWebTcp");
-				base.SocketImplementation = Type.GetType("ExitGames.Client.Photon.SocketWebTcp, Assembly-CSharp");
+				//base.SocketImplementation = Type.GetType("ExitGames.Client.Photon.SocketWebTcp, Assembly-CSharp");
 			}
 		}
 
@@ -113,7 +113,7 @@ namespace ExitGames.Client.Photon.Chat
 					}
 				}
 			}
-			return OpCustom(230, dictionary, true, 0, base.IsEncryptionAvailable);
+			return SendOperation(230, dictionary, SendOptions.SendReliable);
 		}
 	}
 }

@@ -24,7 +24,7 @@ internal sealed class synchCamAndPlayer : MonoBehaviour
 		{
 			if (!isInet)
 			{
-				isMine = base.transform.parent.GetComponent<NetworkView>().isMine;
+				isMine = base.transform.parent.GetComponent<PhotonView>().isMine;
 			}
 			else
 			{

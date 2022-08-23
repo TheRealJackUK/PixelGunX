@@ -825,9 +825,6 @@ public sealed class FriendsController : MonoBehaviour
 			form.AddField("uniq_id", sharedController.id);
 			form.AddField("auth", Hash("start_check"));
 			form.AddField("abuse_method", Storager.getInt("AbuseMethod", false));
-			if (Launcher.PackageInfo.HasValue)
-			{
-			}
 			WWW download = new WWW(actionAddress, form);
 			yield return download;
 			response = URLs.Sanitize(download);

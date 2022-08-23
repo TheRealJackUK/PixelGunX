@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
+
 public sealed class ZombiUpravlenie : MonoBehaviour
 {
 	public delegate void DelayedCallback();
@@ -111,19 +112,19 @@ public sealed class ZombiUpravlenie : MonoBehaviour
 		}
 	}
 
-	[RPC]
+	[PunRPC]
 	private void setHealthRPC(float _health)
 	{
 		health = _health;
 	}
 
-	[RPC]
+	[PunRPC]
 	private void flashRPC()
 	{
 		StartCoroutine(Flash());
 	}
 
-	[RPC]
+	[PunRPC]
 	public void SlowdownRPC(float coef)
 	{
 	}
@@ -205,7 +206,7 @@ public sealed class ZombiUpravlenie : MonoBehaviour
 		photonView.RPC("setIdRPC", PhotonTargets.All, _id);
 	}
 
-	[RPC]
+	[PunRPC]
 	public void setIdRPC(int _id)
 	{
 		GetComponent<PhotonView>().viewID = _id;
@@ -343,7 +344,7 @@ public sealed class ZombiUpravlenie : MonoBehaviour
 		}
 	}
 
-	[RPC]
+	[PunRPC]
 	private void Death()
 	{
 		if (!Defs.isCOOP)
@@ -434,7 +435,7 @@ public sealed class ZombiUpravlenie : MonoBehaviour
 		tekAnim = 2;
 	}
 
-	[RPC]
+	[PunRPC]
 	public void PlayZombieRunRPC()
 	{
 		if ((bool)_modelChild.GetComponent<Animation>()[zombieWalkAnim])
@@ -444,7 +445,7 @@ public sealed class ZombiUpravlenie : MonoBehaviour
 		tekAnim = 1;
 	}
 
-	[RPC]
+	[PunRPC]
 	public void PlayZombieAttackRPC()
 	{
 		if ((bool)_modelChild.GetComponent<Animation>()[attackAnim])

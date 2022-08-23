@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public sealed class ZombiManager : MonoBehaviour
 {
 	public static ZombiManager sharedManager;
@@ -68,7 +69,7 @@ public sealed class ZombiManager : MonoBehaviour
 		}
 	}
 
-	[RPC]
+	[PunRPC]
 	private void synchTime(float _time)
 	{
 	}
@@ -146,7 +147,7 @@ public sealed class ZombiManager : MonoBehaviour
 		}
 	}
 
-	[RPC]
+	[PunRPC]
 	private void win(string _winer)
 	{
 		WeaponManager.sharedManager.myNetworkStartTable.win(_winer);
@@ -188,7 +189,7 @@ public sealed class ZombiManager : MonoBehaviour
 		PhotonNetwork.InstantiateSceneObject(zombiePrefabs[index], position, Quaternion.identity, 0, null);
 	}
 
-	[RPC]
+	[PunRPC]
 	private void WinID(int winID)
 	{
 		WeaponManager weaponManager = WeaponManager.sharedManager;

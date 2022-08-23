@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 internal sealed class ObjectPictFlag : MonoBehaviour
 {
@@ -19,7 +20,7 @@ internal sealed class ObjectPictFlag : MonoBehaviour
 
 	public void SetTexture(Texture _texture)
 	{
-		GetComponent<GUITexture>().texture = _texture;
+		//GetComponent<Image>().text = _texture;
 	}
 
 	private void Update()

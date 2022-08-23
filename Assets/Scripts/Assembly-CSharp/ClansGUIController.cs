@@ -609,7 +609,7 @@ public sealed class ClansGUIController : MonoBehaviour, IFriendsGUIController
 		Action<string> backHandler = null;
 		backHandler = delegate
 		{
-			MenuBackgroundMusic.sharedMusic.StopCustomMusicFrom(SkinEditorController.sharedController.gameObject);
+			MenuBackgroundMusic.sharedMusic.StSendOperationMusicFrom(SkinEditorController.sharedController.gameObject);
 			SkinEditorController.ExitFromSkinEditor -= backHandler;
 			logo.mainTexture = EditorTextures.CreateCopyTexture(SkinsController.logoClanUserTexture);
 			if (InClan)
