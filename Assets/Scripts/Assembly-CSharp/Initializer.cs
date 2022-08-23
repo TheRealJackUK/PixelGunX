@@ -386,19 +386,11 @@ public sealed class Initializer : MonoBehaviour
 		else
 		{
 			tc = UnityEngine.Object.Instantiate(tempCam, Vector3.zero, Quaternion.identity) as GameObject;
-			/*if (!Defs.isInet)
+			if (!Defs.isInet)
 			{
-				if (PlayerPrefs.GetString("TypeGame").Equals("client"))
-				{
-					bool flag2 = (PhotonNetwork.use = !Network.HavePublicAddress());
-					UnityEngine.Debug.Log(Defs.ServerIp + " " + Network.Connect(Defs.ServerIp, 25002));
-				}
-				else
-				{
-					_weaponManager.myTable = (GameObject)Network.Instantiate(networkTablePref, base.transform.position, base.transform.rotation, 0);
-					_weaponManager.myNetworkStartTable = _weaponManager.myTable.GetComponent<NetworkStartTable>();
-				}
-			}*/
+				_weaponManager.myTable = (GameObject)PhotonNetwork.Instantiate("NetworkTable", base.transform.position, base.transform.rotation, 0);
+				_weaponManager.myNetworkStartTable = _weaponManager.myTable.GetComponent<NetworkStartTable>();
+			}
 				_weaponManager.myTable = PhotonNetwork.Instantiate("NetworkTable", base.transform.position, base.transform.rotation, 0);
 				if (_weaponManager.myTable != null)
 				{
