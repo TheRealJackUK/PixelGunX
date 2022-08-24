@@ -1792,7 +1792,7 @@ public sealed class WeaponManager : MonoBehaviour
 		List<GameObject> wp = new List<GameObject>(1000);
 		List<GameObject> innerP = new List<GameObject>(1000);
 		int yieldCount = 0;
-		for (int i = 0; i < Resources.LoadAll<WeaponSounds>("Weapons").ToArray().Length; i++)
+		for (int i = 0; i != 1000; i++)
 		{
 			GameObject w = Resources.Load<GameObject>("Weapons/Weapon" + i);
 			GameObject iw = (Device.IsLoweMemoryDevice ? null : ((!(w != null)) ? null : InnerPrefabForWeapon(w)));
