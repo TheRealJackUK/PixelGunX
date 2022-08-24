@@ -92,7 +92,7 @@ public sealed class Rocket : MonoBehaviour
 		{
 			if (!isInet)
 			{
-				isMine = base.GetComponent<NetworkView>().isMine;
+				isMine = base.GetComponent<PhotonView>().isMine;
 			}
 			else
 			{
@@ -108,7 +108,7 @@ public sealed class Rocket : MonoBehaviour
 		{
 			if (!isInet)
 			{
-				base.GetComponent<NetworkView>().RPC("SetRocketActive", RPCMode.AllBuffered, rocketNum, radiusImpulse);
+				base.GetComponent<PhotonView>().RPC("SetRocketActive", PhotonTargets.AllBuffered, rocketNum, radiusImpulse);
 			}
 			else
 			{
@@ -183,18 +183,18 @@ public sealed class Rocket : MonoBehaviour
 		rockets[10].transform.localPosition = Vector3.zero;
 	}
 
-	public void SendNetworkViewMyPlayer(NetworkViewID myId)
+	public void SendPhotonViewMyPlayer(PhotonView myId)
 	{
-		base.GetComponent<NetworkView>().RPC("SendNetworkViewMyPlayerRPC", RPCMode.AllBuffered, myId);
+		base.GetComponent<PhotonView>().RPC("SendPhotonViewMyPlayerRPC", PhotonTargets.AllBuffered, myId);
 	}
 
-	[RPC]
-	public void SendNetworkViewMyPlayerRPC(NetworkViewID myId)
+	[PunRPC]
+	public void SendPhotonViewMyPlayerRPC(PhotonView myId)
 	{
 		GameObject[] array = GameObject.FindGameObjectsWithTag("Player");
 		for (int i = 0; i < array.Length; i++)
 		{
-			if (myId.Equals(array[i].GetComponent<NetworkView>().viewID))
+			if (myId.Equals(array[i].GetComponent<PhotonView>().viewID))
 			{
 				myPlayer = array[i];
 				break;
@@ -208,7 +208,7 @@ public sealed class Rocket : MonoBehaviour
 		{
 			if (!isInet)
 			{
-				base.GetComponent<NetworkView>().RPC("StartRocketRPC", RPCMode.AllBuffered);
+				base.GetComponent<PhotonView>().RPC("StartRocketRPC", PhotonTargets.AllBuffered);
 			}
 			else
 			{
@@ -222,7 +222,7 @@ public sealed class Rocket : MonoBehaviour
 		base.transform.GetComponent<Rigidbody>().isKinematic = false;
 	}
 
-	[RPC]
+	[PunRPC]
 	public void StartRocketRPC()
 	{
 		if (isMulti && isInet && photonView != null)
@@ -231,7 +231,7 @@ public sealed class Rocket : MonoBehaviour
 		}
 		if (isMulti && !isInet)
 		{
-			base.GetComponent<NetworkView>().stateSynchronization = NetworkStateSynchronization.Unreliable;
+			base.GetComponent<PhotonView>().synchronization = ViewSynchronization.Unreliable;
 		}
 		base.transform.parent = null;
 		Player_move_c.SetLayerRecursively(base.gameObject, LayerMask.NameToLayer("Default"));
@@ -251,8 +251,8 @@ public sealed class Rocket : MonoBehaviour
 		}
 		else if (!isInet)
 		{
-			Network.RemoveRPCs(base.GetComponent<NetworkView>().viewID);
-			Network.Destroy(base.gameObject);
+			PhotonNetwork.RemoveRPCs(base.GetComponent<PhotonView>());
+			PhotonNetwork.Destroy(base.gameObject);
 		}
 		else
 		{
@@ -260,7 +260,7 @@ public sealed class Rocket : MonoBehaviour
 		}
 	}
 
-	[RPC]
+	[PunRPC]
 	public void SetRocketActive(int rn, float _radiusImpulse)
 	{
 		radiusImpulse = _radiusImpulse;
@@ -324,7 +324,7 @@ public sealed class Rocket : MonoBehaviour
 		{
 			if (!isInet)
 			{
-				base.GetComponent<NetworkView>().RPC("Collide", RPCMode.All, weaponName);
+				base.GetComponent<PhotonView>().RPC("Collide", PhotonTargets.All, weaponName);
 			}
 			else if (photonView != null)
 			{
@@ -341,7 +341,7 @@ public sealed class Rocket : MonoBehaviour
 		}
 	}
 
-	[RPC]
+	[PunRPC]
 	private void Collide(string _weaponName)
 	{
 		BazookaExplosion(_weaponName);
@@ -429,7 +429,7 @@ public sealed class Rocket : MonoBehaviour
 				}
 				else
 				{
-					component.MinusLive(num2, isExplosion, Convert.ToInt32(WeaponManager.sharedManager.myPlayer.GetComponent<NetworkView>().viewID));
+					component.MinusLive(num2, isExplosion, Convert.ToInt32(WeaponManager.sharedManager.myPlayer.GetComponent<PhotonView>().viewID));
 				}
 			}
 		}
@@ -442,7 +442,7 @@ public sealed class Rocket : MonoBehaviour
 		foreach (GameObject gameObject in array4)
 		{
 			bool flag3 = false;
-			flag3 = (isInet ? gameObject.GetComponent<PhotonView>().isMine : gameObject.GetComponent<NetworkView>().isMine);
+			flag3 = (isInet ? gameObject.GetComponent<PhotonView>().isMine : gameObject.GetComponent<PhotonView>().isMine);
 			Player_move_c playerMoveC = gameObject.GetComponent<SkinName>().playerMoveC;
 			if ((!isCOOP || !flag3) && (isCOOP || (!flag3 && (isCompany || Defs.isFlag || Defs.isCapturePoints) && ((!isCompany && !Defs.isFlag && !Defs.isCapturePoints) || playerMoveC.myCommand == _weaponManager.myTable.GetComponent<NetworkStartTable>().myCommand))))
 			{
@@ -518,12 +518,12 @@ public sealed class Rocket : MonoBehaviour
 				}
 				else
 				{
-					playerMoveC.GetComponent<NetworkView>().RPC("SlowdownRPC", RPCMode.All, slowdownCoeff, slowdownTime);
+					playerMoveC.GetComponent<PhotonView>().RPC("SlowdownRPC", PhotonTargets.All, slowdownCoeff, slowdownTime);
 				}
 			}
 			if (!isInet)
 			{
-				playerMoveC.MinusLive(_weaponManager.myPlayer.GetComponent<NetworkView>().viewID, num6, typeKills, typeWeapon, (rocketNum != 10) ? weaponName : string.Empty);
+				playerMoveC.MinusLive(_weaponManager.myPlayer.GetComponent<PhotonView>().viewID, num6, typeKills, typeWeapon, (rocketNum != 10) ? weaponName : string.Empty);
 			}
 			else
 			{
@@ -537,8 +537,8 @@ public sealed class Rocket : MonoBehaviour
 	{
 		if (!isInet)
 		{
-			Network.RemoveRPCs(base.GetComponent<NetworkView>().viewID);
-			Network.Destroy(base.gameObject);
+			PhotonNetwork.RemoveRPCs(base.GetComponent<PhotonView>());
+			PhotonNetwork.Destroy(base.gameObject);
 		}
 		else
 		{
@@ -605,7 +605,7 @@ public sealed class Rocket : MonoBehaviour
 			}
 			myTransform.rotation = Quaternion.LookRotation(base.GetComponent<Rigidbody>().velocity);
 		}
-		if (Defs.isMulti && isStartSynh && ((Defs.isInet && photonView != null && !photonView.isMine) || (!Defs.isInet && !base.GetComponent<NetworkView>().isMine)))
+		if (Defs.isMulti && isStartSynh && ((Defs.isInet && photonView != null && !photonView.isMine) || (!Defs.isInet && !base.GetComponent<PhotonView>().isMine)))
 		{
 			if (!Defs.isInet && Vector3.SqrMagnitude(base.transform.position - correctPos) > 300f)
 			{
@@ -633,7 +633,7 @@ public sealed class Rocket : MonoBehaviour
 		}
 	}
 
-	private void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
+	private void OnSerializePhotonView(PhotonStream stream, PhotonMessageInfo info)
 	{
 		isStartSynh = true;
 		if (stream.isWriting)

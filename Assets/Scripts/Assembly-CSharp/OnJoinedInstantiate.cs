@@ -1,33 +1,33 @@
 using UnityEngine;
+using System.Collections;
 
 public class OnJoinedInstantiate : MonoBehaviour
 {
-	public Transform SpawnPosition;
+    public Transform SpawnPosition;
+    public float PositionOffset = 2.0f;
+    public GameObject[] PrefabsToInstantiate;   // set in inspector
 
-	public float PositionOffset = 2f;
+    public void OnJoinedRoom()
+    {
+        if (this.PrefabsToInstantiate != null)
+        {
+            foreach (GameObject o in this.PrefabsToInstantiate)
+            {
+                Debug.Log("Instantiating: " + o.name);
 
-	public GameObject[] PrefabsToInstantiate;
+                Vector3 spawnPos = Vector3.up;
+                if (this.SpawnPosition != null)
+                {
+                    spawnPos = this.SpawnPosition.position;
+                }
 
-	public void OnJoinedRoom()
-	{
-		if (PrefabsToInstantiate == null)
-		{
-			return;
-		}
-		GameObject[] prefabsToInstantiate = PrefabsToInstantiate;
-		foreach (GameObject gameObject in prefabsToInstantiate)
-		{
-			Debug.Log("Instantiating: " + gameObject.name);
-			Vector3 vector = Vector3.up;
-			if (SpawnPosition != null)
-			{
-				vector = SpawnPosition.position;
-			}
-			Vector3 insideUnitSphere = Random.insideUnitSphere;
-			insideUnitSphere.y = 0f;
-			insideUnitSphere = insideUnitSphere.normalized;
-			Vector3 position = vector + PositionOffset * insideUnitSphere;
-			PhotonNetwork.Instantiate(gameObject.name, position, Quaternion.identity, 0);
-		}
-	}
+                Vector3 random = Random.insideUnitSphere;
+                random.y = 0;
+                random = random.normalized;
+                Vector3 itempos = spawnPos + this.PositionOffset * random;
+
+                PhotonNetwork.Instantiate(o.name, itempos, Quaternion.identity, 0);
+            }
+        }
+    }
 }

@@ -1012,12 +1012,11 @@ public class ConnectSceneNGUIController : MonoBehaviour
 			{
 				StoreKitEventListener.purchaseActivityInd.SetActive(true);
 			}
-			PhotonNetwork.CreateRoom(text, true, true, (num <= 10) ? num : 10, hashtable, array);
+			PhotonNetwork.CreateRoom(text);
 		}
 		else
 		{
-			bool useNat = Network.HavePublicAddress();
-			Network.InitializeServer(num - 1, 25002, useNat);
+			PhotonNetwork.CreateRoom(num.ToString());
 			PlayerPrefs.SetString("ServerName", text);
 			PlayerPrefs.SetString("PlayersLimits", num.ToString());
 			Application.LoadLevelAsync("PromScene");
@@ -2241,7 +2240,7 @@ public class ConnectSceneNGUIController : MonoBehaviour
 			WeaponManager.sharedManager.Reset(Defs.filterMaps.ContainsKey(goMapName) ? Defs.filterMaps[goMapName] : 0);
 		}
 		StartCoroutine(SetFonLoadingWaitForReset(goMapName));
-		PhotonNetwork.CreateRoom(null, true, true, Defs.isCOOP ? 4 : (Defs.isCompany ? 10 : ((!Defs.isHunger) ? 10 : 6)), hashtable, array);
+		PhotonNetwork.CreateRoom("");
 	}
 
 	private void OnPhotonJoinRoomFailed()

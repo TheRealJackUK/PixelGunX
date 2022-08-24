@@ -130,7 +130,7 @@ internal sealed class HungerGameController : Photon.MonoBehaviour
 		}
 	}
 
-	[RPC]
+	[PunRPC]
 	private void Draw()
 	{
 		Debug.Log("Draw!!!");
@@ -141,37 +141,37 @@ internal sealed class HungerGameController : Photon.MonoBehaviour
 		}
 	}
 
-	[RPC]
+	[PunRPC]
 	private void StartTimer(bool _isStartTimer)
 	{
 		isStartTimer = _isStartTimer;
 	}
 
-	[RPC]
+	[PunRPC]
 	private void SynchStartTimer(float _startTimer)
 	{
 		startTimer = _startTimer;
 	}
 
-	[RPC]
+	[PunRPC]
 	private void SynchTimerGo(float _goTimer)
 	{
 		goTimer = _goTimer;
 	}
 
-	[RPC]
+	[PunRPC]
 	private void SynchGameTimer(float _gameTimer)
 	{
 		gameTimer = _gameTimer;
 	}
 
-	[RPC]
+	[PunRPC]
 	private void StartGame()
 	{
 		isStartGame = true;
 	}
 
-	[RPC]
+	[PunRPC]
 	private void Go()
 	{
 		isGo = true;

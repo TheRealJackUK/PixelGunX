@@ -166,7 +166,7 @@ public sealed class PotionsController : MonoBehaviour
 			}
 			else
 			{
-				Network.Destroy(player_move_c.currentTurret);
+				PhotonNetwork.Destroy(player_move_c.currentTurret);
 			}
 		}
 		else

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 [ExecuteInEditMode]
 public class Ender : MonoBehaviour
@@ -16,7 +17,7 @@ public class Ender : MonoBehaviour
 
 	private Camera _camera;
 
-	private GUIText _text;
+	private Text _text;
 
 	private readonly float _pauseBeforeClouds = 1f;
 
@@ -28,7 +29,7 @@ public class Ender : MonoBehaviour
 	{
 		MainMenu.BlockInterface = true;
 		_camera = cam.GetComponent<Camera>();
-		_text = text.GetComponent<GUIText>();
+		_text = text.GetComponent<Text>();
 		float animLength = enderPers.GetComponent<Animation>().GetComponent<Animation>()["Ender_AD"].length;
 		yield return new WaitForSeconds(_pauseBeforeClouds);
 		for (int i = 0; i < clouds.Length; i++)

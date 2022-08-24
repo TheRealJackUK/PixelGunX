@@ -62,7 +62,7 @@ public class Move : MonoBehaviour
 
 	public float smokeDestroyTime;
 
-	public ParticleRenderer smokeStem;
+	public ParticleSystem smokeStem;
 
 	public float destroySpeed;
 
@@ -78,26 +78,30 @@ public class Move : MonoBehaviour
 	public virtual void Update()
 	{
 		transform.position = Vector3.Lerp(transform.position, target.position, Time.deltaTime * speed);
-		Color color = default(Color);
 		if (destroyEnabled)
+		{		
+		ParticleSystemRenderer psr;
+		ParticleSystem.MainModule settings;
+		if (destroyEnabled && GetComponent<ParticleSystemRenderer>() != null)
 		{
-			ParticleRenderer particleRenderer = (ParticleRenderer)GetComponent(typeof(ParticleRenderer));
-			color = particleRenderer.material.GetColor("_TintColor");
-			Color color2 = smokeStem.material.GetColor("_TintColor");
-			if (!(color.a <= 0f))
+			psr = GetComponent<ParticleSystemRenderer>();
+			Color rgba = psr.material.GetColor("_TintColor");
+			settings = GetComponent<ParticleSystem>().main;
+			ParticleSystem particleRenderer = (ParticleSystem)GetComponent(typeof(ParticleSystem));
+			if (!(rgba.a <= 0f))
 			{
-				color.a -= destroySpeed * Time.deltaTime;
+				rgba.a -= destroySpeed * Time.deltaTime;
 			}
-			if (!(color2.a <= 0f))
+			if (!(rgba.a <= 0f))
 			{
-				color2.a -= destroySpeedStem * Time.deltaTime;
+				rgba.a -= destroySpeedStem * Time.deltaTime;
 			}
-			smokeStem.material.SetColor("_TintColor", color2);
-			particleRenderer.material.SetColor("_TintColor", color);
-		}
-		if (!(color.a >= 0f))
+			settings.startColor = new ParticleSystem.MinMaxGradient( rgba );
+					if (!(rgba.a >= 0f))
 		{
 			UnityEngine.Object.Destroy(transform.root.gameObject);
+		}
+		}
 		}
 	}
 

@@ -75,12 +75,14 @@ public class FireFade : MonoBehaviour
 
 	public virtual void Update()
 	{
-		if (destroyEnabled)
+		ParticleSystemRenderer psr;
+		ParticleSystem.MainModule settings;
+		if (destroyEnabled && GetComponent<ParticleSystemRenderer>() != null)
 		{
-			ParticleRenderer particleRenderer = (ParticleRenderer)GetComponent(typeof(ParticleRenderer));
-			Color color = particleRenderer.materials[1].GetColor("_TintColor");
-			color.a -= destroySpeed * Time.deltaTime;
-			particleRenderer.materials[1].SetColor("_TintColor", color);
+			psr = GetComponent<ParticleSystemRenderer>();
+			Color rgba = psr.material.GetColor("_TintColor");
+			settings = GetComponent<ParticleSystem>().main;
+			settings.startColor = new ParticleSystem.MinMaxGradient( rgba );
 		}
 	}
 

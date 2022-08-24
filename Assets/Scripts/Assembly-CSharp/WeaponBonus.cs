@@ -119,7 +119,7 @@ public class WeaponBonus : Photon.MonoBehaviour
 		gameObject.transform.parent = base.transform;
 	}
 
-	[RPC]
+	[PunRPC]
 	public void DestroyRPC()
 	{
 		if (PhotonNetwork.isMasterClient)

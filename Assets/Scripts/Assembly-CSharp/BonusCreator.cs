@@ -117,14 +117,14 @@ internal sealed class BonusCreator : MonoBehaviour
 		return result;
 	}
 
-	[RPC]
-	private void delBonus(NetworkViewID id)
+	[PunRPC]
+	private void delBonus(PhotonView id)
 	{
 		GameObject[] array = GameObject.FindGameObjectsWithTag("Bonus");
 		GameObject[] array2 = array;
 		foreach (GameObject gameObject in array2)
 		{
-			if (id.Equals(gameObject.GetComponent<NetworkView>().viewID))
+			if (id.Equals(gameObject.GetComponent<PhotonView>().viewID))
 			{
 				Object.Destroy(gameObject);
 				break;
