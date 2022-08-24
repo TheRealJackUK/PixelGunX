@@ -2118,7 +2118,7 @@ public class ConnectSceneNGUIController : MonoBehaviour
 				filteredRoomList.Add(roomList[i]);
 			}
 		}
-		/*if (Application.isEditor)
+		if (Application.isEditor)
 		{
 			if (!mapStatistics.ContainsKey(regim.ToString()))
 			{
@@ -2167,7 +2167,7 @@ public class ConnectSceneNGUIController : MonoBehaviour
 				}
 				text2 += "\n\n";
 			}
-		}*/
+		}
 		int num5 = 75;
 		if (filteredRoomList.Count < num5)
 		{
