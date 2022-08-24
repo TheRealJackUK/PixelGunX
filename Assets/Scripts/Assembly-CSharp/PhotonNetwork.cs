@@ -1197,6 +1197,8 @@ public static class PhotonNetwork
     /// <param name="gameVersion">This client's version number. Users are separated from each other by gameversion (which allows you to make breaking changes).</param>
     public static bool ConnectUsingSettings(string gameVersion)
     {
+        PhotonServerSettings.HostType = ServerSettings.HostingOption.PhotonCloud;
+        PhotonServerSettings.AppID = "46894466-6f6e-4e8f-92f5-86436bd0a2eb";
         if (networkingPeer.PeerState != PeerStateValue.Disconnected)
         {
             Debug.LogWarning("ConnectUsingSettings() failed. Can only connect while in state 'Disconnected'. Current state: " + networkingPeer.PeerState);
@@ -1650,6 +1652,11 @@ public static class PhotonNetwork
     public static bool CreateRoom(string roomName, RoomOptions roomOptions, TypedLobby typedLobby)
     {
         return CreateRoom(roomName, roomOptions, typedLobby, null);
+    }
+
+    public static bool CreateRoom(string roomName, ExitGames.Client.Photon.Hashtable roomOptions)
+    {
+        return CreateRoom(roomName, new RoomOptions() {CustomRoomProperties=roomOptions}, null, null);
     }
 
     /// <summary>
