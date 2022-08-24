@@ -399,7 +399,6 @@ public class ConnectSceneNGUIController : MonoBehaviour
 
 	private void Start()
 	{
-		localBtn.SetActive(false);
 		if (ExperienceController.sharedController != null)
 		{
 			ExperienceController.sharedController.Refresh();
@@ -1759,6 +1758,10 @@ public class ConnectSceneNGUIController : MonoBehaviour
 
 	private void Update()
 	{
+		if (GameObject.Find("LocalButton") != null)
+		{
+			Destroy(GameObject.Find("LocalButton"));
+		}
 		try {
 			if (Input.GetKeyUp(KeyCode.Escape))
 			{
