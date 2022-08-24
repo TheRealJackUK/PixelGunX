@@ -1057,7 +1057,7 @@ public sealed class Initializer : MonoBehaviour
 		{
 			WeaponManager.sharedManager.Reset(Defs.filterMaps.ContainsKey(goMapName) ? Defs.filterMaps[goMapName] : 0);
 		}
-		PhotonNetwork.CreateRoom(string.Empty); // IF GLITCHES COME BACK HERE
+		PhotonNetwork.CreateRoom(string.Empty, hashtable); // IF GLITCHES COME BACK HERE
 	}
 
 	[Obfuscation(Exclude = true)]

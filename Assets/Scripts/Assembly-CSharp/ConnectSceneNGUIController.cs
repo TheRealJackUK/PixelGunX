@@ -1012,7 +1012,7 @@ public class ConnectSceneNGUIController : MonoBehaviour
 			{
 				StoreKitEventListener.purchaseActivityInd.SetActive(true);
 			}
-			PhotonNetwork.CreateRoom(text);
+			PhotonNetwork.CreateRoom(text, hashtable);
 		}
 		else
 		{
@@ -2240,7 +2240,7 @@ public class ConnectSceneNGUIController : MonoBehaviour
 			WeaponManager.sharedManager.Reset(Defs.filterMaps.ContainsKey(goMapName) ? Defs.filterMaps[goMapName] : 0);
 		}
 		StartCoroutine(SetFonLoadingWaitForReset(goMapName));
-		PhotonNetwork.CreateRoom("");
+		PhotonNetwork.CreateRoom("", hashtable);
 	}
 
 	private void OnPhotonJoinRoomFailed()
