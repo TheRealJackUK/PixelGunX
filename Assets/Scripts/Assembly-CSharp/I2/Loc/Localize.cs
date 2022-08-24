@@ -182,7 +182,7 @@ namespace I2.Loc
 			}
 			if (MainTranslation == "minecraft") {
 				MainTranslation = Storager.getString("currentfont", false);
-				UnityEngine.Debug.LogWarning("Localize: " + MainTranslation);
+//				UnityEngine.Debug.LogWarning("Localize: " + MainTranslation);
 			}
 			EventDoLocalize(MainTranslation, SecondaryTranslation);
 		}

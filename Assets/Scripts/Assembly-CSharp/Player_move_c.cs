@@ -6116,9 +6116,9 @@ public sealed class Player_move_c : MonoBehaviour
 			{
 				foreach (AnimationState ac in _weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()){
 					string nm = ac.name.ToString();
-					Debug.Log("found anim: " + nm);
+//					Debug.Log("found anim: " + nm);
 				}
-				Debug.Log(myCAnim("Shoot"));
+//				Debug.Log(myCAnim("Shoot"));
 				_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>().Play(myCAnim("Shoot"));
 				num = _weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()[myCAnim("Shoot")].length;
 			}

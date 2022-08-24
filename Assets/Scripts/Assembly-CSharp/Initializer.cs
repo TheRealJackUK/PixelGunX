@@ -385,7 +385,7 @@ public sealed class Initializer : MonoBehaviour
 		else
 		{
 			tc = UnityEngine.Object.Instantiate(tempCam, Vector3.zero, Quaternion.identity) as GameObject;
-			if (!Defs.isInet)
+			/*if (!Defs.isInet)
 			{
 				if (PlayerPrefs.GetString("TypeGame").Equals("client"))
 				{
@@ -398,7 +398,7 @@ public sealed class Initializer : MonoBehaviour
 				}
 			}
 			else
-			{
+			{*/
 				_weaponManager.myTable = PhotonNetwork.Instantiate("NetworkTable", base.transform.position, base.transform.rotation, 0);
 				if (_weaponManager.myTable != null)
 				{
@@ -408,7 +408,6 @@ public sealed class Initializer : MonoBehaviour
 				{
 					OnConnectionFail(DisconnectCause.DisconnectByClientTimeout);
 				}
-			}
 		}
 		FlurryEvents.StartLoggingGameModeEvent();
 		_gameSessionStopwatch.Start();
@@ -1057,7 +1056,12 @@ public sealed class Initializer : MonoBehaviour
 		{
 			WeaponManager.sharedManager.Reset(Defs.filterMaps.ContainsKey(goMapName) ? Defs.filterMaps[goMapName] : 0);
 		}
+<<<<<<< HEAD
 		PhotonNetwork.CreateRoom(string.Empty, hashtable); // IF GLITCHES COME BACK HERE
+=======
+		UnityEngine.Debug.LogError("Calling from Initializer.cs");
+		PhotonNetwork.CreateRoom(string.Empty); // IF GLITCHES COME BACK HERE
+>>>>>>> dfd4d47c4af080562c3ccdfce7f5b2a0178b588f
 	}
 
 	[Obfuscation(Exclude = true)]
