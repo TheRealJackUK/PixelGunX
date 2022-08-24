@@ -360,6 +360,7 @@ public static class ItemDb
 		}
 		if (!string.IsNullOrEmpty(text))
 		{
+		// (it dead)	Debug.LogError("the game did the for the " + text);
 			return Resources.Load<Texture>("OfferIcons/" + text);
 		}
 		UnityEngine.Debug.LogError("the game no findy the icon for " + tag);
@@ -409,6 +410,7 @@ public static class ItemDb
 		}
 		if (!string.IsNullOrEmpty(text))
 		{
+		//	Debug.LogError("the game did the for the " + text);
 			return Resources.Load<Texture>("OfferIcons/" + text);
 		}
 		return null;

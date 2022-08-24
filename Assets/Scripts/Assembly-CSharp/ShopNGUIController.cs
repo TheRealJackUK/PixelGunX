@@ -1204,11 +1204,14 @@ public class ShopNGUIController : MonoBehaviour
 	public static Texture TextureForCat(int cc)
 	{
 		string text = (IsWeaponCategory((CategoryNames)cc) ? sharedShop._CurrentWeaponSetIDs()[cc] : ((!IsWearCategory((CategoryNames)cc)) ? "potion" : sharedShop.WearForCat((CategoryNames)cc)));
+//		Debug.LogError("text here is " + sharedShop._CurrentWeaponSetIDs()[cc]);
 		if (text == null)
 		{
+			Debug.LogError("trolled lmfao");
 			return null;
 		}
-		text = ItemIDForPrefab(text, (CategoryNames)cc);
+		//text = ItemIDForPrefab(text, (CategoryNames)cc);
+		//Debug.LogError("1112121312text here is " + text);
 		int num = 1;
 		if (IsWeaponCategory((CategoryNames)cc))
 		{
@@ -1775,15 +1778,12 @@ public class ShopNGUIController : MonoBehaviour
 				array[i] = null;
 				continue;
 			}
-			Weapon weapon = sharedManager.playerWeapons[num] as Weapon;
-			if (weapon.weaponPrefab.GetComponent<WeaponSounds>().categoryNabor - 1 == i)
+			Weapon[] weapon = sharedManager.weaponsInSlots.ToArray();
+			if (weapon[i].weaponPrefab.GetComponent<WeaponSounds>().categoryNabor - 1 == i)
 			{
+				Debug.LogError(weapon[i].weaponPrefab.GetComponent<WeaponSounds>().categoryNabor);
 				num++;
-				array[i] = weapon.weaponPrefab.tag;
-			}
-			else
-			{
-				array[i] = null;
+				array[i] = weapon[i].weaponPrefab.tag;
 			}
 		}
 		return array;

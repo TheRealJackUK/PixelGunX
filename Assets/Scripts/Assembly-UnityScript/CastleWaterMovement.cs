@@ -19,11 +19,12 @@ public class CastleWaterMovement : MonoBehaviour
 
 	public virtual void Update()
 	{
+		Color color = new Color();
 		float time = Time.time;
 		float y = Mathf.Repeat(time * speed, 100f) * 0.15f;
 		gameObject.GetComponent<Renderer>().material.mainTextureOffset = new Vector2(0f, y);
 		float a = alpha;
-		Color color = gameObject.GetComponent<Renderer>().material.color;
+		color = gameObject.GetComponent<Renderer>().material.color;
 		float num = (color.a = a);
 		Color color3 = (gameObject.GetComponent<Renderer>().material.color = color);
 		gameObject.GetComponent<Renderer>().material.mainTextureScale = new Vector2(waveScale, waveScale);

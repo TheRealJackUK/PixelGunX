@@ -207,7 +207,10 @@ public class UIAnchor : MonoBehaviour
 
 				Debug.unityLogger.logEnabled = false;
 				v.z = uiCamera.WorldToScreenPoint(mTrans.position).z;
-				v = uiCamera.ScreenToWorldPoint(v);
+				try {
+					v = uiCamera.ScreenToWorldPoint(v);
+				} catch {
+				}
 				Debug.unityLogger.logEnabled = true;
 			}
 			else

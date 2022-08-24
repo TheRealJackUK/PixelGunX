@@ -574,6 +574,7 @@ public class PromoActionsGUIController : MonoBehaviour
 			int cat = CatForTg(key2);
 			string imageName = IconNameForKey(key2, cat);
 			Texture t = Resources.Load<Texture>("OfferIcons/" + imageName);
+//			Debug.LogError("the game did the for the " + imageName);
 			if (t != null)
 			{
 				pap3.unpressed = t;
