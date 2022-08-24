@@ -4593,9 +4593,9 @@ public sealed class Player_move_c : MonoBehaviour
 	private IEnumerator FlashWhenDead()
 	{
 		damageShown = true;
-		Color rgba = damage.GetComponent<Image>().color;
-		rgba.a = 0f;
-		damage.GetComponent<Image>().color = rgba;
+//		Color rgba = damage.GetComponent<Image>().color;
+//		rgba.a = 0f;
+//		damage.GetComponent<Image>().color = rgba;
 		float danageTime = 0.15f;
 		yield return StartCoroutine(Fade(0f, 1f, danageTime, damage));
 		while (isDeadFrame)
