@@ -399,6 +399,7 @@ public class ConnectSceneNGUIController : MonoBehaviour
 
 	private void Start()
 	{
+		localBtn.SetActive(false);
 		if (ExperienceController.sharedController != null)
 		{
 			ExperienceController.sharedController.Refresh();
@@ -1013,6 +1014,7 @@ public class ConnectSceneNGUIController : MonoBehaviour
 				StoreKitEventListener.purchaseActivityInd.SetActive(true);
 			}
 			PhotonNetwork.CreateRoom(text, hashtable);
+			Debug.LogError("calling createroom!");
 		}
 		else
 		{
@@ -2242,6 +2244,7 @@ public class ConnectSceneNGUIController : MonoBehaviour
 		}
 		StartCoroutine(SetFonLoadingWaitForReset(goMapName));
 		PhotonNetwork.CreateRoom("", hashtable);
+		Debug.LogError("calling createroom!");
 	}
 
 	private void OnPhotonJoinRoomFailed()
