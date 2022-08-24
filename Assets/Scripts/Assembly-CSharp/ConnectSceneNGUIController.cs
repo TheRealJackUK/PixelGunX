@@ -1012,7 +1012,7 @@ public class ConnectSceneNGUIController : MonoBehaviour
 			{
 				StoreKitEventListener.purchaseActivityInd.SetActive(true);
 			}
-			PhotonNetwork.CreateRoom(text, hashtable, array);
+			PhotonNetwork.CreateRoom(text, 10, hashtable, array);
 			Debug.LogError("calling createroom!");
 		}
 		else
@@ -2248,7 +2248,7 @@ public class ConnectSceneNGUIController : MonoBehaviour
 			WeaponManager.sharedManager.Reset(Defs.filterMaps.ContainsKey(goMapName) ? Defs.filterMaps[goMapName] : 0);
 		}
 		StartCoroutine(SetFonLoadingWaitForReset(goMapName));
-		PhotonNetwork.CreateRoom("", hashtable, array);
+		PhotonNetwork.CreateRoom("", 10, hashtable, array);
 		Debug.LogError("calling createroom!");
 	}
 

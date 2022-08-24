@@ -1652,9 +1652,9 @@ public static class PhotonNetwork
         return CreateRoom(roomName, roomOptions, typedLobby, null);
     }
 
-    public static bool CreateRoom(string roomName, ExitGames.Client.Photon.Hashtable roomOptions, string[] roomOpLobby)
+    public static bool CreateRoom(string roomName, byte maxPlayers, ExitGames.Client.Photon.Hashtable roomOptions, string[] roomOpLobby)
     {
-        return CreateRoom(roomName, new RoomOptions() {CustomRoomProperties=roomOptions, customRoomPropertiesForLobby=roomOpLobby}, null, null);
+        return CreateRoom(roomName, new RoomOptions() {MaxPlayers = maxPlayers, CustomRoomProperties=roomOptions, customRoomPropertiesForLobby=roomOpLobby}, null, null);
     }
 
     /// <summary>
