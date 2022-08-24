@@ -2063,6 +2063,7 @@ public class ConnectSceneNGUIController : MonoBehaviour
 		filteredRoomList.Clear();
 		int num = 0;
 		RoomInfo[] roomList = PhotonNetwork.GetRoomList();
+		// SEARCHPOINT
 		Dictionary<string, Dictionary<string, int>> dictionary = new Dictionary<string, Dictionary<string, int>>();
 		for (int i = 0; i < roomList.Length; i++)
 		{
@@ -2116,7 +2117,7 @@ public class ConnectSceneNGUIController : MonoBehaviour
 				filteredRoomList.Add(roomList[i]);
 			}
 		}
-		if (Application.isEditor)
+		/*if (Application.isEditor)
 		{
 			if (!mapStatistics.ContainsKey(regim.ToString()))
 			{
@@ -2165,7 +2166,7 @@ public class ConnectSceneNGUIController : MonoBehaviour
 				}
 				text2 += "\n\n";
 			}
-		}
+		}*/
 		int num5 = 75;
 		if (filteredRoomList.Count < num5)
 		{
