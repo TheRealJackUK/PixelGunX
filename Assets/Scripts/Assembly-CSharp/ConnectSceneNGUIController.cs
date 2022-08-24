@@ -1012,12 +1012,7 @@ public class ConnectSceneNGUIController : MonoBehaviour
 			{
 				StoreKitEventListener.purchaseActivityInd.SetActive(true);
 			}
-<<<<<<< HEAD
 			PhotonNetwork.CreateRoom(text, hashtable);
-=======
-			PhotonNetwork.CreateRoom(text);
-			Debug.LogError("calling from here");
->>>>>>> dfd4d47c4af080562c3ccdfce7f5b2a0178b588f
 		}
 		else
 		{
@@ -2246,13 +2241,7 @@ public class ConnectSceneNGUIController : MonoBehaviour
 			WeaponManager.sharedManager.Reset(Defs.filterMaps.ContainsKey(goMapName) ? Defs.filterMaps[goMapName] : 0);
 		}
 		StartCoroutine(SetFonLoadingWaitForReset(goMapName));
-<<<<<<< HEAD
 		PhotonNetwork.CreateRoom("", hashtable);
-=======
-		Debug.LogError("Calling from here");
-		
-		PhotonNetwork.CreateRoom(name);
->>>>>>> dfd4d47c4af080562c3ccdfce7f5b2a0178b588f
 	}
 
 	private void OnPhotonJoinRoomFailed()

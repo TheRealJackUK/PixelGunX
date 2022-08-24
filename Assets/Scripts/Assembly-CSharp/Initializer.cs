@@ -1056,12 +1056,7 @@ public sealed class Initializer : MonoBehaviour
 		{
 			WeaponManager.sharedManager.Reset(Defs.filterMaps.ContainsKey(goMapName) ? Defs.filterMaps[goMapName] : 0);
 		}
-<<<<<<< HEAD
 		PhotonNetwork.CreateRoom(string.Empty, hashtable); // IF GLITCHES COME BACK HERE
-=======
-		UnityEngine.Debug.LogError("Calling from Initializer.cs");
-		PhotonNetwork.CreateRoom(string.Empty); // IF GLITCHES COME BACK HERE
->>>>>>> dfd4d47c4af080562c3ccdfce7f5b2a0178b588f
 	}
 
 	[Obfuscation(Exclude = true)]
