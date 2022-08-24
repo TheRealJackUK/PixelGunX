@@ -1781,7 +1781,6 @@ public class ShopNGUIController : MonoBehaviour
 			Weapon[] weapon = sharedManager.weaponsInSlots.ToArray();
 			if (weapon[i].weaponPrefab.GetComponent<WeaponSounds>().categoryNabor - 1 == i)
 			{
-				Debug.LogError(weapon[i].weaponPrefab.GetComponent<WeaponSounds>().categoryNabor);
 				num++;
 				array[i] = weapon[i].weaponPrefab.tag;
 			}
