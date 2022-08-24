@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EveryplayFaceCamTest : MonoBehaviour
 {
@@ -28,16 +29,15 @@ public class EveryplayFaceCamTest : MonoBehaviour
 		{
 			return;
 		}
-		debugMessage = new GameObject("FaceCamDebugMessage", typeof(GUIText));
+		debugMessage = new GameObject("FaceCamDebugMessage", typeof(Text));
 		debugMessage.transform.position = new Vector3(0.5f, 0.5f, 0f);
 		if (debugMessage != null)
 		{
-			GUIText component = debugMessage.GetComponent<GUIText>();
+			Text component = debugMessage.GetComponent<Text>();
 			if ((bool)component)
 			{
 				component.text = "Microphone access denied. FaceCam requires access to the microphone.\nPlease enable Microphone access from Settings / Privacy / Microphone.";
-				component.alignment = TextAlignment.Center;
-				component.anchor = TextAnchor.MiddleCenter;
+				component.alignment = TextAnchor.MiddleCenter;
 			}
 		}
 	}

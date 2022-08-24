@@ -1,9 +1,11 @@
 using UnityEngine;
 
-public class OnStartDelete : MonoBehaviour
+/// <summary>This component will destroy the GameObject it is attached to (in Start()).</summary>
+public class OnStartDelete : MonoBehaviour 
 {
-	private void Start()
-	{
-		Object.DestroyObject(base.gameObject);
+	// Use this for initialization
+	void Start()
+    {
+		Destroy(this.gameObject);
 	}
 }

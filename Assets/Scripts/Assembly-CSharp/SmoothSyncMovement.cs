@@ -1,42 +1,54 @@
-using Photon;
 using UnityEngine;
+using System.Collections;
 
-public class SmoothSyncMovement : Photon.MonoBehaviour
+[RequireComponent(typeof(PhotonView))]
+public class SmoothSyncMovement : Photon.MonoBehaviour, IPunObservable
 {
-	public float SmoothingDelay = 5f;
+    public float SmoothingDelay = 5;
+    public void Awake()
+    {
+        bool observed = false;
+        foreach (Component observedComponent in this.photonView.ObservedComponents)
+        {
+            if (observedComponent == this)
+            {
+                observed = true;
+                break;
+            }
+        }
+        if (!observed)
+        {
+            Debug.LogWarning(this + " is not observed by this object's photonView! OnPhotonSerializeView() in this class won't be used.");
+        }
+    }
 
-	private Vector3 correctPlayerPos = Vector3.zero;
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            //We own this player: send the others our data
+            stream.SendNext(transform.position);
+            stream.SendNext(transform.rotation);
+        }
+        else
+        {
+            //Network player, receive data
+            correctPlayerPos = (Vector3)stream.ReceiveNext();
+            correctPlayerRot = (Quaternion)stream.ReceiveNext();
+        }
+    }
 
-	private Quaternion correctPlayerRot = Quaternion.identity;
+    private Vector3 correctPlayerPos = Vector3.zero; //We lerp towards this
+    private Quaternion correctPlayerRot = Quaternion.identity; //We lerp towards this
 
-	public void Awake()
-	{
-		if (base.photonView == null || base.photonView.observed != this)
-		{
-			Debug.LogWarning(string.Concat(this, " is not observed by this object's photonView! OnPhotonSerializeView() in this class won't be used."));
-		}
-	}
+    public void Update()
+    {
+        if (!photonView.isMine)
+        {
+            //Update remote player (smooth this, this looks good, at the cost of some accuracy)
+            transform.position = Vector3.Lerp(transform.position, correctPlayerPos, Time.deltaTime * this.SmoothingDelay);
+            transform.rotation = Quaternion.Lerp(transform.rotation, correctPlayerRot, Time.deltaTime * this.SmoothingDelay);
+        }
+    }
 
-	public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-	{
-		if (stream.isWriting)
-		{
-			stream.SendNext(base.transform.position);
-			stream.SendNext(base.transform.rotation);
-		}
-		else
-		{
-			correctPlayerPos = (Vector3)stream.ReceiveNext();
-			correctPlayerRot = (Quaternion)stream.ReceiveNext();
-		}
-	}
-
-	public void Update()
-	{
-		if (!base.photonView.isMine)
-		{
-			base.transform.position = Vector3.Lerp(base.transform.position, correctPlayerPos, Time.deltaTime * SmoothingDelay);
-			base.transform.rotation = Quaternion.Lerp(base.transform.rotation, correctPlayerRot, Time.deltaTime * SmoothingDelay);
-		}
-	}
 }

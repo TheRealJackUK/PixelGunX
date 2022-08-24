@@ -1,74 +1,85 @@
-using Photon;
 using UnityEngine;
 
-[RequireComponent(typeof(PhotonView))]
+/// <summary>
+/// Very basic component to move a GameObject by WASD and Space.
+/// </summary>
+/// <remarks>
+/// Requires a PhotonView. 
+/// Disables itself on GameObjects that are not owned on Start.
+/// 
+/// Speed affects movement-speed. 
+/// JumpForce defines how high the object "jumps". 
+/// JumpTimeout defines after how many seconds you can jump again.
+/// </remarks>
+[RequireComponent(typeof (PhotonView))]
 public class MoveByKeys : Photon.MonoBehaviour
 {
-	public float Speed = 10f;
+    public float Speed = 10f;
+    public float JumpForce = 200f;
+    public float JumpTimeout = 0.5f;
 
-	public float JumpForce = 200f;
+    private bool isSprite;
+    private float jumpingTime;
+    private Rigidbody body;
+    private Rigidbody2D body2d;
 
-	public float JumpTimeout = 0.5f;
+    public void Start()
+    {
+        //enabled = photonView.isMine;
+        this.isSprite = (GetComponent<SpriteRenderer>() != null);
 
-	private bool isSprite;
+        this.body2d = GetComponent<Rigidbody2D>();
+        this.body = GetComponent<Rigidbody>();
+    }
 
-	private float jumpingTime;
 
-	private Rigidbody body;
+    // Update is called once per frame
+    public void FixedUpdate()
+    {
+        if (!photonView.isMine)
+        {
+            return;
+        }
 
-	private Rigidbody2D body2d;
+        if ((Input.GetAxisRaw("Horizontal") < -0.1f) || (Input.GetAxisRaw("Horizontal") > 0.1f))
+        {
+            transform.position += Vector3.right * (Speed * Time.deltaTime) * Input.GetAxisRaw("Horizontal");
+        }
 
-	public void Start()
-	{
-		isSprite = GetComponent<SpriteRenderer>() != null;
-		body2d = GetComponent<Rigidbody2D>();
-		body = GetComponent<Rigidbody>();
-	}
+        // jumping has a simple "cooldown" time but you could also jump in the air
+        if (this.jumpingTime <= 0.0f)
+        {
+            if (this.body != null || this.body2d != null)
+            {
+                // obj has a Rigidbody and can jump (AddForce)
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    this.jumpingTime = this.JumpTimeout;
 
-	public void FixedUpdate()
-	{
-		if (!base.photonView.isMine)
-		{
-			return;
-		}
-		if (Input.GetKey(KeyCode.A))
-		{
-			base.transform.position += Vector3.left * (Speed * Time.deltaTime);
-		}
-		if (Input.GetKey(KeyCode.D))
-		{
-			base.transform.position += Vector3.right * (Speed * Time.deltaTime);
-		}
-		if (jumpingTime <= 0f)
-		{
-			if ((body != null || body2d != null) && Input.GetKey(KeyCode.Space))
-			{
-				jumpingTime = JumpTimeout;
-				Vector2 vector = Vector2.up * JumpForce;
-				if (body2d != null)
-				{
-					body2d.AddForce(vector);
-				}
-				else if (body != null)
-				{
-					body.AddForce(vector);
-				}
-			}
-		}
-		else
-		{
-			jumpingTime -= Time.deltaTime;
-		}
-		if (!isSprite)
-		{
-			if (Input.GetKey(KeyCode.W))
-			{
-				base.transform.position += Vector3.forward * (Speed * Time.deltaTime);
-			}
-			if (Input.GetKey(KeyCode.S))
-			{
-				base.transform.position -= Vector3.forward * (Speed * Time.deltaTime);
-			}
-		}
-	}
+                    Vector2 jump = Vector2.up*this.JumpForce;
+                    if (this.body2d != null)
+                    {
+                        this.body2d.AddForce(jump);
+                    }
+                    else if (this.body != null)
+                    {
+                        this.body.AddForce(jump);
+                    }
+                }
+            }
+        }
+        else
+        {
+            this.jumpingTime -= Time.deltaTime;
+        }
+
+        // 2d objects can't be moved in 3d "forward"
+        if (!this.isSprite)
+        {
+            if ((Input.GetAxisRaw("Vertical") < -0.1f) || (Input.GetAxisRaw("Vertical") > 0.1f))
+            {
+                transform.position += Vector3.forward * (Speed * Time.deltaTime) * Input.GetAxisRaw("Vertical");
+            }
+        }
+    }
 }

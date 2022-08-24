@@ -254,7 +254,7 @@ public class DepthOfFieldScatter : PostEffectsBase
 				dx11bokehMaterial.SetTexture("_MainTex", dx11BokehTexture);
 				dx11bokehMaterial.SetVector("_Screen", new Vector3(1f / (1f * (float)source.width), 1f / (1f * (float)source.height), internalBlurWidth));
 				dx11bokehMaterial.SetPass(2);
-				Graphics.DrawProceduralIndirect(MeshTopology.Points, cbDrawArgs, 0);
+				Graphics.DrawProceduralIndirectNow(MeshTopology.Points, cbDrawArgs, 0);
 				Graphics.Blit(temporary, destination);
 				RenderTexture.ReleaseTemporary(temporary);
 				RenderTexture.ReleaseTemporary(renderTexture3);
@@ -308,7 +308,7 @@ public class DepthOfFieldScatter : PostEffectsBase
 				dx11bokehMaterial.SetTexture("_MainTex", dx11BokehTexture);
 				dx11bokehMaterial.SetVector("_Screen", new Vector3(1f / (1f * (float)renderTexture2.width), 1f / (1f * (float)renderTexture2.height), internalBlurWidth));
 				dx11bokehMaterial.SetPass(1);
-				Graphics.DrawProceduralIndirect(MeshTopology.Points, cbDrawArgs, 0);
+				Graphics.DrawProceduralIndirectNow(MeshTopology.Points, cbDrawArgs, 0);
 				dofHdrMaterial.SetTexture("_LowRez", renderTexture2);
 				dofHdrMaterial.SetTexture("_FgOverlap", renderTexture5);
 				dofHdrMaterial.SetVector("_Offsets", 1f * (float)source.width / (1f * (float)renderTexture2.width) * internalBlurWidth * Vector4.one);

@@ -1,104 +1,159 @@
+#pragma warning disable 1587
+/// \file
+/// <summary>Part of the [Optional GUI](@ref optionalGui).</summary>
+#pragma warning restore 1587
+
+
 using ExitGames.Client.Photon;
 using UnityEngine;
 
+
+/// <summary>
+/// Basic GUI to show traffic and health statistics of the connection to Photon,
+/// toggled by shift+tab.
+/// </summary>
+/// <remarks>
+/// The shown health values can help identify problems with connection losses or performance.
+/// Example:
+/// If the time delta between two consecutive SendOutgoingCommands calls is a second or more,
+/// chances rise for a disconnect being caused by this (because acknowledgements to the server
+/// need to be sent in due time).
+/// </remarks>
+/// \ingroup optionalGui
 public class PhotonStatsGui : MonoBehaviour
 {
-	public bool statsWindowOn = true;
+    /// <summary>Shows or hides GUI (does not affect if stats are collected).</summary>
+    public bool statsWindowOn = true;
 
-	public bool statsOn = true;
+    /// <summary>Option to turn collecting stats on or off (used in Update()).</summary>
+    public bool statsOn = true;
 
-	public bool healthStatsVisible;
+    /// <summary>Shows additional "health" values of connection.</summary>
+    public bool healthStatsVisible;
 
-	public bool trafficStatsOn;
+    /// <summary>Shows additional "lower level" traffic stats.</summary>
+    public bool trafficStatsOn;
 
-	public bool buttonsOn;
+    /// <summary>Show buttons to control stats and reset them.</summary>
+    public bool buttonsOn;
 
-	public Rect statsRect = new Rect(0f, 100f, 200f, 50f);
+    /// <summary>Positioning rect for window.</summary>
+    public Rect statsRect = new Rect(0, 100, 200, 50);
 
-	public int WindowId = 100;
+    /// <summary>Unity GUI Window ID (must be unique or will cause issues).</summary>
+    public int WindowId = 100;
 
-	public void Start()
-	{
-		statsRect.x = (float)Screen.width - statsRect.width;
-	}
 
-	public void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.Tab) && Input.GetKey(KeyCode.LeftShift))
-		{
-			statsWindowOn = !statsWindowOn;
-			statsOn = true;
-		}
-	}
+    public void Start()
+    {
+        if (this.statsRect.x <= 0)
+        {
+            this.statsRect.x = Screen.width - this.statsRect.width;
+        }
+    }
 
-	public void OnGUI()
-	{
-		if (PhotonNetwork.networkingPeer.TrafficStatsEnabled != statsOn)
-		{
-			PhotonNetwork.networkingPeer.TrafficStatsEnabled = statsOn;
-		}
-		if (statsWindowOn)
-		{
-			statsRect = GUILayout.Window(WindowId, statsRect, TrafficStatsWindow, "Messages (shift+tab)");
-		}
-	}
+    /// <summary>Checks for shift+tab input combination (to toggle statsOn).</summary>
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab) && Input.GetKey(KeyCode.LeftShift))
+        {
+            this.statsWindowOn = !this.statsWindowOn;
+            this.statsOn = true;    // enable stats when showing the window
+        }
+    }
 
-	public void TrafficStatsWindow(int windowID)
-	{
-		bool flag = false;
-		TrafficStatsGameLevel trafficStatsGameLevel = PhotonNetwork.networkingPeer.TrafficStatsGameLevel;
-		long num = PhotonNetwork.networkingPeer.TrafficStatsElapsedMs / 1000;
-		if (num == 0L)
-		{
-			num = 1L;
-		}
-		GUILayout.BeginHorizontal();
-		buttonsOn = GUILayout.Toggle(buttonsOn, "buttons");
-		healthStatsVisible = GUILayout.Toggle(healthStatsVisible, "health");
-		trafficStatsOn = GUILayout.Toggle(trafficStatsOn, "traffic");
-		GUILayout.EndHorizontal();
-		string text = string.Format("Out|In|Sum:\t{0,4} | {1,4} | {2,4}", trafficStatsGameLevel.TotalOutgoingMessageCount, trafficStatsGameLevel.TotalIncomingMessageCount, trafficStatsGameLevel.TotalMessageCount);
-		string text2 = string.Format("{0}sec average:", num);
-		string text3 = string.Format("Out|In|Sum:\t{0,4} | {1,4} | {2,4}", trafficStatsGameLevel.TotalOutgoingMessageCount / num, trafficStatsGameLevel.TotalIncomingMessageCount / num, trafficStatsGameLevel.TotalMessageCount / num);
-		GUILayout.Label(text);
-		GUILayout.Label(text2);
-		GUILayout.Label(text3);
-		if (buttonsOn)
-		{
-			GUILayout.BeginHorizontal();
-			statsOn = GUILayout.Toggle(statsOn, "stats on");
-			if (GUILayout.Button("Reset"))
-			{
-				PhotonNetwork.networkingPeer.TrafficStatsReset();
-				PhotonNetwork.networkingPeer.TrafficStatsEnabled = true;
-			}
-			flag = GUILayout.Button("To Log");
-			GUILayout.EndHorizontal();
-		}
-		string text4 = string.Empty;
-		string text5 = string.Empty;
-		if (trafficStatsOn)
-		{
-			text4 = "Incoming: " + PhotonNetwork.networkingPeer.TrafficStatsIncoming.ToString();
-			text5 = "Outgoing: " + PhotonNetwork.networkingPeer.TrafficStatsOutgoing.ToString();
-			GUILayout.Label(text4);
-			GUILayout.Label(text5);
-		}
-		string text6 = string.Empty;
-		if (healthStatsVisible)
-		{
-			text6 = string.Format("ping: {6}[+/-{7}]ms\nlongest delta between\nsend: {0,4}ms disp: {1,4}ms\nlongest time for:\nev({3}):{2,3}ms op({5}):{4,3}ms", trafficStatsGameLevel.LongestDeltaBetweenSending, trafficStatsGameLevel.LongestDeltaBetweenDispatching, trafficStatsGameLevel.LongestEventCallback, trafficStatsGameLevel.LongestEventCallbackCode, trafficStatsGameLevel.LongestOpResponseCallback, trafficStatsGameLevel.LongestOpResponseCallbackOpCode, PhotonNetwork.networkingPeer.RoundTripTime, PhotonNetwork.networkingPeer.RoundTripTimeVariance);
-			GUILayout.Label(text6);
-		}
-		if (flag)
-		{
-			string message = string.Format("{0}\n{1}\n{2}\n{3}\n{4}\n{5}", text, text2, text3, text4, text5, text6);
-			Debug.Log(message);
-		}
-		if (GUI.changed)
-		{
-			statsRect.height = 100f;
-		}
-		GUI.DragWindow();
-	}
+    public void OnGUI()
+    {
+        if (PhotonNetwork.networkingPeer.TrafficStatsEnabled != statsOn)
+        {
+            PhotonNetwork.networkingPeer.TrafficStatsEnabled = this.statsOn;
+        }
+
+        if (!this.statsWindowOn)
+        {
+            return;
+        }
+
+        this.statsRect = GUILayout.Window(this.WindowId, this.statsRect, this.TrafficStatsWindow, "Messages (shift+tab)");
+    }
+
+    public void TrafficStatsWindow(int windowID)
+    {
+        bool statsToLog = false;
+        TrafficStatsGameLevel gls = PhotonNetwork.networkingPeer.TrafficStatsGameLevel;
+        long elapsedMs = PhotonNetwork.networkingPeer.TrafficStatsElapsedMs / 1000;
+        if (elapsedMs == 0)
+        {
+            elapsedMs = 1;
+        }
+
+        GUILayout.BeginHorizontal();
+        this.buttonsOn = GUILayout.Toggle(this.buttonsOn, "buttons");
+        this.healthStatsVisible = GUILayout.Toggle(this.healthStatsVisible, "health");
+        this.trafficStatsOn = GUILayout.Toggle(this.trafficStatsOn, "traffic");
+        GUILayout.EndHorizontal();
+
+        string total = string.Format("Out {0,4} | In {1,4} | Sum {2,4}", gls.TotalOutgoingMessageCount, gls.TotalIncomingMessageCount, gls.TotalMessageCount);
+        string elapsedTime = string.Format("{0}sec average:", elapsedMs);
+        string average = string.Format("Out {0,4} | In {1,4} | Sum {2,4}", gls.TotalOutgoingMessageCount / elapsedMs, gls.TotalIncomingMessageCount / elapsedMs, gls.TotalMessageCount / elapsedMs);
+        GUILayout.Label(total);
+        GUILayout.Label(elapsedTime);
+        GUILayout.Label(average);
+
+        if (this.buttonsOn)
+        {
+            GUILayout.BeginHorizontal();
+            this.statsOn = GUILayout.Toggle(this.statsOn, "stats on");
+            if (GUILayout.Button("Reset"))
+            {
+                PhotonNetwork.networkingPeer.TrafficStatsReset();
+                PhotonNetwork.networkingPeer.TrafficStatsEnabled = true;
+            }
+            statsToLog = GUILayout.Button("To Log");
+            GUILayout.EndHorizontal();
+        }
+
+        string trafficStatsIn = string.Empty;
+        string trafficStatsOut = string.Empty;
+        if (this.trafficStatsOn)
+        {
+            GUILayout.Box("Traffic Stats");
+            trafficStatsIn = "Incoming: \n" + PhotonNetwork.networkingPeer.TrafficStatsIncoming.ToString();
+            trafficStatsOut = "Outgoing: \n" + PhotonNetwork.networkingPeer.TrafficStatsOutgoing.ToString();
+            GUILayout.Label(trafficStatsIn);
+            GUILayout.Label(trafficStatsOut);
+        }
+
+        string healthStats = string.Empty;
+        if (this.healthStatsVisible)
+        {
+            GUILayout.Box("Health Stats");
+            healthStats = string.Format(
+                "ping: {6}[+/-{7}]ms resent:{8} \n\nmax ms between\nsend: {0,4} \ndispatch: {1,4} \n\nlongest dispatch for: \nev({3}):{2,3}ms \nop({5}):{4,3}ms",
+                gls.LongestDeltaBetweenSending,
+                gls.LongestDeltaBetweenDispatching,
+                gls.LongestEventCallback,
+                gls.LongestEventCallbackCode,
+                gls.LongestOpResponseCallback,
+                gls.LongestOpResponseCallbackOpCode,
+                PhotonNetwork.networkingPeer.RoundTripTime,
+                PhotonNetwork.networkingPeer.RoundTripTimeVariance,
+                PhotonNetwork.networkingPeer.ResentReliableCommands);
+            GUILayout.Label(healthStats);
+        }
+
+        if (statsToLog)
+        {
+            string complete = string.Format("{0}\n{1}\n{2}\n{3}\n{4}\n{5}", total, elapsedTime, average, trafficStatsIn, trafficStatsOut, healthStats);
+            Debug.Log(complete);
+        }
+
+        // if anything was clicked, the height of this window is likely changed. reduce it to be layouted again next frame
+        if (GUI.changed)
+        {
+            this.statsRect.height = 100;
+        }
+
+        GUI.DragWindow();
+    }
 }

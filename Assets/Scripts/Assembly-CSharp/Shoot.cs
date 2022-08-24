@@ -17,10 +17,10 @@ internal sealed class Shoot : MonoBehaviour
 		_bulletSpawnPoint = GameObject.Find("BulletSpawnPoint");
 	}
 
-	[RPC]
-	private void Popal(NetworkViewID Popal, NetworkMessageInfo info)
+	[PunRPC]
+	private void Popal(PhotonView Popal, PhotonMessageInfo info)
 	{
-		Debug.Log(string.Concat(Popal, " ", base.gameObject.transform.GetComponent<NetworkView>().viewID, " ", info.sender));
+		Debug.Log(string.Concat(Popal, " ", base.gameObject.transform.GetComponent<PhotonView>().viewID, " ", info.sender));
 	}
 
 	public void shootS()
@@ -33,7 +33,7 @@ internal sealed class Shoot : MonoBehaviour
 			Debug.Log("Hit!");
 			if (hitInfo.collider.gameObject.transform.CompareTag("Enemy") && Defs.isMulti)
 			{
-				base.GetComponent<NetworkView>().RPC("Popal", RPCMode.All, hitInfo.collider.gameObject.transform.GetComponent<NetworkView>().viewID);
+				base.GetComponent<PhotonView>().RPC("Popal", PhotonTargets.All, hitInfo.collider.gameObject.transform.GetComponent<PhotonView>().viewID);
 			}
 		}
 	}

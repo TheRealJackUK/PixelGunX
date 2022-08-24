@@ -16,7 +16,7 @@ internal sealed class crossHair : MonoBehaviour
 	{
 		Debug.LogError("i was called from: " + base.gameObject + " or " + this.gameObject);
 		photonView = PhotonView.Get(this);
-		if ((((!Defs.isInet && base.GetComponent<NetworkView>().isMine) || (Defs.isInet && photonView.isMine)) && Defs.isMulti) || !Defs.isMulti)
+		if ((((!Defs.isInet && base.GetComponent<PhotonView>().isMine) || (Defs.isInet && photonView.isMine)) && Defs.isMulti) || !Defs.isMulti)
 		{
 			crossHairPosition = new Rect((Screen.width - crossHairTexture.width * Screen.height / 640) / 2, (Screen.height - crossHairTexture.height * Screen.height / 640) / 2, crossHairTexture.width * Screen.height / 640, crossHairTexture.height * Screen.height / 640);
 			pauser = GameObject.FindGameObjectWithTag("GameController").GetComponent<Pauser>();
@@ -26,7 +26,7 @@ internal sealed class crossHair : MonoBehaviour
 
 	private void OnGUI()
 	{
-		if (((((!Defs.isInet && base.GetComponent<NetworkView>().isMine) || (Defs.isInet && photonView.isMine)) && Defs.isMulti) || !Defs.isMulti) && !pauser.paused)
+		if (((((!Defs.isInet && base.GetComponent<PhotonView>().isMine) || (Defs.isInet && photonView.isMine)) && Defs.isMulti) || !Defs.isMulti) && !pauser.paused)
 		{
 			GUI.DrawTexture(crossHairPosition, crossHairTexture);
 		}

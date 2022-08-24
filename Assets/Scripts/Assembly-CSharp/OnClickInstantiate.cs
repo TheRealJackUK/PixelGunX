@@ -1,38 +1,42 @@
 using UnityEngine;
+using System.Collections;
 
 public class OnClickInstantiate : MonoBehaviour
 {
-	public GameObject Prefab;
+    public GameObject Prefab;
+    public int InstantiateType;
+    private string[] InstantiateTypeNames = {"Mine", "Scene"};
 
-	public int InstantiateType;
+    public bool showGui;
 
-	private string[] InstantiateTypeNames = new string[2] { "Mine", "Scene" };
+    void OnClick()
+    {
+        if (!PhotonNetwork.inRoom)
+        {
+            // only use PhotonNetwork.Instantiate while in a room.
+            return;
+        }
 
-	public bool showGui;
+        switch (InstantiateType)
+        {
+            case 0:
+                PhotonNetwork.Instantiate(Prefab.name, InputToEvent.inputHitPos + new Vector3(0, 5f, 0), Quaternion.identity, 0);
+                break;
+            case 1:
+                PhotonNetwork.InstantiateSceneObject(Prefab.name, InputToEvent.inputHitPos + new Vector3(0, 5f, 0), Quaternion.identity, 0, null);
+                break;
+        }
+    }
 
-	private void OnClick()
-	{
-		if (PhotonNetwork.connectionStateDetailed == PeerState.Joined)
-		{
-			switch (InstantiateType)
-			{
-			case 0:
-				PhotonNetwork.Instantiate(Prefab.name, InputToEvent.inputHitPos + new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
-				break;
-			case 1:
-				PhotonNetwork.InstantiateSceneObject(Prefab.name, InputToEvent.inputHitPos + new Vector3(0f, 5f, 0f), Quaternion.identity, 0, null);
-				break;
-			}
-		}
-	}
+    void OnGUI()
+    {
+        if (showGui)
+        {
+            GUILayout.BeginArea(new Rect(Screen.width - 180, 0, 180, 50));
+            InstantiateType = GUILayout.Toolbar(InstantiateType, InstantiateTypeNames);
+            GUILayout.EndArea();
+        }
+    }
 
-	private void OnGUI()
-	{
-		if (showGui)
-		{
-			GUILayout.BeginArea(new Rect(Screen.width - 180, 0f, 180f, 50f));
-			InstantiateType = GUILayout.Toolbar(InstantiateType, InstantiateTypeNames);
-			GUILayout.EndArea();
-		}
-	}
+
 }

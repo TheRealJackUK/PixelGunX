@@ -389,12 +389,11 @@ public sealed class Initializer : MonoBehaviour
 			{
 				if (PlayerPrefs.GetString("TypeGame").Equals("client"))
 				{
-					bool flag2 = (Network.useNat = !Network.HavePublicAddress());
-					UnityEngine.Debug.Log(Defs.ServerIp + " " + Network.Connect(Defs.ServerIp, 25002));
+					UnityEngine.Debug.Log(Defs.ServerIp);
 				}
 				else
 				{
-					_weaponManager.myTable = (GameObject)Network.Instantiate(networkTablePref, base.transform.position, base.transform.rotation, 0);
+					_weaponManager.myTable = (GameObject)PhotonNetwork.Instantiate("NetworkTable", base.transform.position, base.transform.rotation, 0);
 					_weaponManager.myNetworkStartTable = _weaponManager.myTable.GetComponent<NetworkStartTable>();
 				}
 			}
@@ -407,7 +406,7 @@ public sealed class Initializer : MonoBehaviour
 				}
 				else
 				{
-					OnConnectionFail(DisconnectCause.TimeoutDisconnect);
+					OnConnectionFail(DisconnectCause.DisconnectByClientTimeout);
 				}
 			}
 		}
@@ -427,7 +426,7 @@ public sealed class Initializer : MonoBehaviour
 		}
 	}
 
-	[RPC]
+	[PunRPC]
 	private void SpawnOnNetwork(Vector3 pos, Quaternion rot, int id1, PhotonPlayer np)
 	{
 		if (networkTablePref != null)
@@ -591,7 +590,7 @@ public sealed class Initializer : MonoBehaviour
 		if (isMulti && isInet && NotificationController.Paused)
 		{
 			NotificationController.ResetPaused();
-			OnConnectionFail(DisconnectCause.TimeoutDisconnect);
+			OnConnectionFail(DisconnectCause.DisconnectByClientTimeout);
 		}
 		if ((bool)_onGUIDrawer)
 		{
@@ -608,17 +607,17 @@ public sealed class Initializer : MonoBehaviour
 
 	private void OnConnectedToServer()
 	{
-		_weaponManager.myTable = (GameObject)Network.Instantiate(networkTablePref, base.transform.position, base.transform.rotation, 0);
+		_weaponManager.myTable = (GameObject)PhotonNetwork.Instantiate("NetworkTable", base.transform.position, base.transform.rotation, 0);
 		_weaponManager.myNetworkStartTable = _weaponManager.myTable.GetComponent<NetworkStartTable>();
 	}
 
-	private void OnFailedToConnect(NetworkConnectionError error)
+	private void OnFailedToConnectToPhoton(DisconnectCause error)
 	{
-		if (error == NetworkConnectionError.TooManyConnectedPlayers)
+		if (error == DisconnectCause.MaxCcuReached)
 		{
 			ShowDescriptionLabel(LocalizationStore.Get("Key_0992"));
 		}
-		if (error == NetworkConnectionError.ConnectionFailed)
+		if (error == DisconnectCause.Exception)
 		{
 			ShowDescriptionLabel(LocalizationStore.Get("Key_0993"));
 		}
@@ -1058,7 +1057,7 @@ public sealed class Initializer : MonoBehaviour
 		{
 			WeaponManager.sharedManager.Reset(Defs.filterMaps.ContainsKey(goMapName) ? Defs.filterMaps[goMapName] : 0);
 		}
-		PhotonNetwork.CreateRoom(null, true, true, Defs.isCOOP ? 4 : (Defs.isCompany ? 10 : ((!Defs.isHunger) ? 10 : 6)), hashtable, array);
+		PhotonNetwork.CreateRoom(string.Empty); // IF GLITCHES COME BACK HERE
 	}
 
 	[Obfuscation(Exclude = true)]

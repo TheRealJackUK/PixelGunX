@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EveryplayTest : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class EveryplayTest : MonoBehaviour
 
 	private bool isRecordingFinished;
 
-	private GUIText uploadStatusLabel;
+	private Text uploadStatusLabel;
 
 	private Texture2D previousThumbnail;
 
@@ -65,15 +66,15 @@ public class EveryplayTest : MonoBehaviour
 
 	private void CreateUploadStatusLabel()
 	{
-		GameObject gameObject = new GameObject("UploadStatus", typeof(GUIText));
+		GameObject gameObject = new GameObject("UploadStatus", typeof(Text));
 		if ((bool)gameObject)
 		{
 			gameObject.transform.parent = base.transform;
-			uploadStatusLabel = gameObject.GetComponent<GUIText>();
+			uploadStatusLabel = gameObject.GetComponent<Text>();
 			if (uploadStatusLabel != null)
 			{
-				uploadStatusLabel.anchor = TextAnchor.LowerLeft;
-				uploadStatusLabel.alignment = TextAlignment.Left;
+				//uploadStatusLabel.anchor = TextAnchor.LowerLeft;
+				//uploadStatusLabel.alignment = TextAlignment.Left;
 				uploadStatusLabel.text = "Not uploading";
 			}
 		}

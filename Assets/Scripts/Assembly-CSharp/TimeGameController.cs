@@ -32,7 +32,7 @@ public class TimeGameController : MonoBehaviour
 	private void Start()
 	{
 		sharedController = this;
-		if (Defs.isMulti && !Defs.isInet && Network.isServer)
+		if (Defs.isMulti && !Defs.isInet && PhotonNetwork.insideLobby)
 		{
 			InvokeRepeating("SinchServerTimeInvoke", 0.1f, 2f);
 			Debug.Log("TimeGameController: Start synch server time");
@@ -42,7 +42,7 @@ public class TimeGameController : MonoBehaviour
 	[Obfuscation(Exclude = true)]
 	public void SinchServerTimeInvoke()
 	{
-		base.GetComponent<NetworkView>().RPC("SynchTimeServer", RPCMode.Others, (float)Network.time);
+		base.GetComponent<PhotonView>().RPC("SynchTimeServer", PhotonTargets.Others, (float)PhotonNetwork.time);
 	}
 
 	public void StartMatch()
@@ -70,7 +70,7 @@ public class TimeGameController : MonoBehaviour
 		if (!Defs.isInet && (timeEndMatch < networkTime || GameObject.FindGameObjectsWithTag("Player").Length == 0))
 		{
 			timeEndMatch = networkTime + (double)((PlayerPrefs.GetString("MaxKill", "9").Equals(string.Empty) ? 5 : int.Parse(PlayerPrefs.GetString("MaxKill", "5"))) * 60);
-			base.GetComponent<NetworkView>().RPC("SynchTimeEnd", RPCMode.Others, (float)timeEndMatch);
+			base.GetComponent<PhotonView>().RPC("SynchTimeEnd", PhotonTargets.Others, (float)timeEndMatch);
 		}
 	}
 
@@ -103,9 +103,9 @@ public class TimeGameController : MonoBehaviour
 		}
 		if (!Defs.isInet)
 		{
-			if (Network.isServer)
+			if (PhotonNetwork.insideLobby)
 			{
-				networkTime = Network.time;
+				networkTime = PhotonNetwork.time;
 			}
 			else
 			{
@@ -139,12 +139,12 @@ public class TimeGameController : MonoBehaviour
 		}
 	}
 
-	private void OnPlayerConnected(NetworkPlayer player)
+	private void OnPlayerConnected(PhotonPlayer player)
 	{
-		if (Network.isServer)
+		if (PhotonNetwork.insideLobby)
 		{
-			base.GetComponent<NetworkView>().RPC("SynchTimeEnd", RPCMode.Others, (float)timeEndMatch);
-			base.GetComponent<NetworkView>().RPC("SynchTimeServer", RPCMode.Others, (float)Network.time);
+			base.GetComponent<PhotonView>().RPC("SynchTimeEnd", PhotonTargets.Others, (float)timeEndMatch);
+			base.GetComponent<PhotonView>().RPC("SynchTimeServer", PhotonTargets.Others, (float)PhotonNetwork.time);
 		}
 	}
 
@@ -152,13 +152,13 @@ public class TimeGameController : MonoBehaviour
 	{
 	}
 
-	[RPC]
+	[PunRPC]
 	private void SynchTimeEnd(float synchTime)
 	{
 		timeEndMatch = synchTime;
 	}
 
-	[RPC]
+	[PunRPC]
 	private void SynchTimeServer(float synchTime)
 	{
 		if (networkTime < (double)synchTime)

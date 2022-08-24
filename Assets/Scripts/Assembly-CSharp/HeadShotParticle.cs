@@ -10,7 +10,7 @@ public class HeadShotParticle : MonoBehaviour
 
 	private Transform myTransform;
 
-	public ParticleEmitter myParticleSystem;
+	public ParticleSystem myParticleSystem;
 
 	private void Start()
 	{
