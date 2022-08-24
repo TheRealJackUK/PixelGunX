@@ -1197,8 +1197,6 @@ public static class PhotonNetwork
     /// <param name="gameVersion">This client's version number. Users are separated from each other by gameversion (which allows you to make breaking changes).</param>
     public static bool ConnectUsingSettings(string gameVersion)
     {
-        PhotonServerSettings.HostType = ServerSettings.HostingOption.PhotonCloud;
-        PhotonServerSettings.AppID = "46894466-6f6e-4e8f-92f5-86436bd0a2eb";
         PhotonServerSettings.PreferredRegion = CloudRegionCode.eu;
         if (networkingPeer.PeerState != PeerStateValue.Disconnected)
         {
@@ -1260,7 +1258,6 @@ public static class PhotonNetwork
         {
             return ConnectToBestCloudServer(gameVersion);
         }
-
         return networkingPeer.ConnectToRegionMaster(PhotonServerSettings.PreferredRegion);
     }
 

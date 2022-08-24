@@ -2067,6 +2067,7 @@ public class ConnectSceneNGUIController : MonoBehaviour
 		Dictionary<string, Dictionary<string, int>> dictionary = new Dictionary<string, Dictionary<string, int>>();
 		for (int i = 0; i < roomList.Length; i++)
 		{
+			Debug.LogError(roomList[i]);
 			if (Application.isEditor)
 			{
 				string key = Defs.levelNamesFromNums[roomList[i].customProperties["map"].ToString()];
@@ -2517,6 +2518,7 @@ public class ConnectSceneNGUIController : MonoBehaviour
 		isConnectingToPhoton = true;
 		isCancelConnectingToPhoton = false;
 		gameTier = ExpController.Instance.OurTier;
+		Debug.LogError(Initializer.Separator + regim.ToString() + gameTier + "v" + GlobalGameController.MultiplayerProtocolVersion);
 		PhotonNetwork.ConnectUsingSettings(Initializer.Separator + regim.ToString() + gameTier + "v" + GlobalGameController.MultiplayerProtocolVersion);
 	}
 

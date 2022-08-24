@@ -99,7 +99,7 @@ public sealed class Initializer : MonoBehaviour
 	{
 		get
 		{
-			return "verylegitseparator";
+			return "";
 		}
 	}
 
