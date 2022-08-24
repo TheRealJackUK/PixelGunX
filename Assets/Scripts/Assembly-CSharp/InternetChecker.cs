@@ -28,8 +28,6 @@ internal sealed class InternetChecker : MonoBehaviour
     	    Storager.setInt("camerafov", 44, false);
     	}
     	Storager.setInt(Defs.ShownLobbyLevelSN, 31, false);
-    	PhotonNetwork.PhotonServerSettings.AppID = "46894466-6f6e-4e8f-92f5-86436bd0a2eb";
-    	PhotonNetwork.PhotonServerSettings.HostType = ServerSettings.HostingOption.PhotonCloud; 
 	}
 
 	public void Update()

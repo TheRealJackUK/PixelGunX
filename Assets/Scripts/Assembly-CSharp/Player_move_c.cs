@@ -2209,9 +2209,12 @@ public sealed class Player_move_c : MonoBehaviour
 		{
 			GameObject tmpDamage = Resources.Load("Damage") as GameObject;
 			damage = (GameObject)UnityEngine.Object.Instantiate(tmpDamage);
-			Color rgba = damage.GetComponent<Image>().color;
-			rgba.a = 0f;
-			damage.GetComponent<Image>().color = rgba;
+			if (damage.GetComponent<Image>() != null)
+			{
+				Color rgba = damage.GetComponent<Image>().color;
+				rgba.a = 0f;
+				damage.GetComponent<Image>().color = rgba;
+			}
 		}
 		if (!isMulti || isMine)
 		{
@@ -6113,9 +6116,9 @@ public sealed class Player_move_c : MonoBehaviour
 			{
 				foreach (AnimationState ac in _weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()){
 					string nm = ac.name.ToString();
-					Debug.LogError("found anim: " + nm);
+					Debug.Log("found anim: " + nm);
 				}
-				Debug.LogError(myCAnim("Shoot"));
+				Debug.Log(myCAnim("Shoot"));
 				_weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>().Play(myCAnim("Shoot"));
 				num = _weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>()[myCAnim("Shoot")].length;
 			}
