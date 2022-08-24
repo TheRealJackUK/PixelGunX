@@ -22,8 +22,8 @@ internal sealed class InternetChecker : MonoBehaviour
 	}
 	private void Start()
 	{
-		PhotonServerSettings.HostType = ServerSettings.HostingOption.PhotonCloud;
-        PhotonServerSettings.AppID = "46894466-6f6e-4e8f-92f5-86436bd0a2eb";
+		PhotonNetwork.PhotonServerSettings.HostType = ServerSettings.HostingOption.PhotonCloud;
+        PhotonNetwork.PhotonServerSettings.AppID = "46894466-6f6e-4e8f-92f5-86436bd0a2eb";
 		Object.DontDestroyOnLoad(base.gameObject);
 		if (Storager.getInt("camerafov", false) == 0 || Storager.getInt("camerafov", false) == null || Storager.getInt("camerafov", false) == 180)
     	{
