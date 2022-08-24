@@ -1758,9 +1758,9 @@ public class ConnectSceneNGUIController : MonoBehaviour
 
 	private void Update()
 	{
-		if (GameObject.Find("LocalButton") != null)
+		if (GameObject.Find("LocalButton") != null && GameObject.Find("LocalButton").active)
 		{
-			Destroy(GameObject.Find("LocalButton"));
+			GameObject.Find("LocalButton").SetActive(false);
 		}
 		try {
 			if (Input.GetKeyUp(KeyCode.Escape))
