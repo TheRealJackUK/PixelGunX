@@ -944,7 +944,7 @@ public class ConnectSceneNGUIController : MonoBehaviour
 	{
 		string text = FilterBadWorld.FilterString(nameServerInput.value);
 		bool flag = false;
-		if (Defs.isInet)
+		if (true)
 		{
 			RoomInfo[] roomList = PhotonNetwork.GetRoomList();
 			for (int i = 0; i < roomList.Length; i++)
@@ -980,7 +980,7 @@ public class ConnectSceneNGUIController : MonoBehaviour
 		StartCoroutine(SetFonLoadingWaitForReset(goMapName));
 		loadingMapPanel.SetActive(true);
 		int num = ((regim != 0 && regim != RegimGame.TimeBattle && regim != RegimGame.DeadlyGames) ? teamCountPlayer.value : numberOfPlayer.value.Value);
-		if (Defs.isInet)
+		if (true)
 		{
 			int num2 = 7;
 			string[] array = new string[num2 + ExperienceController.maxLevel];
@@ -1013,9 +1013,11 @@ public class ConnectSceneNGUIController : MonoBehaviour
 				StoreKitEventListener.purchaseActivityInd.SetActive(true);
 			}
 			PhotonNetwork.CreateRoom(text);
+			Debug.LogError("calling from here");
 		}
 		else
 		{
+			Debug.LogError("Calling from here");
 			PhotonNetwork.CreateRoom(num.ToString());
 			PlayerPrefs.SetString("ServerName", text);
 			PlayerPrefs.SetString("PlayersLimits", num.ToString());
@@ -2240,7 +2242,9 @@ public class ConnectSceneNGUIController : MonoBehaviour
 			WeaponManager.sharedManager.Reset(Defs.filterMaps.ContainsKey(goMapName) ? Defs.filterMaps[goMapName] : 0);
 		}
 		StartCoroutine(SetFonLoadingWaitForReset(goMapName));
-		PhotonNetwork.CreateRoom("");
+		Debug.LogError("Calling from here");
+		
+		PhotonNetwork.CreateRoom(name);
 	}
 
 	private void OnPhotonJoinRoomFailed()
