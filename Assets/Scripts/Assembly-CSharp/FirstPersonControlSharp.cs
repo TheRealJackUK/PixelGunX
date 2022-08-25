@@ -322,7 +322,7 @@ internal sealed class FirstPersonControlSharp : UnityEngine.MonoBehaviour
 			}
 			if (Screen.lockCursor)
 			{
-				_cameraMouseDelta = vector * Defs.Sensitivity / 2f;
+				_cameraMouseDelta = vector * Defs.Sensitivity;
 			}
 		}
 		mousePosOld = Input.mousePosition;
