@@ -5268,6 +5268,7 @@ public sealed class Player_move_c : MonoBehaviour
 			Weapon weapon = (Weapon)WeaponManager.sharedManager.playerWeapons[i];
 			WeaponSounds component = weapon.weaponPrefab.GetComponent<WeaponSounds>();
 			weapon.currentAmmoInBackpack = component.MaxAmmoWithEffectApplied / 2;
+			weapon.currentAmmoInClip = weapon.weaponPrefab.GetComponent<WeaponSounds>().ammoInClip;
 		}
 	}
 
