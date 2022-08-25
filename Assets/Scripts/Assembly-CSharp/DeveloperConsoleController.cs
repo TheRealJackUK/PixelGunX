@@ -122,6 +122,8 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 			if (toggle.value)
 			{
 				Application.targetFrameRate = 9999;
+			} else {
+				Application.targetFrameRate = 240;
 			}
 		}
 	}
@@ -497,7 +499,7 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 		{
 			if (view.set60FpsCheckbox != null)
 			{
-				view.set60FpsCheckbox.startsActive = Application.targetFrameRate == 240;
+				view.set60FpsCheckbox.startsActive = Application.targetFrameRate == 9999;
 			}
 			if (view.tempGunCheckbox != null)
 			{

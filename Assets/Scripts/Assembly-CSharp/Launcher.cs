@@ -254,7 +254,7 @@ internal sealed class Launcher : MonoBehaviour
 
 	private string _leaderboardId = string.Empty;
 
-	private int _targetFramerate = 30;
+	private int _targetFramerate = 240;
 
 	internal static LicenseVerificationController.PackageInfo? PackageInfo { get; set; }
 
@@ -283,7 +283,7 @@ internal sealed class Launcher : MonoBehaviour
 	{
 		if (SplashScreen != null)
 		{
-			int splashScreenFadeOutFrameCount = 1 * _targetFramerate;
+			int splashScreenFadeOutFrameCount = _targetFramerate;
 			SplashScreen.gameObject.SetActive(true);
 			for (int i = 0; i != splashScreenFadeOutFrameCount; i++)
 			{
