@@ -296,6 +296,31 @@ public class CameraSceneController : MonoBehaviour
 			posCam = new Vector3(11.4502f, 20.29328f, 19.8833f);
 			rotateCam = Quaternion.Euler(new Vector3(32.95062f, -149.9998f, 0f));
 		}
+		else if (Application.loadedLevelName.Equals("old_office"))
+		{
+			posCam = new Vector3(102.09f, -10.5f, -552.96f);
+			rotateCam = Quaternion.Euler(new Vector3(5.921417f, -59.10556f, 4.291768e-07f));
+		}
+		else if (Application.loadedLevelName.Equals("Shipyard"))
+		{
+			posCam = new Vector3(-34.42f, 27.61f, -43.45f);
+			rotateCam = Quaternion.Euler(new Vector3(12.01048f, 42.81794f, -1.309322e-06f));
+		}
+		else if (Application.loadedLevelName.Equals("High Noon"))
+		{
+			posCam = new Vector3(-98.08f, 39.1f, -41.05f);
+			rotateCam = Quaternion.Euler(new Vector3(17.66532f, 55.16882f, 8.960254e-07f));
+		}
+		else if (Application.loadedLevelName.Equals("Frontier"))
+		{
+			posCam = new Vector3(-25.52f, 19.01f, -24.15f);
+			rotateCam = Quaternion.Euler(new Vector3(3.120753f, 26.34697f, -1.255646f));
+		}
+		else if (Application.loadedLevelName.Equals("Pirate Cove"))
+		{
+			posCam = new Vector3(-45.1f, 69f, 29f);
+			rotateCam = Quaternion.Euler(new Vector3(8.734755f, 116.2118f, -4.31896e-07f));
+		}
 		else if (Application.loadedLevelName.Equals("Candyland"))
 		{
 			posCam = new Vector3(11.4502f, 20.29328f, 19.8833f);

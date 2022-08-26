@@ -228,6 +228,11 @@ public sealed class Defs2
 		_mapsInfo.Add(new MapInfo("survival_3", "oni house", "oni house", "oni house"));
 		_mapsInfo.Add(new MapInfo("RealCube", "Cube.", "Cube.", "Cube."));
 		_mapsInfo.Add(new MapInfo("ExtremelyReal", "PixlMan Land", "PixlMan Land", "pretty small idk medium"));
+		_mapsInfo.Add(new MapInfo("old_office", "OLDPG Headquarters", "OLDPG Headquarters", "very beeg"));
+		_mapsInfo.Add(new MapInfo("Shipyard", "Shipment", "Shipment", "Small Map"));
+		_mapsInfo.Add(new MapInfo("High Noon", "High Noon", "High Noon", "Large Map"));
+		_mapsInfo.Add(new MapInfo("Frontier", "Orbit", "Orbit", "Large Map"));
+		_mapsInfo.Add(new MapInfo("Pirate Cove", "Pirate Cove", "Pirate Cove", "Medium Map"));
 	}
 
 	public static void SetLocalizeForMaps()
