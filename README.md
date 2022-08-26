@@ -1,4 +1,5 @@
-# 10.0.4-death-pg3d
-please do not look at the code inside, thanks
+# Pixel Gun X
 
-## STAY OUT, DONT LOOK, PLEASE
+This is the official PGX repository.
+
+To build and modify, you need **Unity 2019.4.40f4**.
