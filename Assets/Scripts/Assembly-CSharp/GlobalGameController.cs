@@ -172,15 +172,7 @@ public class GlobalGameController
 	{
 		get
 		{
-			switch (BuildSettings.BuildTarget)
-			{
-			case BuildTarget.Android:
-				return "10.0.0";
-			case BuildTarget.WP8Player:
-				return "10.0.0";
-			default:
-				return "10.0.0";
-			}
+			return Application.version;
 		}
 	}
 
