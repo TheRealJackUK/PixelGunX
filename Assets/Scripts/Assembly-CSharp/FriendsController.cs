@@ -1720,7 +1720,7 @@ public sealed class FriendsController : MonoBehaviour
 			}
 			WWW download = new WWW(actionAddress, form);
 			yield return download;
-			response = URLs.Sanitize(download);
+			response = download.text;
 			if (canPrintSecuritySensitiveInfo)
 			{
 				Debug.Log("CreatePlayer: Response for “" + tokenHashString + "” received:    “" + response + "”");
