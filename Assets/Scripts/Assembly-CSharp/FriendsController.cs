@@ -344,11 +344,11 @@ public sealed class FriendsController : MonoBehaviour
 			}
 		}
 		UnityEngine.Object.DontDestroyOnLoad(base.gameObject);
-		if (!PlayerPrefs.HasKey(AccountCreated))
+		/*if (!PlayerPrefs.HasKey(AccountCreated))
 		{
 			PlayerPrefs.SetString(AccountCreated, string.Empty);
-		}
-		id = PlayerPrefs.GetString(AccountCreated);
+		}*/
+		id = PlayerPrefs.GetString(AccountCreated, "");
 		if (string.IsNullOrEmpty(id))
 		{
 			StartCoroutine(CreatePlayer());
@@ -1697,6 +1697,9 @@ public sealed class FriendsController : MonoBehaviour
 	private IEnumerator CreatePlayer()
 	{
 		string response;
+		/*if (!PlayerPrefs.GetString("AccountCreated", string.Empty).Equals()) {
+			yield break;
+		}*/
 		while (true)
 		{
 			yield return StartCoroutine(GetToken());
@@ -1711,6 +1714,8 @@ public sealed class FriendsController : MonoBehaviour
 			string hash = Hash("create_player", _inputToken);
 			form.AddField("auth", hash);
 			form.AddField("token", _inputToken);
+			// SystemInfo.deviceUniqueIdentifier
+			form.AddField("deviceid", SystemInfo.deviceUniqueIdentifier);
 			string tokenHashString = string.Format("token:hash = {0}:{1}", _inputToken, hash);
 			_inputToken = null;
 			bool canPrintSecuritySensitiveInfo = Debug.isDebugBuild || Defs.IsDeveloperBuild || BuildSettings.BuildTarget == BuildTarget.WP8Player;
@@ -1758,7 +1763,7 @@ public sealed class FriendsController : MonoBehaviour
 			yield return StartCoroutine(MyWaitForSeconds(10f));
 		}
 		Debug.Log("CreatePlayer succeeded with response:    “" + response + "”");
-		PlayerPrefs.GetString(AccountCreated, response);
+		PlayerPrefs.SetString(AccountCreated, response);
 		id = response;
 		readyToOperate = true;
 		StartCoroutine(UpdatePlayer(true));

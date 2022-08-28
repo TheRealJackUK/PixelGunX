@@ -45,13 +45,25 @@
 	}
 	//
 	$yourip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+	$deviceid = "";
+	if (isset($_POST["deviceid"])) {
+		$deviceid = $_POST["deviceid"];
+	}
     switch ($action) {
         case "start_check":
+        	$usesrget = $db->prepare("SELECT id FROM `pgx_users` WHERE id = :name");
+            $usesrget->bindparam(":name", $id);
+            $usesrget->execute();
+            $usesrgetresult = $tokenget->fetchColumn();
+            if (strcmp(trim(strval($usesrgetresult)), trim(strval($id))) !== 0) {
+				echo 'fail';
+				break;
+			}
             $tokenget = $db->prepare("SELECT clan FROM `pgx_users` WHERE id = :name");
             $tokenget->bindparam(":name", $id);
             $tokenget->execute();
-            $token = $tokenget->fetchColumn();
-            if (strval($token) == "0"){
+            $tooken = $tokenget->fetchColumn();
+            if (strval($tooken) == "0"){
                 $tokenget = $db->prepare("SELECT username FROM `pgx_users` WHERE id = :name");
                 $tokenget->bindparam(":name", $id);
                 $tokenget->execute();
@@ -64,19 +76,30 @@
             }else{
                 // {"id":0,"creator_id":0,"name":"example","logo":"png here"}
                 $tokenget = $db->prepare("SELECT pid FROM `pgx_clans` WHERE id = :name");
-                $tokenget->bindparam(":name", $token);
+                $tokenget->bindparam(":name", $tooken);
                 $tokenget->execute();
                 $cid = $tokenget->fetchColumn();
                 $tokenget = $db->prepare("SELECT name FROM `pgx_clans` WHERE id = :name");
-                $tokenget->bindparam(":name", $token);
+                $tokenget->bindparam(":name", $tooken);
                 $tokenget->execute();
                 $nm = $tokenget->fetchColumn();
                 $tokenget = $db->prepare("SELECT logo FROM `pgx_clans` WHERE id = :name");
-                $tokenget->bindparam(":name", $token);
+                $tokenget->bindparam(":name", $tooken);
                 $tokenget->execute();
                 $log = $tokenget->fetchColumn();
                 echo '{"id":"' . $token . '","creator_id":"'.$cid.'","name":"'.$nm.'","logo":"'.$log.'"}"';
             }
+            break;
+        case "user_exists":
+        	$usesrget = $db->prepare("SELECT id FROM `pgx_users` WHERE id = :name");
+            $usesrget->bindparam(":name", $id);
+            $usesrget->execute();
+            $usesrgetresult = $tokenget->fetchColumn();
+            if (strcmp(trim(strval($usesrgetresult)), trim(strval($id))) !== 0) {
+				echo 'fail';
+				break;
+			}
+			echo $id;
             break;
         case "get_clan_info":
             $tokenget = $db->prepare("SELECT clan FROM `pgx_users` WHERE id = :name");
@@ -97,10 +120,11 @@
 		case "create_clan":
 			// INSERT INTO `pgx_clans` (`id`, `pid`, `name`, `logo`, `pid2`, `originver`) VALUES (NULL, '1', 'HELL GAY GAMING', 'aa', '1', '10.3.0');
 			// UPDATE `pgx_users` SET `clan`=3 WHERE id = 0
-			$tokenget = $db->prepare("INSERT INTO `pgx_clans` (`id`, `pid`, `name`, `logo`, `pid2`, `originver`) VALUES (NULL, :id, :name, :logo, :id, '10.3.0');");
+			$tokenget = $db->prepare("INSERT INTO `pgx_clans` (`id`, `pid`, `name`, `logo`, `originver`) VALUES (NULL, :id, :name, :logo, :appver);");
             $tokenget->bindparam(":id", $id);
 			$tokenget->bindparam(":name", $name);
 			$tokenget->bindparam(":logo", $logo);
+			$tokenget->bindparam(":appver", $appver);
             $tokenget->execute();
 			$response = $db->lastInsertId();
 			$tokenget = $db->prepare("UPDATE `pgx_users` SET `clan`=:clan WHERE id = :id");
@@ -112,32 +136,20 @@
 		case "create_player":
 			// INSERT INTO `pgx_clans` (`id`, `pid`, `name`, `logo`, `pid2`, `originver`) VALUES (NULL, '1', 'HELL GAY GAMING', 'aa', '1', '10.3.0');
 			// UPDATE `pgx_users` SET `clan`=3 WHERE id = 0
-			if (!empty($token)) {
-				$tokenget = $db->prepare("INSERT INTO `pgx_users` (`id`, `platform`, `token`, `clan`, `username`) VALUES (NULL, :platform, :token, 0, 'Player');");
-				$tokenget->bindparam(":platform", $platform);
-				$tokenget->bindparam(":token", $token);
-				$tokenget->execute();
-				$response = $db->lastInsertId();
-				echo $response;
-				// echo "fail";
-			}else {
-				echo md5($appver . $yourip);
-			}
+			$tokenget = $db->prepare("INSERT INTO `pgx_users` (`id`, `platform`, `token`, `clan`, `username`, `ip`) VALUES (NULL, :platform, :token, 0, 'Player', :ip);");
+			$tokenget->bindparam(":platform", $platform);
+			$tokenget->bindparam(":token", $token);
+			$finalip = md5($yourip);
+			$tokenget->bindparam(":ip", $finalip);
+			$tokenget->execute();
+			$response = $db->lastInsertId();
+			echo $response;
+			// echo "fail";
 			break;
 		case "create_player_intent":
 			// INSERT INTO `pgx_clans` (`id`, `pid`, `name`, `logo`, `pid2`, `originver`) VALUES (NULL, '1', 'HELL GAY GAMING', 'aa', '1', '10.3.0');
 			// UPDATE `pgx_users` SET `clan`=3 WHERE id = 0
-			if (!empty($token)) {
-				$tokenget = $db->prepare("INSERT INTO `pgx_users` (`id`, `platform`, `token`, `clan`, `username`) VALUES (NULL, :platform, :token, 0, 'Player');");
-				$tokenget->bindparam(":platform", $platform);
-				$tokenget->bindparam(":token", $token);
-				$tokenget->execute();
-				$response = $db->lastInsertId();
-				echo $response;
-				// echo "fail";
-			}else {
-				echo md5($appver . $yourip);
-			}
+			echo md5($appver . $deviceid);
 			break;
 		case "change_logo":
 			// logo
@@ -147,7 +159,7 @@
             $tokenget->bindparam(":id", $cid);
 			$tokenget->bindparam(":logo", $logo);
             $tokenget->execute();
-			echo $response;
+			echo 1;
 			break;
 		case "change_clan_name":
 			// logo
@@ -157,18 +169,18 @@
             $tokenget->bindparam(":id", $cid);
 			$tokenget->bindparam(":logo", $name);
             $tokenget->execute();
-			echo $response;
+			echo 1;
 			break;
 		case "friend_request":
 			// NOT IFNIHED
 			// logo
 			// INSERT INTO `pgx_clans` (`id`, `pid`, `name`, `logo`, `pid2`, `originver`) VALUES (NULL, '1', 'HELL GAY GAMING', 'aa', '1', '10.3.0');
 			// UPDATE `pgx_users` SET `clan`=3 WHERE id = 0
-			$tokenget = $db->prepare("UPDATE `pgx_clans` SET `name`=:logo WHERE id = :id");
+			/*$tokenget = $db->prepare("UPDATE `pgx_clans` SET `name`=:logo WHERE id = :id");
             $tokenget->bindparam(":id", $cid);
 			$tokenget->bindparam(":logo", $logo);
             $tokenget->execute();
-			echo $response;
+			echo $response;*/
 			break;
 		case "get_users_info_by_param":
 			$qeryname = htmlspecialchars($param, ENT_QUOTES);

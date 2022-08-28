@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class URLs
 {
-	public static string BanURL = "https://secure.pixelgunserver.com/getBanList.php";
+	public static string BanURL = "https://oldpg3d.7m.pl/~pgx/getBanList.php";
 
 	public static string PopularityMapUrl = "http://secure.pixelgunserver.com/mapstat.txt";
 
