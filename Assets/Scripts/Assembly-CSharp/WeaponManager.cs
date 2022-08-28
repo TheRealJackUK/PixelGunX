@@ -1322,6 +1322,7 @@ public sealed class WeaponManager : MonoBehaviour
 
 	public static GameObject AddRay(Vector3 pos, Vector3 forw, string nm)
 	{
+		UnityEngine.Debug.LogError("when the");
 		GameObject gameObject = Resources.Load(ResPath.Combine("Rays", nm)) as GameObject;
 		if (gameObject == null)
 		{

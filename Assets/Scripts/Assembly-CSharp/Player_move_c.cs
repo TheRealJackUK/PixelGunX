@@ -4180,7 +4180,7 @@ public sealed class Player_move_c : MonoBehaviour
 			{
 				continue;
 			}
-			if ((bool)child.gameObject.GetComponent<Renderer>() && (bool)child.gameObject.GetComponent<Renderer>().material)
+			if ((bool)child.gameObject.GetComponent<Renderer>() && (bool)child.gameObject.GetComponent<Renderer>().material && child.gameObject.tag != "donotchange")
 			{
 				child.gameObject.GetComponent<Renderer>().material.mainTexture = txt;
 			}
@@ -4303,6 +4303,7 @@ public sealed class Player_move_c : MonoBehaviour
 		return ws.animationObject.GetComponent<Animation>()["Shoot"].length * ws.meleeAttackTimeModifier;
 	}
 
+
 	[PunRPC]
 	private void fireFlash(bool isFlash, int numFlash)
 	{
@@ -4313,11 +4314,11 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 		if (isFlash)
 		{
-			if (numFlash == 0)
+			if (numFlash == 0 && !_weaponManager.currentWeaponSounds.isWaitWeapon)
 			{
 				weaponSounds.GetComponent<FlashFire>().fire();
 			}
-			else if (weaponSounds.gunFlashDouble.Length > numFlash - 1)
+			else if (weaponSounds.gunFlashDouble.Length > numFlash - 1 && !_weaponManager.currentWeaponSounds.isWaitWeapon)
 			{
 				weaponSounds.gunFlashDouble[numFlash - 1].GetComponent<FlashFire>().fire();
 			}
@@ -6071,8 +6072,15 @@ public sealed class Player_move_c : MonoBehaviour
 			_Shot();
 			if (!_weaponManager.currentWeaponSounds.isShotMelee || isMechActive)
 			{
+				if (!_weaponManager.currentWeaponSounds.isWaitWeapon)
+				{
 				_SetGunFlashActive(true);
 				GunFlashLifetime = ((!isMechActive) ? _weaponManager.currentWeaponSounds.gameObject.GetComponent<FlashFire>().timeFireAction : 0.15f);
+				}
+				else
+				{
+					StartCoroutine(waitFlash());
+				}
 			}
 			return;
 		}
@@ -6092,6 +6100,13 @@ public sealed class Player_move_c : MonoBehaviour
 				base.GetComponent<AudioSource>().PlayOneShot(_weaponManager.currentWeaponSounds.empty);
 			}
 		}
+	}
+
+	public IEnumerator waitFlash()
+	{
+		yield return new WaitForSeconds(_weaponManager.currentWeaponSounds.waitTime);
+		_SetGunFlashActive(true);
+				GunFlashLifetime = ((!isMechActive) ? _weaponManager.currentWeaponSounds.gameObject.GetComponent<FlashFire>().timeFireAction : 0.15f);
 	}
 
 	private void _Shot()
@@ -6138,6 +6153,17 @@ public sealed class Player_move_c : MonoBehaviour
 		{
 			inGameGUI.StartFireCircularIndicators(num);
 		}
+		if (_weaponManager.currentWeaponSounds.isWaitWeapon)
+		{
+			StartCoroutine(waitShoot());
+			return;
+		}
+		shootS();
+	}
+
+	public IEnumerator waitShoot()
+	{
+		yield return new WaitForSeconds(_weaponManager.currentWeaponSounds.waitTime);
 		shootS();
 	}
 
@@ -6176,7 +6202,13 @@ public sealed class Player_move_c : MonoBehaviour
 				{
 					_DoHit(hitInfo);
 				}
+				if (!_weaponManager.currentWeaponSounds.isWaitWeapon)
+				{
 				_FireFlash(0);
+				}
+				else
+				{
+				}
 				_HitEnemies(list);
 				return;
 			}
@@ -6185,6 +6217,7 @@ public sealed class Player_move_c : MonoBehaviour
 				StartCoroutine(BazookaShoot());
 				return;
 			}
+			
 			if ((_weaponManager.currentWeaponSounds.railgun || _weaponManager.currentWeaponSounds.freezer) && !isMechActive)
 			{
 				Ray ray2 = Camera.main.ScreenPointToRay(new Vector3((float)Screen.width * 0.5f - _weaponManager.currentWeaponSounds.startZone.x * _weaponManager.currentWeaponSounds.tekKoof * Defs.Coef * 0.5f + (float)UnityEngine.Random.Range(0, Mathf.RoundToInt(_weaponManager.currentWeaponSounds.startZone.x * _weaponManager.currentWeaponSounds.tekKoof * Defs.Coef)), (float)Screen.height * 0.5f - _weaponManager.currentWeaponSounds.startZone.y * _weaponManager.currentWeaponSounds.tekKoof * Defs.Coef * 0.5f + (float)UnityEngine.Random.Range(0, Mathf.RoundToInt(_weaponManager.currentWeaponSounds.startZone.y * _weaponManager.currentWeaponSounds.tekKoof * Defs.Coef)), 0f));

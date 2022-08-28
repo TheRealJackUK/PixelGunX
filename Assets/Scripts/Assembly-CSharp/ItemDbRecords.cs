@@ -282,6 +282,7 @@ public static class ItemDbRecords
 		list.Add(new ItemRecord(218, "PX-3000", "PX-3000", "Weapon220", "PX-3000", "PX-3000", 289, true, false, "GemsCurrency"));
 		// AdvancedScoutRifle
 		list.Add(new ItemRecord(218, "AdvancedScoutRifle", "AdvancedScoutRifle", "Weapon278", "AdvancedScoutRifle", "AdvancedScoutRifle", 500, true, false, "Coins"));
+		list.Add(new ItemRecord(282, "PixelStrikeRifle", "PixelStrikeRifle", "Weapon282", "PixelStrikeRifle", "PixelStrikeRifle", 999, true, false, "Coins"));
 		list.Add(new ItemRecord(279, "OGUzi", "OGUzi", "Weapon279", "OGUzi", "OGUzi", 50, true, false, "Coins"));
 		list.Add(new ItemRecord(280, "Nokia", "Nokia", "Weapon280", "Nokia", "Nokia", 420, true, false, "GemsCurrency"));
 		list.Add(new ItemRecord(395, "GiantSword", "GiantSword", "Weapon395", "GiantSword", "GiantSword", 300, true, false, "GemsCurrency"));
@@ -289,6 +290,7 @@ public static class ItemDbRecords
 		list.Add(new ItemRecord(404, "PiratBlunderbuss", "PiratBlunderbuss", "Weapon404", "PiratBlunderbuss", "PiratBlunderbuss", 325, true, false, "GemsCurrency"));
 		list.Add(new ItemRecord(403, "PiratPistols", "PiratPistols", "Weapon403", "PiratPistols", "PiratPistols", 300, true, false, "GemsCurrency"));
 		list.Add(new ItemRecord(406, "PirateMusket", "PirateMusket", "Weapon406", "PirateMusket", "PirateMusket", 350, true, false, "GemsCurrency"));
+		list.Add(new ItemRecord(283, "bg3dcodrailgun", "bg3dcodrailgun", "Weapon283", "bg3dcodrailgun", "bg3dcodrailgun", 700, true, false, "GemsCurrency"));
 		list.Add(new ItemRecord(436, "NightHunter", "NightHunter", "Weapon436", "NightHunter", "NightHunter", 700, true, false, "Coins"));
 		list.Add(new ItemRecord(437, "Casanova", "Casanova", "Weapon437", "Casanova", "Casanova", 400, true, false, "GemsCurrency"));
 		list.Add(new ItemRecord(438, "Veteran", "Veteran", "Weapon438", "Veteran", "Veteran", 700, true, false, "Coins"));
