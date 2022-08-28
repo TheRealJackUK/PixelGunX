@@ -18,11 +18,15 @@ public sealed class WeaponSounds : MonoBehaviour
 	}
 
 	public bool isSlowdown;
-
+	
 	[Range(0.01f, 10f)]
 	public float slowdownCoeff;
 
 	public float slowdownTime;
+
+	public bool isWaitWeapon = false;
+
+	public float waitTime = 0f;
 
 	public GameObject[] noFillObjects;
 

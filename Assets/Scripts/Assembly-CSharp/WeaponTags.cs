@@ -432,6 +432,8 @@ public static class WeaponTags
 
 	public static readonly string AdvancedScoutRifle_Tag = "AdvancedScoutRifle";
 
+	public static readonly string PixelStrikeRifle_Tag = "PixelStrikeRifle";
+
 	public static readonly string Nokia_Tag = "Nokia";
 
 	public static readonly string OGUzi_Tag = "OGUzi";
