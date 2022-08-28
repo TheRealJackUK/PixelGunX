@@ -203,7 +203,7 @@ public class GlobalGameController
 		coinsBase = 1;
 		coinsBaseAdding = 0;
 		levelsToGetCoins = 1;
-		AppVersion = "10.0.4";
+		AppVersion = Application.version;
 	}
 
 	public static void SetMultiMode()
