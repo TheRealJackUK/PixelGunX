@@ -62,7 +62,7 @@ public static class Storager
 
 	public static bool hasKey(string key)
 	{
-		bool flag = CryptoPlayerPrefs.HasKey(key);
+		bool flag = PlayerPrefs.HasKey(key);
 		if ((key.Equals("Coins") || key.Equals("GemsCurrency")))
 		{
 			return true;

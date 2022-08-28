@@ -348,7 +348,7 @@ public sealed class FriendsController : MonoBehaviour
 		{
 			PlayerPrefs.SetString(AccountCreated, string.Empty);
 		}
-		id = PlayerPrefs.GetString(AccountCreated, false);
+		id = PlayerPrefs.GetString(AccountCreated);
 		if (string.IsNullOrEmpty(id))
 		{
 			StartCoroutine(CreatePlayer());
