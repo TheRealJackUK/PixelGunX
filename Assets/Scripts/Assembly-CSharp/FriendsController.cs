@@ -344,11 +344,11 @@ public sealed class FriendsController : MonoBehaviour
 			}
 		}
 		UnityEngine.Object.DontDestroyOnLoad(base.gameObject);
-		if (!Storager.hasKey(AccountCreated))
+		if (!PlayerPrefs.HasKey(AccountCreated))
 		{
-			Storager.setString(AccountCreated, string.Empty, false);
+			PlayerPrefs.SetString(AccountCreated, string.Empty);
 		}
-		id = Storager.getString(AccountCreated, false);
+		id = PlayerPrefs.GetString(AccountCreated, false);
 		if (string.IsNullOrEmpty(id))
 		{
 			StartCoroutine(CreatePlayer());
@@ -884,7 +884,7 @@ public sealed class FriendsController : MonoBehaviour
 		}
 		else
 		{
-			Storager.setString(AccountCreated, response, false);
+			PlayerPrefs.GetString(AccountCreated, response);
 			id = response;
 			onlineInfo.Clear();
 			friends.Clear();
@@ -1758,7 +1758,7 @@ public sealed class FriendsController : MonoBehaviour
 			yield return StartCoroutine(MyWaitForSeconds(10f));
 		}
 		Debug.Log("CreatePlayer succeeded with response:    “" + response + "”");
-		Storager.setString(AccountCreated, response, false);
+		PlayerPrefs.GetString(AccountCreated, response);
 		id = response;
 		readyToOperate = true;
 		StartCoroutine(UpdatePlayer(true));
