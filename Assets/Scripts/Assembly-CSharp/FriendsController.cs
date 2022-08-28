@@ -803,13 +803,20 @@ public sealed class FriendsController : MonoBehaviour
 			{
 				break;
 			}
-			Debug.LogWarning("GetBanList cannot parse ban!");
+			Debug.LogWarning("GetBanList cannot parse ban!" + responseText);
 			yield return StartCoroutine(MyWaitForSeconds(1f));
+		}
+		if (ban > 1) {
+			ban = 1;
 		}
 		Banned = ban;
 		if (Debug.isDebugBuild)
 		{
 			Debug.Log("GetBanList Banned: " + Banned);
+		}
+		if (ban.Equals(1))
+		{
+			Application.LoadLevel("Cheat");
 		}
 	}
 
@@ -847,6 +854,7 @@ public sealed class FriendsController : MonoBehaviour
 			if (Debug.isDebugBuild)
 			{
 				Debug.LogWarning("CheckOurIDExists fail.");
+				StartCoroutine(CreatePlayer());
 			}
 			yield return StartCoroutine(MyWaitForSeconds(10f));
 		}

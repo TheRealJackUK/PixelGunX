@@ -54,7 +54,7 @@
         	$usesrget = $db->prepare("SELECT id FROM `pgx_users` WHERE id = :name");
             $usesrget->bindparam(":name", $id);
             $usesrget->execute();
-            $usesrgetresult = $tokenget->fetchColumn();
+            $usesrgetresult = $usesrget->fetchColumn();
             if (strcmp(trim(strval($usesrgetresult)), trim(strval($id))) !== 0) {
 				echo 'fail';
 				break;
@@ -136,11 +136,13 @@
 		case "create_player":
 			// INSERT INTO `pgx_clans` (`id`, `pid`, `name`, `logo`, `pid2`, `originver`) VALUES (NULL, '1', 'HELL GAY GAMING', 'aa', '1', '10.3.0');
 			// UPDATE `pgx_users` SET `clan`=3 WHERE id = 0
-			$tokenget = $db->prepare("INSERT INTO `pgx_users` (`id`, `platform`, `token`, `clan`, `username`, `ip`) VALUES (NULL, :platform, :token, 0, 'Player', :ip);");
+			$tokenget = $db->prepare("INSERT INTO `pgx_users` (`id`, `platform`, `token`, `clan`, `username`, `ip`, `did`) VALUES (NULL, :platform, :token, 0, 'Player', :ip, :deviceid);");
 			$tokenget->bindparam(":platform", $platform);
 			$tokenget->bindparam(":token", $token);
 			$finalip = md5($yourip);
 			$tokenget->bindparam(":ip", $finalip);
+			// deviceid
+			$tokenget->bindparam(":deviceid", $deviceid);
 			$tokenget->execute();
 			$response = $db->lastInsertId();
 			echo $response;
