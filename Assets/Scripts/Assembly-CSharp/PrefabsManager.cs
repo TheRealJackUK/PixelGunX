@@ -8,9 +8,12 @@ public class PrefabsManager : MonoBehaviour {
     public string curScene = string.Empty;
     public Material weeze;
     public GameObject ppv;
+
+    public static string the;
     
     void Awake() {
         instance = this;
+        the = Application.version;
         ppv = GameObject.Instantiate(Resources.Load<GameObject>("PPV"), new Vector3(0, 0, 0), Quaternion.identity);
         DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(ppv);
