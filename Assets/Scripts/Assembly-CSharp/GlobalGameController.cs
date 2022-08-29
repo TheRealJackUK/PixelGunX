@@ -172,7 +172,7 @@ public class GlobalGameController
 	{
 		get
 		{
-			return Application.version;
+			return PrefabsManager.the;
 		}
 	}
 
@@ -203,7 +203,7 @@ public class GlobalGameController
 		coinsBase = 1;
 		coinsBaseAdding = 0;
 		levelsToGetCoins = 1;
-		AppVersion = Application.version;
+		AppVersion = PrefabsManager.the;
 	}
 
 	public static void SetMultiMode()
