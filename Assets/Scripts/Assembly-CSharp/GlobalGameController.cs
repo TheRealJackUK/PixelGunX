@@ -172,7 +172,7 @@ public class GlobalGameController
 	{
 		get
 		{
-			return Application.version;
+			return PrefabsManager.the;
 		}
 	}
 
