@@ -70,7 +70,7 @@ public class GlobalGameController
 
 	public static int levelsToGetCoins;
 
-	public static string AppVersion;
+	public static readonly string AppVersion;
 
 	public static float armorMyPlayer { get; set; }
 
@@ -172,7 +172,7 @@ public class GlobalGameController
 	{
 		get
 		{
-			return Application.version;
+			return PrefabsManager.the;
 		}
 	}
 
@@ -203,12 +203,9 @@ public class GlobalGameController
 		coinsBase = 1;
 		coinsBaseAdding = 0;
 		levelsToGetCoins = 1;
+		AppVersion = PrefabsManager.the;
 	}
 
-	void Start()
-	{
-		AppVersion = Application.version;
-	}
 	public static void SetMultiMode()
 	{
 		Defs.isMulti = true;
