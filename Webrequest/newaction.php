@@ -125,7 +125,7 @@
                 $clanName = GetDBVarOne("pgx_clans", "name", "WHERE id = :name", [":name" => $token]);
                 $clanLogo = GetDBVarOne("pgx_clans", "logo", "WHERE id = :name", [":name" => $token]);
                 // temporary fix
-                echo "{\"info\":{\"creator_id\":\"{$creatorID}\",\"name\":{$clanName},\"logo\":{$clanLogo}},\"players\":{\"0\":" . $creatorID . "},\"invites\":{\"0\":1}}";
+                echo "{\"info\":{\"creator_id\":\"". $creatorID ."\",\"name\":" . $clanName . ",\"logo\":" . $clanLogo . "},\"players\":{\"0\":" . $creatorID . "},\"invites\":{\"0\":1}}";
             }
             break;
 		case "create_clan":
