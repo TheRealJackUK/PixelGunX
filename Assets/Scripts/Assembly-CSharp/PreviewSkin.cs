@@ -27,36 +27,65 @@ public class PreviewSkin : MonoBehaviour
 
 	private void Update()
 	{
-		if (!isTapDown && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+		if (!isTapDown && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began || Input.GetMouseButtonDown(0))
 		{
-			touchPosition = ((Input.touchCount <= 0) ? new Vector2(Input.mousePosition.x, Input.mousePosition.y) : Input.GetTouch(0).position);
-			if (swipeZone.Contains(touchPosition))
+			if (Application.isMobilePlatform)
 			{
+				touchPosition = ((Input.touchCount <= 0) ? new Vector2(Input.mousePosition.x, Input.mousePosition.y) : Input.GetTouch(0).position);
+				if (swipeZone.Contains(touchPosition))
+				{
+					isTapDown = true;
+					selectedGameObject = GameObjectOnTouch(touchPosition);
+					if (selectedGameObject != null)
+					{
+						Highlight(selectedGameObject);
+					}
+				}
+				return;
+			} else {
+				touchPosition = (Vector2)Input.mousePosition;
 				isTapDown = true;
 				selectedGameObject = GameObjectOnTouch(touchPosition);
 				if (selectedGameObject != null)
 				{
 					Highlight(selectedGameObject);
 				}
+				Debug.LogError("called here with a mouse pos of " + (Vector2)Input.mousePosition + ", the selected gameobject is " + GameObjectOnTouch(touchPosition));
+				return;
 			}
-			return;
 		}
-		if (isTapDown && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
+		if (Application.isMobilePlatform && isTapDown && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
 		{
-			float num = ((Input.touchCount <= 0) ? (touchPosition.x - Input.mousePosition.x) : (touchPosition.x - Input.GetTouch(0).position.x));
-			if (selectedGameObject != null && Mathf.Abs(num) > 2f)
+			if (Application.isMobilePlatform)
 			{
-				Unhighlight(selectedGameObject);
-				selectedGameObject = null;
-			}
-			else
-			{
-				float num2 = 0.5f;
-				base.transform.Rotate(0f, num2 * num, 0f, Space.Self);
-				touchPosition = ((Input.touchCount <= 0) ? new Vector2(Input.mousePosition.x, Input.mousePosition.y) : Input.GetTouch(0).position);
+				float num = ((Input.touchCount <= 0) ? (touchPosition.x - Input.mousePosition.x) : (touchPosition.x - Input.GetTouch(0).position.x));
+				if (selectedGameObject != null && Mathf.Abs(num) > 2f)
+				{
+					Unhighlight(selectedGameObject);
+					selectedGameObject = null;
+				}
+				else
+				{
+					float num2 = 0.5f;
+					base.transform.Rotate(0f, num2 * num, 0f, Space.Self);
+					touchPosition = ((Input.touchCount <= 0) ? new Vector2(Input.mousePosition.x, Input.mousePosition.y) : Input.GetTouch(0).position);
+				}
+			} else {
+				float num = Input.mousePosition.x;
+				if (selectedGameObject != null && Mathf.Abs(num) > 2f)
+				{
+					Unhighlight(selectedGameObject);
+					selectedGameObject = null;
+				}
+				else
+				{
+					float num2 = 0.5f;
+					base.transform.Rotate(0f, num2 * num, 0f, Space.Self);
+					touchPosition = Input.mousePosition;
+				}
 			}
 		}
-		if (Input.touchCount <= 0 || (Input.GetTouch(0).phase != TouchPhase.Ended && Input.GetTouch(0).phase != TouchPhase.Canceled))
+		if (Application.isMobilePlatform && Input.touchCount <= 0 || Application.isMobilePlatform && (Input.GetTouch(0).phase != TouchPhase.Ended && Input.GetTouch(0).phase != TouchPhase.Canceled))
 		{
 			return;
 		}
