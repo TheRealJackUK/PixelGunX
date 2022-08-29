@@ -42,8 +42,10 @@ public sealed class ChatViewrController : MonoBehaviour
 		}
 		if (nameButton.Equals("KeyboardButton"))
 		{
-			Debug.Log("KeyboardButton");
-			mKeyboard = TouchScreenKeyboard.Open(string.Empty, TouchScreenKeyboardType.Default, false, false);
+			if (Application.isMobilePlatform)
+			{
+				mKeyboard = TouchScreenKeyboard.Open(string.Empty, TouchScreenKeyboardType.Default, false, false);
+			}
 		}
 	}
 
@@ -59,7 +61,7 @@ public sealed class ChatViewrController : MonoBehaviour
 
 	public void closeChat()
 	{
-		if (Application.isEditor)
+		if (!Application.isMobilePlatform)
 		{
 			Player_move_c.isBlockKeybordControl = false;
 		}
@@ -82,7 +84,7 @@ public sealed class ChatViewrController : MonoBehaviour
 
 	public void PostMessageByInput()
 	{
-		if ((Application.isEditor || Application.platform == RuntimePlatform.WP8Player) && enterMessageInput != null)
+		if (!Application.isMobilePlatform && enterMessageInput != null)
 		{
 			postChat(enterMessageInput.value);
 			enterMessageInput.value = string.Empty;
@@ -91,7 +93,7 @@ public sealed class ChatViewrController : MonoBehaviour
 
 	private void OnEnable()
 	{
-		if ((Application.isEditor || Application.platform == RuntimePlatform.WP8Player) && enterMessageInput != null)
+		if (!Application.isMobilePlatform && enterMessageInput != null)
 		{
 			enterMessageInput.isSelected = true;
 		}
@@ -109,13 +111,13 @@ public sealed class ChatViewrController : MonoBehaviour
 
 	private void Start()
 	{
-		isHold = true;
-		holdButtonOn.SetActive(false);
+		holdButton.SetActive(false);
 		holdButtonOn.SetActive(true);
 		sharedController = this;
 		_weaponManager = WeaponManager.sharedManager;
 		mKeyboard = TouchScreenKeyboard.Open(string.Empty, TouchScreenKeyboardType.Default, false, false);
-		if (Application.isEditor || Application.platform == RuntimePlatform.WP8Player)
+		isHold = true;
+		if (!Application.isMobilePlatform)
 		{
 			enterMessageController.gameObject.SetActive(true);
 			Player_move_c.isBlockKeybordControl = true;
@@ -170,7 +172,7 @@ public sealed class ChatViewrController : MonoBehaviour
 		{
 			labelChat[i].SetActive(false);
 		}
-		if (Application.isEditor || mKeyboard == null)
+		if (!Application.isMobilePlatform || mKeyboard == null)
 		{
 			return;
 		}
@@ -194,15 +196,15 @@ public sealed class ChatViewrController : MonoBehaviour
 				mKeyboard.text = mText;
 			}
 		}
-		if (mKeyboard.done && !mKeyboard.wasCanceled)
+		if (mKeyboard.done && !mKeyboard.wasCanceled || !Application.isMobilePlatform)
 		{
 			if (isHold)
 			{
-				if (BuildSettings.BuildTarget == BuildTarget.WP8Player)
+				if (!Application.isMobilePlatform)
 				{
 					if (enterMessageInput != null)
 					{
-						enterMessageInput.isSelected = true;
+					//	enterMessageInput.isSelected = true;
 					}
 				}
 				else
