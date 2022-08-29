@@ -6167,6 +6167,12 @@ public sealed class Player_move_c : MonoBehaviour
 		shootS();
 	}
 
+	public IEnumerator waitBazooka()
+	{
+		yield return new WaitForSeconds(_weaponManager.currentWeaponSounds.waitTime);
+		StartCoroutine(BazookaShoot());
+	}
+
 	public void shootS()
 	{
 		if (isGrenadePress)
@@ -6212,9 +6218,14 @@ public sealed class Player_move_c : MonoBehaviour
 				_HitEnemies(list);
 				return;
 			}
-			if (_weaponManager.currentWeaponSounds.bazooka && !isMechActive)
+			if (_weaponManager.currentWeaponSounds.bazooka && !isMechActive && !_weaponManager.currentWeaponSounds.isWaitWeapon)
 			{
 				StartCoroutine(BazookaShoot());
+				return;
+			}
+			else if (_weaponManager.currentWeaponSounds.bazooka && !isMechActive && _weaponManager.currentWeaponSounds.isWaitWeapon)
+			{
+				StartCoroutine(waitBazooka());
 				return;
 			}
 			
