@@ -41,6 +41,10 @@ public class PrefabsManager : MonoBehaviour {
     public void FixedUpdate(){
         if (Application.loadedLevelName != curScene){
             curScene = Application.loadedLevelName;
+            if (curScene == "LevelComplete" || curScene == "ChooseLevel")
+            {
+                return;
+            }
             //GameObject.Instantiate(Resources.Load<GameObject>("PPV"), new Vector3(0, 0, 0), Quaternion.identity);
             //if (Application.isPlaying) {
                 bool lo = false;
