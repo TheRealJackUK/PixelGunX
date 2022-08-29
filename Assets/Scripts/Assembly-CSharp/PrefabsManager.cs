@@ -13,6 +13,7 @@ public class PrefabsManager : MonoBehaviour {
     void Awake() {
         the = Application.version;
         instance = this;
+        the = Application.version;
         ppv = GameObject.Instantiate(Resources.Load<GameObject>("PPV"), new Vector3(0, 0, 0), Quaternion.identity);
         DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(ppv);

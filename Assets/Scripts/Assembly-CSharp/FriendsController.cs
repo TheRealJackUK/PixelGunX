@@ -918,8 +918,16 @@ public sealed class FriendsController : MonoBehaviour
 	public void InitOurInfo()
 	{
 		nick = Defs.GetPlayerNameOrDefault();
+		// SkinsController.sharedController.Start();
+		/*while (SkinsController.currentSkinForPers != null) {
+		}*/
 		byte[] inArray = SkinsController.currentSkinForPers.EncodeToPNG();
-		skin = Convert.ToBase64String(inArray);
+		skin = "";
+		try {
+			skin = Convert.ToBase64String(inArray);
+		}catch(Exception e){
+
+		}
 		rank = ExperienceController.sharedController.currentLevel;
 		wins.Value = Storager.getInt("Rating", false);
 		survivalScore = PlayerPrefs.GetInt(Defs.SurvivalScoreSett, 0);
@@ -1880,11 +1888,12 @@ public sealed class FriendsController : MonoBehaviour
 
 	private IEnumerator UpdatePlayer(bool sendSkin)
 	{
-		InitOurInfo();
+		// InitOurInfo();
 		while (!ReceivedLastOnline || !infoLoaded)
 		{
 			yield return null;
 		}
+		InitOurInfo();
 		WWWForm form = new WWWForm();
 		form.AddField("action", "update_player");
 		form.AddField("id", id);
