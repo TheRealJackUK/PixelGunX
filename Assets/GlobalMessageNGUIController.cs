@@ -32,7 +32,7 @@ public class GlobalMessageNGUIController : MonoBehaviour
     }
 
     IEnumerator FoundGM() {
-        mainPanel.gameObject.SetActive(true);
+        //mainPanel.gameObject.SetActive(true);
         yield return new WaitForSeconds(4);
         mainPanel.gameObject.SetActive(false);
         yield break;
