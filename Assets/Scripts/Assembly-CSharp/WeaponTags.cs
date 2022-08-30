@@ -436,6 +436,8 @@ public static class WeaponTags
 
 	public static readonly string Nokia_Tag = "Nokia";
 
+	// public static readonly string bg3dchainsaw_Tag = "bg3dchainsaw";
+
 	public static readonly string OGUzi_Tag = "OGUzi";
 
 	public static readonly string GiantSword_Tag = "GiantSword";

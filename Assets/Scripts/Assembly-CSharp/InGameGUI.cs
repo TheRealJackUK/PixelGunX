@@ -1084,6 +1084,10 @@ public sealed class InGameGUI : MonoBehaviour
 
 	private void Update()
 	{
+		if (GameObject.Find("Panel_Swipe") != null)
+		{
+			GameObject.Find("Panel_Swipe").SetActive(false);
+		}
 		if (!Application.isMobilePlatform && Defs.isMouseControl)
 		{
 			if (JoystickController.leftJoystick != null && JoystickController.leftJoystick.transform.parent.gameObject.active)
@@ -1096,20 +1100,23 @@ public sealed class InGameGUI : MonoBehaviour
             }
 		if (Defs.isMouseControl && reloadButton != null && reloadButton.active)
 		{
-			Destroy(zoomButton);
-			Destroy(reloadButton);
-			Destroy(fireButton);
-			Destroy(fireButtonInJoystick);
+			zoomButton.SetActive(false);
+			reloadButton.SetActive(false);
+			fireButton.SetActive(false);
+			fireButtonInJoystick.SetActive(false);
 			Destroy(fireButtonSprite);
 			Destroy(fireButtonSprite2);
-			Destroy(healthAddButton);
-			Destroy(ammoAddButton);
-			Destroy(grenadeButton);
-			Destroy(jumpButton);
-		} else if (ammoAddButton != null)
+			healthAddButton.SetActive(false);
+			ammoAddButton.SetActive(false);
+			grenadeButton.SetActive(false);
+			jumpButton.SetActive(false);
+		} else if (GameObject.Find("AmmoButton") != null)
 		{
-			Destroy(healthAddButton);
-			Destroy(ammoAddButton);
+			/*healthAddButton.SetActive(false);
+			ammoAddButton.SetActive(false);
+			grenadeButton.SetActive(false);*/
+			GameObject.Find("AmmoButton").SetActive(false);
+			GameObject.Find("Health_Button").SetActive(false);
 		}
 		}
 		if (currentScrollIndex > 5){
@@ -1605,7 +1612,6 @@ public sealed class InGameGUI : MonoBehaviour
 		changeWeaponWrap.SortAlphabetically();
 		changeWeaponWrap.GetComponent<MyCenterOnChild>().enabled = false;
 		changeWeaponWrap.GetComponent<MyCenterOnChild>().enabled = true;
-		int num3 = 0;
 		for (int j = 0; j < 5; j++)
 		{
 			Texture texture = ShopNGUIController.TextureForCat(j);
@@ -1616,13 +1622,13 @@ public sealed class InGameGUI : MonoBehaviour
 			weaponIcons[j].mainTexture = texture;
 			foreach (Transform item in changeWeaponWrap.transform)
 			{
-				if (item.name.Equals("WeaponCat_" + num3))
+				Debug.LogError(item.name);
+				if (item.name.Equals("WeaponCat_" + j))
 				{
 					item.GetComponent<UITexture>().mainTexture = texture;
 					break;
 				}
 			}
-			num3++;
 		}
 		for (int k = 0; k < WeaponManager.sharedManager.playerWeapons.Count; k++)
 		{
