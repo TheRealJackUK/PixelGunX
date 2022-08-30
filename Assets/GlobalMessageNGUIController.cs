@@ -17,13 +17,13 @@ public class GlobalMessageNGUIController : MonoBehaviour
         string name = b.text.Trim();
         string msg = a.text.Trim();
         if ((prevName.Equals(name)) && (prevMsg.Equals(msg))) {
-            Debug.LogError("recieved message from " + b.text + " saying " + a.text + " BUT " + prevName + " == " + b.text + " and " + prevMsg + " == " + a.text);
+            //Debug.LogError("recieved message from " + b.text + " saying " + a.text + " BUT " + prevName + " == " + b.text + " and " + prevMsg + " == " + a.text);
         }else{
             PlayerPrefs.SetString("lastGMName", b.text.Trim());
             PlayerPrefs.SetString("lastGMMsg", a.text.Trim());
             usernameLabel.text = "Global message from " + b.text + ":";
             messageLabel.text = a.text;
-            Debug.LogError("recieved message from " + b.text + " saying " + a.text);
+            //Debug.LogError("recieved message from " + b.text + " saying " + a.text);
             StartCoroutine(FoundGM());
         }
         yield return new WaitForSeconds(2);

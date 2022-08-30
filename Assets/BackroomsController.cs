@@ -5,36 +5,104 @@ using System;
 
 public class BackroomsController : MonoBehaviour
 {
-    public Camera targetCamera;
+    public Camera myCamera;
+
+    public GameObject pointsholder;
+
+    public List<GameObject> targetpoints;
 
     public GameObject[] backroomsGameobjects;
 
-    private GameObject[] instantiated;
+    public List<GameObject> instantiated;
 
-    public GameObject l;
+    private GameObject l;
+
+    public Vector3 pointOffset;
+
+    public GameObject deadCollider;
+
+    public Transform playerTransform;
+    
+    public Vector3 playerPosition;
+
+    public int division = 6;
+
+    private int i = 0;
 
     public void Start() {
-        int i = 0;
-        instantiated = new GameObject[backroomsGameobjects.Length];
-        foreach (GameObject lmao in backroomsGameobjects) {
-            instantiated[i] = GameObject.Instantiate(lmao, new Vector3(0, 9, 0), Quaternion.identity);
-            i++;
+
+    }
+
+    public void TryCreateFromPos(Vector3 pos) {
+
+    }
+
+    private bool isVisible(GameObject obj) {
+        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(myCamera);
+        bool cansee = false;
+        foreach (Transform zhaild in obj.transform) {
+            if (GeometryUtility.TestPlanesAABB(planes, zhaild.gameObject.GetComponent<Collider>().bounds)) {
+                cansee = true;
+            }
         }
+        return cansee;
     }
 
     public void Update() {
-        for (int eks = -3; eks < 3; eks++)
-        {
-            for (int zed = -3; zed < 3; zed++)
+        foreach (Camera cam in Resources.FindObjectsOfTypeAll<Camera>()) {
+            if ((cam.gameObject.active && cam.targetDisplay == 1) || cam.gameObject.name == "Main Camera") {
+                myCamera = cam;
+            }
+        }
+        if (myCamera.gameObject.name.Equals("Main Camera")) {
+            
+        }else{
+            /*pointsholder.transform.position = new Vector3(myCamera.transform.position.x, 0, myCamera.transform.position.z);
+            deadCollider.transform.position = new Vector3(myCamera.transform.position.x, -1.48f, myCamera.transform.position.z);*/
+        }
+        foreach (Player_move_c lolplr in Resources.FindObjectsOfTypeAll<Player_move_c>()) {
+            if (lolplr.isMine)
             {
+                playerTransform = lolplr.gameObject.transform;
+                playerPosition = playerTransform.position;
+                pointsholder.transform.position = new Vector3(playerPosition.x, 0, playerPosition.z);
+                deadCollider.transform.position = new Vector3(playerPosition.x, -1.48f, playerPosition.z);
+            }
+        }
+        foreach (GameObject targetCamera in targetpoints) {
+            if (targetCamera.active) {
                 Vector3 yourpos = targetCamera.transform.position;
-                Vector3 divvedpos = new Vector3((yourpos.x+eks*6)/6, yourpos.y/6, (yourpos.z+zed*6)/6);
-                UnityEngine.Random.InitState((int)((int)(divvedpos.x) + (int)(divvedpos.z)));
-                foreach (GameObject lmao in instantiated) {
-                    lmao.transform.position = new Vector3(0, 9, 0);
+                Vector3 divvedpos = new Vector3((yourpos.x+pointOffset.x)/division, yourpos.y/division, (yourpos.z+pointOffset.z)/division);
+                UnityEngine.Random.InitState((int)((int)(divvedpos.x * divvedpos.x) + (int)(divvedpos.z * divvedpos.z)));
+                bool can = true;
+                foreach (GameObject loma in instantiated) {
+                    if (loma.transform.position == new Vector3((int)((int)(divvedpos.x) * 6), 0, (int)((int)(divvedpos.z) * 6))) {
+                        can = false;
+                    }
                 }
-                l = instantiated[(int)UnityEngine.Random.Range(0,5)];
-                l.transform.position = new Vector3((int)((int)(divvedpos.x) * 6), 0, (int)((int)(divvedpos.z) * 6));
+                if (can) {
+                    l = GameObject.Instantiate(backroomsGameobjects[(int)UnityEngine.Random.Range(0,5)], new Vector3(0, 0, 0), Quaternion.identity);
+                    l.transform.position = new Vector3((int)((int)(divvedpos.x) * 6), 0, (int)((int)(divvedpos.z) * 6));
+                    l.transform.parent = transform;
+                    instantiated.Add(l);
+                }
+            }
+        }
+       /* foreach (GameObject instanti in instantiated) {
+            if (!isVisible(instanti))
+            {
+                instantiated.Remove(instanti);
+                GameObject.Destroy(instanti);
+            }
+        }*/
+        foreach (GameObject instanti in instantiated) {
+            if (!isVisible(instanti))
+            {
+                //instantiated.Remove(instanti);
+                //GameObject.Destroy(instanti);
+                instanti.SetActive(false);
+            }else{
+                instanti.SetActive(true);
             }
         }
     }
