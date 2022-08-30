@@ -21,6 +21,10 @@ public class BackroomsController : MonoBehaviour
 
     public GameObject deadCollider;
 
+    public Transform playerTransform;
+    
+    public Vector3 playerPosition;
+
     public int division = 6;
 
     private int i = 0;
@@ -56,10 +60,14 @@ public class BackroomsController : MonoBehaviour
             /*pointsholder.transform.position = new Vector3(myCamera.transform.position.x, 0, myCamera.transform.position.z);
             deadCollider.transform.position = new Vector3(myCamera.transform.position.x, -1.48f, myCamera.transform.position.z);*/
         }
-        if (GameObject.Find("Player")) {
-            Transform plr = GameObject.Find("Player").transform;
-            pointsholder.transform.position = new Vector3(plr.position.x, 0, plr.position.z);
-            deadCollider.transform.position = new Vector3(plr.position.x, -1.48f, plr.position.z);
+        foreach (Player_move_c lolplr in Resources.FindObjectsOfTypeAll<Player_move_c>()) {
+            if (lolplr.isMine)
+            {
+                playerTransform = lolplr.gameObject.transform;
+                playerPosition = playerTransform.position;
+                pointsholder.transform.position = new Vector3(playerPosition.x, 0, playerPosition.z);
+                deadCollider.transform.position = new Vector3(playerPosition.x, -1.48f, playerPosition.z);
+            }
         }
         foreach (GameObject targetCamera in targetpoints) {
             if (targetCamera.active) {
