@@ -188,8 +188,8 @@ internal sealed class FirstPersonControlSharp : UnityEngine.MonoBehaviour
 			mySkinName.sendAnimJump();
 			mult += 0.1f;
 		}
-		if (mult > 2) {
-			mult = 2;
+		if (mult > 1.7f) {
+			mult = 1.7f;
 		}
 		if ((BuildSettings.BuildTarget != BuildTarget.Android && BuildSettings.BuildTarget != BuildTarget.iPhone) || !Social.localUser.authenticated)
 		{
@@ -219,7 +219,7 @@ internal sealed class FirstPersonControlSharp : UnityEngine.MonoBehaviour
 		});
 	}
 
-	public float mult = 1;
+	public float mult = 0.9f;
 	public int tmr = 0;
 
 	private void Update()
@@ -229,7 +229,7 @@ internal sealed class FirstPersonControlSharp : UnityEngine.MonoBehaviour
 			tmr = 0;
 		}
 		if (tmr > 5){
-			mult = 1;
+			mult = 0.9f;
 		}
 		if ((isMulti && !isMine) || JoystickController.leftJoystick == null || JoystickController.rightJoystick == null)
 		{
