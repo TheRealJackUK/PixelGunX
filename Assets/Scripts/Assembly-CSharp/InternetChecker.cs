@@ -49,14 +49,10 @@ internal sealed class InternetChecker : MonoBehaviour
 		else if (!htmlFromUri.Contains("schema.org/WebPage"))
 		{
 			InternetAvailable = false;
-			PhotonNetwork.PhotonServerSettings.HostType = ServerSettings.HostingOption.NotSet;
-        	PhotonNetwork.PhotonServerSettings.AppID = "retarded ahh faggot";
 		}
 		else
 		{
 			InternetAvailable = true;
-			PhotonNetwork.PhotonServerSettings.HostType = ServerSettings.HostingOption.PhotonCloud;
-        	PhotonNetwork.PhotonServerSettings.AppID = "46894466-6f6e-4e8f-92f5-86436bd0a2eb";
 		}
 	}
 
