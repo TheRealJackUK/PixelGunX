@@ -9,7 +9,7 @@ public class GlobalMessageNGUIController : MonoBehaviour
     public UILabel messageLabel;
 
     IEnumerator TestForGM() {
-        string prevName = PlayerPrefs.GetString("lastGMName").Trim();
+        /*string prevName = PlayerPrefs.GetString("lastGMName").Trim();
         string prevMsg = PlayerPrefs.GetString("lastGMMsg").Trim();
         WWW a = new WWW("https://oldpg3d.7m.pl/~pgx/msg");
         WWW b = new WWW("https://oldpg3d.7m.pl/~pgx/name");
@@ -31,7 +31,7 @@ public class GlobalMessageNGUIController : MonoBehaviour
             StartCoroutine(FoundGM());
         }
         yield return new WaitForSeconds(2);
-        StartCoroutine(TestForGM());
+        StartCoroutine(TestForGM());*/
         yield break;
     }
 
