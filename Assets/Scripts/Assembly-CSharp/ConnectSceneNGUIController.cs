@@ -2517,7 +2517,7 @@ public class ConnectSceneNGUIController : MonoBehaviour
 		}
 		isConnectingToPhoton = true;
 		isCancelConnectingToPhoton = false;
-		gameTier = ExpController.Instance.OurTier;
+		gameTier = 1;
 		Debug.LogError(Initializer.Separator + regim.ToString() + gameTier + "v" + GlobalGameController.MultiplayerProtocolVersion);
 		PhotonNetwork.ConnectUsingSettings(Initializer.Separator + regim.ToString() + gameTier + "v" + GlobalGameController.MultiplayerProtocolVersion);
 	}

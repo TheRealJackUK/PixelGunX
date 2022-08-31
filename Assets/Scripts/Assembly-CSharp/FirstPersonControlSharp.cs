@@ -186,7 +186,10 @@ internal sealed class FirstPersonControlSharp : UnityEngine.MonoBehaviour
 		if (!Defs.isJetpackEnabled)
 		{
 			mySkinName.sendAnimJump();
-			mult += 0.3f;
+			mult += 0.1f;
+		}
+		if (mult > 2) {
+			mult = 2;
 		}
 		if ((BuildSettings.BuildTarget != BuildTarget.Android && BuildSettings.BuildTarget != BuildTarget.iPhone) || !Social.localUser.authenticated)
 		{
