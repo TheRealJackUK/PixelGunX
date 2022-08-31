@@ -403,7 +403,7 @@ internal sealed class MainMenuController : ControlsSettingsBase
 //		freeAwardChestObj.SetActive(false);
 		premiumTime.gameObject.SetActive(true);
 		InitializeBannerWindow();
-		bool developerConsoleEnabled = Debug.isDebugBuild || true;
+		bool developerConsoleEnabled = false;
 		if (developerConsole != null)
 		{
 			developerConsole.gameObject.SetActive(developerConsoleEnabled);

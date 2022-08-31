@@ -63,10 +63,10 @@ public sealed class VirtualCurrencyHelper
 		AddPrice(StoreKitEventListener.skin810_6, 25);
 		AddPrice(StoreKitEventListener.skin931_1, 25);
 		AddPrice(StoreKitEventListener.skin931_2, 25);
-		AddPrice(StoreKitEventListener.skin931_3, int.MaxValue);
-		AddPrice(StoreKitEventListener.skin931_4, 50);
-		AddPrice(StoreKitEventListener.skin931_5, int.MaxValue);
-		AddPrice(StoreKitEventListener.skin931_6, 30);
+		AddPrice(StoreKitEventListener.skin931_3, 25);
+		AddPrice(StoreKitEventListener.skin931_4, 25);
+		AddPrice(StoreKitEventListener.skin931_5, 25);
+		AddPrice(StoreKitEventListener.skin931_6, 25);
 		AddPrice("CustomSkinID", Defs.skinsMakerPrice);
 		AddPrice(Wear.HitmanCape, 60);
 		AddPrice(Wear.BerserkCape, 60);

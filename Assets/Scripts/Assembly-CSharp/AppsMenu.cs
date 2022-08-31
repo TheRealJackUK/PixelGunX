@@ -209,14 +209,6 @@ internal sealed class AppsMenu : MonoBehaviour
 
 	private void Awake()
 	{
-		// clear data
-		if (PlayerPrefs.HasKey("AccountCreated")) {
-			string UserID = PlayerPrefs.GetString("AccountCreated");
-			PlayerPrefs.DeleteAll();
-			PlayerPrefs.SetString("AccountCreated", UserID);
-		}else{
-			PlayerPrefs.DeleteAll();
-		}
 		Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, true);
 		if (Storager.getInt("currentExperience", false) < 0 || Storager.getInt("currentExperience", false) == null) 
 		{
@@ -244,6 +236,19 @@ internal sealed class AppsMenu : MonoBehaviour
 
 	internal static IEnumerable<float> AppsMenuAwakeCoroutine()
 	{
+		// clear data
+		if (!PlayerPrefs.HasKey("dataReset")) {
+			if (PlayerPrefs.HasKey("AccountCreated")) {
+				string UserID = PlayerPrefs.GetString("AccountCreated");
+				PlayerPrefs.DeleteAll();
+				PlayerPrefs.SetString("AccountCreated", UserID);
+				PlayerPrefs.SetString("currentfont", "minecraft");
+			}else{
+				PlayerPrefs.DeleteAll();
+				PlayerPrefs.SetString("currentfont", "minecraft");
+			}
+			PlayerPrefs.SetInt("dataReset", 1);
+		}
 		if (!PlayerPrefs.HasKey("currentfont")) {
 			PlayerPrefs.SetString("currentfont", "minecraft");
 		}

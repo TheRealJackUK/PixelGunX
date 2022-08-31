@@ -4,6 +4,7 @@ using UnityEngine;
 using Rilisoft;
 using Holoville.HOTween;
 using I2.Loc;
+using System;
 
 public class GraphicsMenuController : MonoBehaviour {
 
@@ -13,10 +14,15 @@ public class GraphicsMenuController : MonoBehaviour {
 	public ButtonHandler mbBtn;
 	public ButtonHandler quitBtn;
 
+	public UILabel fovLabel;
+	public UISlider fovSlider;
+
 	public ButtonHandler mojanglesBtn;
 	public ButtonHandler miniBtn;
 	public ButtonHandler ponderosaBtn;
 	public ButtonHandler unibodyBtn;
+
+	public ButtonHandler offGuiBtn;
 
 	public void SwitchBtn(bool on, ButtonHandler btn) {
 		HOTween.Init(true, true, true);
@@ -59,6 +65,12 @@ public class GraphicsMenuController : MonoBehaviour {
 		bool x = !(Storager.getInt("mb", false) == 1);
 		Storager.setInt("mb", (x==true?1:0), false);
 		SwitchBtn(x, mbBtn);
+	}
+
+	public void HandleOffGui(object sender, System.EventArgs e){
+		bool x = !(Storager.getInt(Defs.GameGUIOffMode, false) == 1);
+		Storager.setInt(Defs.GameGUIOffMode, (x==true?1:0), false);
+		SwitchBtn(x, offGuiBtn);
 	}
 
 	public void HandleQuit(object sender, System.EventArgs e){
@@ -111,6 +123,16 @@ public class GraphicsMenuController : MonoBehaviour {
 		SwitchBtn(true, unibodyBtn);
 	}
 
+	public void fovchanged() {
+		int currentFOV = Storager.getInt("camerafov", false);
+		int num = 179;
+		int num2 = Mathf.Clamp(Convert.ToInt32(fovSlider.value * (float)num), 0, num);
+		float fovPercentage = (float)num2 / (float)num;
+		fovLabel.text = "FOV: " + num2 + '/' + num;
+		// view.FOVPercentage = fovPercentage;
+		Storager.setInt("camerafov", num2, false);
+	}
+
 	void Start () {
 		SwitchBtn(Storager.getInt("bloom", false) == 1, bloomBtn);
 		SwitchBtn(Storager.getInt("ao", false) == 1, aoBtn);
@@ -120,7 +142,14 @@ public class GraphicsMenuController : MonoBehaviour {
 		SwitchBtn(PlayerPrefs.GetString("currentfont") == "MINI", miniBtn);
 		SwitchBtn(PlayerPrefs.GetString("currentfont") == "Ponderosa", ponderosaBtn);
 		SwitchBtn(PlayerPrefs.GetString("currentfont") == "Unibody", unibodyBtn);
+		SwitchBtn(PlayerPrefs.GetInt(Defs.GameGUIOffMode) == 1, offGuiBtn);
 		Resources.Load<LanguageSource>("I2Languages").UpdateTheFont();
+		int currentFOV = Storager.getInt("camerafov", false);
+		int num = 179;
+		int num2 = Mathf.Clamp(Convert.ToInt32(currentFOV * (float)num), 0, num);
+		float fovPercentage = (float)currentFOV / (float)num;
+		fovLabel.text = "FOV: " + currentFOV + '/' + num;
+		fovSlider.value = fovPercentage;
 		if (bloomBtn != null)
 		{
 			bloomBtn.Clicked += HandleBloom;
@@ -156,6 +185,10 @@ public class GraphicsMenuController : MonoBehaviour {
 		if (unibodyBtn != null)
 		{
 			unibodyBtn.Clicked += HandleUnibody;
+		}
+		if (offGuiBtn != null)
+		{
+			offGuiBtn.Clicked += HandleOffGui;
 		}
 	}
 }

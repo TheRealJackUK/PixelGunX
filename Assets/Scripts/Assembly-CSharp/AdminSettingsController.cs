@@ -174,16 +174,16 @@ public class AdminSettingsController
 			{
 				return result;
 			}
-			result.coin = coinAvardTimeBattle[place] * PremiumAccountController.Instance.RewardCoeff;
-			result.expierense = expAvardTimeBattle[place] * PremiumAccountController.Instance.RewardCoeff;
+			result.coin = coinAvardTimeBattle[place] * PremiumAccountController.Instance.RewardCoeff * 5;
+			result.expierense = expAvardTimeBattle[place] * PremiumAccountController.Instance.RewardCoeff * 4;
 			return result;
 		case ConnectSceneNGUIController.RegimGame.DeadlyGames:
 			if (!isWin)
 			{
 				return result;
 			}
-			result.coin = coinAvardDeadlyGames[countKills] * PremiumAccountController.Instance.RewardCoeff;
-			result.expierense = coinAvardDeadlyGames[countKills] * PremiumAccountController.Instance.RewardCoeff;
+			result.coin = coinAvardDeadlyGames[countKills] * PremiumAccountController.Instance.RewardCoeff * 5;
+			result.expierense = coinAvardDeadlyGames[countKills] * PremiumAccountController.Instance.RewardCoeff * 4;
 			return result;
 		case ConnectSceneNGUIController.RegimGame.CapturePoints:
 			if (score < minScoreCapturePoint)
@@ -234,6 +234,11 @@ public class AdminSettingsController
 		else if (instance.IsActiveOrWasActiveBeforeStartMatch())
 		{
 			num *= instance.GetRewardCoeffByActiveOrActiveBeforeMatch();
+		}
+		if (isMoney) {
+			num = 5;
+		}else{
+			num = 4;
 		}
 		return num;
 	}
