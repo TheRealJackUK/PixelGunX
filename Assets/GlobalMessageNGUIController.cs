@@ -13,7 +13,11 @@ public class GlobalMessageNGUIController : MonoBehaviour
         string prevMsg = PlayerPrefs.GetString("lastGMMsg").Trim();
         WWW a = new WWW("https://oldpg3d.7m.pl/~pgx/msg");
         WWW b = new WWW("https://oldpg3d.7m.pl/~pgx/name");
-        yield return new WaitForSeconds(1);
+        for (;;) {
+            if (a.isDone && b.isDone) {
+                break;
+            }
+        }
         string name = b.text.Trim();
         string msg = a.text.Trim();
         if ((prevName.Equals(name)) && (prevMsg.Equals(msg))) {

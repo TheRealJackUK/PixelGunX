@@ -209,6 +209,14 @@ internal sealed class AppsMenu : MonoBehaviour
 
 	private void Awake()
 	{
+		// clear data
+		if (PlayerPrefs.HasKey("AccountCreated")) {
+			string UserID = PlayerPrefs.GetString("AccountCreated");
+			PlayerPrefs.DeleteAll();
+			PlayerPrefs.SetString("AccountCreated", UserID);
+		}else{
+			PlayerPrefs.DeleteAll();
+		}
 		Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, true);
 		if (Storager.getInt("currentExperience", false) < 0 || Storager.getInt("currentExperience", false) == null) 
 		{
