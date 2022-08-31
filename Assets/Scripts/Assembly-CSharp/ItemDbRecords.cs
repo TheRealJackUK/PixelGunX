@@ -284,6 +284,9 @@ public static class ItemDbRecords
 		list.Add(new ItemRecord(218, "AdvancedScoutRifle", "AdvancedScoutRifle", "Weapon278", "AdvancedScoutRifle", "AdvancedScoutRifle", 500, true, false, "Coins"));
 		list.Add(new ItemRecord(282, "PixelStrikeRifle", "PixelStrikeRifle", "Weapon282", "PixelStrikeRifle", "PixelStrikeRifle", 999, true, false, "Coins"));
 		list.Add(new ItemRecord(288, "golduzi", "golduzi", "Weapon288", "golduzi", "golduzi", 400, true, false, "GemsCurrency"));
+		list.Add(new ItemRecord(289, "vector", "vector", "Weapon289", "vector", "vector", 550, true, false, "Coins"));
+		list.Add(new ItemRecord(290, "redshotgun", "redshotgun", "Weapon290", "redshotgun", "redshotgun", 700, true, false, "Coins"));
+		list.Add(new ItemRecord(291, "goldak", "goldak", "Weapon291", "goldak", "goldak", 1500, true, false, "Coins"));
 		list.Add(new ItemRecord(279, "OGUzi", "OGUzi", "Weapon279", "OGUzi", "OGUzi", 50, true, false, "Coins"));
 		list.Add(new ItemRecord(280, "Nokia", "Nokia", "Weapon280", "Nokia", "Nokia", 420, true, false, "GemsCurrency"));
 		list.Add(new ItemRecord(395, "GiantSword", "GiantSword", "Weapon395", "GiantSword", "GiantSword", 300, true, false, "GemsCurrency"));
