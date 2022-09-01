@@ -69,7 +69,7 @@ public class PrefabsManager : MonoBehaviour {
                                 }
                             }
                             if (!jugf){
-                                if (!LayerMask.LayerToName(gobj.layer).ToLower().Contains("ngui") && !LayerMask.LayerToName(gobj.layer).ToLower().Contains("label") && !LayerMask.LayerToName(gobj.layer).ToLower().Contains("skin") && !LayerMask.LayerToName(gobj.layer).ToLower().Contains("game")){
+                                if (!LayerMask.LayerToName(gobj.layer).ToLower().Contains("ngui") && !LayerMask.LayerToName(gobj.layer).ToLower().Contains("label") && !LayerMask.LayerToName(gobj.layer).ToLower().Contains("skin") && !LayerMask.LayerToName(gobj.layer).ToLower().Contains("game") && !LayerMask.LayerToName(gobj.layer).ToLower().Contains("star") && !LayerMask.LayerToName(gobj.layer).ToLower().Contains("shine") && !LayerMask.LayerToName(gobj.layer).ToLower().Contains("exp")){
                                     gobj.layer = 29;
                                 }
                             }
