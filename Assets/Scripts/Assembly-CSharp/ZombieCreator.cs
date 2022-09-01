@@ -250,6 +250,10 @@ public sealed class ZombieCreator : MonoBehaviour
 		_enemiesInWaves = new List<List<string>>();
 		_allEnemiesSurvival = new List<string>();
 		bossesSurvival = new Dictionary<int, int>();
+		bossesSurvival.Add(3, 22);
+		bossesSurvival.Add(7, 23);
+		bossesSurvival.Add(11, 24);
+		bossesSurvival.Add(15, 25);
 		_WeaponsAddedInWaves = new List<List<string>>();
 		survivalAvailableWeapons = new List<string>();
 		List<string> list = new List<string>();
