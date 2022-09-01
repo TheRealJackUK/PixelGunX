@@ -32,7 +32,7 @@ internal sealed class CoinBonus : MonoBehaviour
 				int num = ((!(PremiumAccountController.Instance != null)) ? 1 : PremiumAccountController.Instance.RewardCoeff);
 				if (!Defs.IsSurvival && !Defs.isMulti)
 				{
-					num = 1;
+					num = 5;
 				}
 				int @int = Storager.getInt("Coins", false);
 				Storager.setInt("Coins", @int + 1 * num, false);
