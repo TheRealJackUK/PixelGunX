@@ -190,12 +190,12 @@ public sealed class ExperienceController : MonoBehaviour
 	{
 		int @int = Storager.getInt("GemsCurrency", false);
 		int num = addGemsFromLevels[currentLevel - 1];
-		Storager.setInt("GemsCurrency", @int + num, false);
+		Storager.setInt("GemsCurrency", @int + num * 4, false);
 		FlurryEvents.LogGemsGained(FlurryEvents.GetPlayingMode(), num);
 		CoinsMessage.FireCoinsAddedEvent(true);
 		int int2 = Storager.getInt("Coins", false);
 		int num2 = addCoinsFromLevels[currentLevel - 1];
-		Storager.setInt("Coins", int2 + num2, false);
+		Storager.setInt("Coins", int2 + num2 * 4, false);
 		FlurryEvents.LogCoinsGained(FlurryEvents.GetPlayingMode(), num2);
 		CoinsMessage.FireCoinsAddedEvent(false);
 	}
