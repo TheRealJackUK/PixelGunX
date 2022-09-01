@@ -55,6 +55,11 @@ internal sealed class ComicsCampaign : MonoBehaviour
 
 	private void Awake()
 	{
+		if (CurrentCampaignGame.levelSceneName.ToLower().Equals("farm")) {
+			if (UnityEngine.Random.Range(1,90) == 1) {
+				CurrentCampaignGame.levelSceneName = "survival_7_campaign";
+			}
+		}
 		if (subtitlesText != null)
 		{
 			subtitlesText.transform.parent.gameObject.SetActive(/*LocalizationStore.CurrentLanguage != "English"*/ true);
