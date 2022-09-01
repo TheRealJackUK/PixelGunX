@@ -510,7 +510,7 @@ namespace Rilisoft
 				FlurryEvents.LogGemsGained("Campaign", addGemsCount);
 				int addCoinCount = CoinsToAddForBox();
 				int oldCoinCount2 = Storager.getInt("Coins", false);
-				Storager.setInt("Coins", oldCoinCount2 + addCoinCount*3, false);
+				Storager.setInt("Coins", oldCoinCount2 + addCoinCount*5, false);
 				if (awardClip != null && Defs.isSoundFX)
 				{
 					_awardAudioSource = NGUITools.PlaySound(awardClip);
