@@ -1889,10 +1889,10 @@ public sealed class FriendsController : MonoBehaviour
 	private IEnumerator UpdatePlayer(bool sendSkin)
 	{
 		// InitOurInfo();
-		while (!ReceivedLastOnline || !infoLoaded)
+		/*while (!ReceivedLastOnline || !infoLoaded)
 		{
 			yield return null;
-		}
+		}*/
 		InitOurInfo();
 		WWWForm form = new WWWForm();
 		form.AddField("action", "update_player");

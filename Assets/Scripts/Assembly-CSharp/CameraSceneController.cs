@@ -446,6 +446,11 @@ public class CameraSceneController : MonoBehaviour
 			posCam = new Vector3(0, 0.5f, 0f);
 			rotateCam = Quaternion.Euler(new Vector3(0f, 0f, 0f));
 		}
+		else if (Application.loadedLevelName.Equals("Computer"))
+		{
+			posCam = new Vector3(0, 12.8f, 22.9f);
+			rotateCam = Quaternion.Euler(new Vector3(0f, -180f, 0f));
+		}
 	}
 
 	private void Start()
