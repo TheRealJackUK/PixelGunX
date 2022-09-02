@@ -627,6 +627,7 @@ internal sealed class DeveloperConsoleController : MonoBehaviour
 		yield return null;
 		_initialized = true;
 		#endif
+		yield return null;
 	}
 
 	public void ChangePremiumAccountLiveTime(UIInput input)

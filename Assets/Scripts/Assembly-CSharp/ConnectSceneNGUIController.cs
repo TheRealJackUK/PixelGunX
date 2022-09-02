@@ -993,7 +993,7 @@ public class ConnectSceneNGUIController : MonoBehaviour
 			array[6] = "platform";
 			for (int j = num2; j < num2 + ExperienceController.maxLevel; j++)
 			{
-				array[j] = "Level_" + (j - num2 + 1);
+				array[j] = "Level_1";
 			}
 			ExitGames.Client.Photon.Hashtable hashtable = new ExitGames.Client.Photon.Hashtable();
 			hashtable["starting"] = 0;
@@ -1005,7 +1005,7 @@ public class ConnectSceneNGUIController : MonoBehaviour
 			hashtable["platform"] = (int)((!string.IsNullOrEmpty(password)) ? PlatformConnect.custom : myPlatformConnect);
 			for (int k = num2; k < num2 + ExperienceController.maxLevel; k++)
 			{
-				hashtable["Level_" + (k - num2 + 1)] = ((ExperienceController.sharedController != null && ExperienceController.sharedController.currentLevel == k - num2 + 1) ? 1 : 0);
+				hashtable["Level_1"] = 1;
 			}
 			loadingMapPanel.SetActive(true);
 			if (StoreKitEventListener.purchaseActivityInd != null)
@@ -2100,14 +2100,14 @@ public class ConnectSceneNGUIController : MonoBehaviour
 			if (ExperienceController.sharedController != null)
 			{
 				bool flag = false;
-				for (int j = 0; j < ExperienceController.maxLevel; j++)
+				/*for (int j = 0; j < ExperienceController.maxLevel; j++)
 				{
 					if (ExperienceController.accessByLevels[ExperienceController.sharedController.currentLevel - 1, j] == 0 && roomList[i].customProperties["Level_" + (j + 1)].Equals(1))
 					{
 						flag = true;
 						break;
 					}
-				}
+				}*/
 				if (flag)
 				{
 					continue;
