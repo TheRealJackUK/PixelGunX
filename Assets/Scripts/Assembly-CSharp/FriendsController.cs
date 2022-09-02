@@ -298,6 +298,13 @@ public sealed class FriendsController : MonoBehaviour
 		sharedController = this;
 	}
 
+	public IEnumerator GetBanListLoop() {
+		StartCoroutine("GetBanList");
+		yield return new WaitForSeconds(4f);
+		StartCoroutine("GetBanListLoop");
+		yield break;
+	}
+
 	private IEnumerator Start()
 	{
 		string secret = alphaIvory ?? string.Empty;
@@ -306,8 +313,8 @@ public sealed class FriendsController : MonoBehaviour
 			Debug.LogError("Secret is empty!");
 		}
 		_hmac = new HMACSHA1(Encoding.UTF8.GetBytes(secret), true);
-		StopCoroutine("GetBanList");
-		StartCoroutine("GetBanList");
+		StopCoroutine("GetBanListLoop");
+		StartCoroutine("GetBanListLoop");
 		StartCoroutine("GetPopularityMap");
 		if (!Storager.hasKey(FacebookIDKey))
 		{
@@ -1022,8 +1029,8 @@ public sealed class FriendsController : MonoBehaviour
 			}
 			return;
 		}
-		StopCoroutine("GetBanList");
-		StartCoroutine("GetBanList");
+		StopCoroutine("GetBanListLoop");
+		StartCoroutine("GetBanListLoop");
 		StopCoroutine("GetPopularityMap");
 		StartCoroutine("GetPopularityMap");
 		StartCoroutine(GetFriendDataOnce(true));
