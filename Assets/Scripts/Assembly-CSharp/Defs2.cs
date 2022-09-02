@@ -235,6 +235,7 @@ public sealed class Defs2
 		_mapsInfo.Add(new MapInfo("High Noon", "High Noon", "High Noon", "Large Map"));
 		_mapsInfo.Add(new MapInfo("Frontier", "Orbit", "Orbit", "Large Map"));
 		_mapsInfo.Add(new MapInfo("Pirate Cove", "Pirate Cove", "Pirate Cove", "Medium Map"));
+		_mapsInfo.Add(new MapInfo("Warehouse", "Warehouse", "Warehouse", "Medium Map"));
 	}
 
 	public static void SetLocalizeForMaps()

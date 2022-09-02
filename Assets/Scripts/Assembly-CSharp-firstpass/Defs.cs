@@ -2683,6 +2683,7 @@ public static string CAnim(GameObject animator, string con){
 		levelNumsForMusicInMult.Add("High Noon", 22090);
 		levelNumsForMusicInMult.Add("Frontier", 22222);
 		levelNumsForMusicInMult.Add("Pirate Cove", 22000);
+		levelNumsForMusicInMult.Add("Warehouse", 252525);
 		_premiumMaps.Add("Ants", 15);
 		_premiumMaps.Add("Lean_Matrix", 15);
 		_premiumMaps.Add("Matrix", 15);
