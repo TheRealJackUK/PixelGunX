@@ -150,6 +150,8 @@ public class ConnectSceneNGUIController : MonoBehaviour
 
 	public GameObject goBtn;
 
+	public GameObject exploreBtn;
+
 	public GameObject backBtn;
 
 	public GameObject unlockBtn;
@@ -487,6 +489,14 @@ public class ConnectSceneNGUIController : MonoBehaviour
 			if (component4 != null)
 			{
 				component4.Clicked += HandleGoBtnClicked;
+			}
+		}
+		if (exploreBtn != null)
+		{
+			ButtonHandler component4242 = exploreBtn.GetComponent<ButtonHandler>();
+			if (component4242 != null)
+			{
+				component4242.Clicked += HandleExploreBtnClicked;
 			}
 		}
 		if (backBtn != null)
@@ -1396,8 +1406,21 @@ public class ConnectSceneNGUIController : MonoBehaviour
 		ShowConnectToPhotonPanel();
 	}
 
+	private void HandleExploreBtnClicked(object sender, EventArgs e)
+	{
+		PlayerPrefs.SetInt("isExploring", 1);
+		Defs.isMulti = false;
+		StartCoroutine(MoveToExploreScene(Defs.levelNamesFromNums[masUseMaps[selectIndexMap].ToString()]));
+		if (_loadingNGUIController != null)
+		{
+			UnityEngine.Object.Destroy(_loadingNGUIController.gameObject);
+			_loadingNGUIController = null;
+		}
+	}
+
 	private void JoinRandomRoom(int _map)
 	{
+		// goMapName = Defs.levelNamesFromNums[masUseMaps[selectIndexMap].ToString()]
 		goMapName = Defs.levelNamesFromNums[_map.ToString()];
 		ExitGames.Client.Photon.Hashtable hashtable = new ExitGames.Client.Photon.Hashtable();
 		hashtable["pass"] = string.Empty;
@@ -2459,6 +2482,25 @@ public class ConnectSceneNGUIController : MonoBehaviour
 		LoadConnectScene.sceneToLoad = _mapName;
 		LoadConnectScene.noteToShow = null;
 		loadingToDraw.gameObject.SetActive(false);
+	}
+
+	private IEnumerator MoveToExploreScene(string _goMapName)
+	{
+		Debug.Log("MoveToExploreScene=" + _goMapName);
+		Defs.isGameFromFriends = false;
+		Defs.isGameFromClans = false;
+		for (int i = 0; i < grid.transform.childCount; i++)
+		{
+			UnityEngine.Object.Destroy(grid.transform.GetChild(i).gameObject);
+		}
+		mapPreview.Clear();
+		yield return null;
+		yield return Resources.UnloadUnusedAssets();
+		StartCoroutine(SetFonLoadingWaitForReset(_goMapName, true));
+		isGoInPhotonGame = false;
+		AsyncOperation async = Application.LoadLevelAsync("PromScene");
+		FlurryPluginWrapper.LogEvent("Play_" + _goMapName);
+		yield return async;
 	}
 
 	private IEnumerator MoveToGameScene(string _goMapName)

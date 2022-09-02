@@ -41,6 +41,9 @@ public class PrefabsManager : MonoBehaviour {
     public void FixedUpdate(){
         if (Application.loadedLevelName != curScene){
             curScene = Application.loadedLevelName;
+            if (PlayerPrefs.GetInt("isExploring") == 1) {
+                GameObject.Instantiate(Resources.Load<GameObject>("ExploreCamera"), new Vector3(0, 0, 0), Quaternion.identity);
+            }
             if (curScene == "LevelComplete" || curScene == "ChooseLevel")
             {
                 return;

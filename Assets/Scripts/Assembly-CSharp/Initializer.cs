@@ -380,7 +380,9 @@ public sealed class Initializer : MonoBehaviour
 				GameObject original = Resources.Load("MessageCoinsObject") as GameObject;
 				UnityEngine.Object.Instantiate(original);
 			}
-			AddPlayer();
+			if (PlayerPrefs.GetInt("isExploring") != 1) {
+				AddPlayer();
+			}
 		}
 		else
 		{

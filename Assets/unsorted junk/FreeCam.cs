@@ -51,6 +51,13 @@ public class FreeCam : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKey(KeyCode.Escape)) {
+            PlayerPrefs.SetInt("isExploring", 0);
+            LoadConnectScene.textureToShow = null;
+			LoadConnectScene.sceneToLoad = "ConnectScene";
+			LoadConnectScene.noteToShow = null;
+			Application.LoadLevel(Defs.PromSceneName);
+        }
         var fastMode = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
         var movementSpeed = fastMode ? this.fastMovementSpeed : this.movementSpeed;
 
@@ -108,11 +115,11 @@ public class FreeCam : MonoBehaviour
             transform.position = transform.position + transform.forward * axis * zoomSensitivity;
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        if (Input.GetKey(KeyCode.Mouse1))
         {
             StartLooking();
         }
-        else if (Input.GetKeyUp(KeyCode.Mouse1))
+        else
         {
             StopLooking();
         }
@@ -129,8 +136,8 @@ public class FreeCam : MonoBehaviour
     public void StartLooking()
     {
         looking = true;
-        /*Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;*/
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     /// <summary>
@@ -139,7 +146,79 @@ public class FreeCam : MonoBehaviour
     public void StopLooking()
     {
         looking = false;
-        /*Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;*/
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }
+/*using UnityEngine;
+
+public class FreeCam : MonoBehaviour
+{
+    public float flySpeed = 10;
+    public GameObject defaultCam;
+    public bool isEnabled;
+    
+    public bool shift;
+    public bool ctrl;
+    public float accelerationAmount = 30;
+    public float accelerationRatio = 3;
+    public float slowDownRatio = 0.2f;
+    
+    
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.Escape)) {
+            PlayerPrefs.SetInt("isExploring", 0);
+            LoadConnectScene.textureToShow = null;
+			LoadConnectScene.sceneToLoad = "ConnectScene";
+			LoadConnectScene.noteToShow = null;
+			Application.LoadLevel(Defs.PromSceneName);
+        }
+        //use shift to speed up flight
+        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+        {
+            shift = true;
+            flySpeed *= accelerationRatio;
+        }
+    
+        if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
+        {
+            shift = false;
+            flySpeed /= accelerationRatio;
+        }
+    
+        //use ctrl to slow up flight
+        if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl))
+        {
+            ctrl = true;
+            flySpeed *= slowDownRatio;
+        }
+    
+        if (Input.GetKeyUp(KeyCode.LeftControl) || Input.GetKeyUp(KeyCode.RightControl))
+        {
+            ctrl = false;
+            flySpeed /= slowDownRatio;
+        }
+        //
+        if (Input.GetAxis("Vertical") != 0)
+        {
+            transform.Translate(Vector3.forward * flySpeed * Input.GetAxis("Vertical"));
+        }
+    
+    
+        if (Input.GetAxis("Horizontal") != 0)
+        {
+            transform.Translate(Vector3.right * flySpeed * Input.GetAxis("Horizontal"));
+        }
+    
+    
+        if (Input.GetKey(KeyCode.E))
+        {
+            transform.Translate(Vector3.up * flySpeed);
+        }
+        else if (Input.GetKey(KeyCode.Q))
+        {
+            transform.Translate(Vector3.down * flySpeed);
+        }
+    }  
+}*/

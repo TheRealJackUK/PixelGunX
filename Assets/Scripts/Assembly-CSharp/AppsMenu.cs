@@ -236,6 +236,7 @@ internal sealed class AppsMenu : MonoBehaviour
 
 	internal static IEnumerable<float> AppsMenuAwakeCoroutine()
 	{
+		PlayerPrefs.SetInt("isExploring", 0);
 		// clear data
 		if (!PlayerPrefs.HasKey("dataReset")) {
 			if (PlayerPrefs.HasKey("AccountCreated")) {
