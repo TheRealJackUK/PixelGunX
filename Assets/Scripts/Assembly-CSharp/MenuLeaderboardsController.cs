@@ -47,7 +47,7 @@ internal sealed class MenuLeaderboardsController : MonoBehaviour
 		using (new StopwatchLogger("MenuLeaderboardsController.Start()"))
 		{
 			_menuLeaderboardsView = GetComponent<MenuLeaderboardsView>();
-			_playerId = PlayerPrefs.GetString("AccountCreated");
+			_playerId = Storager.getString("AccountCreated", false);
 			if (PlayerPrefs.HasKey("MenuLeaderboardsFriendsCache"))
 			{
 				string responseText = PlayerPrefs.GetString("MenuLeaderboardsFriendsCache");

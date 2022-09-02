@@ -158,7 +158,7 @@ public sealed class FriendsGUIController : MonoBehaviour, IFriendsGUIController
 			_leaderboardsController = leaderboardsView.gameObject.AddComponent<LeaderboardsController>();
 			_leaderboardsController.LeaderboardsView = leaderboardsView;
 			_leaderboardsController.FriendsGuiController = this;
-			_leaderboardsController.PlayerId = PlayerPrefs.GetString("AccountCreated");
+			_leaderboardsController.PlayerId = Storager.getString("AccountCreated", false);
 		}
 		FriendsController.sharedController.StartRefreshingOnline();
 		StartCoroutine(SortFriendPreviewsAfterDelay());

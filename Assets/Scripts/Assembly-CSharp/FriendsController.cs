@@ -348,7 +348,7 @@ public sealed class FriendsController : MonoBehaviour
 		{
 			PlayerPrefs.SetString(AccountCreated, string.Empty);
 		}*/
-		id = PlayerPrefs.GetString(AccountCreated, "");
+		id = Storager.getString(AccountCreated, "", false);
 		if (string.IsNullOrEmpty(id))
 		{
 			StartCoroutine(CreatePlayer());
@@ -892,7 +892,7 @@ public sealed class FriendsController : MonoBehaviour
 		}
 		else
 		{
-			PlayerPrefs.GetString(AccountCreated, response);
+			Storager.getString(AccountCreated, response, false);
 			id = response;
 			onlineInfo.Clear();
 			friends.Clear();
@@ -1779,7 +1779,7 @@ public sealed class FriendsController : MonoBehaviour
 			yield return StartCoroutine(MyWaitForSeconds(10f));
 		}
 		Debug.Log("CreatePlayer succeeded with response:    “" + response + "”");
-		PlayerPrefs.SetString(AccountCreated, response);
+		Storager.setString(AccountCreated, response, false);
 		id = response;
 		readyToOperate = true;
 		StartCoroutine(UpdatePlayer(true));
