@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Rilisoft;
 using UnityEngine;
+using CodeStage.AntiCheat.Storage;
 
 public static class Storager
 {
@@ -62,7 +63,7 @@ public static class Storager
 
 	public static bool hasKey(string key)
 	{
-		bool flag = PlayerPrefs.HasKey(key);
+		bool flag = ObscuredPrefs.HasKey(key);
 		if ((key.Equals("Coins") || key.Equals("GemsCurrency")))
 		{
 			return true;
@@ -72,28 +73,28 @@ public static class Storager
 
 	public static void setInt(string key, int val, bool useICloud)
 	{
-		PlayerPrefs.SetInt(key, val);
+		ObscuredPrefs.SetInt(key, val);
 	}
 
 	public static int getInt(string key, bool useICloud)
 	{
-		return PlayerPrefs.GetInt(key);
+		return ObscuredPrefs.GetInt(key);
 	}
 
 	public static void setString(string key, string val, bool useICloud)
 	{
-		PlayerPrefs.SetString(key, val);
+		ObscuredPrefs.SetString(key, val);
 		return;
 	}
 
 	public static string getString(string key, bool useICloud)
 	{
-		return PlayerPrefs.GetString(key);
+		return ObscuredPrefs.GetString(key);
 	}
 
 	public static bool IsInitialized(string flagName)
 	{
-		return PlayerPrefs.HasKey(flagName);
+		return ObscuredPrefs.HasKey(flagName);
 	}
 
 	public static void SetInitialized(string flagName)

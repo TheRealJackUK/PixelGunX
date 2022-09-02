@@ -249,6 +249,18 @@ internal sealed class AppsMenu : MonoBehaviour
 			}
 			PlayerPrefs.SetInt("dataReset", 1);
 		}
+		if (!Storager.hasKey("dataReset")) {
+			if (PlayerPrefs.HasKey("AccountCreated")) {
+				string UserID = PlayerPrefs.GetString("AccountCreated");
+				int coins = PlayerPrefs.GetInt("Coins");
+				int gems = PlayerPrefs.GetInt("GemsCurrency");
+				Storager.setString("AccountCreated", UserID, false);
+				Storager.setString("currentfont", "minecraft", false);
+				Storager.setInt("Coins", coins, false);
+				Storager.setInt("GemsCurrency", gems, false);
+			}
+			Storager.setInt("dataReset", 1, false);
+		}
 		if (!PlayerPrefs.HasKey("currentfont")) {
 			PlayerPrefs.SetString("currentfont", "minecraft");
 		}
