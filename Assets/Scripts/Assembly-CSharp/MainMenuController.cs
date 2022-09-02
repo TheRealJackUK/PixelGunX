@@ -406,7 +406,10 @@ internal sealed class MainMenuController : ControlsSettingsBase
 		bool developerConsoleEnabled = false;
 		if (developerConsole != null)
 		{
-			developerConsole.gameObject.SetActive(developerConsoleEnabled);
+			developerConsole.gameObject.SetActive(false);
+			#if UNITY_EDITOR
+			developerConsole.gameObject.SetActive(true);
+			#endif
 		}
 		if (Device.isWeakDevice || Application.platform == RuntimePlatform.WP8Player)
 		{
