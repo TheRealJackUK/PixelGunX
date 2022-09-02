@@ -92,6 +92,11 @@ public static class Storager
 		return ObscuredPrefs.GetString(key);
 	}
 
+	public static string getString(string key, string ignore, bool useICloud)
+	{
+		return ObscuredPrefs.GetString(key);
+	}
+
 	public static bool IsInitialized(string flagName)
 	{
 		return ObscuredPrefs.HasKey(flagName);
