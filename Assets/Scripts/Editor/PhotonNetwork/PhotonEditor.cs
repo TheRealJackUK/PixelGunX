@@ -272,7 +272,7 @@ public class PhotonEditor : EditorWindow
 
         if (PhotonNetwork.PhotonServerSettings.HostType == ServerSettings.HostingOption.NotSet)
         {
-            // EditorUtility.DisplayDialog(CurrentLang.SetupWizardWarningTitle, CurrentLang.SetupWizardWarningMessage, CurrentLang.OkButton);
+            EditorUtility.DisplayDialog(CurrentLang.SetupWizardWarningTitle, CurrentLang.SetupWizardWarningMessage, CurrentLang.OkButton);
         }
     }
 
