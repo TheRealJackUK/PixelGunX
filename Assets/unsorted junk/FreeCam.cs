@@ -146,8 +146,8 @@ public class FreeCam : MonoBehaviour
     public void StopLooking()
     {
         looking = false;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 }
 /*using UnityEngine;
