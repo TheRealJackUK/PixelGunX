@@ -127,6 +127,8 @@ internal sealed class MainMenuController : ControlsSettingsBase
 
 	public UIButton developerConsole;
 
+	public UIButton discordBtn;
+
 	public UICamera uiCamera;
 
 	public GameObject eventX3Window;
@@ -975,6 +977,11 @@ internal sealed class MainMenuController : ControlsSettingsBase
 		{
 			Application.LoadLevel("DeveloperConsole");
 		}
+	}
+
+	public void HandleDiscordClicked()
+	{
+		Application.OpenURL("https://discord.gg/vSepQdHcNh");
 	}
 
 	public void HandlePromoActionClicked(string tg)
