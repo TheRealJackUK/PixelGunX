@@ -57,11 +57,58 @@ public class EasterEggController : MonoBehaviour
 		PhotonNetwork.JoinRandomRoom(hashtable, 0);
 	}
 
+	private void OnPhotonRandomJoinFailed()
+	{
+		Debug.Log("OnPhotonJoinRoomFailed");
+		PlayerPrefs.SetString("TypeGame", "server");
+		int num = 7;
+		string[] array = new string[num + ExperienceController.maxLevel];
+		array[0] = "starting";
+		array[1] = "map";
+		array[2] = "MaxKill";
+		array[3] = "pass";
+		array[4] = "regim";
+		array[5] = "TimeMatchEnd";
+		array[6] = "platform";
+		for (int i = num; i < num + ExperienceController.maxLevel; i++)
+		{
+			array[i] = "Level_" + (i - num + 1);
+		}
+		ExitGames.Client.Photon.Hashtable hashtable = new ExitGames.Client.Photon.Hashtable();
+		PlayerPrefs.SetString("PlayersLimits", "10");
+		hashtable["starting"] = 0;
+		hashtable["map"] = Defs.levelNumsForMusicInMult[theName];
+		hashtable["MaxKill"] = 4;
+		hashtable["pass"] = "this is a secret map, you won't be able to enter this match, god bye";
+		hashtable["regim"] = RegimGame.Deathmatch;
+		hashtable["TimeMatchEnd"] = PhotonNetwork.time;
+		hashtable["platform"] = (int)PlatformConnect.custom;
+		for (int j = num; j < num + ExperienceController.maxLevel; j++)
+		{
+			hashtable["Level_" + (j - num + 1)] = ((ExperienceController.sharedController != null && ExperienceController.sharedController.currentLevel == j - num + 1) ? 1 : 0);
+		}
+		if (WeaponManager.sharedManager != null)
+		{
+			WeaponManager.sharedManager.Reset(Defs.filterMaps.ContainsKey(theName) ? Defs.filterMaps[theName] : 0);
+		}
+		StartCoroutine(SetFonLoadingWaitForReset(theName));
+		PhotonNetwork.CreateRoom("", 10, hashtable, array);
+		Debug.LogError("calling createroom!");
+	}
+
     private IEnumerator MoveToGameScene(string _goMapName)
 	{
 		Debug.Log("MoveToGameScene=" + _goMapName);
 		Defs.isGameFromFriends = false;
 		Defs.isGameFromClans = false;
+		Defs.isMulti = true;
+		Defs.isInet = true;
+		Defs.isCOOP = false;
+		Defs.isCompany = false;
+		Defs.isHunger = false;
+		Defs.isFlag = false;
+		Defs.isCapturePoints = false;
+		Defs.IsSurvival = false;
 		yield return null;
 		yield return Resources.UnloadUnusedAssets();
 		StartCoroutine(SetFonLoadingWaitForReset(_goMapName, true));
@@ -72,8 +119,10 @@ public class EasterEggController : MonoBehaviour
 
     private void ShowLoadingGUI(string _mapName)
 	{
+		LoadConnectScene.textureToShow = Resources.Load("LevelLoadings" + ((!Device.isRetinaAndStrong) ? string.Empty : "/Hi") + "/Loading_" + _mapName) as Texture2D;
+		LoadConnectScene.sceneToLoad = theName;
 		_loadingNGUIController = (UnityEngine.Object.Instantiate(Resources.Load<GameObject>("LoadingGUI")) as GameObject).GetComponent<LoadingNGUIController>();
-		_loadingNGUIController.SceneToLoad = _mapName;
+		_loadingNGUIController.SceneToLoad = theName;
 		_loadingNGUIController.loadingNGUITexture.mainTexture = LoadConnectScene.textureToShow;
 		_loadingNGUIController.transform.parent = null;
 		_loadingNGUIController.transform.localPosition = Vector3.zero;
@@ -115,6 +164,14 @@ public class EasterEggController : MonoBehaviour
 
     public void HandleAngryHerobrine(object sender, System.EventArgs e){
         LoadMap("gameplay slender 5");
+	}
+
+	private void OnJoinedRoom()
+	{
+		Debug.Log("OnJoinedRoom " + theName);
+		PhotonNetwork.isMessageQueueRunning = false;
+		NotificationController.ResetPaused();
+		StartCoroutine(MoveToGameScene(theName));
 	}
 
     public void Start() {

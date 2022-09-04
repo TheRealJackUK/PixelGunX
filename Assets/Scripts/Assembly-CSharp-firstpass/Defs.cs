@@ -2670,6 +2670,7 @@ public static string CAnim(GameObject animator, string con){
 		levelNumsForMusicInMult.Add("epilepsy", 4205);
 		levelNumsForMusicInMult.Add("RealCube", 4207);
 		levelNumsForMusicInMult.Add("RunAndJump", 4208);
+		levelNumsForMusicInMult.Add("gameplay slender 5", 4209);
 		levelNumsForMusicInMult.Add("level_0", 9999);
 		levelNumsForMusicInMult.Add("level_1", 10002);
 		levelNumsForMusicInMult.Add("level_2", 10004);

@@ -1197,7 +1197,8 @@ public static class PhotonNetwork
     /// <param name="gameVersion">This client's version number. Users are separated from each other by gameversion (which allows you to make breaking changes).</param>
     public static bool ConnectUsingSettings(string gameVersion)
     {
-        PhotonNetwork.PhotonServerSettings.AppID = "46894466-6f6e-4e8f-92f5-86436bd0a2eb";
+        //7f6f3946-7574-4fe5-8f76-44063c43a103
+        PhotonNetwork.PhotonServerSettings.AppID = "7f6f3946-7574-4fe5-8f76-44063c43a103";
         PhotonServerSettings.HostType = ServerSettings.HostingOption.PhotonCloud;
         PhotonServerSettings.PreferredRegion = CloudRegionCode.eu;
         /*if (!InternetChecker.InternetAvailable) {
