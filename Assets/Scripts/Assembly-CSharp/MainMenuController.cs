@@ -812,12 +812,12 @@ internal sealed class MainMenuController : ControlsSettingsBase
 					Storager.setString(key, nowTicksHalved.ToString(), false);
 				}
 				TimeSpan timespan = TimeSpan.FromTicks(nowTicksHalved - abuseTicksHalved);
-				if (((!Defs.IsDeveloperBuild) ? (timespan.TotalDays >= 1.0) : (timespan.TotalMinutes >= 3.0)) && Application.platform != RuntimePlatform.IPhonePlayer)
+				/*if (((!Defs.IsDeveloperBuild) ? (timespan.TotalDays >= 1.0) : (timespan.TotalMinutes >= 3.0)) && Application.platform != RuntimePlatform.IPhonePlayer)
 				{
 					Debug.Log("Setting alternative photon key: 68c9fbdb-682a-411f-a229-1a9786b5835c");
 					PhotonNetwork.PhotonServerSettings.AppID = "68c9fbdb-682a-411f-a229-1a9786b5835c";
 					PhotonNetwork.PhotonServerSettings.HostType = ServerSettings.HostingOption.PhotonCloud;
-				}
+				}*/
 			}
 		}
 		StartCoroutine(TryToShowExpiredBanner());

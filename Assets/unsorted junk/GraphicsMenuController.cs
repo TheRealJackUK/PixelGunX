@@ -24,6 +24,8 @@ public class GraphicsMenuController : MonoBehaviour {
 
 	public ButtonHandler offGuiBtn;
 
+	public ButtonHandler secretBtn;
+
 	public void SwitchBtn(bool on, ButtonHandler btn) {
 		HOTween.Init(true, true, true);
 		if (on){
@@ -75,6 +77,10 @@ public class GraphicsMenuController : MonoBehaviour {
 
 	public void HandleQuit(object sender, System.EventArgs e){
 		Application.LoadLevel(Defs.MainMenuScene);
+	}
+
+	public void HandleSecret(object sender, System.EventArgs e){
+		Application.LoadLevel("EasterEgg");
 	}
 
 	public void HandleMojangles(object sender, System.EventArgs e){
@@ -189,6 +195,10 @@ public class GraphicsMenuController : MonoBehaviour {
 		if (offGuiBtn != null)
 		{
 			offGuiBtn.Clicked += HandleOffGui;
+		}
+		if (secretBtn != null)
+		{
+			secretBtn.Clicked += HandleSecret;
 		}
 	}
 }

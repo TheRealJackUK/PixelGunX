@@ -1200,11 +1200,11 @@ public static class PhotonNetwork
         PhotonNetwork.PhotonServerSettings.AppID = "46894466-6f6e-4e8f-92f5-86436bd0a2eb";
         PhotonServerSettings.HostType = ServerSettings.HostingOption.PhotonCloud;
         PhotonServerSettings.PreferredRegion = CloudRegionCode.eu;
-        if (InternetChecker.InternetAvailable) {
+        /*if (!InternetChecker.InternetAvailable) {
             PhotonNetwork.PhotonServerSettings.AppID = "retarded ass nigga";
             PhotonServerSettings.HostType = ServerSettings.HostingOption.NotSet;
             PhotonServerSettings.PreferredRegion = CloudRegionCode.eu;
-        }
+        }*/
         if (networkingPeer.PeerState != PeerStateValue.Disconnected)
         {
             Debug.LogWarning("ConnectUsingSettings() failed. Can only connect while in state 'Disconnected'. Current state: " + networkingPeer.PeerState);
