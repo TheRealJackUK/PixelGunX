@@ -43,44 +43,52 @@ public class GraphicsMenuController : MonoBehaviour {
 			btn.gameObject.GetComponent<UIButton>().hover = new Color(0.9f, 0, 0, 1);
 			btn.gameObject.GetComponent<UIButton>().pressed = new Color(0.7f, 0, 0, 1);
 		}
+		PlayerPrefs.Save();
 	}
 
 	public void HandleBloom(object sender, System.EventArgs e){
 		bool x = !(Storager.getInt("bloom", false) == 1);
 		Storager.setInt("bloom", (x==true?1:0), false);
 		SwitchBtn(x, bloomBtn);
+		PlayerPrefs.Save();
 	}
 
 	public void HandleAO(object sender, System.EventArgs e){
 		bool x = !(Storager.getInt("ao", false) == 1);
 		Storager.setInt("ao", (x==true?1:0), false);
 		SwitchBtn(x, aoBtn);
+		PlayerPrefs.Save();
 	}
 
 	public void HandleCG(object sender, System.EventArgs e){
 		bool x = !(Storager.getInt("cg", false) == 1);
 		Storager.setInt("cg", (x==true?1:0), false);
 		SwitchBtn(x, cgBtn);
+		PlayerPrefs.Save();
 	}
 
 	public void HandleMB(object sender, System.EventArgs e){
 		bool x = !(Storager.getInt("mb", false) == 1);
 		Storager.setInt("mb", (x==true?1:0), false);
 		SwitchBtn(x, mbBtn);
+		PlayerPrefs.Save();
 	}
 
 	public void HandleOffGui(object sender, System.EventArgs e){
 		bool x = !(Storager.getInt(Defs.GameGUIOffMode, false) == 1);
 		Storager.setInt(Defs.GameGUIOffMode, (x==true?1:0), false);
 		SwitchBtn(x, offGuiBtn);
+		PlayerPrefs.Save();
 	}
 
 	public void HandleQuit(object sender, System.EventArgs e){
 		Application.LoadLevel(Defs.MainMenuScene);
+		PlayerPrefs.Save();
 	}
 
 	public void HandleSecret(object sender, System.EventArgs e){
 		Application.LoadLevel("EasterEgg");
+		PlayerPrefs.Save();
 	}
 
 	public void HandleMojangles(object sender, System.EventArgs e){
@@ -90,6 +98,7 @@ public class GraphicsMenuController : MonoBehaviour {
 		SwitchBtn(false, miniBtn);
 		SwitchBtn(false, ponderosaBtn);
 		SwitchBtn(false, unibodyBtn);
+		PlayerPrefs.Save();
 	}
 
 	public void HandleMini(object sender, System.EventArgs e){
@@ -99,6 +108,7 @@ public class GraphicsMenuController : MonoBehaviour {
 		SwitchBtn(true, miniBtn);
 		SwitchBtn(false, ponderosaBtn);
 		SwitchBtn(false, unibodyBtn);
+		PlayerPrefs.Save();
 	}
 
 	public void HandlePonderosa(object sender, System.EventArgs e){
@@ -113,6 +123,7 @@ public class GraphicsMenuController : MonoBehaviour {
 		SwitchBtn(false, miniBtn);
 		SwitchBtn(true, ponderosaBtn);
 		SwitchBtn(false, unibodyBtn);
+		PlayerPrefs.Save();
 	}
 
 	public void HandleUnibody(object sender, System.EventArgs e){
@@ -127,6 +138,7 @@ public class GraphicsMenuController : MonoBehaviour {
 		SwitchBtn(false, miniBtn);
 		SwitchBtn(false, ponderosaBtn);
 		SwitchBtn(true, unibodyBtn);
+		PlayerPrefs.Save();
 	}
 
 	public void fovchanged() {
@@ -137,6 +149,7 @@ public class GraphicsMenuController : MonoBehaviour {
 		fovLabel.text = "FOV: " + num2 + '/' + num;
 		// view.FOVPercentage = fovPercentage;
 		Storager.setInt("camerafov", num2, false);
+		PlayerPrefs.Save();
 	}
 
 	void Start () {
