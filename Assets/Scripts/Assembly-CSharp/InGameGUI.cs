@@ -1110,13 +1110,12 @@ public sealed class InGameGUI : MonoBehaviour
 			ammoAddButton.SetActive(false);
 			grenadeButton.SetActive(false);
 			jumpButton.SetActive(false);
-		} else if (GameObject.Find("AmmoButton") != null)
+		} else if (GameObject.Find("EveryplaAnchor") != null)
 		{
-			/*healthAddButton.SetActive(false);
+			healthAddButton.SetActive(false);
 			ammoAddButton.SetActive(false);
-			grenadeButton.SetActive(false);*/
-			GameObject.Find("AmmoButton").SetActive(false);
-			GameObject.Find("Health_Button").SetActive(false);
+			grenadeButton.SetActive(false);
+			GameObject.Find("EveryplaAnchor").SetActive(false);
 		}
 		}
 		if (currentScrollIndex > 5){
