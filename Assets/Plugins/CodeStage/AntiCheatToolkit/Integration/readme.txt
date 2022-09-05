@@ -1,1 +1,0 @@
-This folder contains packages with ACTk scripts for different third-party plugins.

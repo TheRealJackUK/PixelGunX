@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Rilisoft;
 using UnityEngine;
-using CodeStage.AntiCheat.Storage;
-
 public static class Storager
 {
 	private const bool useCryptoPlayerPrefs = true;
