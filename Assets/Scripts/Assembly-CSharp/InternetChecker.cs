@@ -37,6 +37,12 @@ internal sealed class InternetChecker : MonoBehaviour
 			Cursor.visible = true;
 			Cursor.lockState = CursorLockMode.None;
 		}
+		if (!Application.isFocused && !Application.isMobilePlatform)
+		{
+			Application.targetFrameRate = 15;
+		} else {
+			Application.targetFrameRate = 360;
+		}
 	}
 
 	public static void CheckForInternetConn()
