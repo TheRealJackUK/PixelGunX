@@ -40,6 +40,11 @@ public class PrefabsManager : MonoBehaviour {
 
     public void FixedUpdate(){
         if (Application.loadedLevelName != curScene){
+            bool isbloom = Storager.getInt("bloom", false) == 1;
+            bool isao = Storager.getInt("ao", false) == 1;
+            bool iscg = Storager.getInt("cg", false) == 1;
+            bool ismb = Storager.getInt("mb", false) == 1;
+            bool canSetpp = !isbloom & !isao & !iscg & !ismb;
             curScene = Application.loadedLevelName;
             if (PlayerPrefs.GetInt("isExploring") == 1) {
                 GameObject.Instantiate(Resources.Load<GameObject>("ExploreCamera"), new Vector3(0, 0, 0), Quaternion.identity);
@@ -59,6 +64,9 @@ public class PrefabsManager : MonoBehaviour {
                     }
                 }
                 if (Application.loadedLevelName == "AppCenter" || Application.loadedLevelName == "Loading" || Application.loadedLevelName == "PromScene"){
+                    lo = true;
+                }
+                if (!canSetpp) {
                     lo = true;
                 }
                 if (!lo){
