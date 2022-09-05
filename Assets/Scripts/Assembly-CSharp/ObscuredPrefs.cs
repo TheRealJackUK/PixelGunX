@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Text;
 
 public class ObscuredPrefs : MonoBehaviour 
 {
@@ -34,10 +35,11 @@ public class ObscuredPrefs : MonoBehaviour
         var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
         return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
     }
-    public static void ToBytes(string var1) {
+    public static string ToBytes(string var1) {
         byte[] ba = Encoding.Default.GetBytes(var1);
         var hexString = BitConverter.ToString(ba);
         hexString = hexString.Replace("-", "");
+        return hexString;
     }
     public static bool HasKey(string var1) {
         string var2 = Base64Encode(ToBytes(var1));
@@ -51,9 +53,9 @@ public class ObscuredPrefs : MonoBehaviour
     }
 
     // keep in mind this is setstring because you cant really store base64 in ints
-    public static void SetInt(string var1, string var2) {
+    public static void SetInt(string var1, int var2) {
         string var3 = Base64Encode(ToBytes(var1));
-        string var4 = Base64Encode(ToBytes(var2));
+        string var4 = Base64Encode(ToBytes(var2.ToString()));
         PlayerPrefs.SetString(var3, var4);
     }
     public static string GetString(string var1) {
