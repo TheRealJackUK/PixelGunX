@@ -2588,8 +2588,9 @@ public sealed class Player_move_c : MonoBehaviour
 		{
 			if (gobj[i].layer.Equals(11) && gobj[i].GetComponent<PhotonView>().viewID == idKiller)
 			{
-				gobj[i].GetComponent<AudioSource>().PlayOneShot((_typeKills != 2) ? hitmarkerSound : headShotSound, 1f);
+				randomThingController.HitmarkerController.GetComponent<Animation>().Stop();
 				randomThingController.HitmarkerController.GetComponent<Animation>().Play((_typeKills != 2) ? "hit" : "headshot");
+				gobj[i].GetComponent<AudioSource>().PlayOneShot((_typeKills != 2) ? hitmarkerSound : headShotSound, 1f);
 			}
 		}
 	}
@@ -2601,8 +2602,9 @@ public sealed class Player_move_c : MonoBehaviour
 		{
 			if (gobj[i].layer.Equals(11) && gobj[i].GetComponent<PhotonView>() == idKiller)
 			{
-				gobj[i].GetComponent<AudioSource>().PlayOneShot((_typeKills != 2) ? hitmarkerSound : headShotSound, 1f);
+				randomThingController.HitmarkerController.GetComponent<Animation>().Stop();
 				randomThingController.HitmarkerController.GetComponent<Animation>().Play((_typeKills != 2) ? "hit" : "headshot");
+				gobj[i].GetComponent<AudioSource>().PlayOneShot((_typeKills != 2) ? hitmarkerSound : headShotSound, 1f);
 			}
 		}
 	}
@@ -2614,8 +2616,9 @@ public sealed class Player_move_c : MonoBehaviour
 		{
 			if (gobj[i].layer.Equals(11) && gobj[i].GetComponent<PhotonView>() == idKiller)
 			{
-				gobj[i].GetComponent<AudioSource>().PlayOneShot((_typeKills != 2) ? killSound : headshotkillSound, 1f);
+				randomThingController.HitmarkerController.GetComponent<Animation>().Stop();
 				randomThingController.HitmarkerController.GetComponent<Animation>().Play((_typeKills != 2) ? "kill" : "killheadshot");
+				gobj[i].GetComponent<AudioSource>().PlayOneShot((_typeKills != 2) ? killSound : headshotkillSound, 1f);
 			}
 		}
 	}
@@ -2627,6 +2630,8 @@ public sealed class Player_move_c : MonoBehaviour
 		{
 			if (gobj[i].layer.Equals(11) && gobj[i].GetComponent<PhotonView>().viewID == idKiller)
 			{
+				randomThingController.HitmarkerController.GetComponent<Animation>().Stop();
+				randomThingController.HitmarkerController.GetComponent<Animation>().Play((_typeKills != 2) ? "kill" : "killheadshot");
 				gobj[i].GetComponent<AudioSource>().PlayOneShot((_typeKills != 2) ? killSound : headshotkillSound, 1f);
 			}
 		}
