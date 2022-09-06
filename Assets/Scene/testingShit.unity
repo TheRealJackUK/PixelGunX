@@ -294,7 +294,7 @@ MonoBehaviour:
   mSymbols: 1
   mEffectDistance: {x: 1, y: 1}
   mOverflow: 0
-  mApplyGradient: 1
+  mApplyGradient: 0
   mGradientTop: {r: 1, g: 1, b: 1, a: 1}
   mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   mSpacingX: 0
@@ -394,7 +394,7 @@ MonoBehaviour:
   mSymbols: 1
   mEffectDistance: {x: 1, y: 1}
   mOverflow: 0
-  mApplyGradient: 1
+  mApplyGradient: 0
   mGradientTop: {r: 1, g: 1, b: 1, a: 1}
   mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   mSpacingX: 0
@@ -664,6 +664,8 @@ GameObject:
   - component: {fileID: 1100422181}
   - component: {fileID: 1100422183}
   - component: {fileID: 1100422182}
+  - component: {fileID: 1100422185}
+  - component: {fileID: 1100422184}
   m_Layer: 10
   m_Name: GodBtn
   m_TagString: Untagged
@@ -747,7 +749,7 @@ MonoBehaviour:
   mHeight: 42
   mDepth: 2
   mMat: {fileID: 0}
-  autoResizeBoxCollider: 0
+  autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1
@@ -767,6 +769,32 @@ MonoBehaviour:
   mAtlas: {fileID: 114081948681600575, guid: f8d20a5e9c7df334f82299fe47c197f9, type: 3}
   mSpriteName: red_btn
   mFillCenter: 1
+--- !u!65 &1100422184
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100422180}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 42, y: 42, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1100422185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100422180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b93308d0ebf75d041bc29c950ca7ef9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noSound: 0
 --- !u!1 &1114506954
 GameObject:
   m_ObjectHideFlags: 0
@@ -778,6 +806,8 @@ GameObject:
   - component: {fileID: 1114506955}
   - component: {fileID: 1114506957}
   - component: {fileID: 1114506956}
+  - component: {fileID: 1114506958}
+  - component: {fileID: 1114506959}
   m_Layer: 10
   m_Name: Firerate
   m_TagString: Untagged
@@ -861,7 +891,7 @@ MonoBehaviour:
   mHeight: 42
   mDepth: 2
   mMat: {fileID: 0}
-  autoResizeBoxCollider: 0
+  autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1
@@ -881,6 +911,32 @@ MonoBehaviour:
   mAtlas: {fileID: 114081948681600575, guid: f8d20a5e9c7df334f82299fe47c197f9, type: 3}
   mSpriteName: red_btn
   mFillCenter: 1
+--- !u!114 &1114506958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114506954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b93308d0ebf75d041bc29c950ca7ef9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noSound: 0
+--- !u!65 &1114506959
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114506954}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 42, y: 42, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1190295089
 GameObject:
   m_ObjectHideFlags: 0
@@ -985,6 +1041,7 @@ GameObject:
   - component: {fileID: 1308012760}
   - component: {fileID: 1308012759}
   - component: {fileID: 1308012758}
+  - component: {fileID: 1308012762}
   m_Layer: 10
   m_Name: UI Root
   m_TagString: Untagged
@@ -1070,12 +1127,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24ad40667c77db64b9eb06b380ef21d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scalingStyle: 0
-  manualWidth: 1280
-  manualHeight: 720
+  scalingStyle: 1
+  manualWidth: 320
+  manualHeight: 320
   minimumHeight: 320
   maximumHeight: 1536
-  fitWidth: 0
+  fitWidth: 1
   fitHeight: 1
   adjustByDPI: 0
   shrinkPortraitUI: 0
@@ -1095,6 +1152,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1308012762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1308012757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba1e5caca09fcbda0b26797c5582e688, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonHandlers:
+  - infammo
+  - god
+  - firerate
+  actualHandlers:
+  - {fileID: 2113070904}
+  - {fileID: 1100422185}
+  - {fileID: 1114506958}
 --- !u!1 &1473716480
 GameObject:
   m_ObjectHideFlags: 0
@@ -1268,7 +1345,7 @@ MonoBehaviour:
   mSymbols: 1
   mEffectDistance: {x: 1, y: 1}
   mOverflow: 0
-  mApplyGradient: 1
+  mApplyGradient: 0
   mGradientTop: {r: 1, g: 1, b: 1, a: 1}
   mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   mSpacingX: 0
@@ -1609,6 +1686,8 @@ GameObject:
   - component: {fileID: 2113070900}
   - component: {fileID: 2113070902}
   - component: {fileID: 2113070901}
+  - component: {fileID: 2113070904}
+  - component: {fileID: 2113070903}
   m_Layer: 10
   m_Name: InfBtn
   m_TagString: Untagged
@@ -1692,7 +1771,7 @@ MonoBehaviour:
   mHeight: 42
   mDepth: 2
   mMat: {fileID: 0}
-  autoResizeBoxCollider: 0
+  autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1
@@ -1712,6 +1791,32 @@ MonoBehaviour:
   mAtlas: {fileID: 114081948681600575, guid: f8d20a5e9c7df334f82299fe47c197f9, type: 3}
   mSpriteName: red_btn
   mFillCenter: 1
+--- !u!65 &2113070903
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2113070899}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 42, y: 42, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2113070904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2113070899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b93308d0ebf75d041bc29c950ca7ef9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noSound: 0
 --- !u!1 &56646881302747871
 GameObject:
   m_ObjectHideFlags: 0

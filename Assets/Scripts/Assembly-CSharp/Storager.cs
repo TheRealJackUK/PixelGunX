@@ -74,7 +74,17 @@ public static class Storager
 		ObscuredPrefs.SetInt(key, val);
 	}
 
+	public static void setInt(string key, int val)
+	{
+		ObscuredPrefs.SetInt(key, val);
+	}
+
 	public static int getInt(string key, bool useICloud)
+	{
+		return ObscuredPrefs.GetInt(key);
+	}
+
+	public static int getInt(string key)
 	{
 		return ObscuredPrefs.GetInt(key);
 	}

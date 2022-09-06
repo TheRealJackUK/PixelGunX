@@ -1333,7 +1333,9 @@ public sealed class WeaponManager : MonoBehaviour
 			return null;
 		}
 		GameObject gameObject2 = UnityEngine.Object.Instantiate(gameObject, pos, Quaternion.identity) as GameObject;
+		gameObject2.SetActive(false);
 		gameObject2.transform.forward = forw;
+		gameObject2.SetActive(true);
 		return gameObject2;
 	}
 
