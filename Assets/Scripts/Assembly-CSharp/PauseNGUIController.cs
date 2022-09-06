@@ -67,6 +67,7 @@ public class PauseNGUIController : ControlsSettingsBase
 	private new void Start()
 	{
 		base.Start();
+		sensitivitySlider.value = Defs.Sensitivity;
 		if (Defs.IsTraining)
 		{
 			shopButton.gameObject.SetActive(false);
@@ -266,9 +267,13 @@ public class PauseNGUIController : ControlsSettingsBase
 
 	private void Update()
 	{
+		if (sensitivitySlider.value == 0.752)
+		{
+			sensitivitySlider.value = Defs.Sensitivity;
+		}
 		foreach (UILabel labe in Resources.FindObjectsOfTypeAll<UILabel>()) {
 			if (labe.gameObject.name == "ViewSensitivityLabel") {
-				labe.text = "SENSITIVITY: " + Defs.Sensitivity * 100;
+				labe.text = "SENSITIVITY: " + (Defs.Sensitivity * 100);
 			}
 		}
 		if (_isCancellationRequested)
@@ -294,14 +299,6 @@ public class PauseNGUIController : ControlsSettingsBase
 		}
 		float num = sensitivitySlider.value;
 		Debug.LogError("set here2");
-		if (_cachedSensitivity != num)
-		{
-			if (Application.isEditor)
-			{
-				Debug.Log("New sensitivity: " + num);
-			}
-			_cachedSensitivity = num;
-		}
 		Defs.Sensitivity = num;
 		if (!InPauseShop())
 		{
