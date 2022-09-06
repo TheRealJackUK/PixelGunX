@@ -67,6 +67,12 @@ public sealed class Player_move_c : MonoBehaviour
 
 	public AudioClip jetpackActivSound;
 
+	public AudioClip hitmarkerSound;
+	
+	public AudioClip killSound;
+
+	public AudioClip headshotkillSound;
+
 	public PlayerScoreController myScoreController;
 
 	public bool isRocketJump;
@@ -106,6 +112,8 @@ public sealed class Player_move_c : MonoBehaviour
 	public Animation mechBodyAnimation;
 
 	public WeaponSounds mechWeaponSounds;
+
+	public bool currentlyHead;
 
 	public ParticleSystem[] flashMech;
 
@@ -2570,6 +2578,38 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 	}
 
+	void playHitSound(int _typeKills, int idKiller)
+	{
+		if (!myKillAssists.Contains(idKiller))
+		{
+			GameObject.FindGameObjectWithTag("BackgroundMusic").GetComponent<AudioSource>().PlayOneShot((_typeKills != 2) ? hitmarkerSound : headShotSound, 1f);
+		}
+	}
+
+	void playHitSound(int _typeKills, PhotonView idKiller)
+	{
+		if (!myKillAssistsLocal.Contains(idKiller))
+		{
+			GameObject.FindGameObjectWithTag("BackgroundMusic").GetComponent<AudioSource>().PlayOneShot((_typeKills != 2) ? hitmarkerSound : headShotSound, 1f);
+		}
+	}
+
+	void playKillSound(int _typeKills, PhotonView idKiller)
+	{
+		if (!myKillAssistsLocal.Contains(idKiller))
+		{
+			GameObject.FindGameObjectWithTag("BackgroundMusic").GetComponent<AudioSource>().PlayOneShot((_typeKills != 2) ? killSound : headshotkillSound, 1f);
+		}
+	}
+
+	void playKillSound(int _typeKills, int idKiller)
+	{
+		if (!myKillAssists.Contains(idKiller))
+		{
+			GameObject.FindGameObjectWithTag("BackgroundMusic").GetComponent<AudioSource>().PlayOneShot((_typeKills != 2) ? killSound : headshotkillSound, 1f);
+		}
+	}
+
 	public void UpdateSkin()
 	{
 		if (!isMulti)
@@ -3387,6 +3427,7 @@ public sealed class Player_move_c : MonoBehaviour
 		{
 			if (!gameObject.GetComponent<PhotonView>().viewID.Equals(idKiller))
 			{
+				playKillSound(_typeKill, idKiller);
 				continue;
 			}
 			SkinName component = gameObject.GetComponent<SkinName>();
@@ -3544,6 +3585,7 @@ public sealed class Player_move_c : MonoBehaviour
 			{
 				continue;
 			}
+			playKillSound(_typekill, idKiller);
 			SkinName component = array[i].GetComponent<SkinName>();
 			Player_move_c playerMoveC = component.playerMoveC;
 			nick = component.NickName;
@@ -3800,7 +3842,7 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 		if (Defs.isSoundFX)
 		{
-			base.GetComponent<AudioSource>().PlayOneShot((_typeKills != 2) ? damagePlayerSound : headShotSound);
+			playHitSound(_typeKills, idKiller);
 		}
 		if (isMine && !isKilled && !isImmortality)
 		{
@@ -3972,7 +4014,7 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 		if (Defs.isSoundFX)
 		{
-			base.gameObject.GetComponent<AudioSource>().PlayOneShot((_typeKills != 2) ? damagePlayerSound : headShotSound);
+			playHitSound(_typeKills, idKiller);
 		}
 		if (isMine && !isKilled && !isImmortality)
 		{
@@ -4978,6 +5020,7 @@ public sealed class Player_move_c : MonoBehaviour
 			{
 				if (myKillAssistsLocal.Count > 0)
 				{
+					
 					base.GetComponent<PhotonView>().RPC("AddScoreKillAssisitLocal", PhotonTargets.Others, (myKillAssistsLocal.Count <= 0) ? default(PhotonView) : myKillAssistsLocal[0], (myKillAssistsLocal.Count <= 1) ? default(PhotonView) : myKillAssistsLocal[1], (myKillAssistsLocal.Count <= 2) ? default(PhotonView) : myKillAssistsLocal[2], (myKillAssistsLocal.Count <= 3) ? default(PhotonView) : myKillAssistsLocal[3], (myKillAssistsLocal.Count <= 4) ? default(PhotonView) : myKillAssistsLocal[4], (myKillAssistsLocal.Count <= 5) ? default(PhotonView) : myKillAssistsLocal[5], (myKillAssistsLocal.Count <= 6) ? default(PhotonView) : myKillAssistsLocal[6], (myKillAssistsLocal.Count <= 7) ? default(PhotonView) : myKillAssistsLocal[7]);
 				}
 				myKillAssistsLocal.Clear();
@@ -6790,12 +6833,14 @@ public sealed class Player_move_c : MonoBehaviour
 
 	private void _HitChest(GameObject go)
 	{
+		Debug.LogError("hit registered on chest");
 		WeaponSounds weaponSounds = ((!isMechActive) ? _weaponManager.currentWeaponSounds : mechWeaponSounds);
 		go.GetComponent<ChestController>().MinusLive(((float)weaponSounds.damage + UnityEngine.Random.Range(weaponSounds.damageRange.x, weaponSounds.damageRange.y)) * (1f + koofDamageWeaponFromPotoins + EffectsController.DamageModifsByCats(weaponSounds.categoryNabor - 1)));
 	}
 
 	private void _HitZombie(GameObject zmb)
 	{
+		Debug.LogError("hit registered on zombie");
 		WeaponSounds weaponSounds = ((!isMechActive) ? _weaponManager.currentWeaponSounds : mechWeaponSounds);
 		BaseBot botScriptForObject = BaseBot.GetBotScriptForObject(zmb.transform.parent);
 		if (!isMulti)
@@ -6814,6 +6859,7 @@ public sealed class Player_move_c : MonoBehaviour
 
 	private void _HitTurret(GameObject _turret)
 	{
+		Debug.LogError("hit registered on turret");
 		if (_turret.GetComponent<TurretController>().isEnemyTurret)
 		{
 			float num = GetMultyDamage() * (1f + koofDamageWeaponFromPotoins);
@@ -6831,6 +6877,7 @@ public sealed class Player_move_c : MonoBehaviour
 
 	private void _HitPlayer(GameObject plr, GameObject hitGameObject)
 	{
+		Debug.LogError("hit registered on player");
 		GameObject label = plr.GetComponent<SkinName>().playerMoveC._label;
 		if (label != null)
 		{
