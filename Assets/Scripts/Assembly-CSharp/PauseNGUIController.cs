@@ -201,12 +201,12 @@ public class PauseNGUIController : ControlsSettingsBase
 		};
 		if (sensitivitySlider != null)
 		{
-			float sensitivity = Defs.Sensitivity;
+			/*float sensitivity = Defs.Sensitivity;
 			float num = Mathf.Clamp(sensitivity, 6f, 19f);
 			float num2 = num;
 			sensitivitySlider.value = num2;
 			_cachedSensitivity = num;
-			// Defs.Sensitivity = sensitivitySlider.value;
+			Defs.Sensitivity = sensitivitySlider.value;*/
 		}
 		else
 		{
@@ -268,7 +268,7 @@ public class PauseNGUIController : ControlsSettingsBase
 	{
 		foreach (UILabel labe in Resources.FindObjectsOfTypeAll<UILabel>()) {
 			if (labe.gameObject.name == "ViewSensitivityLabel") {
-				labe.text = "SENSITIVITY: " + Defs.Sensitivity;
+				labe.text = "SENSITIVITY: " + Defs.Sensitivity * 100;
 			}
 		}
 		if (_isCancellationRequested)
@@ -293,16 +293,16 @@ public class PauseNGUIController : ControlsSettingsBase
 			return;
 		}
 		float num = sensitivitySlider.value;
-		float num2 = Mathf.Clamp(num + 10f, 10f, 30f);
-		if (_cachedSensitivity != num2)
+		Debug.LogError("set here2");
+		if (_cachedSensitivity != num)
 		{
 			if (Application.isEditor)
 			{
-				Debug.Log("New sensitivity: " + num2);
+				Debug.Log("New sensitivity: " + num);
 			}
-			Defs.Sensitivity = num2;
-			_cachedSensitivity = num2;
+			_cachedSensitivity = num;
 		}
+		Defs.Sensitivity = num;
 		if (!InPauseShop())
 		{
 			if (_shopOpened)

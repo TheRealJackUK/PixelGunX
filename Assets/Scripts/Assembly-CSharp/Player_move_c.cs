@@ -2580,33 +2580,49 @@ public sealed class Player_move_c : MonoBehaviour
 
 	void playHitSound(int _typeKills, int idKiller)
 	{
-		if (!myKillAssists.Contains(idKiller))
+		var gobj = GameObject.FindGameObjectsWithTag("Player");
+		for (int i = 0; i < gobj.Length; i++)
 		{
-			GameObject.FindGameObjectWithTag("BackgroundMusic").GetComponent<AudioSource>().PlayOneShot((_typeKills != 2) ? hitmarkerSound : headShotSound, 1f);
+			if (gobj[i].layer.Equals(11) && gobj[i].GetComponent<PhotonView>().viewID == idKiller)
+			{
+				gobj[i].GetComponent<AudioSource>().PlayOneShot((_typeKills != 2) ? hitmarkerSound : headShotSound, 1f);
+			}
 		}
 	}
 
 	void playHitSound(int _typeKills, PhotonView idKiller)
 	{
-		if (!myKillAssistsLocal.Contains(idKiller))
+		var gobj = GameObject.FindGameObjectsWithTag("Player");
+		for (int i = 0; i < gobj.Length; i++)
 		{
-			GameObject.FindGameObjectWithTag("BackgroundMusic").GetComponent<AudioSource>().PlayOneShot((_typeKills != 2) ? hitmarkerSound : headShotSound, 1f);
+			if (gobj[i].layer.Equals(11) && gobj[i].GetComponent<PhotonView>() == idKiller)
+			{
+				gobj[i].GetComponent<AudioSource>().PlayOneShot((_typeKills != 2) ? hitmarkerSound : headShotSound, 1f);
+			}
 		}
 	}
 
 	void playKillSound(int _typeKills, PhotonView idKiller)
 	{
-		if (!myKillAssistsLocal.Contains(idKiller))
+		var gobj = GameObject.FindGameObjectsWithTag("Player");
+		for (int i = 0; i < gobj.Length; i++)
 		{
-			GameObject.FindGameObjectWithTag("BackgroundMusic").GetComponent<AudioSource>().PlayOneShot((_typeKills != 2) ? killSound : headshotkillSound, 1f);
+			if (gobj[i].layer.Equals(11) && gobj[i].GetComponent<PhotonView>() == idKiller)
+			{
+				gobj[i].GetComponent<AudioSource>().PlayOneShot((_typeKills != 2) ? killSound : headshotkillSound, 1f);
+			}
 		}
 	}
 
 	void playKillSound(int _typeKills, int idKiller)
 	{
-		if (!myKillAssists.Contains(idKiller))
+		var gobj = GameObject.FindGameObjectsWithTag("Player");
+		for (int i = 0; i < gobj.Length; i++)
 		{
-			GameObject.FindGameObjectWithTag("BackgroundMusic").GetComponent<AudioSource>().PlayOneShot((_typeKills != 2) ? killSound : headshotkillSound, 1f);
+			if (gobj[i].layer.Equals(11) && gobj[i].GetComponent<PhotonView>().viewID == idKiller)
+			{
+				gobj[i].GetComponent<AudioSource>().PlayOneShot((_typeKills != 2) ? killSound : headshotkillSound, 1f);
+			}
 		}
 	}
 

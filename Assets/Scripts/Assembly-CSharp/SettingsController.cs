@@ -299,7 +299,7 @@ internal sealed class SettingsController : MonoBehaviour
 			rotateCamera.OnMainMenuCloseOptions();
 			return;
 		}
-		float num = sensitivitySlider.value * 13f;
+		float num = sensitivitySlider.value;
 		float num2 = Mathf.Clamp(num + 6f, 6f, 19f);
 		if (_cachedSensitivity != num2)
 		{
