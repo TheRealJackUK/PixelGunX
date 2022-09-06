@@ -78,7 +78,7 @@ public sealed class GUISetting : MonoBehaviour
 		thumbStyle.fixedHeight = (float)polzunok.height * num;
 		Rect position4 = new Rect((float)Screen.width * 0.5f - (float)slow_fast.width * 0.5f * num, (float)Screen.height * 0.81f - (float)slow_fast.height * 0.5f * num, (float)slow_fast.width * num, (float)slow_fast.height * num);
 		mySens = GUI.HorizontalSlider(position4, Defs.Sensitivity, 6f, 18f, sliderStyle, thumbStyle);
-		Defs.Sensitivity = mySens;
+		//Defs.Sensitivity = mySens;
 	}
 
 	private void OnDestroy()

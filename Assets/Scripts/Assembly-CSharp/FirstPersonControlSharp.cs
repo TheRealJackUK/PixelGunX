@@ -325,7 +325,7 @@ internal sealed class FirstPersonControlSharp : UnityEngine.MonoBehaviour
 			}
 			if (Screen.lockCursor)
 			{
-				_cameraMouseDelta = vector * Defs.Sensitivity;
+				_cameraMouseDelta = vector * Defs.Sensitivity * 30;
 			}
 		}
 		mousePosOld = Input.mousePosition;
@@ -457,7 +457,7 @@ internal sealed class FirstPersonControlSharp : UnityEngine.MonoBehaviour
 			{
 				TrainingController.isNextStep = TrainingController.stepTrainingList["SwipeToRotate"];
 			}
-			float sensitivity = Defs.Sensitivity;
+			float sensitivity = Defs.Sensitivity * 30;
 			float num = 1f;
 			if (_moveC != null)
 			{
