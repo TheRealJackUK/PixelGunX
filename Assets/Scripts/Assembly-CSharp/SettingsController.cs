@@ -298,6 +298,11 @@ internal sealed class SettingsController : MonoBehaviour
 		}
 		float num = sensitivitySlider.value;
 		Defs.Sensitivity = num;
+		foreach (UILabel labe in Resources.FindObjectsOfTypeAll<UILabel>()) {
+			if (labe.gameObject.name == "ViewSensitivityLabel") {
+				labe.text = "SENSITIVITY: " + Defs.Sensitivity * 100;
+			}
+		}
 	}
 
 	private void LateUpdate()
