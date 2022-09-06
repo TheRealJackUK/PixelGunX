@@ -74,11 +74,11 @@ public class ConnectSceneNGUIController : MonoBehaviour
 
 	public static int gameTier = 1;
 
-	public static string[] masMapName = new string[53]
+	public static string[] masMapName = new string[51]
 	{
 		"Paradise", "Computer", "Pizza", "Christmas_Town", "level_0", "level_1", "level_2", "level_3", "level_4", "level_5", "NuclearCity", "Supermarket", "Sky_islands", "Sniper", "Knife", "Heaven", "Hill",
 		"Ants", "DarkMall", "Underwater", "Matrix", "Ships", "Portal", "Space", "actualgame", "Estate", "old_office", "Parkour", "Pool", "School",
-		"Coliseum_MP", "Bridge", "Jail", "Pool_Brian", "Slender_Multy", "Train", "Pool_Abandoned", "Lean_Matrix", "Tatuan", "ChinaPand", "PiratIsland",
+		"Coliseum_MP", "Bridge", "Jail", "Slender_Multy", "Train", "Pool_Abandoned", "Tatuan", "ChinaPand", "PiratIsland",
 		"emperors_palace", "Helicarrier", "train_robbery", "Candyland", "survival_7",
 		"survival_3", "facility", "Shipyard", "High Noon", "Frontier", "Pirate Cove", "Warehouse"
 	};
@@ -87,19 +87,20 @@ public class ConnectSceneNGUIController : MonoBehaviour
 
 	public static string[] masMapNameCOOP = new string[6] { "Utopia", "Arena", "Bridge", "Assault", "Dust", "Winter" };
 
-	public static string[] masMapNameCompany = new string[44]
+	public static string[] masMapNameCompany = new string[43]
 	{
 		"Heaven", "Barge", "Pizza", "Bota", "Paradise", "Christmas_Town_Night", "Space", "Train", "Day_D", "Sniper",
 		"Knife", "Ants", "Underwater", "old_office", "Matrix", "Ships_Night", "Portal", "actualgame", "Estate", "Parkour", "Pool", "Ranch",
-		"Assault", "Aztec", "Dust", "Sky_islands", "NuclearCity", "Lean_Matrix", "Tatuan", "ChinaPand", "PiratIsland", "emperors_palace",
+		"Assault", "Aztec", "Dust", "Sky_islands", "NuclearCity", "Tatuan", "ChinaPand", "PiratIsland", "emperors_palace",
 		"Christmas_dinner", "Secret_Base", "Helicarrier", "train_robbery", "Candyland", "survival_7",
 		"survival_3", "facility", "High Noon", "Frontier", "Pirate Cove", "Warehouse"
 	};
 
-	public static string[] masMapNameflag = new string[17]
+	public static string[] masMapNameflag = new string[16]
 	{
+		//add lean matrix here when you can ig with easter eggs
 		"Two_Castles", "Barge", "Bota", "Paradise", "Parkour", "NuclearCity", "Day_D", "Ants", "Underwater", "Matrix",
-		"Portal", "Space", "Dust", "Ships", "Lean_Matrix", "emperors_palace", "Christmas_dinner"
+		"Portal", "Space", "Dust", "Ships", "emperors_palace", "Christmas_dinner"
 	};
 
 	public static string[] masMapNameCapturePoints = new string[4] { "Mine", "Bota", "Paradise", "Parkour" };

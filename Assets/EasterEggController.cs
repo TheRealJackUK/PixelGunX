@@ -8,6 +8,7 @@ public class EasterEggController : MonoBehaviour
 {
     public ButtonHandler AngryHerobrineButton;
     public ButtonHandler BryantButton;
+	public ButtonHandler LeanButton;
     public ButtonHandler BackButton;
     private LoadingNGUIController _loadingNGUIController;
     public string theName = "";
@@ -166,6 +167,10 @@ public class EasterEggController : MonoBehaviour
         LoadMap("gameplay slender 5");
 	}
 
+	public void HandleLean(object sender, System.EventArgs e){
+        LoadMap("Lean_Matrix");
+	}
+
 	private void OnJoinedRoom()
 	{
 		Debug.Log("OnJoinedRoom " + theName);
@@ -186,6 +191,10 @@ public class EasterEggController : MonoBehaviour
 		if (BryantButton != null)
 		{
 			BryantButton.Clicked += HandleBryant;
+		}
+		if (LeanButton != null)
+		{
+			LeanButton.Clicked += HandleLean;
 		}
     }
 
