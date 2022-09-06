@@ -183,10 +183,7 @@ internal sealed class SettingsController : MonoBehaviour
 		if (sensitivitySlider != null)
 		{
 			float sensitivity = Defs.Sensitivity;
-			float num = Mathf.Clamp(sensitivity, 6f, 19f);
-			float num2 = num - 6f;
-			sensitivitySlider.value = num2 / 13f;
-			_cachedSensitivity = num;
+			sensitivitySlider.value = sensitivity;
 		}
 		else
 		{
@@ -300,16 +297,7 @@ internal sealed class SettingsController : MonoBehaviour
 			return;
 		}
 		float num = sensitivitySlider.value;
-		float num2 = Mathf.Clamp(num + 6f, 6f, 19f);
-		if (_cachedSensitivity != num2)
-		{
-			if (Application.isEditor)
-			{
-				Debug.Log("New sensitivity: " + num2);
-			}
-			Defs.Sensitivity = num2;
-			_cachedSensitivity = num2;
-		}
+		Defs.Sensitivity = num;
 	}
 
 	private void LateUpdate()
