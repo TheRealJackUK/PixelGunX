@@ -6071,6 +6071,17 @@ public sealed class Player_move_c : MonoBehaviour
 
 	public void ShotPressed()
 	{
+		/*
+		#if UNITY_EDITOR
+			Weapon zeweapon = (Weapon)_weaponManager.playerWeapons[_weaponManager.CurrentWeaponIndex];
+			zeweapon.currentAmmoInClip = 9999;
+		#endif
+		#if !UNITY_EDITOR
+			if (deltaAngle > 10f)
+			{
+				return;
+			}
+		#endif*/
 		if (deltaAngle > 10f)
 		{
 			return;
