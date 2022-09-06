@@ -265,6 +265,10 @@ internal sealed class AppsMenu : MonoBehaviour
 		if (!PlayerPrefs.HasKey("currentfont")) {
 			PlayerPrefs.SetString("currentfont", "minecraft");
 		}
+		if (!Storager.hasKey("graphicSetting")) {
+			Storager.setInt("graphicSetting", 3);
+		}
+		QualitySettings.SetQualityLevel(Storager.getInt("graphicSetting"));
 		Resources.Load<LanguageSource>("I2Languages").UpdateTheFont();
 		if (PlayerPrefs.HasKey("WantToResetKeychain"))
 		{

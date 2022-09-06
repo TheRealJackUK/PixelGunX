@@ -26,6 +26,15 @@ public class GraphicsMenuController : MonoBehaviour {
 
 	public ButtonHandler secretBtn;
 
+	public ButtonHandler potatoBtn;
+	public ButtonHandler veryLowBtn;
+	public ButtonHandler lowBtn;
+	public ButtonHandler standardBtn;
+
+	public ButtonHandler highBtn;
+
+	public ButtonHandler ultraBtn;
+
 	public void SwitchBtn(bool on, ButtonHandler btn) {
 		HOTween.Init(true, true, true);
 		if (on){
@@ -141,6 +150,24 @@ public class GraphicsMenuController : MonoBehaviour {
 		PlayerPrefs.Save();
 	}
 
+	public void HandleGraphicBtn(object sender, System.EventArgs e){
+		string var1 = (sender as ButtonHandler).transform.parent.parent.gameObject.name;
+		var1 = var1.Replace("Btn", "");
+		SwitchBtn(false, potatoBtn);
+		SwitchBtn(false, veryLowBtn);
+		SwitchBtn(false, lowBtn);
+		SwitchBtn(false, standardBtn);
+		SwitchBtn(false, highBtn);
+		SwitchBtn(false, ultraBtn);
+		for (int i = 0; i < QualitySettings.names.Length; i++) {
+			if (var1 == QualitySettings.names[i]) {
+				SwitchBtn(true, (sender as ButtonHandler));
+				Storager.setInt("graphicSetting", i);
+				QualitySettings.SetQualityLevel(i);
+			}
+		}
+	}
+
 	public void fovchanged() {
 		int currentFOV = Storager.getInt("camerafov", false);
 		int num = 179;
@@ -152,15 +179,33 @@ public class GraphicsMenuController : MonoBehaviour {
 		PlayerPrefs.Save();
 	}
 
+	public bool IsGraphicSetting(string var1) {
+		for (int i = 0; i < QualitySettings.names.Length; i++) {
+			if (var1 == QualitySettings.names[QualitySettings.GetQualityLevel()]) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	void Start () {
 		SwitchBtn(Storager.getInt("bloom", false) == 1, bloomBtn);
 		SwitchBtn(Storager.getInt("ao", false) == 1, aoBtn);
 		SwitchBtn(Storager.getInt("cg", false) == 1, cgBtn);
 		SwitchBtn(Storager.getInt("mb", false) == 1, mbBtn);
+		//
 		SwitchBtn(PlayerPrefs.GetString("currentfont") == "minecraft", mojanglesBtn);
 		SwitchBtn(PlayerPrefs.GetString("currentfont") == "MINI", miniBtn);
 		SwitchBtn(PlayerPrefs.GetString("currentfont") == "Ponderosa", ponderosaBtn);
 		SwitchBtn(PlayerPrefs.GetString("currentfont") == "Unibody", unibodyBtn);
+		//
+		SwitchBtn(IsGraphicSetting("Potato"), potatoBtn);
+		SwitchBtn(IsGraphicSetting("Very Low"), veryLowBtn);
+		SwitchBtn(IsGraphicSetting("Low"), lowBtn);
+		SwitchBtn(IsGraphicSetting("Standard"), standardBtn);
+		SwitchBtn(IsGraphicSetting("High"), highBtn);
+		SwitchBtn(IsGraphicSetting("Ultra"), ultraBtn);
+		//
 		SwitchBtn(PlayerPrefs.GetInt(Defs.GameGUIOffMode) == 1, offGuiBtn);
 		Resources.Load<LanguageSource>("I2Languages").UpdateTheFont();
 		int currentFOV = Storager.getInt("camerafov", false);
@@ -212,6 +257,30 @@ public class GraphicsMenuController : MonoBehaviour {
 		if (secretBtn != null)
 		{
 			secretBtn.Clicked += HandleSecret;
+		}
+		if (potatoBtn != null)
+		{
+			potatoBtn.Clicked += HandleGraphicBtn;
+		}
+		if (veryLowBtn != null)
+		{
+			veryLowBtn.Clicked += HandleGraphicBtn;
+		}
+		if (lowBtn != null)
+		{
+			lowBtn.Clicked += HandleGraphicBtn;
+		}
+		if (standardBtn != null)
+		{
+			standardBtn.Clicked += HandleGraphicBtn;
+		}
+		if (highBtn != null)
+		{
+			highBtn.Clicked += HandleGraphicBtn;
+		}
+		if (ultraBtn != null)
+		{
+			ultraBtn.Clicked += HandleGraphicBtn;
 		}
 	}
 }
