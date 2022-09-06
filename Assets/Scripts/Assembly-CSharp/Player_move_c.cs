@@ -63,6 +63,8 @@ public sealed class Player_move_c : MonoBehaviour
 
 	public AudioClip mechActivSound;
 
+	private RandomThingController randomThingController;
+
 	public AudioClip invisibleActivSound;
 
 	public AudioClip jetpackActivSound;
@@ -2018,6 +2020,7 @@ public sealed class Player_move_c : MonoBehaviour
 
 	private IEnumerator Start()
 	{
+		randomThingController = GameObject.FindGameObjectWithTag("RandomThingController").GetComponent<RandomThingController>();
 		_killerInfo.Reset();
 		isNeedTakePremiumAccountRewards = PremiumAccountController.Instance.isAccountActive;
 		InitiailizeIcnreaseArmorEffectFlags();
@@ -2586,6 +2589,7 @@ public sealed class Player_move_c : MonoBehaviour
 			if (gobj[i].layer.Equals(11) && gobj[i].GetComponent<PhotonView>().viewID == idKiller)
 			{
 				gobj[i].GetComponent<AudioSource>().PlayOneShot((_typeKills != 2) ? hitmarkerSound : headShotSound, 1f);
+				randomThingController.HitmarkerController.GetComponent<Animation>().Play((_typeKills != 2) ? "hit" : "headshot");
 			}
 		}
 	}
@@ -2598,6 +2602,7 @@ public sealed class Player_move_c : MonoBehaviour
 			if (gobj[i].layer.Equals(11) && gobj[i].GetComponent<PhotonView>() == idKiller)
 			{
 				gobj[i].GetComponent<AudioSource>().PlayOneShot((_typeKills != 2) ? hitmarkerSound : headShotSound, 1f);
+				randomThingController.HitmarkerController.GetComponent<Animation>().Play((_typeKills != 2) ? "hit" : "headshot");
 			}
 		}
 	}
@@ -2610,6 +2615,7 @@ public sealed class Player_move_c : MonoBehaviour
 			if (gobj[i].layer.Equals(11) && gobj[i].GetComponent<PhotonView>() == idKiller)
 			{
 				gobj[i].GetComponent<AudioSource>().PlayOneShot((_typeKills != 2) ? killSound : headshotkillSound, 1f);
+				randomThingController.HitmarkerController.GetComponent<Animation>().Play((_typeKills != 2) ? "kill" : "killheadshot");
 			}
 		}
 	}
