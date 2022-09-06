@@ -3858,6 +3858,7 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 		if (Defs.isSoundFX)
 		{
+			base.GetComponent<AudioSource>().PlayOneShot((_typeKills != 2) ? damagePlayerSound : headShotSound);
 			playHitSound(_typeKills, idKiller);
 		}
 		if (isMine && !isKilled && !isImmortality)
@@ -4030,6 +4031,7 @@ public sealed class Player_move_c : MonoBehaviour
 		}
 		if (Defs.isSoundFX)
 		{
+			base.GetComponent<AudioSource>().PlayOneShot((_typeKills != 2) ? damagePlayerSound : headShotSound);
 			playHitSound(_typeKills, idKiller);
 		}
 		if (isMine && !isKilled && !isImmortality)
