@@ -203,9 +203,10 @@ public class PauseNGUIController : ControlsSettingsBase
 		{
 			float sensitivity = Defs.Sensitivity;
 			float num = Mathf.Clamp(sensitivity, 6f, 19f);
-			float num2 = num - 6f;
-			sensitivitySlider.value = num2 / 13f;
+			float num2 = num;
+			sensitivitySlider.value = num2;
 			_cachedSensitivity = num;
+			// Defs.Sensitivity = sensitivitySlider.value;
 		}
 		else
 		{
@@ -265,6 +266,11 @@ public class PauseNGUIController : ControlsSettingsBase
 
 	private void Update()
 	{
+		foreach (UILabel labe in Resources.FindObjectsOfTypeAll<UILabel>()) {
+			if (labe.gameObject.name == "ViewSensitivityLabel") {
+				labe.text = "SENSITIVITY: " + Defs.Sensitivity;
+			}
+		}
 		if (_isCancellationRequested)
 		{
 			if (SettingsJoysticksPanel.activeInHierarchy)
@@ -286,7 +292,7 @@ public class PauseNGUIController : ControlsSettingsBase
 			_isCancellationRequested = true;
 			return;
 		}
-		float num = sensitivitySlider.value * 13f;
+		float num = sensitivitySlider.value;
 		float num2 = Mathf.Clamp(num + 10f, 10f, 30f);
 		if (_cachedSensitivity != num2)
 		{
