@@ -8,6 +8,7 @@ public class PrefabsManager : MonoBehaviour {
     public string curScene = string.Empty;
     public Material weeze;
     public GameObject ppv;
+    bool lo = false;
     public static string the = string.Empty;
     
     void Awake() {
@@ -38,24 +39,22 @@ public class PrefabsManager : MonoBehaviour {
 		}
 	}
 
-    public void FixedUpdate(){
-        if (Application.loadedLevelName != curScene){
-            bool isbloom = Storager.getInt("bloom", false) == 1;
-            bool isao = Storager.getInt("ao", false) == 1;
-            bool iscg = Storager.getInt("cg", false) == 1;
-            bool ismb = Storager.getInt("mb", false) == 1;
-            bool canSetpp = !isbloom & !isao & !iscg & !ismb;
+    public void FixedUpdate()
+    {
+        bool isbloom = Storager.getInt("bloom", false) == 1;
+        bool isao = Storager.getInt("ao", false) == 1;
+        bool iscg = Storager.getInt("cg", false) == 1;
+        bool ismb = Storager.getInt("mb", false) == 1;
+        bool canSetpp = !isbloom | !isao | !iscg | !ismb;
+        if (Application.loadedLevelName != curScene)
+        {
+            lo = false;
             curScene = Application.loadedLevelName;
             if (PlayerPrefs.GetInt("isExploring") == 1) {
                 GameObject.Instantiate(Resources.Load<GameObject>("ExploreCamera"), new Vector3(0, 0, 0), Quaternion.identity);
             }
-            if (curScene == "LevelComplete" || curScene == "ChooseLevel")
-            {
-                return;
-            }
             //GameObject.Instantiate(Resources.Load<GameObject>("PPV"), new Vector3(0, 0, 0), Quaternion.identity);
             //if (Application.isPlaying) {
-                bool lo = false;
                 foreach (GameObject gobj in Resources.FindObjectsOfTypeAll<GameObject>()){
                     if (gobj.GetComponent<PostProcessVolume>()){
                         if (!gobj.name.Contains("(Clone)") && !gobj.name.Contains("Camera")){
@@ -63,9 +62,10 @@ public class PrefabsManager : MonoBehaviour {
                         }
                     }
                 }
-                if (Application.loadedLevelName == "AppCenter" || Application.loadedLevelName == "Loading" || Application.loadedLevelName == "PromScene"){
+                if (Application.loadedLevelName == "AppCenter" || Application.loadedLevelName == "Loading" || Application.loadedLevelName == "PromScene" || curScene == "LevelComplete" || curScene == "ChooseLevel"){
                     lo = true;
                 }
+                //Debug.LogError(GameObject.Find("SkinEditorController(Clone)" + GameObject.Find("SkinEditorController(Clone)").GetActive()));
                 if (!canSetpp) {
                     lo = true;
                 }
@@ -92,7 +92,8 @@ public class PrefabsManager : MonoBehaviour {
                 }
             //}
             foreach (GameObject gobj in Resources.FindObjectsOfTypeAll<GameObject>()){
-                if (gobj.GetComponent<PostProcessVolume>()){
+                if (gobj.GetComponent<PostProcessVolume>())
+                {
                     try {
                         bool bloom = Storager.getInt("bloom", false) == 1;
                         bool ao = Storager.getInt("ao", false) == 1;
@@ -119,6 +120,12 @@ public class PrefabsManager : MonoBehaviour {
             }
             /*foreach (Camera gobj in Resources.FindObjectsOfTypeAll<Camera>()){
                 if (gobj.GetComponent<PostProcessLayer>()){*/
+        }
+        if (GameObject.Find("SkinEditorController(Clone)") != null && ppv.GetActive()) 
+        {
+            ppv.SetActive(false);
+        } else if (canSetpp && !ppv.GetActive() && !lo && GameObject.Find("SkinEditorController(Clone)") == null) {
+            ppv.SetActive(true);
         }
     }
     

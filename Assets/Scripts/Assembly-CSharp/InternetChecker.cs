@@ -9,7 +9,6 @@ internal sealed class InternetChecker : MonoBehaviour
 
 	public GameObject consolePrefab;
 
-
 	public void OnGUI()
 	{
 		string input11 = string.Empty;
