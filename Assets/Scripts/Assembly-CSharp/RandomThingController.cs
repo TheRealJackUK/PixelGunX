@@ -7,6 +7,6 @@ public class RandomThingController : MonoBehaviour
     public GameObject HitmarkerController;
     public void Awake()
     {
-        UnityEngine.Object.DontDestroyOnLoad(base.gameObject);
+        DontDestroyOnLoad(base.gameObject);
     }
 }
