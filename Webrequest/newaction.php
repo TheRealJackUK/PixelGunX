@@ -151,6 +151,39 @@
                 echo "{\"info\":{\"creator_id\":\"". $creatorID ."\",\"name\":\"" . $clanName . "\",\"logo\":\"" . $clanLogo . "\"},\"players\":[" . $playerslist . "],\"invites\":{}}";
             }
             break;
+        case "get_leaderboards":
+            $clansget = $db->prepare("SELECT id, name, logo FROM `pgx_clans` WHERE 1");
+            $clansget->bindparam(":clan", $clan);
+			$clansget->execute();
+			$clans = $clansget->fetchAll();
+			$clanslist = "";
+			//$curi = 0;
+			foreach($clans as &$clandata) {
+				$clanslist .= "{\"id\":\"" . $clandata["id"] . "\", \"name\":\"" . $clandata["name"] . "\", \"logo\":\"" . $clandata["logo"] . "\"},";
+				//$curi += 1;
+			}
+			$clanslist = substr($clanslist, 0, strlen($clanslist)-1);
+			//
+			$playersget = $db->prepare("SELECT id, username, wins, clan FROM `pgx_users` WHERE wins > 10");
+			$playersget->execute();
+			$players = $playersget->fetchAll();
+			$playerslist = "";
+			//$curi = 0;
+			foreach($players as &$playerdata) {
+				if ($playerdata["clan"] != 0) {
+					$tokenget = $db->prepare("SELECT logo FROM `pgx_clans` WHERE id = :name");
+			        $tokenget->bindparam(":name", $playerdata["clan"]);
+			        $tokenget->execute();
+			        $clanLogo = $tokenget->fetchColumn();
+					$playerslist .= "{\"id\":\"" . $playerdata["id"] . "\", \"nick\":\"" . $playerdata["username"] . "\", \"wins\":\"" . $playerdata["wins"] . "\", \"logo\": \"{$clanLogo}\"},";
+				}else{
+					$playerslist .= "{\"id\":\"" . $playerdata["id"] . "\", \"nick\":\"" . $playerdata["username"] . "\", \"wins\":\"" . $playerdata["wins"] . "\"},";
+				}
+				//$curi += 1;
+			}
+			$playerslist = substr($playerslist, 0, strlen($playerslist)-1);
+			echo "{\"top_clans\": [{$clanslist}], \"best_players\": [{$playerslist}]}";
+            break;
 		case "create_clan":
 			// INSERT INTO `pgx_clans` (`id`, `pid`, `name`, `logo`, `pid2`, `originver`) VALUES (NULL, '1', 'HELL GAY GAMING', 'aa', '1', '10.3.0');
 			// UPDATE `pgx_users` SET `clan`=3 WHERE id = 0
@@ -201,12 +234,13 @@
 			// logo
 			// INSERT INTO `pgx_clans` (`id`, `pid`, `name`, `logo`, `pid2`, `originver`) VALUES (NULL, '1', 'HELL GAY GAMING', 'aa', '1', '10.3.0');
 			// UPDATE `pgx_users` SET `clan`=3 WHERE id = 0
-			$tokenget = $db->prepare("UPDATE `pgx_users` SET `username`=:nick, `skin`=:skin, `coins`=:coins, `gems`=:gems WHERE id = :id");
+			$tokenget = $db->prepare("UPDATE `pgx_users` SET `username`=:nick, `skin`=:skin, `coins`=:coins, `gems`=:gems, `wins`=:wins WHERE id = :id");
             $tokenget->bindparam(":id", $id);
 			$tokenget->bindparam(":nick", $nick);
 			$tokenget->bindparam(":skin", $skin);
 			$tokenget->bindparam(":coins", $_POST["coins"]);
 			$tokenget->bindparam(":gems", $_POST["gems"]);
+			$tokenget->bindparam(":wins", $_POST["total_wins"]);
             $tokenget->execute();
 			echo 1;
 			break;
@@ -215,8 +249,8 @@
 			// INSERT INTO `pgx_clans` (`id`, `pid`, `name`, `logo`, `pid2`, `originver`) VALUES (NULL, '1', 'HELL GAY GAMING', 'aa', '1', '10.3.0');
 			// UPDATE `pgx_users` SET `clan`=3 WHERE id = 0
 			$tokenget = $db->prepare("UPDATE `pgx_clans` SET `name`=:logo WHERE id = :id");
-            $tokenget->bindparam(":id", $cid);
-			$tokenget->bindparam(":logo", $name);
+            $tokenget->bindparam(":id", $_POST["id_clan"]);
+			$tokenget->bindparam(":logo", $_POST["name"]);
             $tokenget->execute();
 			echo 1;
 			break;

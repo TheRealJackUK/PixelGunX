@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -49,8 +50,116 @@ public class FreeCam : MonoBehaviour
     /// </summary>
     private bool looking = false;
 
+    private int leftFingerId, rightFingerId;
+    private float halfScreenWidth;
+
+    // Camera control
+    private Vector2 lookInput;
+    private float cameraPitch;
+
+    // Player movement
+    private Vector2 moveTouchStartPosition;
+    private Vector2 moveInput;
+    
+    public float moveSpeed = 8;
+    public float cameraSensitivity = 8;
+
+    void Start() {
+        leftFingerId = -1;
+        rightFingerId = -1;
+        // cameraSensitivity = 4;
+        halfScreenWidth = Screen.width / 2;
+    }
+
+    void GetTouchInput() {
+        // Iterate through all the detected touches
+        for (int i = 0; i < Input.touchCount; i++)
+        {
+
+            Touch t = Input.GetTouch(i);
+
+            // Check each touch's phase
+            switch (t.phase)
+            {
+                case TouchPhase.Began:
+
+                    if (t.position.x < halfScreenWidth && leftFingerId == -1)
+                    {
+                        // Start tracking the left finger if it was not previously being tracked
+                        leftFingerId = t.fingerId;
+
+                        // Set the start position for the movement control finger
+                        moveTouchStartPosition = t.position;
+                    }
+                    else if (t.position.x > halfScreenWidth && rightFingerId == -1)
+                    {
+                        // Start tracking the rightfinger if it was not previously being tracked
+                        rightFingerId = t.fingerId;
+                    }
+
+                    break;
+                case TouchPhase.Ended:
+                case TouchPhase.Canceled:
+
+                    if (t.fingerId == leftFingerId)
+                    {
+                        // Stop tracking the left finger
+                        leftFingerId = -1;
+                        moveInput = new Vector2(0, 0);
+                        Debug.Log("Stopped tracking left finger");
+                    }
+                    else if (t.fingerId == rightFingerId)
+                    {
+                        // Stop tracking the right finger
+                        rightFingerId = -1;
+                        Debug.Log("Stopped tracking right finger");
+                    }
+
+                    break;
+                case TouchPhase.Moved:
+
+                    // Get input for looking around
+                    if (t.fingerId == rightFingerId)
+                    {
+                        lookInput = t.deltaPosition * cameraSensitivity * Time.deltaTime;
+                    }
+                    else if (t.fingerId == leftFingerId) {
+
+                        // calculating the position delta from the start position
+                        moveInput = t.position - moveTouchStartPosition;
+                    }
+
+                    break;
+                case TouchPhase.Stationary:
+                    // Set the look input to zero if the finger is still
+                    if (t.fingerId == rightFingerId)
+                    {
+                        lookInput = Vector2.zero;
+                    }
+                    break;
+            }
+        }
+    }
+
+    // References
+    [SerializeField] private Transform cameraTransform;
+
+    void LookAround() {
+        float newRotationX = transform.localEulerAngles.y + lookInput.x * cameraSensitivity;
+        float newRotationY = transform.localEulerAngles.x - lookInput.y * cameraSensitivity;
+        transform.localEulerAngles = new Vector3(newRotationY, newRotationX, 0f);
+    }
+
     void Update()
     {
+        GetTouchInput();
+        Vector2 movementDirection = moveInput.normalized * moveSpeed * Time.deltaTime;
+        transform.position += transform.right * movementDirection.x + transform.forward * movementDirection.y;
+        if (rightFingerId != -1) {
+            // Ony look around if the right finger is being tracked
+            Debug.Log("Rotating");
+            LookAround();
+        }
         if (Input.GetKey(KeyCode.Escape)) {
             PlayerPrefs.SetInt("isExploring", 0);
             LoadConnectScene.textureToShow = null;
