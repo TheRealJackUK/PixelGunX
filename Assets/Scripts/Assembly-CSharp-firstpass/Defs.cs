@@ -2419,7 +2419,6 @@ public static string CAnim(GameObject animator, string con){
 			{
 				_sensitivity = PlayerPrefs.GetFloat("SensitivitySett", 12f);
 			}
-			Debug.LogError(_sensitivity.Value);
 			return _sensitivity.Value;
 		}
 		set

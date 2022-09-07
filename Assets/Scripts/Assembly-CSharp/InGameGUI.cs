@@ -92,6 +92,8 @@ public sealed class InGameGUI : MonoBehaviour
 
 	public static Vector3 swipeWeaponPanelPos;
 
+	public RandomThingController randomThingController;
+
 	public static Vector3 shopPanelForTapPos;
 
 	public static Vector3 shopPanelForSwipePos;
@@ -598,6 +600,7 @@ public sealed class InGameGUI : MonoBehaviour
 
 	private void Start()
 	{
+		randomThingController = GameObject.Find("RandomThingController").GetComponent<RandomThingController>();
 		HOTween.Init(true, true, true);
 		HOTween.EnableOverwriteManager(true);
 		if (!Defs.isMulti && !Defs.IsSurvival)

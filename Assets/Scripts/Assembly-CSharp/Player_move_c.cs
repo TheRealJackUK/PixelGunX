@@ -2020,7 +2020,6 @@ public sealed class Player_move_c : MonoBehaviour
 
 	private IEnumerator Start()
 	{
-		randomThingController = GameObject.Find("RandomThingController").GetComponent<RandomThingController>();
 		_killerInfo.Reset();
 		isNeedTakePremiumAccountRewards = PremiumAccountController.Instance.isAccountActive;
 		InitiailizeIcnreaseArmorEffectFlags();
@@ -2588,8 +2587,8 @@ public sealed class Player_move_c : MonoBehaviour
 		{
 			if (gobj[i].layer.Equals(11) && gobj[i].GetComponent<PhotonView>().viewID == idKiller)
 			{
-				randomThingController.HitmarkerController.GetComponent<Animation>().Stop();
-				randomThingController.HitmarkerController.GetComponent<Animation>().Play((_typeKills != 2) ? "hit" : "headshot");
+				GameObject.Find("Hitmarkerthing").GetComponentInChildren<Animation>().Stop();
+				GameObject.Find("Hitmarkerthing").GetComponentInChildren<Animation>().Play((_typeKills != 2) ? "hit" : "headshot");
 				gobj[i].GetComponent<AudioSource>().PlayOneShot((_typeKills != 2) ? hitmarkerSound : headShotSound, 1f);
 			}
 		}
@@ -2602,8 +2601,8 @@ public sealed class Player_move_c : MonoBehaviour
 		{
 			if (gobj[i].layer.Equals(11) && gobj[i].GetComponent<PhotonView>() == idKiller)
 			{
-				randomThingController.HitmarkerController.GetComponent<Animation>().Stop();
-				randomThingController.HitmarkerController.GetComponent<Animation>().Play((_typeKills != 2) ? "hit" : "headshot");
+				GameObject.Find("Hitmarkerthing").GetComponentInChildren<Animation>().Stop();
+				GameObject.Find("Hitmarkerthing").GetComponentInChildren<Animation>().Play((_typeKills != 2) ? "hit" : "headshot");
 				gobj[i].GetComponent<AudioSource>().PlayOneShot((_typeKills != 2) ? hitmarkerSound : headShotSound, 1f);
 			}
 		}
@@ -2616,8 +2615,8 @@ public sealed class Player_move_c : MonoBehaviour
 		{
 			if (gobj[i].layer.Equals(11) && gobj[i].GetComponent<PhotonView>() == idKiller)
 			{
-				randomThingController.HitmarkerController.GetComponent<Animation>().Stop();
-				randomThingController.HitmarkerController.GetComponent<Animation>().Play((_typeKills != 2) ? "kill" : "killheadshot");
+				GameObject.Find("Hitmarkerthing").GetComponentInChildren<Animation>().Stop();
+				GameObject.Find("Hitmarkerthing").GetComponentInChildren<Animation>().Play((_typeKills != 2) ? "kill" : "killheadshot");
 				gobj[i].GetComponent<AudioSource>().PlayOneShot((_typeKills != 2) ? killSound : headshotkillSound, 1f);
 			}
 		}
@@ -2630,8 +2629,8 @@ public sealed class Player_move_c : MonoBehaviour
 		{
 			if (gobj[i].layer.Equals(11) && gobj[i].GetComponent<PhotonView>().viewID == idKiller)
 			{
-				randomThingController.HitmarkerController.GetComponent<Animation>().Stop();
-				randomThingController.HitmarkerController.GetComponent<Animation>().Play((_typeKills != 2) ? "kill" : "killheadshot");
+				GameObject.Find("Hitmarkerthing").GetComponentInChildren<Animation>().Stop();
+				GameObject.Find("Hitmarkerthing").GetComponentInChildren<Animation>().Play((_typeKills != 2) ? "kill" : "killheadshot");
 				gobj[i].GetComponent<AudioSource>().PlayOneShot((_typeKills != 2) ? killSound : headshotkillSound, 1f);
 			}
 		}
