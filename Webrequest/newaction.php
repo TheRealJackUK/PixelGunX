@@ -113,7 +113,7 @@
             break;
         case "get_clan_info":
             $clanget = $db->prepare("SELECT clan FROM `pgx_users` WHERE id = :name");
-            $clanget->bindparam(":name", $id);
+            $clanget->bindparam(":name", $_POST["id_player"]);
             $clanget->execute();
             $clan = $clanget->fetchColumn();
             if (strval($clan) == "0"){
@@ -125,13 +125,13 @@
                 $clanName = GetDBVarOne("pgx_clans", "name", "WHERE id = :name", [":name" => $clan]);
                 $clanLogo = GetDBVarOne("pgx_clans", "logo", "WHERE id = :name", [":name" => $clan]);
                 $membersget = $db->prepare("SELECT id, clan FROM `pgx_users` WHERE clan=:clan");
-                $membersget->bindparam(":clan", $clan)
+                $membersget->bindparam(":clan", $clan);
 				$membersget->execute();
 				$members = $membersget->fetchAll();
 				$playerslist = "";
 				$curi = 0;
 				foreach($members as &$member) {
-					$playerslist += "\"{$curi}\": \"{$member["id"]}\","
+					$playerslist += "\"{$curi}\": \"{$member["id"]}\",";
 					$curi += 1;
 				}
 				$playerslist = substr(0, strlen($playerslist)-1);
