@@ -23,11 +23,13 @@ internal sealed class Bullet : MonoBehaviour
 
 	public void StartBullet()
 	{
-		//myRender.enabled = false;
+		if (base.gameObject.layer == 29)
+		{
+			Destroy(base.gameObject);
+		}
+		myRender.enabled = false;
 		Invoke("RemoveSelf", LifeTime);
-		gameObject.SetActive(false);
-		base.transform.position = startPos-(transform.forward*6);
-		gameObject.SetActive(true);
+		base.transform.position = startPos;
 		isUse = true;
 		myRender.enabled = true;
 	}
