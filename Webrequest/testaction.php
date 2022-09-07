@@ -124,22 +124,36 @@
             }else{
                 // GetDBVarOne
                 // {"info":{"creator_id":0,"name":"example","logo":"png here"},"players":{"0":1},"invites":{"0":1}}
-                $creatorID = GetDBVarOne("pgx_clans", "pid", "WHERE id = :name", [":name" => $clan]);
-                $clanName = GetDBVarOne("pgx_clans", "name", "WHERE id = :name", [":name" => $clan]);
-                $clanLogo = GetDBVarOne("pgx_clans", "logo", "WHERE id = :name", [":name" => $clan]);
-                $membersget = $db->prepare("SELECT id, clan FROM `pgx_users` WHERE clan=:clan");
+                //
+                $tokenget = $db->prepare("SELECT pid FROM `pgx_clans` WHERE id = :name");
+		        $tokenget->bindparam(":name", $clan);
+		        $tokenget->execute();
+		        $creatorID = $tokenget->fetchColumn();
+		        //
+		        $tokenget = $db->prepare("SELECT name FROM `pgx_clans` WHERE id = :name");
+		        $tokenget->bindparam(":name", $clan);
+		        $tokenget->execute();
+		        $clanName = $tokenget->fetchColumn();
+		        //
+                $tokenget = $db->prepare("SELECT logo FROM `pgx_clans` WHERE id = :name");
+		        $tokenget->bindparam(":name", $clan);
+		        $tokenget->execute();
+		        $clanLogo = $tokenget->fetchColumn();
+		        //
+                $membersget = $db->prepare("SELECT id, username, skin FROM `pgx_users` WHERE clan=:clan");
                 $membersget->bindparam(":clan", $clan);
 				$membersget->execute();
 				$members = $membersget->fetchAll();
 				$playerslist = "";
-				$curi = 0;
+				//$curi = 0;
 				foreach($members as &$member) {
-					$playerslist += "\"{$curi}\": \"{$member["id"]}\",";
-					$curi += 1;
+					$playerslist = $playerslist . "{\"id\":\"" . $member["id"] . "\", \"nick\":\"" . $member["username"] . "\", \"skin\":\"" . $member["skin"] . "\"},";
+					//$curi += 1;
 				}
-				$playerslist = substr(0, strlen($playerslist)-1);
-                // temporary fix
-                echo "{\"info\":{\"creator_id\":\"". $creatorID ."\",\"name\":" . $clanName . ",\"logo\":" . $clanLogo . "},\"players\":{{$playerslist}},\"invites\":{}}";
+				$playerslist = substr($playerslist, 0, strlen($playerslist)-1);
+				//echo $playerslist;
+                // temporary f
+                echo "{\"info\":{\"creator_id\":\"". $creatorID ."\",\"name\":\"" . $clanName . "\",\"logo\":\"" . $clanLogo . "\"},\"players\":[" . $playerslist . "],\"invites\":{}}";
             }
             break;
 		case "create_clan":
