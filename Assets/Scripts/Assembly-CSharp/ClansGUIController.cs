@@ -954,7 +954,7 @@ public sealed class ClansGUIController : MonoBehaviour, IFriendsGUIController
 		}
 		if (InClan)
 		{
-			countMembersLabel.text = string.Format("{0}\n{1}/{2}", LocalizationStore.Get("Key_0983"), FriendsController.sharedController.clanMembers.Count, FriendsController.sharedController.ClanLimit);
+			countMembersLabel.text = string.Format("{0}\n{1}/{2}", LocalizationStore.Get("Key_0983"), FriendsController.sharedController.clanMembers.Count, "inf");
 		}
 		noMembersLabel.SetActive(FriendsController.sharedController.clanMembers != null && FriendsController.sharedController.clanMembers.Count < 2);
 		ClanName.SetActive(!BlockGUI);

@@ -169,7 +169,7 @@ public sealed class FriendsController : MonoBehaviour
 	{
 		get
 		{
-			return 20;
+			return int.MaxValue;
 		}
 	}
 
