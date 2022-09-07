@@ -63,7 +63,7 @@ public sealed class Player_move_c : MonoBehaviour
 
 	public AudioClip mechActivSound;
 
-	private RandomThingController randomThingController;
+	public RandomThingController randomThingController;
 
 	public AudioClip invisibleActivSound;
 
@@ -2020,7 +2020,7 @@ public sealed class Player_move_c : MonoBehaviour
 
 	private IEnumerator Start()
 	{
-		randomThingController = GameObject.FindGameObjectWithTag("RandomThingController").GetComponent<RandomThingController>();
+		randomThingController = GameObject.Find("RandomThingController").GetComponent<RandomThingController>();
 		_killerInfo.Reset();
 		isNeedTakePremiumAccountRewards = PremiumAccountController.Instance.isAccountActive;
 		InitiailizeIcnreaseArmorEffectFlags();
