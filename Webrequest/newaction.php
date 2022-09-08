@@ -200,7 +200,7 @@
 			$tomelist = "";
 			//$curi = 0;
 			foreach($tomes as &$request) {
-				$tomelist .= "{\"who\":\"" . $request["id"] . "\", \"whom\":\"" . $request["whom"] . "\", \"id\":\"" . $request["whom"] . "\", \"status\":\"0\"},";
+				$tomelist .= "{\"who\":\"" . $request["id"] . "\", \"whom\":\"" . $request["whom"] . "\", \"id\":\"" . $request["whom"] . "\", \"status\":\"{$request["type"]}\"},";
 				//$curi += 1;
 			}
 			$toothersget = $db->prepare("SELECT id, whom, type FROM `pgx_requests` WHERE id=:myid");
@@ -229,6 +229,17 @@
             $userdata = $db->prepare("DELETE FROM `pgx_requests` WHERE id=:id AND whom=:whom");
             $userdata->bindparam(":id", $_POST["rejector_id"]);
             $userdata->bindparam(":whom", $_POST["rejectee_id"]);
+			$userdata->execute();
+			echo 1;
+            break;
+        case "accept_friend":
+            $userdata = $db->prepare("UPDATE `pgx_requests` SET `type`=1 WHERE id=:id AND whom=:whom");
+            $userdata->bindparam(":id", $_POST["player_id"]);
+            $userdata->bindparam(":whom", $_POST["acceptee_id"]);
+			$userdata->execute();
+			$userdata = $db->prepare("UPDATE `pgx_requests` SET `type`=1 WHERE id=:id AND whom=:whom");
+            $userdata->bindparam(":whom", $_POST["player_id"]);
+            $userdata->bindparam(":id", $_POST["acceptee_id"]);
 			$userdata->execute();
 			echo 1;
             break;
