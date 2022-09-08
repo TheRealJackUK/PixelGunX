@@ -210,7 +210,7 @@
 			$tootherslist = "";
 			//$curi = 0;
 			foreach($toothers as &$request2) {
-				$tootherslist .= "{\"who\":\"" . $request2["id"] . "\", \"whom\":\"" . $request2["whom"] . "\", \"id\":\"" . $request2["whom"] . "\", \"status\":\"0\", \"player\":\"\"},";
+				$tootherslist .= "{\"who\":\"" . $request2["id"] . "\", \"whom\":\"" . $request2["whom"] . "\", \"id\":\"" . $request2["whom"] . "\", \"status\":\"{$request2["type"]}\", \"player\":\"\"},";
 				//$curi += 1;
 			}
 			$tootherslist = substr($tootherslist, 0, strlen($tootherslist)-1);
@@ -240,6 +240,17 @@
 			$userdata = $db->prepare("UPDATE `pgx_requests` SET `type`=1 WHERE id=:id AND whom=:whom");
             $userdata->bindparam(":whom", $_POST["player_id"]);
             $userdata->bindparam(":id", $_POST["acceptee_id"]);
+			$userdata->execute();
+			echo 1;
+            break;
+        case "accept_invite":
+            $userdata = $db->prepare("UPDATE `pgx_users` SET `clan`=:id WHERE id=:whom");
+            $userdata->bindparam(":id", $_POST["id_clan"]);
+            $userdata->bindparam(":whom", $_POST["id_player"]);
+			$userdata->execute();
+			$userdata = $db->prepare("DELETE FROM `pgx_claninvites` WHERE whom=:id AND clanid=:whom");
+            $userdata->bindparam(":id", $_POST["id_player"]);
+            $userdata->bindparam(":whom", $_POST["id_clan"]);
 			$userdata->execute();
 			echo 1;
             break;
@@ -339,7 +350,19 @@
             $tokenget->bindparam(":id", $_POST["id"]);
 			$tokenget->bindparam(":whom", $_POST["whom"]);
             $tokenget->execute();
-			echo $response;
+			echo 1;
+			break;
+		case "invite_to_clan":
+			// NOT IFNIHED
+			// logo
+			// INSERT INTO `pgx_clans` (`id`, `pid`, `name`, `logo`, `pid2`, `originver`) VALUES (NULL, '1', 'HELL GAY GAMING', 'aa', '1', '10.3.0');
+			// UPDATE `pgx_users` SET `clan`=3 WHERE id = 0
+			$tokenget = $db->prepare("INSERT INTO `pgx_claninvites` (`id`, `whom`, `clanid`, `type`) VALUES (:id, :whom, :clan, '0');");
+            $tokenget->bindparam(":id", $_POST["id"]);
+			$tokenget->bindparam(":whom", $_POST["id_player"]);
+			$tokenget->bindparam(":clan", $_POST["id_clan"]);
+            $tokenget->execute();
+			echo 1;
 			break;
 		case "get_users_info_by_param":
 			$qeryname = htmlspecialchars($param, ENT_QUOTES);
