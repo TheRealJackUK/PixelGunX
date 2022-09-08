@@ -1,0 +1,56 @@
+using UnityEngine;
+
+internal class SettingsMainMenuController : ControlsSettingsBase
+{
+	public Camera CurrentCamera;
+	public Transform RentExpiredPoint;
+	public Transform pers;
+	public GameObject completeTraining;
+	public GameObject stubLoading;
+	public UITexture stubTexture;
+	public MainMenuHeroCamera rotateCamera;
+	public GameObject campaignButton;
+	public GameObject survivalButton;
+	public GameObject multiplayerButton;
+	public GameObject skinsMakerButton;
+	public GameObject friendsButton;
+	public GameObject profileButton;
+	public GameObject freeButton;
+	public GameObject youtubeButton;
+	public GameObject everyplayButton;
+	public GameObject gameCenterButton;
+	public GameObject shopButton;
+	public GameObject settingsButton;
+	public GameObject supportButton;
+	public GameObject supportPanel;
+	public GameObject enderManButton;
+	public GameObject coinsShopButton;
+	public GameObject diclineButton;
+	public GameObject agreeButton;
+	public GameObject UserAgreementPanel;
+	public UISprite newMessagesSprite;
+	public GameObject postFacebookButton;
+	public GameObject postTwitterButton;
+	public GameObject rateUsButton;
+	public GameObject backFromFreeButton;
+	public GameObject twitterSubcribeButton;
+	public GameObject facebookSubcribeButton;
+	public GameObject freePanel;
+	public GameObject mainPanel;
+	public GameObject PromoActionsPanel;
+	public UIToggle notShowAgain;
+	public UILabel coinsLabel;
+	public GameObject award800to810;
+	public UIButton awardOk;
+	public GameObject bannerContainer;
+	public GameObject nicknameLabel;
+	public UIButton developerConsole;
+	public UIButton webViewButton;
+	public UICamera uiCamera;
+	public GameObject eventX3Window;
+	public UILabel[] eventX3RemainTime;
+	public TweenColor colorBlinkForX3;
+	public UIPanel starterPackPanel;
+	public UILabel starterPackTimer;
+	public UITexture buttonBackground;
+}
