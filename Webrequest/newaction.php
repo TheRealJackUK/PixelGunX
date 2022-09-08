@@ -298,13 +298,14 @@
 			// logo
 			// INSERT INTO `pgx_clans` (`id`, `pid`, `name`, `logo`, `pid2`, `originver`) VALUES (NULL, '1', 'HELL GAY GAMING', 'aa', '1', '10.3.0');
 			// UPDATE `pgx_users` SET `clan`=3 WHERE id = 0
-			$tokenget = $db->prepare("UPDATE `pgx_users` SET `username`=:nick, `skin`=:skin, `coins`=:coins, `gems`=:gems, `wins`=:wins WHERE id = :id");
+			$tokenget = $db->prepare("UPDATE `pgx_users` SET `username`=:nick, `skin`=:skin, `coins`=:coins, `gems`=:gems, `wins`=:wins, `rank`=:rank WHERE id = :id");
             $tokenget->bindparam(":id", $id);
 			$tokenget->bindparam(":nick", $nick);
 			$tokenget->bindparam(":skin", $skin);
 			$tokenget->bindparam(":coins", $_POST["coins"]);
 			$tokenget->bindparam(":gems", $_POST["gems"]);
 			$tokenget->bindparam(":wins", $_POST["total_wins"]);
+			$tokenget->bindparam(":rank", $_POST["rank"]);
             $tokenget->execute();
 			echo 1;
 			break;
