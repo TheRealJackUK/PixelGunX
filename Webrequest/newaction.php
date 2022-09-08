@@ -159,7 +159,15 @@
 			$clanslist = "";
 			//$curi = 0;
 			foreach($clans as &$clandata) {
-				$clanslist .= "{\"id\":\"" . $clandata["id"] . "\", \"name\":\"" . $clandata["name"] . "\", \"logo\":\"" . $clandata["logo"] . "\"},";
+				$usersinclanget = $db->prepare("SELECT id, wins FROM `pgx_users` WHERE clan=:clan");
+	            $usersinclanget->bindparam(":clan", $clandata["id"]);
+				$usersinclanget->execute();
+				$usersinclan = $usersinclanget->fetchAll();
+				$winscountclan = 0;
+				foreach($usersinclan as &$userinclan) {
+					$winscountclan += $userinclan["wins"];
+				}
+				$clanslist .= "{\"id\":\"" . $clandata["id"] . "\", \"name\":\"" . $clandata["name"] . "\", \"logo\":\"" . $clandata["logo"] . "\", \"wins\": \"" . $winscountclan . "\"},";
 				//$curi += 1;
 			}
 			$clanslist = substr($clanslist, 0, strlen($clanslist)-1);
@@ -183,6 +191,62 @@
 			}
 			$playerslist = substr($playerslist, 0, strlen($playerslist)-1);
 			echo "{\"top_clans\": [{$clanslist}], \"best_players\": [{$playerslist}]}";
+            break;
+        case "get_inbox_data":
+            $tomeget = $db->prepare("SELECT id, whom, type FROM `pgx_requests` WHERE whom=:myid");
+            $tomeget->bindparam(":myid", $_POST["id"]);
+			$tomeget->execute();
+			$tomes = $tomeget->fetchAll();
+			$tomelist = "";
+			//$curi = 0;
+			foreach($tomes as &$request) {
+				$tomelist .= "{\"who\":\"" . $request["id"] . "\", \"whom\":\"" . $request["whom"] . "\", \"id\":\"" . $request["whom"] . "\", \"status\":\"0\"},";
+				//$curi += 1;
+			}
+			$toothersget = $db->prepare("SELECT id, whom, type FROM `pgx_requests` WHERE id=:myid");
+            $toothersget->bindparam(":myid", $_POST["id"]);
+			$toothersget->execute();
+			$toothers = $toothersget->fetchAll();
+			$tootherslist = "";
+			//$curi = 0;
+			foreach($toothers as &$request2) {
+				$tootherslist .= "{\"who\":\"" . $request2["id"] . "\", \"whom\":\"" . $request2["whom"] . "\", \"id\":\"" . $request2["whom"] . "\", \"status\":\"0\", \"player\":\"\"},";
+				//$curi += 1;
+			}
+			$tootherslist = substr($tootherslist, 0, strlen($tootherslist)-1);
+			echo "{\"friends\": [{$tomelist}{$tootherslist}]}";
+            break;
+        case "get_info_by_id":
+            $userdata = $db->prepare("SELECT id, username, skin, clan, wins FROM `pgx_users` WHERE id=:myid");
+            $userdata->bindparam(":myid", $_POST["id"]);
+			$userdata->execute();
+			$users = $userdata->fetchAll();
+			foreach($users as &$user) {
+				echo "{\"player\":{\"nick\": \"{$user["username"]}\", \"skin\":\"{$user["skin"]}\", \"total_wins\": \"{$user["wins"]}\"}}";
+			}
+            break;
+        case "reject_friend":
+            $userdata = $db->prepare("DELETE FROM `pgx_requests` WHERE id=:id AND whom=:whom");
+            $userdata->bindparam(":id", $_POST["rejector_id"]);
+            $userdata->bindparam(":whom", $_POST["rejectee_id"]);
+			$userdata->execute();
+			echo 1;
+            break;
+        case "get_all_short_info_by_id":
+        	$requestedids = json_decode($_POST["ids"]);
+        	$finaldata = "{";
+        	foreach($requestedids as &$reqid) {
+	            $userdata = $db->prepare("SELECT id, username, skin, clan, rank, wins FROM `pgx_users` WHERE id=:myid");
+	            $userdata->bindparam(":myid", $reqid);
+				$userdata->execute();
+				$users = $userdata->fetchAll();
+				foreach($users as &$user) {
+					$finaldata .= "\"{$reqid}\":{\"friend\": \"{$user["id"]}\", \"player\":{\"nick\": \"{$user["username"]}\", \"skin\":\"{$user["skin"]}\", \"total_wins\": \"{$user["wins"]}\", \"rank\": \"{$user["rank"]}\"}},";
+				}
+			}
+			$finaldata = substr($finaldata, 0, strlen($finaldata)-1);
+			$finaldata .= "}";
+			echo $finaldata;
             break;
 		case "create_clan":
 			// INSERT INTO `pgx_clans` (`id`, `pid`, `name`, `logo`, `pid2`, `originver`) VALUES (NULL, '1', 'HELL GAY GAMING', 'aa', '1', '10.3.0');
@@ -259,11 +323,11 @@
 			// logo
 			// INSERT INTO `pgx_clans` (`id`, `pid`, `name`, `logo`, `pid2`, `originver`) VALUES (NULL, '1', 'HELL GAY GAMING', 'aa', '1', '10.3.0');
 			// UPDATE `pgx_users` SET `clan`=3 WHERE id = 0
-			/*$tokenget = $db->prepare("UPDATE `pgx_clans` SET `name`=:logo WHERE id = :id");
-            $tokenget->bindparam(":id", $cid);
-			$tokenget->bindparam(":logo", $logo);
+			$tokenget = $db->prepare("INSERT INTO `pgx_requests` (`id`, `whom`, `type`) VALUES (:id, :whom, '0');");
+            $tokenget->bindparam(":id", $_POST["id"]);
+			$tokenget->bindparam(":whom", $_POST["whom"]);
             $tokenget->execute();
-			echo $response;*/
+			echo $response;
 			break;
 		case "get_users_info_by_param":
 			$qeryname = htmlspecialchars($param, ENT_QUOTES);

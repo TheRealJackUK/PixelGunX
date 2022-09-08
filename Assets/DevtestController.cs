@@ -72,6 +72,10 @@ public class DevtestController : MonoBehaviour
         Toggle("firerate");
     }
 
+    public void quit(object sender, System.EventArgs e){
+        Destroy(gameObject);
+    }
+
     void Start()
     {
         for (int var1 = 0; var1 < buttonHandlers.Count; var1++) {
@@ -80,5 +84,6 @@ public class DevtestController : MonoBehaviour
         actualHandlers[0].Clicked += infammo;
         actualHandlers[1].Clicked += god;
         actualHandlers[2].Clicked += firerate;
+        actualHandlers[3].Clicked += quit;
     }
 }

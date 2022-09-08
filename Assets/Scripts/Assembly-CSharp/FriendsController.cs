@@ -2298,6 +2298,7 @@ public sealed class FriendsController : MonoBehaviour
 		{
 			return;
 		}
+		UnityEngine.Debug.LogWarning("_UpdateFriends request " + text);
 		invitesFromUs.Clear();
 		invitesToUs.Clear();
 		friends.Clear();
@@ -2390,6 +2391,8 @@ public sealed class FriendsController : MonoBehaviour
 				{
 					if (!key3.Equals("who") && !key3.Equals("status"))
 					{
+						UnityEngine.Debug.LogWarning("key3 == " + key3);
+						UnityEngine.Debug.LogWarning("dict3 new == " + ((!key3.Equals("whom")) ? key3 : "friend"));
 						dictionary3.Add((!key3.Equals("whom")) ? key3 : "friend", item3[key3]);
 					}
 				}
@@ -2548,6 +2551,7 @@ public sealed class FriendsController : MonoBehaviour
 		WWW download = new WWW(actionAddress, form);
 		yield return download;
 		string response = URLs.Sanitize(download);
+		Debug.LogWarning("GetInfoAboutNPlayers response " + response);
 		if (!string.IsNullOrEmpty(download.error))
 		{
 			if (Debug.isDebugBuild)

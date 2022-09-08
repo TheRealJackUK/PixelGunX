@@ -1172,6 +1172,7 @@ MonoBehaviour:
   - {fileID: 2113070904}
   - {fileID: 1100422185}
   - {fileID: 1114506958}
+  - {fileID: 1963182666}
 --- !u!1 &1473716480
 GameObject:
   m_ObjectHideFlags: 0
@@ -1239,7 +1240,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 222
   mHeight: 42
-  mDepth: 0
+  mDepth: 1
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
@@ -1425,7 +1426,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 198
   mHeight: 24
-  mDepth: 1
+  mDepth: 2
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
@@ -1472,6 +1473,8 @@ GameObject:
   - component: {fileID: 1963182663}
   - component: {fileID: 1963182665}
   - component: {fileID: 1963182664}
+  - component: {fileID: 1963182666}
+  - component: {fileID: 1963182667}
   m_Layer: 10
   m_Name: CloseBtn
   m_TagString: Untagged
@@ -1555,7 +1558,7 @@ MonoBehaviour:
   mHeight: 42
   mDepth: 2
   mMat: {fileID: 0}
-  autoResizeBoxCollider: 0
+  autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 0.95238096
@@ -1575,6 +1578,32 @@ MonoBehaviour:
   mAtlas: {fileID: 114081948681600575, guid: f8d20a5e9c7df334f82299fe47c197f9, type: 3}
   mSpriteName: red_btn
   mFillCenter: 1
+--- !u!114 &1963182666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963182662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b93308d0ebf75d041bc29c950ca7ef9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noSound: 0
+--- !u!65 &1963182667
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963182662}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 40, y: 42, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2068861060
 GameObject:
   m_ObjectHideFlags: 0
