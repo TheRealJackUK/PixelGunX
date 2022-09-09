@@ -1,0 +1,718 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1356981861217319}
+  m_IsPrefabParent: 1
+--- !u!1 &1356981861217319
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4084372493753240}
+  - component: {fileID: 114959468080807609}
+  - component: {fileID: 114626059030246892}
+  - component: {fileID: 114685891946831449}
+  - component: {fileID: 114742360665431530}
+  - component: {fileID: 82479238853920037}
+  - component: {fileID: 114695362778283643}
+  - component: {fileID: 195104350612938718}
+  m_Layer: 0
+  m_Name: Boss25
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4084372493753240
+Transform:
+  m_GameObject: {fileID: 1356981861217319}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 59.3592, y: 24.52409, z: -13.28701}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4099204118105832}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114959468080807609
+MonoBehaviour:
+  m_GameObject: {fileID: 1356981861217319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a64178995979e834f8641409ca063809, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  shouldMove: 1
+  isCycle: 0
+  _targetCyclePoints: []
+--- !u!114 &114626059030246892
+MonoBehaviour:
+  m_GameObject: {fileID: 1356981861217319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0992e2c1e35afa046b06b86506258edd, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  hitTexture: {fileID: 2800000, guid: f0f1ef4d5ca6af5428bdaa8083b16408, type: 3}
+--- !u!114 &114685891946831449
+MonoBehaviour:
+  m_GameObject: {fileID: 1356981861217319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f5ee3f48f66e1a4a893c6f285717408, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  _gameController: {fileID: 0}
+--- !u!114 &114742360665431530
+MonoBehaviour:
+  m_GameObject: {fileID: 1356981861217319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4259e8cbaae330e438fd685518336e09, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  Target: {fileID: 0}
+  homePoint: {fileID: 0}
+--- !u!82 &82479238853920037
+AudioSource:
+  m_GameObject: {fileID: 1356981861217319}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 100
+  Pan2D: 0
+  rolloffMode: 2
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &114695362778283643
+MonoBehaviour:
+  m_GameObject: {fileID: 1356981861217319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 847b11365ba8c7e40b84b5f77c6786a5, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  shouldDetectPlayer: 1
+--- !u!195 &195104350612938718
+NavMeshAgent:
+  m_GameObject: {fileID: 1356981861217319}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.1
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 2
+--- !u!1 &1060667987022915
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4099204118105832}
+  - component: {fileID: 111419312387083145}
+  - component: {fileID: 65622402045709592}
+  - component: {fileID: 114430391066786397}
+  m_Layer: 0
+  m_Name: Boss25
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4099204118105832
+Transform:
+  m_GameObject: {fileID: 1060667987022915}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4743935592709422}
+  - {fileID: 4906632595348743}
+  m_Father: {fileID: 4084372493753240}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!111 &111419312387083145
+Animation:
+  m_GameObject: {fileID: 1060667987022915}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 79cb04be5105ad84babe4394d153f1de, type: 2}
+  - {fileID: 7400000, guid: 44d4967b0226d954e90bfbb6695da147, type: 2}
+  - {fileID: 7400000, guid: 489803ee1841bce449f8f5cf0ebd1425, type: 2}
+  - {fileID: 7400000, guid: 07fb514768195f042ba9d21f4fb386ef, type: 2}
+  - {fileID: 7400000, guid: f4d08c1682d464e49b8ce944ee0bfcf8, type: 2}
+  - {fileID: 7400000, guid: 0a3da9a757755594c932db3275d1010e, type: 2}
+  - {fileID: 7400000, guid: fb3b6a77b023eaf4baf5315dfb56ac68, type: 2}
+  - {fileID: 7400000, guid: cc95a2c833295bf4dbfb7b70ff95024b, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 1
+--- !u!65 &65622402045709592
+BoxCollider:
+  m_GameObject: {fileID: 1060667987022915}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.69, y: 3.02, z: 0.94}
+  m_Center: {x: -0.03, y: 1.53, z: -0.02}
+--- !u!114 &114430391066786397
+MonoBehaviour:
+  m_GameObject: {fileID: 1060667987022915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 050ecbd563174f540ae596e149cfcb41, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  monsterId: 0
+--- !u!1 &1036427278443155
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4743935592709422}
+  - component: {fileID: 137252341089750917}
+  m_Layer: 0
+  m_Name: Golem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4743935592709422
+Transform:
+  m_GameObject: {fileID: 1036427278443155}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4099204118105832}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!137 &137252341089750917
+SkinnedMeshRenderer:
+  m_GameObject: {fileID: 1036427278443155}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 071d56d90f2393548a244caacb133168, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  serializedVersion: 2
+  m_Quality: 0
+  m_UpdateWhenOffscreen: 0
+  m_skinnedMotionVectors: 0
+  m_Mesh: {fileID: 4300000, guid: 59c5b5419e038704ca6c886a3f9afb19, type: 2}
+  m_Bones:
+  - {fileID: 4138273880288374}
+  - {fileID: 4894192253062559}
+  - {fileID: 4108682896378940}
+  - {fileID: 4745927631597288}
+  - {fileID: 4647826160033524}
+  - {fileID: 4314186920715695}
+  - {fileID: 4693855884643858}
+  - {fileID: 4484804875755085}
+  - {fileID: 4739349398190601}
+  - {fileID: 4991070780028058}
+  - {fileID: 4406490811837239}
+  - {fileID: 4045214097178552}
+  - {fileID: 4987046385653959}
+  m_BlendShapeWeights: []
+  m_RootBone: {fileID: 4138273880288374}
+  m_AABB:
+    m_Center: {x: -0.09223801, y: 0.3608192, z: 1.238023}
+    m_Extent: {x: 1.827611, y: 3.609431, z: 2.989856}
+  m_DirtyAABB: 0
+--- !u!1 &1642808507423785
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4906632595348743}
+  m_Layer: 0
+  m_Name: Goolem_root
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4906632595348743
+Transform:
+  m_GameObject: {fileID: 1642808507423785}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4138273880288374}
+  m_Father: {fileID: 4099204118105832}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1341795589427776
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4138273880288374}
+  m_Layer: 0
+  m_Name: Golem_Main
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4138273880288374
+Transform:
+  m_GameObject: {fileID: 1341795589427776}
+  m_LocalRotation: {x: 0.0721442, y: -0.08767102, z: -0.02666895, w: 0.9931756}
+  m_LocalPosition: {x: -0.03779793, y: 1.242587, z: -4.20584E-17}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4314186920715695}
+  - {fileID: 4745927631597288}
+  - {fileID: 4894192253062559}
+  m_Father: {fileID: 4906632595348743}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 8.636983, y: 9.805112, z: 3.81853}
+--- !u!1 &1451324470351255
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4314186920715695}
+  m_Layer: 0
+  m_Name: Golem_Pelvis
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4314186920715695
+Transform:
+  m_GameObject: {fileID: 1451324470351255}
+  m_LocalRotation: {x: -0.6688714, y: 0.08192075, z: 0.08481066, w: 0.7339668}
+  m_LocalPosition: {x: 2.074801E-17, y: 0.08471016, z: 1.872285E-16}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4748425859385554}
+  m_Father: {fileID: 4138273880288374}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -84.58236, y: -13.51554, z: -0.8785004}
+--- !u!1 &1553868461537281
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4748425859385554}
+  m_Layer: 0
+  m_Name: Golem_Chest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4748425859385554
+Transform:
+  m_GameObject: {fileID: 1553868461537281}
+  m_LocalRotation: {x: 6.617445E-24, y: 3.104813E-24, z: -1.24376E-24, w: 1}
+  m_LocalPosition: {x: -3.071515E-24, y: -8.160323E-08, z: 1.11472}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4406490811837239}
+  - {fileID: 4739349398190601}
+  - {fileID: 4693855884643858}
+  m_Father: {fileID: 4314186920715695}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 7.583033E-22, y: -3.557854E-22, z: 1.425244E-22}
+--- !u!1 &1269547017454529
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4406490811837239}
+  m_Layer: 0
+  m_Name: Golem_Head
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4406490811837239
+Transform:
+  m_GameObject: {fileID: 1269547017454529}
+  m_LocalRotation: {x: -4.41555E-10, y: 3.391767E-11, z: -0.07658853, w: 0.9970628}
+  m_LocalPosition: {x: -4.813219E-25, y: -0.06556392, z: 0.1984319}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4748425859385554}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -5.074753E-08, y: -3.917372E-16, z: 8.785002}
+--- !u!1 &1652894204241206
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4739349398190601}
+  m_Layer: 0
+  m_Name: Golem_Upper_Hand_L
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4739349398190601
+Transform:
+  m_GameObject: {fileID: 1652894204241206}
+  m_LocalRotation: {x: 0.9942613, y: -0.0458856, z: 0.09400579, w: 0.0224035}
+  m_LocalPosition: {x: -0.8401139, y: 0.001385184, z: -0.01462289}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4991070780028058}
+  m_Father: {fileID: 4748425859385554}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 177.9035, y: 10.89377, z: 5.084774}
+--- !u!1 &1575468811643139
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4991070780028058}
+  m_Layer: 0
+  m_Name: Golem_Lower_Hand_L
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4991070780028058
+Transform:
+  m_GameObject: {fileID: 1575468811643139}
+  m_LocalRotation: {x: -0.2189232, y: 0.009442963, z: 0.001556254, w: 0.9756952}
+  m_LocalPosition: {x: -0.003422364, y: -0.04346725, z: 0.6195194}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4838030418620120}
+  m_Father: {fileID: 4739349398190601}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -25.29337, y: -1.094892, z: 0.06290552}
+--- !u!1 &1461444498899635
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4838030418620120}
+  m_Layer: 0
+  m_Name: End_Golem_Hand_L
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4838030418620120
+Transform:
+  m_GameObject: {fileID: 1461444498899635}
+  m_LocalRotation: {x: -1.923195E-23, y: 2.218589E-16, z: 6.617445E-24, w: 1}
+  m_LocalPosition: {x: -6.928672E-08, y: 0.04700108, z: 0.8180978}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4045214097178552}
+  m_Father: {fileID: 4991070780028058}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -2.203819E-21, y: -2.542316E-14, z: -7.583033E-22}
+--- !u!1 &1875579416183054
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4045214097178552}
+  m_Layer: 0
+  m_Name: Golem_Bone_Shit
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4045214097178552
+Transform:
+  m_GameObject: {fileID: 1875579416183054}
+  m_LocalRotation: {x: 1.823972E-09, y: 7.36011E-08, z: -8.147226E-08, w: 1}
+  m_LocalPosition: {x: -0.1736735, y: -0.002148657, z: -0.8358762}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4838030418620120}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 2.090112E-07, y: -8.434065E-06, z: 9.336033E-06}
+--- !u!1 &1391042010009452
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4693855884643858}
+  m_Layer: 0
+  m_Name: Golem_Upper_Hand_R
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4693855884643858
+Transform:
+  m_GameObject: {fileID: 1391042010009452}
+  m_LocalRotation: {x: -8.224198E-05, y: 3.5411E-06, z: -4.955472E-05, w: 1}
+  m_LocalPosition: {x: 0.8401139, y: -0.001385182, z: -0.01462285}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4484804875755085}
+  m_Father: {fileID: 4748425859385554}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: -0.009424256, y: -0.0004053132, z: 0.005678586}
+--- !u!1 &1657967354411170
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4484804875755085}
+  m_Layer: 0
+  m_Name: Golem_Lower_Hand_R
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4484804875755085
+Transform:
+  m_GameObject: {fileID: 1657967354411170}
+  m_LocalRotation: {x: 0.000144747, y: -6.30544E-06, z: 3.611216E-07, w: 1}
+  m_LocalPosition: {x: 0.003434964, y: 0.04346728, z: -0.6195194}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4161987861188234}
+  m_Father: {fileID: 4693855884643858}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0.01658679, y: 0.0007225563, z: -4.12769E-05}
+--- !u!1 &1374499523012090
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4161987861188234}
+  m_Layer: 0
+  m_Name: End_Golem_Hand_R
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4161987861188234
+Transform:
+  m_GameObject: {fileID: 1374499523012090}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.616816E-08, y: -0.04700106, z: -0.8180978}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4987046385653959}
+  m_Father: {fileID: 4484804875755085}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1690717041900452
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4987046385653959}
+  m_Layer: 0
+  m_Name: Golem_Bone_Sword
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4987046385653959
+Transform:
+  m_GameObject: {fileID: 1690717041900452}
+  m_LocalRotation: {x: 0.7070626, y: 3.674359E-05, z: 3.282412E-05, w: 0.7071509}
+  m_LocalPosition: {x: 1.421085E-16, y: 2.842171E-16, z: 4.263256E-16}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4161987861188234}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 89.99284, y: -0.0003179405, z: -0.005636944}
+--- !u!1 &1268814180385874
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4745927631597288}
+  m_Layer: 0
+  m_Name: Golem_Upper_Leg_L
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4745927631597288
+Transform:
+  m_GameObject: {fileID: 1268814180385874}
+  m_LocalRotation: {x: 0.8260638, y: 0.07403962, z: -0.05632874, w: 0.5558452}
+  m_LocalPosition: {x: -0.2121378, y: 0.06394629, z: -0.03276277}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4647826160033524}
+  m_Father: {fileID: 4138273880288374}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 112.4354, y: -10.10027, z: -3.476698}
+--- !u!1 &1805478208031317
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4647826160033524}
+  m_Layer: 0
+  m_Name: Golem_Lower_Leg_L
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4647826160033524
+Transform:
+  m_GameObject: {fileID: 1805478208031317}
+  m_LocalRotation: {x: -0.1196735, y: 5.457437E-17, z: 2.138122E-17, w: 0.9928133}
+  m_LocalPosition: {x: 8.326673E-17, y: 0.05217861, z: 0.479097}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4745927631597288}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -13.74652, y: -6.502032E-15, z: -1.684089E-15}
+--- !u!1 &1252011286035393
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4894192253062559}
+  m_Layer: 0
+  m_Name: Golem_Upper_Leg_R
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4894192253062559
+Transform:
+  m_GameObject: {fileID: 1252011286035393}
+  m_LocalRotation: {x: -0.704874, y: -1.225713E-09, z: -1.311213E-09, w: 0.7093326}
+  m_LocalPosition: {x: 0.2121378, y: 0.06394628, z: -0.03276277}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4108682896378940}
+  m_Father: {fileID: 4138273880288374}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: -89.63873, y: 2.055404E-07, z: 7.575985E-09}
+--- !u!1 &1524350259303475
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4108682896378940}
+  m_Layer: 0
+  m_Name: Golem_Lower_Leg_R
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4108682896378940
+Transform:
+  m_GameObject: {fileID: 1524350259303475}
+  m_LocalRotation: {x: -0.00509879, y: 0, z: 0, w: 0.999987}
+  m_LocalPosition: {x: 3.552714E-17, y: -0.05217861, z: -0.479097}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4894192253062559}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -0.5842808, y: 0, z: 0}

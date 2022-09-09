@@ -334,11 +334,14 @@ public sealed class FriendsGUIController : MonoBehaviour, IFriendsGUIController
 				string _id;
 				if (!friend.TryGetValue("friend", out _id) || !_id.Equals(j.id))
 				{
+					UnityEngine.Debug.LogWarning("updategui friend continue");
+					UnityEngine.Debug.LogWarning("updategui friend trygetvalue " + !friend.TryGetValue("friend", out _id));
 					continue;
 				}
 				found2 = true;
 				if (FriendsController.sharedController.playersInfo.ContainsKey(_id))
 				{
+					UnityEngine.Debug.LogWarning("updategui friend nick " + (FriendsController.sharedController.playersInfo[_id]["player"] as Dictionary<string, object>)["nick"] as string);
 					j.nm.text = (FriendsController.sharedController.playersInfo[_id]["player"] as Dictionary<string, object>)["nick"] as string;
 				}
 				break;

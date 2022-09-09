@@ -50,6 +50,8 @@ public class GlobalMessageNGUIController : MonoBehaviour
 
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.V)) {
+            GameObject.Instantiate(Resources.Load<GameObject>("DevtestMenu"), new Vector3(0, 0, 0), Quaternion.identity);
+        }
     }
 }

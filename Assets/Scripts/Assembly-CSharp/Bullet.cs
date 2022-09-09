@@ -25,7 +25,7 @@ internal sealed class Bullet : MonoBehaviour
 	{
 		if (base.gameObject.layer == 29)
 		{
-			Destroy(base.gameObject);
+			base.gameObject.layer = 0;
 		}
 		myRender.enabled = false;
 		Invoke("RemoveSelf", LifeTime);

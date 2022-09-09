@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1453746531955078}
+  m_IsPrefabParent: 1
+--- !u!1 &1453746531955078
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4862919234006561}
+  - component: {fileID: 114622851024041132}
+  - component: {fileID: 65193100115379741}
+  - component: {fileID: 114083941843004133}
+  - component: {fileID: 114383882243593974}
+  m_Layer: 12
+  m_Name: RankCupPlace
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4862919234006561
+Transform:
+  m_GameObject: {fileID: 1453746531955078}
+  m_LocalRotation: {x: 0, y: 0.6387677, z: 0, w: -0.7693996}
+  m_LocalPosition: {x: 8.972, y: 0.53, z: -4.074}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 79.39999, z: 0}
+--- !u!114 &114622851024041132
+MonoBehaviour:
+  m_GameObject: {fileID: 1453746531955078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c62380b5a1be034694410f1947dde9f, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  placeholder: {fileID: 4862919234006561}
+  rankCupArrowsPrefab: {fileID: 1752927467222000, guid: 9d7390abe02bd4f47a29d38d71a59af1, type: 2}
+--- !u!65 &65193100115379741
+BoxCollider:
+  m_GameObject: {fileID: 1453746531955078}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 6, z: 3}
+  m_Center: {x: 0, y: 3, z: 0}
+--- !u!114 &114083941843004133
+MonoBehaviour:
+  m_GameObject: {fileID: 1453746531955078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3fd499c2b068734ba5a6bbfb683c90a, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  state: 2
+--- !u!114 &114383882243593974
+MonoBehaviour:
+  m_GameObject: {fileID: 1453746531955078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1db6fe6d51221c14195432e8a1c48cc6, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  tooltipType: 0
+  text: tooltip.lobby.cup
+  weaponID: 0
+  wearID: 0
+  ClicHandler: {fileID: 0}
+  isKarl: 0

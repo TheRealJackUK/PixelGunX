@@ -205,6 +205,7 @@ internal sealed class LeaderboardsController : MonoBehaviour
 			Debug.LogWarning("Leaderboars response is empty.");
 			return;
 		}
+		Debug.LogWarning("Leaderboars response is " + text);
 		Dictionary<string, object> dictionary = Json.Deserialize(text) as Dictionary<string, object>;
 		if (dictionary == null)
 		{

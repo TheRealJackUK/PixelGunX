@@ -1,3 +1,4 @@
+using System.Globalization;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -4444,6 +4445,11 @@ public sealed class Player_move_c : MonoBehaviour
 
 	private void FixedUpdate()
 	{
+		#if UNITY_EDITOR
+		if (Storager.getInt("god") == 1) {
+			this.CurHealth = int.MaxValue;
+		}
+		#endif
 		if (isMulti && !isMine && myNickLabelController != null)
 		{
 			bool isVisible = (isImVisible = false);
@@ -6083,21 +6089,26 @@ public sealed class Player_move_c : MonoBehaviour
 
 	public void ShotPressed()
 	{
-		/*
+		
 		#if UNITY_EDITOR
+		if (Storager.getInt("infammo") == 1) {
 			Weapon zeweapon = (Weapon)_weaponManager.playerWeapons[_weaponManager.CurrentWeaponIndex];
 			zeweapon.currentAmmoInClip = 9999;
+		}
 		#endif
 		#if !UNITY_EDITOR
-			if (deltaAngle > 10f)
-			{
-				return;
-			}
-		#endif*/
 		if (deltaAngle > 10f)
 		{
 			return;
 		}
+		#else
+		if (Storager.getInt("firerate") != 1) {
+			if (deltaAngle > 10f)
+			{
+				return;
+			}
+		}
+		#endif
 		if (isTraining && TrainingController.stepTraining == TrainingController.stepTrainingList["TapToShoot"])
 		{
 			TrainingController.isNextStep = TrainingController.stepTrainingList["TapToShoot"];
@@ -6107,10 +6118,19 @@ public sealed class Player_move_c : MonoBehaviour
 			return;
 		}
 		Animation animation = ((!isMechActive) ? _weaponManager.currentWeaponSounds.animationObject.GetComponent<Animation>() : mechGunAnimation);
+		#if UNITY_EDITOR
+		if (Storager.getInt("firerate") != 1) {
+			if (animation.IsPlaying(myCAnim("Shoot1")) || animation.IsPlaying(myCAnim("Shoot2")) || animation.IsPlaying(myCAnim("Shoot3")) || animation.IsPlaying(myCAnim("Shoot")) || animation.IsPlaying(myCAnim("Shoot1")) || animation.IsPlaying(myCAnim("Shoot2")) || animation.IsPlaying(myCAnim("Shoot3")) || animation.IsPlaying(myCAnim("Reload")) || animation.IsPlaying(myCAnim("Empty")))
+			{
+				return;
+			}
+		}
+		#else
 		if (animation.IsPlaying(myCAnim("Shoot1")) || animation.IsPlaying(myCAnim("Shoot2")) || animation.IsPlaying(myCAnim("Shoot3")) || animation.IsPlaying(myCAnim("Shoot")) || animation.IsPlaying(myCAnim("Shoot1")) || animation.IsPlaying(myCAnim("Shoot2")) || animation.IsPlaying(myCAnim("Shoot3")) || animation.IsPlaying(myCAnim("Reload")) || animation.IsPlaying(myCAnim("Empty")))
 		{
 			return;
 		}
+		#endif
 		animation.Stop();
 		if (Defs.isTurretWeapon)
 		{
