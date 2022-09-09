@@ -1,0 +1,124 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1013097807330466}
+  m_IsPrefabParent: 1
+--- !u!1 &1013097807330466
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4351123793613381}
+  - component: {fileID: 95052732258236204}
+  - component: {fileID: 114899316056588709}
+  m_Layer: 0
+  m_Name: Jetpack_Up_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4351123793613381
+Transform:
+  m_GameObject: {fileID: 1013097807330466}
+  m_LocalRotation: {x: 1.545431E-08, y: -0.7071068, z: 1.545431E-08, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -0.001345367, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4121973554403859}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 2.504478E-06, y: 90, z: 0}
+--- !u!95 &95052732258236204
+Animator:
+  serializedVersion: 3
+  m_GameObject: {fileID: 1013097807330466}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 0870a507cd1317a4791903b7f77711ee, type: 2}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage:
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114899316056588709
+MonoBehaviour:
+  m_GameObject: {fileID: 1013097807330466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dedc2a1164f54840afb6e799445de0e, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  scaleShop: 121.6011
+  positionShop: {x: 5.736816, y: 4.12162, z: 4.760211}
+  rotationShop: {x: 0.3378775, y: 39.03139, z: 351.2804}
+  tier: 1
+  localizeKey: Key_0772
+  prefabName:
+--- !u!1 &1944590430111963
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4121973554403859}
+  - component: {fileID: 33481520794735115}
+  - component: {fileID: 23427662399133290}
+  m_Layer: 0
+  m_Name: JetPack_Mesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4121973554403859
+Transform:
+  m_GameObject: {fileID: 1944590430111963}
+  m_LocalRotation: {x: 0.05653113, y: 0.7048434, z: -0.05653113, w: 0.7048434}
+  m_LocalPosition: {x: -0.1462616, y: 1.497632, z: 0.009140167}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4351123793613381}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 9.171049, y: -90, z: 0}
+--- !u!33 &33481520794735115
+MeshFilter:
+  m_GameObject: {fileID: 1944590430111963}
+  m_Mesh: {fileID: 4300000, guid: 2404bc99ccd584a4b99461fae4ee30fb, type: 2}
+--- !u!23 &23427662399133290
+MeshRenderer:
+  m_GameObject: {fileID: 1944590430111963}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: f5c2fac37acd2864fbeee581d4bbdfe5, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0

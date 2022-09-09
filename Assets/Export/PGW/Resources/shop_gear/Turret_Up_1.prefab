@@ -1,0 +1,137 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1396449740877539}
+  m_IsPrefabParent: 1
+--- !u!1 &1396449740877539
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4705265892755356}
+  - component: {fileID: 111324192266195475}
+  - component: {fileID: 114925017757336984}
+  m_Layer: 0
+  m_Name: Turret_Up_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4705265892755356
+Transform:
+  m_GameObject: {fileID: 1396449740877539}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4046792481636547}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!111 &111324192266195475
+Animation:
+  m_GameObject: {fileID: 1396449740877539}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 671b979ea21d18a44b646d4ff6e4f320, type: 2}
+  - {fileID: 7400000, guid: 9ca8c127f28e2a94a9d45a22ed777f14, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 1
+--- !u!114 &114925017757336984
+MonoBehaviour:
+  m_GameObject: {fileID: 1396449740877539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dedc2a1164f54840afb6e799445de0e, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  scaleShop: 76.01163
+  positionShop: {x: -2.039551, y: 19.54391, z: 0}
+  rotationShop: {x: 283.3815, y: 182.4464, z: 300.9113}
+  tier: 1
+  localizeKey: Key_0773
+  prefabName:
+--- !u!1 &1330309244564702
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4046792481636547}
+  - component: {fileID: 137676156155232577}
+  m_Layer: 0
+  m_Name: Turret_Mesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4046792481636547
+Transform:
+  m_GameObject: {fileID: 1330309244564702}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4705265892755356}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!137 &137676156155232577
+SkinnedMeshRenderer:
+  m_GameObject: {fileID: 1330309244564702}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: e760c40957d52924c9e94ae95cbd63a2, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  serializedVersion: 2
+  m_Quality: 0
+  m_UpdateWhenOffscreen: 0
+  m_skinnedMotionVectors: 0
+  m_Mesh: {fileID: 4300000, guid: 7d8a811662ce825468b0b753505bc5fb, type: 2}
+  m_Bones:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_BlendShapeWeights: []
+  m_RootBone: {fileID: 0}
+  m_AABB:
+    m_Center: {x: -0.003675997, y: 0.9731367, z: 0.01114142}
+    m_Extent: {x: 0.5708076, y: 0.9745972, z: 0.5454979}
+  m_DirtyAABB: 0

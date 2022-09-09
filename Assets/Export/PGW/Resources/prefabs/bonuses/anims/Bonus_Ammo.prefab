@@ -1,0 +1,141 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1581026500384103}
+  m_IsPrefabParent: 1
+--- !u!1 &1581026500384103
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4825187067139817}
+  - component: {fileID: 114432681130647828}
+  m_Layer: 0
+  m_Name: Bonus_Ammo
+  m_TagString: Bonus
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4825187067139817
+Transform:
+  m_GameObject: {fileID: 1581026500384103}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4417972914747052}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114432681130647828
+MonoBehaviour:
+  m_GameObject: {fileID: 1581026500384103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c959304640aedc74aab958a4bd799d54, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  ItemUpSound: {fileID: 8300000, guid: 087a8039ff9c3b14eae30c923ead22db, type: 3}
+  Effects: {fileID: 0}
+--- !u!1 &1553386976720002
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4417972914747052}
+  - component: {fileID: 111059943667456722}
+  m_Layer: 0
+  m_Name: CLIP
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4417972914747052
+Transform:
+  m_GameObject: {fileID: 1553386976720002}
+  m_LocalRotation: {x: 6.657903E-08, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4274942720460398}
+  m_Father: {fileID: 4825187067139817}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 7.629395E-06, y: 0, z: 0}
+--- !u!111 &111059943667456722
+Animation:
+  m_GameObject: {fileID: 1553386976720002}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: e75258b1c5495764a9bd9bbea92248e1, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!1 &1793317396363428
+GameObject:
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4274942720460398}
+  - component: {fileID: 33754299717870889}
+  - component: {fileID: 23609888656574533}
+  m_Layer: 0
+  m_Name: Clip 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4274942720460398
+Transform:
+  m_GameObject: {fileID: 1793317396363428}
+  m_LocalRotation: {x: 0, y: 0, z: -1.509958E-07, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_Children: []
+  m_Father: {fileID: 4417972914747052}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 1.730285E-05}
+--- !u!33 &33754299717870889
+MeshFilter:
+  m_GameObject: {fileID: 1793317396363428}
+  m_Mesh: {fileID: 4300000, guid: 3002f19868ee5814f9f7f32b7a4ccfb3, type: 2}
+--- !u!23 &23609888656574533
+MeshRenderer:
+  m_GameObject: {fileID: 1793317396363428}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: c8909f6c63c9bc54f9df748c367bf35b, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
