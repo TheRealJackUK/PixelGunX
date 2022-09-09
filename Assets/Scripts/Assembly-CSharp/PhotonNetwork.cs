@@ -1198,9 +1198,9 @@ public static class PhotonNetwork
     public static bool ConnectUsingSettings(string gameVersion)
     {
         //7f6f3946-7574-4fe5-8f76-44063c43a103
-        PhotonNetwork.PhotonServerSettings.AppID = "7f6f3946-7574-4fe5-8f76-44063c43a103";
-        PhotonServerSettings.HostType = ServerSettings.HostingOption.PhotonCloud;
-        PhotonServerSettings.PreferredRegion = CloudRegionCode.eu;
+        //PhotonNetwork.PhotonServerSettings.AppID = "7f6f3946-7574-4fe5-8f76-44063c43a103";
+        //PhotonServerSettings.HostType = ServerSettings.HostingOption.PhotonCloud;
+        //PhotonServerSettings.PreferredRegion = CloudRegionCode.eu;
         /*if (!InternetChecker.InternetAvailable) {
             PhotonNetwork.PhotonServerSettings.AppID = "retarded ass nigga";
             PhotonServerSettings.HostType = ServerSettings.HostingOption.NotSet;
