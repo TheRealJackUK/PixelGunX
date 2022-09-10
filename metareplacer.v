@@ -11,8 +11,8 @@ fn walker(path string) {
             for lieen in le.split("\n") {
                 if lieen.contains(": ") {
                     if lieen.split(": ")[0] == lin.split(": ")[0] {
-                        pgw_guid = lieen.split(": ")[1]
-                        //println("Checking " + path + ". The correct GUID is " + correct_guid + " and the incorrect one is " + pgw_guid)
+                        pgw_guid = lin.split(": ")[1]
+                        println("Checking " + path + ". The correct GUID is " + correct_guid + " and the incorrect one is " + pgw_guid)
                         mut finaltext := os.read_file(path) or { panic(err) }
                         finaltext = finaltext.replace(correct_guid, pgw_guid)
                         os.write_file(path, finaltext) or { panic(err) }
@@ -25,5 +25,5 @@ fn walker(path string) {
 
 fn main() {
     // os.write_file("./result.txt", "") or { panic(err) }
-    os.walk("./Assets/PrefabInstance", walker)
+    os.walk("./Assets/Export/PGW/Resources/ui/common", walker)
 }
