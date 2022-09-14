@@ -193,6 +193,7 @@
 			echo "{\"top_clans\": [{$clanslist}], \"best_players\": [{$playerslist}]}";
             break;
         case "get_inbox_data":
+        	////////////////////////////////////////////////////////////////////////////////////////////
             $tomeget = $db->prepare("SELECT id, whom, type FROM `pgx_requests` WHERE whom=:myid");
             $tomeget->bindparam(":myid", $_POST["id"]);
 			$tomeget->execute();
@@ -203,6 +204,7 @@
 				$tomelist .= "{\"who\":\"" . $request["id"] . "\", \"whom\":\"" . $request["whom"] . "\", \"id\":\"" . $request["whom"] . "\", \"status\":\"{$request["type"]}\"},";
 				//$curi += 1;
 			}
+			////////////////////////////////////////////////////////////////////////////////////////////
 			$toothersget = $db->prepare("SELECT id, whom, type FROM `pgx_requests` WHERE id=:myid");
             $toothersget->bindparam(":myid", $_POST["id"]);
 			$toothersget->execute();
@@ -214,7 +216,25 @@
 				//$curi += 1;
 			}
 			$tootherslist = substr($tootherslist, 0, strlen($tootherslist)-1);
-			echo "{\"friends\": [{$tomelist}{$tootherslist}]}";
+			////////////////////////////////////////////////////////////////////////////////////////////
+			$toothersget = $db->prepare("SELECT id, whom, clanid, type FROM `pgx_claninvites` WHERE whom=:myid");
+            $toothersget->bindparam(":myid", $_POST["id"]);
+			$toothersget->execute();
+			$toothers = $toothersget->fetchAll();
+			$claninvites = "";
+			//$curi = 0;
+			foreach($toothers as &$request2) {
+				$toothersget = $db->prepare("SELECT id, name, logo FROM `pgx_clans` WHERE id=:myid");
+	            $toothersget->bindparam(":myid", $request2["clanid"]);
+				$toothersget->execute();
+				$datas = $toothersget->fetchAll();
+				foreach($datas as &$clandat) {
+					$claninvites .= "{\"id\":\"" . $request2["clanid"] . "\", \"name\": \"{$clandat["name"]}\", \"logo\": \"{$clandat["logo"]}\"},";
+				}
+				//$curi += 1;
+			}
+			$claninvites = substr($claninvites, 0, strlen($claninvites)-1);
+			echo "{\"friends\": [{$tomelist}{$tootherslist}], \"clans_invites\": [{$claninvites}]}";
             break;
         case "get_info_by_id":
             $userdata = $db->prepare("SELECT id, username, skin, clan, wins FROM `pgx_users` WHERE id=:myid");
@@ -251,6 +271,19 @@
 			$userdata = $db->prepare("DELETE FROM `pgx_claninvites` WHERE whom=:id AND clanid=:whom");
             $userdata->bindparam(":id", $_POST["id_player"]);
             $userdata->bindparam(":whom", $_POST["id_clan"]);
+			$userdata->execute();
+			echo 1;
+            break;
+        case "reject_invite":
+			$userdata = $db->prepare("DELETE FROM `pgx_claninvites` WHERE whom=:id AND clanid=:whom");
+            $userdata->bindparam(":id", $_POST["id_player"]);
+            $userdata->bindparam(":whom", $_POST["id_clan"]);
+			$userdata->execute();
+			echo 1;
+            break;
+        case "exit_clan":
+			$userdata = $db->prepare("UPDATE `pgx_users` SET `clan`=0 WHERE id=:whom");
+            $userdata->bindparam(":whom", $_POST["id_player"]);
 			$userdata->execute();
 			echo 1;
             break;

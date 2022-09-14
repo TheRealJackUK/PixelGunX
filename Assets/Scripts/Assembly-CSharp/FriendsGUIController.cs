@@ -303,6 +303,7 @@ public sealed class FriendsGUIController : MonoBehaviour, IFriendsGUIController
 		{
 			if (!existingClanInvs.Contains(ClanInv2["id"]))
 			{
+				UnityEngine.Debug.LogWarning("__UpdateGUI adding clan");
 				GameObject f4 = UnityEngine.Object.Instantiate(Resources.Load("Invitation") as GameObject) as GameObject;
 				f4.transform.parent = ClanInvitationsGrid.transform;
 				f4.transform.localScale = new Vector3(1f, 1f, 1f);

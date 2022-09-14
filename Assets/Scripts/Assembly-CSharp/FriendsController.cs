@@ -2340,6 +2340,7 @@ public sealed class FriendsController : MonoBehaviour
 				}
 				else
 				{
+					Debug.LogWarning(" _UpdateFriends clanInv success");
 					_ProcessClanInvitesList(list2);
 				}
 			}
