@@ -172,22 +172,22 @@
 			}
 			$clanslist = substr($clanslist, 0, strlen($clanslist)-1);
 			//
-			$playersget = $db->prepare("SELECT id, username, wins, clan FROM `pgx_users` WHERE wins > 10");
+			$playersget = $db->prepare("SELECT id, username, wins, clan, rank FROM `pgx_users` WHERE wins > 10 ORDER BY wins DESC");
 			$playersget->execute();
 			$players = $playersget->fetchAll();
 			$playerslist = "";
 			//$curi = 0;
 			foreach($players as &$playerdata) {
+				$playerslist .= "{\"id\":\"" . $playerdata["id"] . "\", \"nick\":\"" . $playerdata["username"] . "\", \"wins\":\"" . $playerdata["wins"] . "\", \"rank\":\"" . $playerdata["rank"] . "\"";
 				if ($playerdata["clan"] != 0) {
 					$tokenget = $db->prepare("SELECT logo FROM `pgx_clans` WHERE id = :name");
 			        $tokenget->bindparam(":name", $playerdata["clan"]);
 			        $tokenget->execute();
 			        $clanLogo = $tokenget->fetchColumn();
-					$playerslist .= "{\"id\":\"" . $playerdata["id"] . "\", \"nick\":\"" . $playerdata["username"] . "\", \"wins\":\"" . $playerdata["wins"] . "\", \"logo\": \"{$clanLogo}\"},";
-				}else{
-					$playerslist .= "{\"id\":\"" . $playerdata["id"] . "\", \"nick\":\"" . $playerdata["username"] . "\", \"wins\":\"" . $playerdata["wins"] . "\"},";
+					$playerslist .= ", \"logo\": \"{$clanLogo}\"";
 				}
 				//$curi += 1;
+				$playerslist .= "},";
 			}
 			$playerslist = substr($playerslist, 0, strlen($playerslist)-1);
 			echo "{\"top_clans\": [{$clanslist}], \"best_players\": [{$playerslist}]}";
@@ -241,8 +241,26 @@
             $userdata->bindparam(":myid", $_POST["id"]);
 			$userdata->execute();
 			$users = $userdata->fetchAll();
+			$alltome = 0;
+			////////////////////////////////////////////////////////////////////////////////////////////
+            $tomeget = $db->prepare("SELECT id, whom, type FROM `pgx_requests` WHERE whom=:myid AND type=0");
+            $tomeget->bindparam(":myid", $_POST["id"]);
+			$tomeget->execute();
+			$tomes = $tomeget->fetchAll();
+			foreach($tomes as &$request) {
+				$alltome++;
+			}
+			////////////////////////////////////////////////////////////////////////////////////////////
+			$toothersget = $db->prepare("SELECT id, whom, type FROM `pgx_requests` WHERE id=:myid AND type=0");
+            $toothersget->bindparam(":myid", $_POST["id"]);
+			$toothersget->execute();
+			$toothers = $toothersget->fetchAll();
+			foreach($toothers as &$request2) {
+				$alltome++;
+			}
+			////////////////////////////////////////////////////////////////////////////////////////////
 			foreach($users as &$user) {
-				echo "{\"player\":{\"nick\": \"{$user["username"]}\", \"skin\":\"{$user["skin"]}\", \"total_wins\": \"{$user["wins"]}\"}}";
+				echo "{\"player\":{\"nick\": \"{$user["username"]}\", \"skin\":\"{$user["skin"]}\", \"total_wins\": \"{$user["wins"]}\", \"friends\": \"{$alltome}\"}}";
 			}
             break;
         case "reject_friend":

@@ -1579,7 +1579,7 @@ public sealed class InGameGUI : MonoBehaviour
 
 	public void SetScopeForWeapon(string num)
 	{
-		scopeText.SetActive(true);
+		scopeText.SetActive((Storager.hasKey("crosshair") ? Storager.getInt("crosshair")==1 : true));
 		string path = ((!Device.isWeakDevice) ? ResPath.Combine("Scopes", "Scope_" + num) : ResPath.Combine("Scopes", "Scope_" + num + "_small"));
 		scopeText.GetComponent<UITexture>().mainTexture = Resources.Load(path) as Texture;
 	}

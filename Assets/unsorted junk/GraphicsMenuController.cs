@@ -30,10 +30,10 @@ public class GraphicsMenuController : MonoBehaviour {
 	public ButtonHandler veryLowBtn;
 	public ButtonHandler lowBtn;
 	public ButtonHandler standardBtn;
-
 	public ButtonHandler highBtn;
-
 	public ButtonHandler ultraBtn;
+
+	public ButtonHandler crosshairBtn;
 
 	public void SwitchBtn(bool on, ButtonHandler btn) {
 		HOTween.Init(true, true, true);
@@ -66,6 +66,13 @@ public class GraphicsMenuController : MonoBehaviour {
 		bool x = !(Storager.getInt("ao", false) == 1);
 		Storager.setInt("ao", (x==true?1:0), false);
 		SwitchBtn(x, aoBtn);
+		PlayerPrefs.Save();
+	}
+
+	public void HandleCrosshair(object sender, System.EventArgs e){
+		bool x = !(Storager.getInt("crosshair", false) == 1);
+		Storager.setInt("crosshair", (x==true?1:0), false);
+		SwitchBtn(x, crosshairBtn);
 		PlayerPrefs.Save();
 	}
 
@@ -207,6 +214,8 @@ public class GraphicsMenuController : MonoBehaviour {
 		SwitchBtn(IsGraphicSetting("Ultra"), ultraBtn);
 		//
 		SwitchBtn(PlayerPrefs.GetInt(Defs.GameGUIOffMode) == 1, offGuiBtn);
+		//
+		SwitchBtn(Storager.getInt("crosshair", false) == 1, crosshairBtn);
 		Resources.Load<LanguageSource>("I2Languages").UpdateTheFont();
 		int currentFOV = Storager.getInt("camerafov", false);
 		int num = 179;
@@ -281,6 +290,9 @@ public class GraphicsMenuController : MonoBehaviour {
 		if (ultraBtn != null)
 		{
 			ultraBtn.Clicked += HandleGraphicBtn;
+		}
+		if (crosshairBtn != null) {
+			crosshairBtn.Clicked += HandleCrosshair;
 		}
 	}
 }
