@@ -193,6 +193,7 @@
 			echo "{\"top_clans\": [{$clanslist}], \"best_players\": [{$playerslist}]}";
             break;
         case "get_inbox_data":
+			// df096a5e516d407c3b8a721240579a9dc8c36788
         	////////////////////////////////////////////////////////////////////////////////////////////
             $tomeget = $db->prepare("SELECT id, whom, type FROM `pgx_requests` WHERE whom=:myid");
             $tomeget->bindparam(":myid", $_POST["id"]);
@@ -259,8 +260,18 @@
 				$alltome++;
 			}
 			////////////////////////////////////////////////////////////////////////////////////////////
+			$result = [];
 			foreach($users as &$user) {
-				echo "{\"player\":{\"nick\": \"{$user["username"]}\", \"skin\":\"{$user["skin"]}\", \"total_wins\": \"{$user["wins"]}\", \"friends\": \"{$alltome}\"}}";
+				$result = [];
+				$playerdata = [];
+				// PLAYER DATA
+				$playerdata += ["nick" => $user["username"]];
+				$playerdata += ["skin" => $user["skin"]];
+				$playerdata += ["total_wins" => $user["wins"]];
+				$playerdata += ["friends" => $alltome];
+				// FINAL RESULT SHIT
+				$result += ["player" => $playerdata];
+				echo json_encode($result);
 			}
             break;
         case "reject_friend":
