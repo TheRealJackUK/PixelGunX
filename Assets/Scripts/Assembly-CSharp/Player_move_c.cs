@@ -728,7 +728,6 @@ public sealed class Player_move_c : MonoBehaviour
 	{
 		get
 		{
-			Debug.Log(this.CurrentBaseArmor + this.CurrentBodyArmor + this.CurrentHatArmor);
 			return this.CurrentBaseArmor + this.CurrentBodyArmor + this.CurrentHatArmor;
 		}
 		set
@@ -888,7 +887,7 @@ public sealed class Player_move_c : MonoBehaviour
 		{
 			float value = 0f;
 			Wear.curArmor.TryGetValue(FriendsController.sharedController.hatName ?? string.Empty, out value);
-			return value;
+			return value / 2;
 		}
 		set
 		{
