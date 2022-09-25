@@ -529,10 +529,11 @@ public sealed class Initializer : MonoBehaviour
 
 	private void DoOnGUI()
 	{
+		bool interfaceEnabled2 = false;
 		float num = (float)Screen.height / 768f;
 		bool guiActive = ShopNGUIController.GuiActive;
 		bool interfaceEnabled = BankController.Instance.InterfaceEnabled;
-		bool interfaceEnabled2 = ProfileController.Instance.InterfaceEnabled;
+		interfaceEnabled2 = ProfileController.Instance.InterfaceEnabled;
 		if (guiActive || interfaceEnabled || interfaceEnabled2)
 		{
 			return;

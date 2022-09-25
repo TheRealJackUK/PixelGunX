@@ -138,6 +138,7 @@ namespace UniGLTF
                 if (path.StartsWithUnityAssetPath())
                 {
                     AssetDatabase.ImportAsset(path.ToUnityRelativePath());
+                    Debug.LogError("called asset refresh from here");
                     AssetDatabase.Refresh();
                 }
 

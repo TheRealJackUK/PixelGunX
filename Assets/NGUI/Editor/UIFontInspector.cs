@@ -641,6 +641,7 @@ public class UIFontInspector : Editor
 			byte[] bytes = final.EncodeToPNG();
 			NGUITools.DestroyImmediate(final);
 			System.IO.File.WriteAllBytes(path, bytes);
+			Debug.LogError("called asset refresh from here");
 			AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
 		}
 		else

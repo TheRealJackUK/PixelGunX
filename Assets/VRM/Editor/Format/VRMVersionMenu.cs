@@ -259,6 +259,7 @@ namespace VRM
                 {
                     UpdateVrmVersion(vrmVersion);
                     UpdateUniGLTFVersion(m_uniGltfVersion, vrmVersion);
+                    Debug.LogError("called asset refresh from here");
                     AssetDatabase.Refresh();
                     Debug.Log($"{m_uniGltfVersion}, {vrmVersion}");
                 }
