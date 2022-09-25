@@ -177,7 +177,7 @@ public class GraphicsMenuController : MonoBehaviour {
 
 	public void fovchanged() {
 		int currentFOV = Storager.getInt("camerafov", false);
-		int num = 179;
+		int num = 130;
 		int num2 = Mathf.Clamp(Convert.ToInt32(fovSlider.value * (float)num), 0, num);
 		float fovPercentage = (float)num2 / (float)num;
 		fovLabel.text = "FOV: " + num2 + '/' + num;

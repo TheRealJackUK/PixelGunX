@@ -728,26 +728,54 @@ public sealed class Player_move_c : MonoBehaviour
 	{
 		get
 		{
-			return currArmor;
+			Debug.Log(this.CurrentBaseArmor + this.CurrentBodyArmor + this.CurrentHatArmor);
+			return this.CurrentBaseArmor + this.CurrentBodyArmor + this.CurrentHatArmor;
 		}
 		set
 		{
-			float num = curArmor - value;
+			float num = this.curArmor - value;
 			if (num >= 0f)
 			{
-				if (currArmor >= num)
+				if (this.CurrentHatArmor >= num)
 				{
-					currArmor -= num;
-					return;
+					this.CurrentHatArmor -= num;
 				}
-				num -= currArmor;
-				currArmor -= num;
+				else
+				{
+					num -= this.CurrentHatArmor;
+					this.CurrentHatArmor = 0f;
+					if (this.CurrentBodyArmor >= num)
+					{
+						this.CurrentBodyArmor -= num;
+					}
+					else
+					{
+						num -= this.CurrentBodyArmor;
+						this.CurrentBodyArmor = 0f;
+						this.CurrentBaseArmor -= num;
+					}
+				}
 			}
 			else if (num < 0f)
 			{
 				num *= -1f;
-				num = ((!(WearedMaxArmor > 0f)) ? 1f : ((!(WearedMaxArmor > 5f)) ? (WearedMaxArmor - WearedCurrentArmor) : Mathf.Min(WearedMaxArmor - WearedCurrentArmor, WearedMaxArmor * 0.5f)));
-				AddArmor(num);
+				bool flag = this.WearedMaxArmor > 0f;
+				if (flag)
+				{
+					if (this.WearedMaxArmor > 5f)
+					{
+						num = Mathf.Min(this.WearedMaxArmor - this.WearedCurrentArmor, this.WearedMaxArmor * 0.5f);
+					}
+					else
+					{
+						num = this.WearedMaxArmor - this.WearedCurrentArmor;
+					}
+				}
+				else
+				{
+					num = 1f;
+				}
+				this.AddArmor(num);
 			}
 		}
 	}
@@ -764,7 +792,9 @@ public sealed class Player_move_c : MonoBehaviour
 	{
 		get
 		{
-			return 31f;
+			float num = Wear.MaxArmorForItem(FriendsController.sharedController.armorName, this.TierOrRoomTier((!(ExpController.Instance != null)) ? (ExpController.LevelsForTiers.Length - 1) : ExpController.Instance.OurTier));
+			float num2 = Wear.MaxArmorForItem(FriendsController.sharedController.hatName, this.TierOrRoomTier((!(ExpController.Instance != null)) ? (ExpController.LevelsForTiers.Length - 1) : ExpController.Instance.OurTier));
+			return num + num2;
 		}
 	}
 
@@ -839,10 +869,16 @@ public sealed class Player_move_c : MonoBehaviour
 	{
 		get
 		{
-			return 19f;
+			float num = 0f;
+			Wear.curArmor.TryGetValue(FriendsController.sharedController.armorName ?? string.Empty, out num);
+			return num;
 		}
 		set
 		{
+			if (Wear.curArmor.ContainsKey(FriendsController.sharedController.armorName ?? string.Empty))
+			{
+				Wear.curArmor[FriendsController.sharedController.armorName ?? string.Empty] = value;
+			}
 		}
 	}
 
@@ -930,32 +966,46 @@ public sealed class Player_move_c : MonoBehaviour
 
 	private void AddArmor(float dt)
 	{
-		if (WearedMaxArmor > 0f)
+		bool flag = this.WearedMaxArmor > 0f;
+		if (flag)
 		{
-			float num2 = 0f;
-			dt -= num2;
-			float num3 = 0f;
-			float num4 = num3 - CurrentHatArmor;
-			if (num4 < 0f)
+			float num = Wear.MaxArmorForItem(FriendsController.sharedController.armorName, this.TierOrRoomTier((!(ExpController.Instance != null)) ? (ExpController.LevelsForTiers.Length - 1) : ExpController.Instance.OurTier));
+			float num2 = num - this.CurrentBodyArmor;
+			if (num2 < 0f)
 			{
-				num4 = 0f;
+				num2 = 0f;
 			}
-			CurrentHatArmor += Mathf.Min(num4, dt);
+			if (dt <= num2)
+			{
+				this.CurrentBodyArmor += dt;
+			}
+			else
+			{
+				this.CurrentBodyArmor += num2;
+				dt -= num2;
+				float num3 = Wear.MaxArmorForItem(FriendsController.sharedController.hatName, this.TierOrRoomTier((!(ExpController.Instance != null)) ? (ExpController.LevelsForTiers.Length - 1) : ExpController.Instance.OurTier));
+				float num4 = num3 - this.CurrentHatArmor;
+				if (num4 < 0f)
+				{
+					num4 = 0f;
+				}
+				this.CurrentHatArmor += Mathf.Min(num4, dt);
+			}
 		}
 		else
 		{
-			float num5 = maxBaseArmor - CurrentBaseArmor;
+			float num5 = this.maxBaseArmor - this.CurrentBaseArmor;
 			if (num5 < 0f)
 			{
 				num5 = 0f;
 			}
 			if (dt <= num5)
 			{
-				CurrentBaseArmor += dt;
+				this.CurrentBaseArmor += dt;
 			}
 			else
 			{
-				CurrentBaseArmor += num5;
+				this.CurrentBaseArmor += num5;
 			}
 		}
 	}
