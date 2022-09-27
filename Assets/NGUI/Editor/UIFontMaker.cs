@@ -444,6 +444,7 @@ public class UIFontMaker : EditorWindow
 
 					// Save the material
 					AssetDatabase.CreateAsset(mat, matPath);
+					Debug.LogError("called asset refresh from here");
 					AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
 
 					// Load the material so it's usable
@@ -515,12 +516,17 @@ public class UIFontMaker : EditorWindow
 
 						// Save the material
 						AssetDatabase.CreateAsset(mat, matPath);
+						Debug.LogError("called asset refresh from here");
 						AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
 
 						// Load the material so it's usable
 						mat = AssetDatabase.LoadAssetAtPath(matPath, typeof(Material)) as Material;
 					}
-					else AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
+					else
+					{
+						Debug.LogError("called asset refresh from here");
+						AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
+					} 
 
 					// Re-load the texture
 					tex = AssetDatabase.LoadAssetAtPath(texPath, typeof(Texture2D)) as Texture2D;
@@ -541,6 +547,7 @@ public class UIFontMaker : EditorWindow
 			// Update the prefab
 			PrefabUtility.ReplacePrefab(go, prefab);
 			DestroyImmediate(go);
+			Debug.LogError("called asset refresh from here");
 			AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
 
 			// Select the atlas

@@ -34,7 +34,7 @@ namespace UniGLTF
                 var tmp = AssetDatabase.LoadAssetAtPath<Mesh>(assetPath);
                 Assert.Null(tmp);
             }
-
+            Debug.LogError("called asset refresh from here");
             AssetDatabase.Refresh();
         }
     }

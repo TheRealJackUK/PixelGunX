@@ -36,7 +36,7 @@ internal sealed class InternetChecker : MonoBehaviour
 			Cursor.visible = true;
 			Cursor.lockState = CursorLockMode.None;
 		}
-		if (!Application.isFocused && !Application.isMobilePlatform)
+		if (!Application.isFocused && !Application.isEditor)
 		{
 			Application.targetFrameRate = 15;
 		} else {

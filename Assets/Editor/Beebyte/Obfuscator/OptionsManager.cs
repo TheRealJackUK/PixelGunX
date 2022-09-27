@@ -84,6 +84,7 @@ namespace Beebyte.Obfuscator
 			//Copy & Delete instead of Move, otherwise future installs think that ObfuscatorOptions is actually ObfuscatorOptionsImport
 			AssetDatabase.CopyAsset(importPath, newOptionsPath);
 			AssetDatabase.DeleteAsset(importPath);
+			Debug.LogError("called asset refresh from here");
 			AssetDatabase.Refresh();
 		}
 

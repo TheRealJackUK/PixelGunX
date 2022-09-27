@@ -524,6 +524,7 @@ static public class NGUIEditorTools
 			//return AssetDatabase.LoadAssetAtPath(path, typeof(Texture2D)) as Texture2D;
 
 			Texture2D tex = AssetDatabase.LoadAssetAtPath(path, typeof(Texture2D)) as Texture2D;
+			Debug.LogError("called asset refresh from here");
 			AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
 			return tex;
 		}
