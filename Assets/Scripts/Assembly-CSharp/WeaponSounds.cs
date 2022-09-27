@@ -352,7 +352,7 @@ public sealed class WeaponSounds : MonoBehaviour
 			}
 		}
 		for (int i = 0; i < damageByTier.Length; i++) {
-			damageByTier[i] *= 0.65;
+			damageByTier[i] *= 0.65f;
 		}
 		if (!isMelee)
 		{
