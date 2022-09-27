@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2020 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 using UnityEngine;
@@ -71,7 +71,7 @@ static public class NGUIMath
 
 	[System.Diagnostics.DebuggerHidden]
 	[System.Diagnostics.DebuggerStepThrough]
-	static public int HexToDecimal (char ch)
+	static public int HexToDecimal (char ch, int defVal = 0xF)
 	{
 		switch (ch)
 		{
@@ -98,7 +98,7 @@ static public class NGUIMath
 			case 'f':
 			case 'F': return 0xF;
 		}
-		return 0xF;
+		return defVal;
 	}
 
 	/// <summary>
@@ -354,6 +354,8 @@ static public class NGUIMath
 		return offset;
 	}
 
+	[System.NonSerialized] static System.Collections.Generic.List<UIWidget> s_widgets = new List<UIWidget>();
+
 	/// <summary>
 	/// Calculate the combined bounds of all widgets attached to the specified game object or its children (in world space).
 	/// </summary>
@@ -362,19 +364,30 @@ static public class NGUIMath
 	{
 		if (trans != null)
 		{
-			UIWidget[] widgets = trans.GetComponentsInChildren<UIWidget>() as UIWidget[];
-			if (widgets.Length == 0) return new Bounds(trans.position, Vector3.zero);
+			s_widgets.Clear();
+			trans.GetComponentsInChildren(s_widgets);
+
+			for (int i = 0, imax = s_widgets.Count; i < imax; ++i)
+			{
+				var w = s_widgets[i];
+
+				if (!w.isSelectable || !w.enabled)
+				{
+					s_widgets.RemoveAt(i--);
+					--imax;
+				}
+			}
+
+			if (s_widgets.Count == 0) return new Bounds(trans.position, Vector3.zero);
 
 			Vector3 vMin = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
 			Vector3 vMax = new Vector3(float.MinValue, float.MinValue, float.MinValue);
 			Vector3 v;
 
-			for (int i = 0, imax = widgets.Length; i < imax; ++i)
+			for (int i = 0, imax = s_widgets.Count; i < imax; ++i)
 			{
-				UIWidget w = widgets[i];
-				if (!w.enabled) continue;
-
-				Vector3[] corners = w.worldCorners;
+				var w = s_widgets[i];
+				var corners = w.worldCorners;
 
 				for (int j = 0; j < 4; ++j)
 				{
@@ -432,15 +445,15 @@ static public class NGUIMath
 	{
 		if (content != null && relativeTo != null)
 		{
-			bool isSet = false;
-			Matrix4x4 toLocal = relativeTo.worldToLocalMatrix;
-			Vector3 min = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
-			Vector3 max = new Vector3(float.MinValue, float.MinValue, float.MinValue);
+			var isSet = false;
+			var toLocal = relativeTo.worldToLocalMatrix;
+			var min = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
+			var max = new Vector3(float.MinValue, float.MinValue, float.MinValue);
 			CalculateRelativeWidgetBounds(content, considerInactive, true, ref toLocal, ref min, ref max, ref isSet, considerChildren);
 
 			if (isSet)
 			{
-				Bounds b = new Bounds(min, Vector3.zero);
+				var b = new Bounds(min, Vector3.zero);
 				b.Encapsulate(max);
 				return b;
 			}
@@ -461,7 +474,7 @@ static public class NGUIMath
 		if (!considerInactive && !NGUITools.GetActive(content.gameObject)) return;
 
 		// If this isn't a root node, check to see if there is a panel present
-		UIPanel p = isRoot ? null : content.GetComponent<UIPanel>();
+		var p = isRoot ? null : content.GetComponent<UIPanel>();
 
 		// Ignore disabled panels as a disabled panel means invisible children
 		if (p != null && !p.enabled) return;
@@ -469,7 +482,7 @@ static public class NGUIMath
 		// If there is a clipped panel present simply include its dimensions
 		if (p != null && p.clipping != UIDrawCall.Clipping.None)
 		{
-			Vector3[] corners = p.worldCorners;
+			var corners = p.worldCorners;
 
 			for (int j = 0; j < 4; ++j)
 			{
@@ -489,15 +502,15 @@ static public class NGUIMath
 		else // No panel present
 		{
 			// If there is a widget present, include its bounds
-			UIWidget w = content.GetComponent<UIWidget>();
+			var w = content.GetComponent<UIWidget>();
 
-			if (w != null && w.enabled)
+			if (w != null && w.enabled && w.isSelectable)
 			{
-				Vector3[] corners = w.worldCorners;
+				var corners = w.worldCorners;
 
 				for (int j = 0; j < 4; ++j)
 				{
-					Vector3 v = toLocal.MultiplyPoint3x4(corners[j]);
+					var v = toLocal.MultiplyPoint3x4(corners[j]);
 
 					if (v.x > vMax.x) vMax.x = v.x;
 					if (v.y > vMax.y) vMax.y = v.y;
@@ -1097,7 +1110,7 @@ static public class NGUIMath
 	/// You can then assign the widget's localPosition to the returned value.
 	/// </summary>
 
-	static public Vector3 WorldToLocalPoint (Vector3 worldPos, Camera worldCam, Camera uiCam, Transform relativeTo)
+	static public Vector3 WorldToLocalPoint (Vector3 worldPos, Camera worldCam, Camera uiCam, Transform relativeTo = null)
 	{
 		worldPos = worldCam.WorldToViewportPoint(worldPos);
 		worldPos = uiCam.ViewportToWorldPoint(worldPos);

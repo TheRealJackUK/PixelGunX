@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2020 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 using UnityEngine;
@@ -17,7 +17,7 @@ public class UIScrollView : MonoBehaviour
 {
 	static public BetterList<UIScrollView> list = new BetterList<UIScrollView>();
 
-	public enum Movement
+	[DoNotObfuscateNGUI] public enum Movement
 	{
 		Horizontal,
 		Vertical,
@@ -25,14 +25,14 @@ public class UIScrollView : MonoBehaviour
 		Custom,
 	}
 
-	public enum DragEffect
+	[DoNotObfuscateNGUI] public enum DragEffect
 	{
 		None,
 		Momentum,
 		MomentumAndSpring,
 	}
 
-	public enum ShowCondition
+	[DoNotObfuscateNGUI] public enum ShowCondition
 	{
 		Always,
 		OnlyIfNeeded,
@@ -96,10 +96,10 @@ public class UIScrollView : MonoBehaviour
 
 	public float momentumAmount = 35f;
 
-	/// <summary>
-	/// Strength of the spring dampening effect.
-	/// </summary>
+	[Tooltip("Strength of the spring effect when moving the contents back into viewable area")]
+	public float springStrength = 8f;
 
+	[Tooltip("Strength of the spring dampening effect.")]
 	public float dampenStrength = 9f;
 
 	/// <summary>
@@ -423,7 +423,7 @@ public class UIScrollView : MonoBehaviour
 				Vector3 pos = mTrans.localPosition + constraint;
 				pos.x = Mathf.Round(pos.x);
 				pos.y = Mathf.Round(pos.y);
-				SpringPanel.Begin(mPanel.gameObject, pos, 8f);
+				SpringPanel.Begin(mPanel.gameObject, pos, springStrength);
 			}
 			else
 			{
@@ -727,7 +727,7 @@ public class UIScrollView : MonoBehaviour
 
 	public void Press (bool pressed)
 	{
-		if (UICamera.currentScheme == UICamera.ControlScheme.Controller) return;
+		if (mPressed == pressed || UICamera.currentScheme == UICamera.ControlScheme.Controller) return;
 
 		if (smoothDragStart && pressed)
 		{

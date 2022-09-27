@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2020 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 using UnityEngine;
@@ -37,6 +37,8 @@ public class UIGridEditor : UIWidgetContainerEditor
 			{
 				EditorGUILayout.HelpBox("Horizontal and Vertical sortinig only works if the number of rows/columns remains at 0.", MessageType.Warning);
 			}
+
+			NGUIEditorTools.DrawProperty("Inverted", serializedObject, "inverted");
 		}
 
 		NGUIEditorTools.DrawProperty("Pivot", serializedObject, "pivot");

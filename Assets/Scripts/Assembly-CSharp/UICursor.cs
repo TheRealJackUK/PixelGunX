@@ -36,7 +36,7 @@ public class UICursor : MonoBehaviour
 		}
 		if (mSprite != null)
 		{
-			mAtlas = mSprite.atlas;
+			//mAtlas = mSprite.atlas;
 			mSpriteName = mSprite.spriteName;
 			if (mSprite.depth < 100)
 			{

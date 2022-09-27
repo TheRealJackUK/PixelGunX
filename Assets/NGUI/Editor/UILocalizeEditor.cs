@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2020 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 using UnityEngine;
@@ -33,7 +33,7 @@ public class UILocalizeEditor : Editor
 	public override void OnInspectorGUI ()
 	{
 		serializedObject.Update();
-		
+
 		GUILayout.Space(6f);
 		NGUIEditorTools.SetLabelWidth(80f);
 
@@ -46,7 +46,7 @@ public class UILocalizeEditor : Editor
 		GUI.color = isPresent ? Color.green : Color.red;
 		GUILayout.BeginVertical(GUILayout.Width(22f));
 		GUILayout.Space(2f);
-		GUILayout.Label(isPresent? "\u2714" : "\u2718", "TL SelectionButtonNew", GUILayout.Height(20f));
+		GUILayout.Label(isPresent? "\u2714" : "\u2718", "Button", GUILayout.Height(20f));
 		GUILayout.EndVertical();
 		GUI.color = Color.white;
 		GUILayout.EndHorizontal();
@@ -73,7 +73,7 @@ public class UILocalizeEditor : Editor
 							GUILayout.BeginHorizontal();
 							GUILayout.Label(keys[i], GUILayout.Width(66f));
 
-							if (GUILayout.Button(values[i], "TextArea", GUILayout.MinWidth(80f), GUILayout.MaxWidth(Screen.width - 110f)))
+							if (GUILayout.Button(values[i], NGUIEditorTools.textArea, GUILayout.MinWidth(80f), GUILayout.MaxWidth(Screen.width - 110f)))
 							{
 								(target as UILocalize).value = values[i];
 								GUIUtility.hotControl = 0;
@@ -107,7 +107,7 @@ public class UILocalizeEditor : Editor
 						GUIUtility.hotControl = 0;
 						GUIUtility.keyboardControl = 0;
 					}
-					
+
 					if (++matches == 8)
 					{
 						GUILayout.Label("...and more");
@@ -120,7 +120,7 @@ public class UILocalizeEditor : Editor
 			GUILayout.Space(22f);
 			GUILayout.EndHorizontal();
 		}
-		
+
 		serializedObject.ApplyModifiedProperties();
 	}
 }
