@@ -351,6 +351,9 @@ public sealed class WeaponSounds : MonoBehaviour
 				}
 			}
 		}
+		for (int i = 0; i < damageByTier.Length; i++) {
+			damageByTier[i] *= 0.65;
+		}
 		if (!isMelee)
 		{
 			gunFlash = ((base.transform.childCount <= 0 || base.transform.GetChild(0).childCount <= 0) ? null : base.transform.GetChild(0).GetChild(0));
