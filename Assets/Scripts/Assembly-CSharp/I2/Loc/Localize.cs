@@ -411,8 +411,8 @@ namespace I2.Loc
 
 		public bool SetFinalTerms_UISprite(string Main, string Secondary, out string primaryTerm, out string secondaryTerm)
 		{
-			string secondary = ((!(mTarget_UISprite.atlas != null)) ? string.Empty : mTarget_UISprite.atlas.name);
-			return SetFinalTerms(mTarget_UISprite.spriteName, secondary, out primaryTerm, out secondaryTerm);
+			//string secondary = ((!(mTarget_UISprite.atlas != null)) ? string.Empty : mTarget_UISprite.atlas.name);
+			return SetFinalTerms(mTarget_UISprite.spriteName, string.Empty, out primaryTerm, out secondaryTerm);
 		}
 
 		public bool SetFinalTerms_UITexture(string Main, string Secondary, out string primaryTerm, out string secondaryTerm)

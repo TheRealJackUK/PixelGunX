@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2020 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 using UnityEngine;
@@ -14,7 +14,7 @@ using System.Collections.Generic;
 [AddComponentMenu("NGUI/Interaction/NGUI Progress Bar")]
 public class UIProgressBar : UIWidgetContainer
 {
-	public enum FillDirection
+	[DoNotObfuscateNGUI] public enum FillDirection
 	{
 		LeftToRight,
 		RightToLeft,
@@ -209,7 +209,7 @@ public class UIProgressBar : UIWidgetContainer
 	/// Set the progress bar's value. If setting the initial value, call Start() first.
 	/// </summary>
 
-	public void Set (float val, bool notify = true)
+	public bool Set (float val, bool notify = true)
 	{
 		val = Mathf.Clamp01(val);
 
@@ -233,6 +233,18 @@ public class UIProgressBar : UIWidgetContainer
 			if (!Application.isPlaying)
 				NGUITools.SetDirty(this);
 #endif
+			return true;
+		}
+		return false;
+	}
+
+	protected void OnEnable ()
+	{
+		if (mStarted && current == null && EventDelegate.IsValid(onChange))
+		{
+			current = this;
+			EventDelegate.Execute(onChange);
+			current = null;
 		}
 	}
 
@@ -252,7 +264,7 @@ public class UIProgressBar : UIWidgetContainer
 
 			OnStart();
 
-			if (current == null && onChange != null)
+			if (current == null && EventDelegate.IsValid(onChange))
 			{
 				current = this;
 				EventDelegate.Execute(onChange);
@@ -340,8 +352,8 @@ public class UIProgressBar : UIWidgetContainer
 	{
 		if (mFG != null)
 		{
-			Vector3[] corners = mFG.localCorners;
-			Vector3 size = (corners[2] - corners[0]);
+			var corners = mFG.localCorners;
+			var size = (corners[2] - corners[0]);
 
 			if (isHorizontal)
 			{
@@ -364,23 +376,23 @@ public class UIProgressBar : UIWidgetContainer
 	public virtual void ForceUpdate ()
 	{
 		mIsDirty = false;
-		bool turnOff = false;
+		var turnOff = false;
+
+		var fgSprite = mFG as UIBasicSprite;
 
 		if (mFG != null)
 		{
-			UIBasicSprite sprite = mFG as UIBasicSprite;
-
 			if (isHorizontal)
 			{
-				if (sprite != null && sprite.type == UIBasicSprite.Type.Filled)
+				if (fgSprite != null && fgSprite.type == UIBasicSprite.Type.Filled)
 				{
-					if (sprite.fillDirection == UIBasicSprite.FillDirection.Horizontal ||
-						sprite.fillDirection == UIBasicSprite.FillDirection.Vertical)
+					if (fgSprite.fillDirection == UIBasicSprite.FillDirection.Horizontal ||
+						fgSprite.fillDirection == UIBasicSprite.FillDirection.Vertical)
 					{
-						sprite.fillDirection = UIBasicSprite.FillDirection.Horizontal;
-						sprite.invert = isInverted;
+						fgSprite.fillDirection = UIBasicSprite.FillDirection.Horizontal;
+						fgSprite.invert = isInverted;
 					}
-					sprite.fillAmount = value;
+					fgSprite.fillAmount = value;
 				}
 				else
 				{
@@ -391,15 +403,15 @@ public class UIProgressBar : UIWidgetContainer
 					turnOff = value < 0.001f;
 				}
 			}
-			else if (sprite != null && sprite.type == UIBasicSprite.Type.Filled)
+			else if (fgSprite != null && fgSprite.type == UIBasicSprite.Type.Filled)
 			{
-				if (sprite.fillDirection == UIBasicSprite.FillDirection.Horizontal ||
-					sprite.fillDirection == UIBasicSprite.FillDirection.Vertical)
+				if (fgSprite.fillDirection == UIBasicSprite.FillDirection.Horizontal ||
+					fgSprite.fillDirection == UIBasicSprite.FillDirection.Vertical)
 				{
-					sprite.fillDirection = UIBasicSprite.FillDirection.Vertical;
-					sprite.invert = isInverted;
+					fgSprite.fillDirection = UIBasicSprite.FillDirection.Vertical;
+					fgSprite.invert = isInverted;
 				}
-				sprite.fillAmount = value;
+				fgSprite.fillAmount = value;
 			}
 			else
 			{
@@ -408,6 +420,17 @@ public class UIProgressBar : UIWidgetContainer
 					new Vector4(0f, 0f, 1f, value);
 				mFG.enabled = true;
 				turnOff = value < 0.001f;
+			}
+		}
+
+		// Automatically invert the fill amount on the background sprite
+		if (mBG != null)
+		{
+			var bgSprite = mBG as UIBasicSprite;
+
+			if (bgSprite != null && fgSprite != null && bgSprite.invert != fgSprite.invert && bgSprite.type == UIBasicSprite.Type.Filled && fgSprite.type == UIBasicSprite.Type.Filled)
+			{
+				bgSprite.fillAmount = 1f - fgSprite.fillAmount;
 			}
 		}
 

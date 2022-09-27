@@ -115,11 +115,11 @@ public class UITextListEdit : MonoBehaviour
 		{
 			return;
 		}
-		UIFont font = textLabel.font;
-		if (!(font != null))
-		{
-			return;
-		}
+		//UIFont font = textLabel.font;
+		//if (!(font != null))
+		//{
+		//	return;
+		//}
 		int num = 0;
 		int num2 = ((!(maxHeight > 0f)) ? 100000 : Mathf.FloorToInt(maxHeight / textLabel.cachedTransform.localScale.y));
 		int num3 = Mathf.RoundToInt(mScroll);

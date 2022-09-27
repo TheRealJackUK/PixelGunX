@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2020 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 using UnityEngine;
@@ -21,14 +21,14 @@ public class UIRoot : MonoBehaviour
 
 	static public List<UIRoot> list = new List<UIRoot>();
 
-	public enum Scaling
+	[DoNotObfuscateNGUI] public enum Scaling
 	{
 		Flexible,
 		Constrained,
 		ConstrainedOnMobiles,
 	}
 
-	public enum Constraint
+	[DoNotObfuscateNGUI] public enum Constraint
 	{
 		Fit,
 		Fill,
@@ -245,17 +245,6 @@ public class UIRoot : MonoBehaviour
 
 	protected virtual void Start ()
 	{
-		//UnityEngine.Debug.LogError(Storager.getInt("weezing", false));
-		if (Application.isPlaying){
-			if (Storager.getInt("weezing", false) == 1){
-				// UnityEngine.Debug.LogError("can weeze");
-				foreach (GameObject gobj in Resources.FindObjectsOfTypeAll<GameObject>()){
-					if (gobj.GetComponent<MeshRenderer>()){
-						gobj.GetComponent<MeshRenderer>().sharedMaterial = Resources.Load("weezer") as Material;
-					}
-				}
-			}
-		}
 		UIOrthoCamera oc = GetComponentInChildren<UIOrthoCamera>();
 
 		if (oc != null)
@@ -268,26 +257,8 @@ public class UIRoot : MonoBehaviour
 		else UpdateScale(false);
 	}
 
-	int time = 0;
-
 	void Update ()
 	{
-		if (Application.isPlaying){
-			time++;
-			if (time % 600 == 0) {
-				if (Storager.getInt("weezing", false) == 1){
-					// UnityEngine.Debug.LogError("can weeze");
-					foreach (GameObject gobj in Resources.FindObjectsOfTypeAll<GameObject>()){
-						if (gobj.GetComponent<MeshRenderer>()){
-							Material weezerial = Resources.Load("weezer") as Material;
-							if (gobj.GetComponent<MeshRenderer>().sharedMaterial != weezerial) {
-								gobj.GetComponent<MeshRenderer>().sharedMaterial = weezerial;
-							}
-						}
-					}
-				}
-			}
-		}
 #if UNITY_EDITOR
 		if (!Application.isPlaying && gameObject.layer != 0)
 			UnityEditor.EditorPrefs.SetInt("NGUI Layer", gameObject.layer);

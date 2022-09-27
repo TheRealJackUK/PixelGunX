@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2020 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 using UnityEngine;
@@ -261,8 +261,11 @@ public class UICenterOnChild : MonoBehaviour
 			else
 #endif
 			{
-				SpringPanel.Begin(mScrollView.panel.cachedGameObject,
-					panelTrans.localPosition - localOffset, springStrength).onFinished = onFinished;
+				var pos = panelTrans.localPosition - localOffset;
+				pos.x = Mathf.Round(pos.x);
+				pos.y = Mathf.Round(pos.y);
+				pos.z = Mathf.Round(pos.z);
+				SpringPanel.Begin(mScrollView.panel.cachedGameObject, pos, springStrength).onFinished = onFinished;
 			}
 		}
 		else mCenteredObject = null;

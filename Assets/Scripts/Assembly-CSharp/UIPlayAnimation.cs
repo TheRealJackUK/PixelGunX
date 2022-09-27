@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2020 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 using UnityEngine;
@@ -263,9 +263,9 @@ public class UIPlayAnimation : MonoBehaviour
 			if (clearSelection && UICamera.selectedObject == gameObject)
 				UICamera.selectedObject = null;
 
-			int pd = -(int)playDirection;
-			Direction dir = forward ? playDirection : ((Direction)pd);
-			ActiveAnimation anim = target ?
+			var pd = -(int)playDirection;
+			var dir = forward ? playDirection : ((Direction)pd);
+			var anim = target ?
 				ActiveAnimation.Play(target, clipName, dir, ifDisabledOnPlay, disableWhenFinished) :
 				ActiveAnimation.Play(animator, clipName, dir, ifDisabledOnPlay, disableWhenFinished);
 

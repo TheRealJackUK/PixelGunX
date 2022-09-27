@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2020 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 using UnityEngine;
@@ -13,7 +13,7 @@ using UnityEngine;
 [AddComponentMenu("NGUI/Interaction/Button Color")]
 public class UIButtonColor : UIWidgetContainer
 {
-	public enum State
+	[DoNotObfuscateNGUI] public enum State
 	{
 		Normal,
 		Hover,
@@ -222,7 +222,7 @@ public class UIButtonColor : UIWidgetContainer
 
 	protected virtual void OnPress (bool isPressed)
 	{
-		if (isEnabled && UICamera.currentTouch != null)
+		if (isEnabled)
 		{
 			if (!mInitDone) OnInit();
 
@@ -232,7 +232,7 @@ public class UIButtonColor : UIWidgetContainer
 				{
 					SetState(State.Pressed, false);
 				}
-				else if (UICamera.currentTouch.current == gameObject)
+				else if (UICamera.currentTouch != null && UICamera.currentTouch.current == gameObject)
 				{
 					if (UICamera.currentScheme == UICamera.ControlScheme.Controller)
 					{
@@ -300,6 +300,8 @@ public class UIButtonColor : UIWidgetContainer
 
 	public void UpdateColor (bool instant)
 	{
+		if (!mInitDone) return;
+
 		TweenColor tc;
 
 		if (tweenTarget != null)

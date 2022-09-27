@@ -1,6 +1,6 @@
 //-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2017 Tasharen Entertainment Inc
+// Copyright © 2011-2020 Tasharen Entertainment Inc
 //-------------------------------------------------
 
 using UnityEngine;
@@ -13,7 +13,7 @@ using UnityEngine;
 [AddComponentMenu("NGUI/UI/Anchor")]
 public class UIAnchor : MonoBehaviour
 {
-	public enum Side
+	[DoNotObfuscateNGUI] public enum Side
 	{
 		BottomLeft,
 		Left,
@@ -117,135 +117,126 @@ public class UIAnchor : MonoBehaviour
 
 	void Update ()
 	{
-		try {
-			if (mAnim != null && mAnim.enabled && mAnim.isPlaying) return;
-			if (mTrans == null) return;
+		if (mAnim != null && mAnim.enabled && mAnim.isPlaying) return;
+		if (mTrans == null) return;
 
-			bool useCamera = false;
+		bool useCamera = false;
 
-			UIWidget wc = (container == null) ? null : container.GetComponent<UIWidget>();
-			UIPanel pc = (container == null && wc == null) ? null : container.GetComponent<UIPanel>();
+		UIWidget wc = (container == null) ? null : container.GetComponent<UIWidget>();
+		UIPanel pc = (container == null && wc == null) ? null : container.GetComponent<UIPanel>();
 
-			if (wc != null)
+		if (wc != null)
+		{
+			Bounds b = wc.CalculateBounds(container.transform.parent);
+
+			mRect.x = b.min.x;
+			mRect.y = b.min.y;
+
+			mRect.width = b.size.x;
+			mRect.height = b.size.y;
+		}
+		else if (pc != null)
+		{
+			if (pc.clipping == UIDrawCall.Clipping.None)
 			{
-				Bounds b = wc.CalculateBounds(container.transform.parent);
-
-				mRect.x = b.min.x;
-				mRect.y = b.min.y;
-
-				mRect.width = b.size.x;
-				mRect.height = b.size.y;
-			}
-			else if (pc != null)
-			{
-				if (pc.clipping == UIDrawCall.Clipping.None)
-				{
-					// Panel has no clipping -- just use the screen's dimensions
-					float ratio = (mRoot != null) ? (float)mRoot.activeHeight / Screen.height * 0.5f : 0.5f;
-					mRect.xMin = -Screen.width * ratio;
-					mRect.yMin = -Screen.height * ratio;
-					mRect.xMax = -mRect.xMin;
-					mRect.yMax = -mRect.yMin;
-				}
-				else
-				{
-					// Panel has clipping -- use it as the mRect
-					Vector4 pos = pc.finalClipRegion;
-					mRect.x = pos.x - (pos.z * 0.5f);
-					mRect.y = pos.y - (pos.w * 0.5f);
-					mRect.width = pos.z;
-					mRect.height = pos.w;
-				}
-			}
-			else if (container != null)
-			{
-				Transform root = container.transform.parent;
-				Bounds b = (root != null) ? NGUIMath.CalculateRelativeWidgetBounds(root, container.transform) :
-					NGUIMath.CalculateRelativeWidgetBounds(container.transform);
-
-				mRect.x = b.min.x;
-				mRect.y = b.min.y;
-
-				mRect.width = b.size.x;
-				mRect.height = b.size.y;
-			}
-			else if (uiCamera != null)
-			{
-				useCamera = true;
-				mRect = uiCamera.pixelRect;
-			}
-			else return;
-
-			float cx = (mRect.xMin + mRect.xMax) * 0.5f;
-			float cy = (mRect.yMin + mRect.yMax) * 0.5f;
-			Vector3 v = new Vector3(cx, cy, 0f);
-
-			if (side != Side.Center)
-			{
-				if (side == Side.Right || side == Side.TopRight || side == Side.BottomRight) v.x = mRect.xMax;
-				else if (side == Side.Top || side == Side.Center || side == Side.Bottom) v.x = cx;
-				else v.x = mRect.xMin;
-
-				if (side == Side.Top || side == Side.TopRight || side == Side.TopLeft) v.y = mRect.yMax;
-				else if (side == Side.Left || side == Side.Center || side == Side.Right) v.y = cy;
-				else v.y = mRect.yMin;
-			}
-
-			float width = mRect.width;
-			float height = mRect.height;
-
-			v.x += pixelOffset.x + relativeOffset.x * width;
-			v.y += pixelOffset.y + relativeOffset.y * height;
-
-			if (useCamera)
-			{
-				if (uiCamera.orthographic)
-				{
-					v.x = Mathf.Round(v.x);
-					v.y = Mathf.Round(v.y);
-				}
-
-				Debug.unityLogger.logEnabled = false;
-				v.z = uiCamera.WorldToScreenPoint(mTrans.position).z;
-				try {
-					v = uiCamera.ScreenToWorldPoint(v);
-				} catch {
-				}
-				Debug.unityLogger.logEnabled = true;
+				// Panel has no clipping -- just use the screen's dimensions
+				float ratio = (mRoot != null) ? (float)mRoot.activeHeight / Screen.height * 0.5f : 0.5f;
+				mRect.xMin = -Screen.width * ratio;
+				mRect.yMin = -Screen.height * ratio;
+				mRect.xMax = -mRect.xMin;
+				mRect.yMax = -mRect.yMin;
 			}
 			else
 			{
+				// Panel has clipping -- use it as the mRect
+				Vector4 pos = pc.finalClipRegion;
+				mRect.x = pos.x - (pos.z * 0.5f);
+				mRect.y = pos.y - (pos.w * 0.5f);
+				mRect.width = pos.z;
+				mRect.height = pos.w;
+			}
+		}
+		else if (container != null)
+		{
+			Transform root = container.transform.parent;
+			Bounds b = (root != null) ? NGUIMath.CalculateRelativeWidgetBounds(root, container.transform) :
+				NGUIMath.CalculateRelativeWidgetBounds(container.transform);
+
+			mRect.x = b.min.x;
+			mRect.y = b.min.y;
+
+			mRect.width = b.size.x;
+			mRect.height = b.size.y;
+		}
+		else if (uiCamera != null)
+		{
+			useCamera = true;
+			mRect = uiCamera.pixelRect;
+		}
+		else return;
+
+		float cx = (mRect.xMin + mRect.xMax) * 0.5f;
+		float cy = (mRect.yMin + mRect.yMax) * 0.5f;
+		Vector3 v = new Vector3(cx, cy, 0f);
+
+		if (side != Side.Center)
+		{
+			if (side == Side.Right || side == Side.TopRight || side == Side.BottomRight) v.x = mRect.xMax;
+			else if (side == Side.Top || side == Side.Center || side == Side.Bottom) v.x = cx;
+			else v.x = mRect.xMin;
+
+			if (side == Side.Top || side == Side.TopRight || side == Side.TopLeft) v.y = mRect.yMax;
+			else if (side == Side.Left || side == Side.Center || side == Side.Right) v.y = cy;
+			else v.y = mRect.yMin;
+		}
+
+		float width = mRect.width;
+		float height = mRect.height;
+
+		v.x += pixelOffset.x + relativeOffset.x * width;
+		v.y += pixelOffset.y + relativeOffset.y * height;
+
+		if (useCamera)
+		{
+			if (uiCamera.orthographic)
+			{
 				v.x = Mathf.Round(v.x);
 				v.y = Mathf.Round(v.y);
-
-				if (pc != null)
-				{
-					v = pc.cachedTransform.TransformPoint(v);
-				}
-				else if (container != null)
-				{
-					Transform t = container.transform.parent;
-					if (t != null) v = t.TransformPoint(v);
-				}
-				v.z = mTrans.position.z;
 			}
 
-			// Wrapped in an 'if' so the scene doesn't get marked as 'edited' every frame
-	#if UNITY_4_3 || UNITY_4_5 || UNITY_4_6 || UNITY_4_7
-			if (useCamera && uiCamera.isOrthoGraphic && mTrans.parent != null)
-	#else
-			if (useCamera && uiCamera.orthographic && mTrans.parent != null)
-	#endif
-			{
-				v = mTrans.parent.InverseTransformPoint(v);
-				v.x = Mathf.RoundToInt(v.x);
-				v.y = Mathf.RoundToInt(v.y);
-				if (mTrans.localPosition != v) mTrans.localPosition = v;
-			}
-			else if (mTrans.position != v) mTrans.position = v;
-			if (runOnlyOnce && Application.isPlaying) enabled = false;
-		}catch(System.Exception e){
-
+			v.z = uiCamera.WorldToScreenPoint(mTrans.position).z;
+			v = uiCamera.ScreenToWorldPoint(v);
 		}
+		else
+		{
+			v.x = Mathf.Round(v.x);
+			v.y = Mathf.Round(v.y);
+
+			if (pc != null)
+			{
+				v = pc.cachedTransform.TransformPoint(v);
+			}
+			else if (container != null)
+			{
+				Transform t = container.transform.parent;
+				if (t != null) v = t.TransformPoint(v);
+			}
+			v.z = mTrans.position.z;
+		}
+
+		// Wrapped in an 'if' so the scene doesn't get marked as 'edited' every frame
+#if UNITY_4_3 || UNITY_4_5 || UNITY_4_6 || UNITY_4_7
+		if (useCamera && uiCamera.isOrthoGraphic && mTrans.parent != null)
+#else
+		if (useCamera && uiCamera.orthographic && mTrans.parent != null)
+#endif
+		{
+			v = mTrans.parent.InverseTransformPoint(v);
+			v.x = Mathf.RoundToInt(v.x);
+			v.y = Mathf.RoundToInt(v.y);
+			if (mTrans.localPosition != v) mTrans.localPosition = v;
+		}
+		else if (mTrans.position != v) mTrans.position = v;
+		if (runOnlyOnce && Application.isPlaying) enabled = false;
 	}
 }
