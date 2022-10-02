@@ -1,3 +1,4 @@
+using System.IO.IsolatedStorage;
 using System;
 using System.Text;
 using System.Collections;
@@ -237,6 +238,7 @@ internal sealed class AppsMenu : MonoBehaviour
 	internal static IEnumerable<float> AppsMenuAwakeCoroutine()
 	{
 		PlayerPrefs.SetInt("isExploring", 0);
+		//ObscuredPrefs.SetInt("FlashlightGun", 0);
 		// clear data
 		if (!PlayerPrefs.HasKey("dataReset")) {
 			if (PlayerPrefs.HasKey("AccountCreated")) {

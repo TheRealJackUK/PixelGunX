@@ -36,6 +36,10 @@ public class ObscuredPrefs : MonoBehaviour
         string var4 = Base64Encode(var2.ToString());
         PlayerPrefs.SetString(var3, var4);
     }
+    public static void DeleteKey(string var1) {
+        string var3 = Base64Encode(var1);
+        PlayerPrefs.DeleteKey(var3);
+    }
     public static string GetString(string var1) {
         string var2 = Base64Encode(var1);
         if (HasKey(var1)) {
