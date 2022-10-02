@@ -2356,7 +2356,7 @@ public sealed class Player_move_c : MonoBehaviour
 				}
 			}
 			inGameGUI.health = () => (!isMechActive) ? CurHealth : liveMech;
-			inGameGUI.armor = () => curArmor;
+			inGameGUI.armor = () => curArmor * 2;
 			inGameGUI.killsToMaxKills = () => myScoreController.currentScore.ToString();
 			inGameGUI.timeLeft = delegate
 			{
